@@ -12,11 +12,11 @@ is a drag-and-drop task manager as well as a time tracker (not for a team, but f
 
 ### This is a great little application when you are working alone on projects where you need to organize your tasks, as well as track the time you spend on a project to know the actual time you spent on it.
 
----
 
->![alt text](demo/demo.gif "RUM versions")
 
----
+![alt text](demo/demo.gif "RUM versions")
+
+
 
 ## Online Demo sites
 
