@@ -14,7 +14,7 @@ is a drag-and-drop task manager as well as a time tracker (not for a team, but f
 
 
 
-![alt text](demo/demo.gif "RUM versions")
+![alt text](demo/demo.gif "My Simple Tasks Manager")
 
 
 
@@ -26,6 +26,8 @@ is a drag-and-drop task manager as well as a time tracker (not for a team, but f
 
 >**This is Progressive Web App (PWA)**
 You can easily install this application on a window, Mac or Linux computer.
+
+![alt text](demo/demoApp.png "My Simple Tasks Manager")
 
 this application is not responsive on mobile (as it is an application for people working in front of a computer - developer like me for example - I did not find useful to do media queries)
 
