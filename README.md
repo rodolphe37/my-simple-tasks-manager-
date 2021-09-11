@@ -22,11 +22,14 @@ is a drag-and-drop task manager as well as a time tracker (not for a team, but f
 
 **You can try My Simple Task Manager** **[here](https://my-simple-tasks-manager.netlify.app/)**,
 
+![alt text](demo/demoApp.png "My Simple Tasks Manager")
 
 >**This is Progressive Web App (PWA)**
 You can easily install this application on a window, Mac or Linux computer.
 
-![alt text](demo/demoApp.png "My Simple Tasks Manager")
+![alt text](demo/demoInstall.gif "My Simple Tasks Manager")
+
+
 
 this application is not responsive on mobile (as it is an application for people working in front of a computer - developer like me for example - I did not find useful to do media queries)
 
