@@ -36,7 +36,13 @@ this application is not responsive on mobile (as it is an application for people
 
 ***(The demo is fully functional, all infos are stocked in localStorage)***
 
-- Infos: 1 day of work is equivalent to 8 hours! (the calculation of the days worked in proportion to the hours is made with this logic)
+- Infos:
+  - An input field, at the top right, is made to enter the name of the project you are working on!
+  - 1 day of work is equivalent to 8 hours! (the calculation of the days worked in proportion to the hours is made with this logic)
+  - When you stop the counter, the seconds passed are sent to the localstorage, and when you restart the counter, the count continues from this beginning.
+  - When you click on reset button, it's reset the time in the state app & remove time to localStorage ( at each project beginning you can put to 0 the counter)
+  - All the cards and their contents are synchronized with the localstorage.
+  - The different states of the cards, according to the columns (To Do, In Progress, Done) are also synchronized with the localStorage.
 
 ---
 
