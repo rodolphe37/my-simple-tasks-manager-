@@ -1,70 +1,107 @@
-# Getting Started with Create React App
+[![Website](https://i.imgur.com/xSu6S5v.png)](https://rodolphe-augusto.fr)
+[![Website](demo/docu.png)](https://react-ultimate-messenger-documentation.netlify.app/)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/3ec8fbd7-9fc6-42aa-b26f-0f9040c01255/deploy-status)](https://app.netlify.com/sites/react-ultimate-messenger/deploys)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Tutorial Intro
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## My Simple Task Manager
 
-### `yarn start`
+is a drag-and-drop task manager as well as a time tracker (not for a team, but for a single freelance developer for example)!
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### This is a great little application when you are working alone on projects where you need to organize your tasks, as well as track the time you spend on a project to know the actual time you spent on it.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+---
 
-### `yarn test`
+>![alt text](demo/demo.gif "RUM versions")
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `yarn build`
+## Online Demo sites
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**You can try My Simple Task Manager** **[here](https://my-simple-tasks-manager.netlify.app/)**,
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `yarn eject`
+>**This is Progressive Web App (PWA)**
+You can easily install this application on a window, Mac or Linux computer.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+(The demo is fully functional, all infos are stocked in localStorage*)
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Getting Started!
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+you just have to **clone this repository**.
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Install dependencies
 
-### Analyzing the Bundle Size
+On the root folder:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```shell
+yarn
+```
+or
+```shell
+npm i
+```
+---
 
-### Making a Progressive Web App
+## Start the App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```shell
+yarn start
+```
+or
+```shell
+npm start
+```
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Your site starts at `http://localhost:3000`.
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `yarn build` fails to minify
+* **Enjoy!**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+---
+
+## Author
+
+- Thought, designed and developed with :purple_heart: by Rodolphe Augusto
+
+---
+
+## A few words from the author
+
+Enjoy the World :smirk:
+
+---
+
+## :sparkling_heart: Support the project
+
+I put almost everything open-source I can, and try to accommodate anyone who needs help using these projects. Obviously,
+this takes time. You can use this service for free.
+
+However, if you are using this project and are happy with it or just want to encourage me to keep creating: -
+
+- Put a star and share the project :rocket:
+
+Thank you! :heart:
+
+---
+
+## License
+
+MIT
+
+---
+

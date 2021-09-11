@@ -15,7 +15,7 @@ let n = d.toLocaleString();
 export default function TimeTracker() {
   const [secondsRemaining, setSecondsRemaining] = useState(INITIAL_COUNT);
   const [status, setStatus] = useState(STATUS.STOPPED);
-
+  const [dayWork, setDayWork] = useState(0);
   const secondsToDisplay = secondsRemaining % 60;
   const minutesRemaining = (secondsRemaining - secondsToDisplay) / 60;
   const minutesToDisplay = minutesRemaining % 60;
@@ -47,6 +47,15 @@ export default function TimeTracker() {
     status === STATUS.STARTED ? 1000 : null
     // passing null stops the interval
   );
+
+  useEffect(() => {
+    function getDaysWork() {
+      setDayWork(hoursToDisplay / 8);
+    }
+    if (hoursToDisplay >= 1) {
+      getDaysWork();
+    }
+  }, [hoursToDisplay]);
   return (
     <div className="time-tracker">
       <div className="trackTimeTitle">
@@ -85,9 +94,10 @@ export default function TimeTracker() {
         </button>
       </div>
       <div style={{ padding: 20 }}>
-        {twoDigits(hoursToDisplay)}:{twoDigits(minutesToDisplay)}:
+        {threeDigits(hoursToDisplay)}:{twoDigits(minutesToDisplay)}:
         {twoDigits(secondsToDisplay)}
       </div>
+      <span>{`${dayWork} ${dayWork > 2 ? "days" : "day"}`}</span>
       <div className="indicator-section">
         <span
           className="status-indicator"
@@ -134,3 +144,4 @@ function useInterval(callback, delay) {
 
 // https://stackoverflow.com/a/2998874/1673761
 const twoDigits = (num) => String(num).padStart(2, "0");
+const threeDigits = (num) => String(num).padStart(3, "0");
