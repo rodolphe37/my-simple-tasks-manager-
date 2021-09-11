@@ -44,6 +44,8 @@ this application is not responsive on mobile (as it is an application for people
   - All the cards and their contents are synchronized with the localstorage.
   - The different states of the cards, according to the columns (To Do, In Progress, Done) are also synchronized with the localStorage.
 
+![alt text](demo/localStore.png "My Simple Tasks Manager")
+
 ---
 
 ## Getting Started!
