@@ -36,6 +36,8 @@ this application is not responsive on mobile (as it is an application for people
 
 ***(The demo is fully functional, all infos are stocked in localStorage)***
 
+- Infos: 1 day of work is equivalent to 8 hours! (the calculation of the days worked in proportion to the hours is made with this logic)
+
 ---
 
 ## Getting Started!
