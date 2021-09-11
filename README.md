@@ -25,7 +25,7 @@ is a drag-and-drop task manager as well as a time tracker (not for a team, but f
 ![alt text](demo/demoApp.png "My Simple Tasks Manager")
 
 >**This is Progressive Web App (PWA)**
-You can easily install this application on a window, Mac or Linux computer.
+You can easily install this application on a Windows, Mac or Linux computer.
 
 ![alt text](demo/demoInstall.gif "My Simple Tasks Manager")
 
