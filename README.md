@@ -1,6 +1,6 @@
 [![Website](https://i.imgur.com/xSu6S5v.png)](https://rodolphe-augusto.fr)
 [![Website](demo/docu.png)](https://react-ultimate-messenger-documentation.netlify.app/)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/3ec8fbd7-9fc6-42aa-b26f-0f9040c01255/deploy-status)](https://app.netlify.com/sites/react-ultimate-messenger/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/bc4cf4a4-5a14-4355-b582-b8c8c8f06457/deploy-status)](https://app.netlify.com/sites/my-simple-tasks-manager/deploys)
 
 # Tutorial Intro
 
