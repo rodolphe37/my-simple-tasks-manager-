@@ -36,3 +36,59 @@
     transform: rotate(360deg);
   }
 }
+.projectName-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 126%;
+}
+.projectName-icons {
+  width: 22px;
+  height: 22px;
+}
+input,
+select {
+  border: none;
+  outline: none;
+  width: 100%;
+}
+.inputNot:hover {
+  display: none;
+}
+.projectName-content button {
+  opacity: 0.8;
+  transition: all 0.8s ease-in-out;
+  margin-right: 22px;
+  background: none;
+  border: none;
+}
+.projectName-content button:hover {
+  opacity: 1;
+  transition: all 0.8s ease-in-out;
+  border-radius: 20%;
+}
+.opacityFilter {
+  filter: opacity(0.2);
+}
+.logo {
+  width: 45px;
+  height: 45px;
+}
+.projectName-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 24px;
+  width: 100%;
+}
+.logoApp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.logoApp > strong {
+  font-size: 20px;
+  margin-left: 4%;
+}
