@@ -59,45 +59,7 @@
   text-decoration: none;
   white-space: nowrap;
   color: #555;
-
   background-color: #ddd;
-  background-image: -webkit-gradient(
-    linear,
-    left top,
-    left bottom,
-    from(rgba(255, 255, 255, 1)),
-    to(rgba(255, 255, 255, 0))
-  );
-  background-image: -webkit-linear-gradient(
-    top,
-    rgba(255, 255, 255, 1),
-    rgba(255, 255, 255, 0)
-  );
-  background-image: -moz-linear-gradient(
-    top,
-    rgba(255, 255, 255, 1),
-    rgba(255, 255, 255, 0)
-  );
-  background-image: -ms-linear-gradient(
-    top,
-    rgba(255, 255, 255, 1),
-    rgba(255, 255, 255, 0)
-  );
-  background-image: -o-linear-gradient(
-    top,
-    rgba(255, 255, 255, 1),
-    rgba(255, 255, 255, 0)
-  );
-  background-image: linear-gradient(
-    top,
-    rgba(255, 255, 255, 1),
-    rgba(255, 255, 255, 0)
-  );
-
-  -webkit-transition: background-color 0.2s ease-out;
-  -moz-transition: background-color 0.2s ease-out;
-  -ms-transition: background-color 0.2s ease-out;
-  -o-transition: background-color 0.2s ease-out;
   transition: background-color 0.2s ease-out;
   background-clip: padding-box; /* Fix bleeding */
   -moz-border-radius: 3px;
@@ -174,42 +136,7 @@
 .button.blue {
   color: #fff;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
-
-  background-image: -webkit-gradient(
-    linear,
-    left top,
-    left bottom,
-    from(rgba(255, 255, 255, 0.3)),
-    to(rgba(255, 255, 255, 0))
-  );
-  background-image: -webkit-linear-gradient(
-    top,
-    rgba(255, 255, 255, 0.3),
-    rgba(255, 255, 255, 0)
-  );
-  background-image: -moz-linear-gradient(
-    top,
-    rgba(255, 255, 255, 0.3),
-    rgba(255, 255, 255, 0)
-  );
-  background-image: -ms-linear-gradient(
-    top,
-    rgba(255, 255, 255, 0.3),
-    rgba(255, 255, 255, 0)
-  );
-  background-image: -o-linear-gradient(
-    top,
-    rgba(255, 255, 255, 0.3),
-    rgba(255, 255, 255, 0)
-  );
-  background-image: linear-gradient(
-    top,
-    rgba(255, 255, 255, 0.3),
-    rgba(255, 255, 255, 0)
-  );
 }
-
-/* */
 
 .button.green {
   background-color: #57a957;
