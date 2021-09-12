@@ -46,7 +46,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 >Install on Mac OSX
 >
->![alt text](demo/install-mac.png "My Simple Tasks Manager")
+>![alt text](demo/install-mac-osx.png "My Simple Tasks Manager")
 ---
 
 >**When you want to delete the Project name!**
