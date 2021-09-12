@@ -50,7 +50,7 @@ this application is not responsive on mobile (as it is an application for people
   - When you click on reset button, it's reset the time in the state app & remove time to localStorage ( at each project beginning you can put to 0 the counter)
   - All the cards and their contents are synchronized with the localstorage.
   - The different states of the cards, according to the columns (To Do, In Progress, Done) are also synchronized with the localStorage.
-  - You can delete only the project name or you can rest all things in the App (Project name, timer & all cards)
+  - You can delete only the project name or you can reset all things in the App (Project name, timer & all cards)
 
 ![alt text](demo/localStore.png "My Simple Tasks Manager")
 
