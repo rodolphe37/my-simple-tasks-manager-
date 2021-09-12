@@ -39,8 +39,12 @@ is a drag-and-drop task manager as well as a time tracker (not for a team, but f
 
 You can easily install this application on a Windows, Mac or Linux computer.
 
+>Install on Ubuntu
 ![alt text](demo/demoInstall.gif "My Simple Tasks Manager")
 
+
+>Install on Mac OSX
+![alt text](demo/install-mac.png "My Simple Tasks Manager")
 ---
 
 >**When you want to delete the Project name!**
