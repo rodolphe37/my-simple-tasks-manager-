@@ -50,6 +50,13 @@ You have two choices, delete only the project name or reset all (Project name, t
 
 ---
 
+>**When you want to delete an task card!**
+You have one alert for confirm your wish to delete this card (with name card)
+
+![alt text](demo/confirm-delete-card.png "My Simple Tasks Manager")
+
+---
+
 this application is not responsive on mobile (as it is an application for people working in front of a computer - developer like me for example - I did not find useful to do media queries)
 
 
