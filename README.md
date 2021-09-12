@@ -14,7 +14,10 @@
 
 ---
 
-## <img  style =" float: left; margin-bottom: -45px; margin-right: 22px " src="demo/backlog.svg" alt="drawing" height="30" width="25"/><div style="margin-left:40px">My Simple Task Manager</div>
+<div style="display:flex; align-item: center; justify-content: center; width: 100%">
+<img  style =" float: left; margin-bottom: -45px; margin-right: 22px " src="demo/backlog.svg" alt="drawing" height="30" width="25"/>
+<div style="margin-left:40px">My Simple Task Manager</div>
+</div>
 
 is a drag-and-drop task manager as well as a time tracker (not for a team, but for a single freelance developer for example)!
 
