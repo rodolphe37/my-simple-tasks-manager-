@@ -14,7 +14,7 @@
 
 ---
 
-## My Simple Task Manager
+## <img src="demo/backlog.svg" alt="drawing" height="30" width="25"/>My Simple Task Manager
 
 is a drag-and-drop task manager as well as a time tracker (not for a team, but for a single freelance developer for example)!
 
