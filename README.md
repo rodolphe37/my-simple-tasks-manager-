@@ -34,7 +34,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 ---
 
->**When you want to delete the app name!**
+>**When you want to delete the Project name!**
 You have two choices, delete only the project name or reset all (Project name, timer & all cards)
 
 ![alt text](demo/delete.png "My Simple Tasks Manager")
