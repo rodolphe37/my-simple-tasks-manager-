@@ -214,6 +214,7 @@
 .heartbeat {
   animation: heartbeat 1.5s ease-in-out infinite both !important;
 }
+
 @keyframes heartbeat {
   from {
     transform: scale(1);
@@ -237,6 +238,35 @@
     animation-timing-function: ease-out;
   }
 }
+
+.vibrate-1 {
+  animation: vibrate-1 0.3s linear infinite both;
+}
+@keyframes vibrate-1 {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
 .button-group > button {
   margin-right: 5px;
+}
+
+.redColor {
+  color: #ff0000 !important;
 }

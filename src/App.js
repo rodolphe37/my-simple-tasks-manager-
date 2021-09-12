@@ -7,6 +7,7 @@ import TimeTracker from "./components/timeTracker/TimeTracker";
 import ok from "./components/assets/ok.svg";
 import supp from "./components/assets/supp.svg";
 import BacklogImg from "./components/assets/backlog.svg";
+import Alert from "./components/alertComponent/customAlert/Alert";
 
 const StyledLayout = styled(Layout)`
   /* We can't use "height: 100vh; width: 100vw;" here.
@@ -37,6 +38,8 @@ function App() {
     localStorage.getItem("validate") ?? false
   );
 
+  const [erasedDemand, setErasedDemand] = useState(false);
+
   useEffect(() => {
     if (projectName !== "" && validateprojectName) {
       setValidateProjectName(true);
@@ -50,15 +53,23 @@ function App() {
   };
 
   const handleEraseprojectName = () => {
-    setProjectName("");
-    localStorage.removeItem("projectName");
-    localStorage.removeItem("validate");
-    setValidateProjectName(false);
+    setErasedDemand(true);
   };
+
   return (
     <StyledLayout>
       <StyledHeader>
         <div className="projectName-container">
+          {erasedDemand ? (
+            <Alert
+              setValidateProjectName={setValidateProjectName}
+              setProjectName={setProjectName}
+              title={`Delete or reset?`}
+              subTitle={`You can delete the project name only, or reset the whole app...`}
+              buttonYes={`Project name`}
+              buttonNo={`Reset all`}
+            />
+          ) : null}
           <div className="projectName-content">
             {projectName && (
               <Fragment>

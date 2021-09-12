@@ -64,7 +64,9 @@ export default function TimeTracker() {
           alt=""
           className={status === STATUS.STARTED ? "logo heartbeat" : "logo"}
         />
-        <h1>Track Time</h1>
+        <h1 className={status === STATUS.STARTED ? "redColor" : ""}>
+          Track Time
+        </h1>
       </div>
       <h2>Date - {n}</h2>
       <div className="button-group">
