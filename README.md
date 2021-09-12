@@ -2,6 +2,7 @@
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/rodolphe37/my-simple-tasks-manager-/graphs/commit-activity)
 [![made-with-javascript](https://img.shields.io/badge/Made%20with-JavaScript-1f425f.svg)](https://github.com/rodolphe37/my-simple-tasks-manager-)
 [![GitHub issues](https://badgen.net/github/issues/rodolphe37/my-simple-tasks-manager-/)](https://github.com/rodolphe37/my-simple-tasks-manager-/issues/)
+[![GitHub pull-requests](https://img.shields.io/github/issues-pr/rodolphe37/StrapDown.js.svg)](https://GitHub.com/rodolphe37/StrapDown.js/pull/)
 
 
 [![Website](https://i.imgur.com/xSu6S5v.png)](https://rodolphe-augusto.fr)
