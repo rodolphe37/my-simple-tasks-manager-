@@ -70,7 +70,7 @@ The elapsed seconds are sent to the localstorage in real time, if you close the 
 
 ---
 
-**:x:** this application is  not responsive on mobile :mobile_phone_off: (as it is an application for people working in front of a computer - developer like me for example - I did not find useful to do media queries).
+**:x:** this application is  not responsive on mobile :mobile_phone_off: (as it is an application for people working in front of a computer - developer like me for example - I did not find useful to do media queries for that).
 
 
 ***(The demo is fully functional, all infos are stocked in localStorage)***
