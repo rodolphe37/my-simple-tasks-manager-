@@ -68,7 +68,7 @@ export default function TimeTracker() {
 
   useEffect(() => {
     function getDaysWork() {
-      // Cut decimal usage ( seconds / senconds contained in 8 hours(3600 x 8 = 28800), and number of decimal you want to cut)
+      // Cut decimal usage ( seconds elapsed / senconds contained in 8 hours(3600 x 8 = 28800), and number of decimal you want to cut)
       setDayWork(cutDecimals(secondsRemaining / 28800, 2));
     }
     // If the total of seconds is at least 8 hours -> it increments one day then,
