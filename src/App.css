@@ -96,7 +96,7 @@ select {
 /* RIBBON */
 /* common */
 .ribbon {
-  width: 139px;
+  width: 150px;
   height: 150px;
   overflow: hidden;
   position: absolute;
