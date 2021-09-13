@@ -58,15 +58,20 @@ export default function TimeTracker() {
     status === STATUS.STARTED ? 1000 : null
     // passing null stops the interval
   );
+  function cutDecimals(number, decimals) {
+    return number.toLocaleString("fullwide", {
+      maximumFractionDigits: decimals,
+    });
+  }
 
   useEffect(() => {
     function getDaysWork() {
-      setDayWork(hoursToDisplay / 8);
+      setDayWork(cutDecimals(secondsRemaining / 28800, 2));
     }
-    if (hoursToDisplay >= 1) {
+    if (secondsRemaining >= 28800) {
       getDaysWork();
     }
-  }, [hoursToDisplay]);
+  }, [secondsRemaining]);
   return (
     <div className="time-tracker">
       <div className="trackTimeTitle">
@@ -110,7 +115,7 @@ export default function TimeTracker() {
         {threeDigits(hoursToDisplay)}:{twoDigits(minutesToDisplay)}:
         {twoDigits(secondsToDisplay)}
       </div>
-      <span>{`${dayWork} ${dayWork > 2 ? "days" : "day"}`}</span>
+      <span>{`${dayWork} ${dayWork > "2,0" ? "days" : "day"}`}</span>
       <div className="indicator-section">
         <span
           className="status-indicator"

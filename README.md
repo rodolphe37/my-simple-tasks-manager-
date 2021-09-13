@@ -77,7 +77,7 @@ The elapsed seconds are sent to the localstorage in real time, if you close the 
 
 - Infos:
   - An input field, at the top right, is made to enter the name of the project you are working on!
-  - 1 day of work is equivalent to 8 hours! (the calculation of the days worked in proportion to the hours is made with this logic)
+  - 1 day of work is equivalent to 8 hours (28800 seconds)! (the calculation of the days worked in proportion to the passed seconds  is made with this logic - each 28800 elapsed seconds increment one day more)
   - When you start the counter, the seconds passed are sent to the localstorage in real time, when you stop the counter, the seconds passed add to the total and when you restart the counter, the count continues from this beginning.
   - When you click on reset button, it's reset the time in the state app & remove time to localStorage ( at each project beginning you can put to 0 the counter)
   - All the cards and their contents are synchronized with the localstorage.
