@@ -58,6 +58,8 @@ export default function TimeTracker() {
     status === STATUS.STARTED ? 1000 : null
     // passing null stops the interval
   );
+
+  // Function for cutting number at x decimal
   function cutDecimals(number, decimals) {
     return number.toLocaleString("fullwide", {
       maximumFractionDigits: decimals,
@@ -66,8 +68,10 @@ export default function TimeTracker() {
 
   useEffect(() => {
     function getDaysWork() {
+      // Cut decimal usage ( seconds / senconds contained in 8 hours(3600 x 8 = 28800), and number of decimal you want to cut)
       setDayWork(cutDecimals(secondsRemaining / 28800, 2));
     }
+    // If the total seconds is equivalent to 8 hours -> increment one day more
     if (secondsRemaining >= 28800) {
       getDaysWork();
     }
