@@ -71,7 +71,8 @@ export default function TimeTracker() {
       // Cut decimal usage ( seconds / senconds contained in 8 hours(3600 x 8 = 28800), and number of decimal you want to cut)
       setDayWork(cutDecimals(secondsRemaining / 28800, 2));
     }
-    // If the total seconds is equivalent to 8 hours -> increment one day more
+    // If the total of seconds is at least 8 hours -> it increments one day then,
+    // beyond 1 day, it automatically synchronizes the number of days worked (two digits after the decimal point).
     if (secondsRemaining >= 28800) {
       getDaysWork();
     }
