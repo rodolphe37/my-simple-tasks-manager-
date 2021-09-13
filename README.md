@@ -63,6 +63,13 @@ You have one alert for confirm your wish to delete this card (with name card)
 
 ---
 
+>**When you Start the counter!**
+The elapsed seconds are sent to the localstorage in real time, if you close the window inadvertently without stopping the counter, the elapsed time is automatically saved in the localStorage, adding to the time already present (seconds)!
+
+![alt text](demo/real-time-seconds.gif "My Simple Tasks Manager")
+
+---
+
 this application is not responsive on mobile (as it is an application for people working in front of a computer - developer like me for example - I did not find useful to do media queries)
 
 
@@ -71,7 +78,7 @@ this application is not responsive on mobile (as it is an application for people
 - Infos:
   - An input field, at the top right, is made to enter the name of the project you are working on!
   - 1 day of work is equivalent to 8 hours! (the calculation of the days worked in proportion to the hours is made with this logic)
-  - When you stop the counter, the seconds passed are sent to the localstorage, and when you restart the counter, the count continues from this beginning.
+  - When you start the counter, the seconds passed are sent to the localstorage in real time, when you stop the counter, the seconds passed add to the total and when you restart the counter, the count continues from this beginning.
   - When you click on reset button, it's reset the time in the state app & remove time to localStorage ( at each project beginning you can put to 0 the counter)
   - All the cards and their contents are synchronized with the localstorage.
   - The different states of the cards, according to the columns (To Do, In Progress, Done) are also synchronized with the localStorage.

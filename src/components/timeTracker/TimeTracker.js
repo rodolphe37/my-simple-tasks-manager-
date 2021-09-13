@@ -29,8 +29,17 @@ export default function TimeTracker() {
   };
   const handleStop = () => {
     setStatus(STATUS.STOPPED);
-    localStorage.setItem("time", secondsRemaining);
   };
+
+  useEffect(() => {
+    if (status === STATUS.STOPPED) {
+      localStorage.setItem("time", secondsRemaining);
+    }
+    return () => {
+      localStorage.setItem("time", secondsRemaining);
+    };
+  }, [secondsRemaining, status]);
+
   const handleReset = () => {
     setStatus(STATUS.STOPPED);
     localStorage.removeItem("time");

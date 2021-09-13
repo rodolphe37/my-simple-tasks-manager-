@@ -122,9 +122,9 @@ function App() {
             <img className="logo" src={BacklogImg} alt="" />
             <strong>My Simple Tasks manager</strong>
           </div>
-          <div class="ribbon ribbon-top-right">
+          <div className="ribbon ribbon-top-right">
             <span>
-              <img class="picture-ribbon" src={PwaLogo} alt="ribbon" />
+              <img className="picture-ribbon" src={PwaLogo} alt="ribbon" />
             </span>
           </div>
         </div>
