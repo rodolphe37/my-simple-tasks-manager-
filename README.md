@@ -134,13 +134,13 @@ Your site starts at `http://localhost:3000`.
 
 ---
 
-## A few words from the author
+## :large_blue_diamond: A few words from the author
 
 Enjoy the World :smirk:
 
 **:memo: To Do for the next version:**
 
->:large_blue_diamond: Add a dashboard of statistics (number of tasks created for each day & total project tasks, time spent - with chronology (date - time - time spent for each work day), total number of hours on the project).
+>:chart_with_upwards_trend: Add a dashboard of statistics (number of tasks created for each day & total project tasks, time spent - with chronology (date - time - time spent for each work day), total number of hours on the project).
 
 ---
 
