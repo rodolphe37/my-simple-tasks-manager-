@@ -18,7 +18,7 @@
 
 is a drag-and-drop task manager as well as a time tracker (not for a team, but for a single freelance developer for example)!
 
-### This is a great little application when you are working alone on projects where you need to organize your tasks, as well as track the time you spend on a project to know the actual time you spent on it.
+### :bookmark: This is a great little application when you are working alone on projects where you need to organize your tasks, as well as track the time you spend on a project to know the actual time you spent on it.
 
 
 
@@ -26,51 +26,51 @@ is a drag-and-drop task manager as well as a time tracker (not for a team, but f
 
 
 
-## Online Demo sites
+## :computer: Online Demo sites
 
 
 **You can try My Simple Task Manager** **[here](https://my-simple-tasks-manager.netlify.app/)**,
 
 ![alt text](demo/pwa-check-all.png "My Simple Tasks Manager")
 
->**This is Progressive Web App (PWA)**
+>**:heavy_check_mark: This is Progressive Web App (PWA)**
 
 ![alt text](demo/pwa-test.png "My Simple Tasks Manager")
 
 You can easily install this application on a Windows, Mac or Linux computer.
 
->Install on Ubuntu
+>Install on Ubuntu :heavy_check_mark:
 >
 >![alt text](demo/demoInstall.gif "My Simple Tasks Manager")
 
 
->Install on Mac OSX
+>Install on Mac OSX :heavy_check_mark:
 >
 >![alt text](demo/install-mac-osx.png "My Simple Tasks Manager")
 ---
 
->**When you want to delete the Project name!**
+>**:heavy_exclamation_mark: When you want to delete the Project name!**
 You have two choices, delete only the project name or reset all (Project name, timer & all cards)
 
 ![alt text](demo/delete.png "My Simple Tasks Manager")
 
 ---
 
->**When you want to delete an task card!**
+>**:heavy_exclamation_mark: When you want to delete an task card!**
 You have one alert for confirm your wish to delete this card (with name card)
 
 ![alt text](demo/confirm-delete-card.png "My Simple Tasks Manager")
 
 ---
 
->**When you Start the counter!**
+>**:heavy_exclamation_mark: When you Start the counter!**
 The elapsed seconds are sent to the localstorage in real time, if you close the window inadvertently without stopping the counter, the elapsed time is automatically saved in the localStorage, adding to the time already present (seconds)!
 
 ![alt text](demo/real-time-seconds.gif "My Simple Tasks Manager")
 
 ---
 
-this application is not responsive on mobile (as it is an application for people working in front of a computer - developer like me for example - I did not find useful to do media queries)
+:mobile_phone_off this application is not responsive on mobile (as it is an application for people working in front of a computer - developer like me for example - I did not find useful to do media queries) :x:
 
 
 ***(The demo is fully functional, all infos are stocked in localStorage)***
@@ -88,13 +88,13 @@ this application is not responsive on mobile (as it is an application for people
 
 ---
 
-## Getting Started!
+## :microscope: Getting Started!
 
 you just have to **clone this repository**.
 
 ---
 
-## Install dependencies
+## :satellite: Install dependencies
 
 On the root folder:
 
@@ -107,7 +107,7 @@ npm i
 ```
 ---
 
-## Start the App
+## :rainbow: Start the App
 
 ```shell
 yarn start
@@ -128,7 +128,7 @@ Your site starts at `http://localhost:3000`.
 
 ---
 
-## Author
+## :bust_in_silhouette: Author
 
 - Thought, designed and developed with :purple_heart: by Rodolphe Augusto
 
@@ -140,7 +140,7 @@ Enjoy the World :smirk:
 
 **:memo: To Do for the next version:**
 
->:chart_with_upwards_trend: Add a dashboard of statistics (number of tasks created for each day & total project tasks, time spent - with chronology (date - time - time spent for each work day), total number of hours on the project).
+>:bar_chart: Add a dashboard of statistics (number of tasks created for each day & total project tasks, time spent - with chronology (date - time - time spent for each work day), total number of hours on the project).
 
 ---
 
@@ -157,7 +157,7 @@ Thank you! :heart:
 
 ---
 
-## License
+## :scroll: License
 
 MIT
 
