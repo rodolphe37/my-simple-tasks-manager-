@@ -32,9 +32,11 @@ export default function TimeTracker() {
   };
 
   useEffect(() => {
+    // If you close the window whitout stop the counter
     if (status === STATUS.STOPPED) {
       localStorage.setItem("time", secondsRemaining);
     }
+    // If the status is started that send the time each second elapsed
     return () => {
       localStorage.setItem("time", secondsRemaining);
     };
