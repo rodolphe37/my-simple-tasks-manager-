@@ -140,7 +140,7 @@ Enjoy the World :smirk:
 
 >**To Do for the next version:**
 >
->Add a dashboard of statistics (number of tasks, time spent - with chronology (date - time - time spent for each work day), total number of hours on the project.
+>Add a dashboard of statistics (number of tasks created for each day & total project tasks, time spent - with chronology (date - time - time spent for each work day), total number of hours on the project.
 
 ---
 
