@@ -171,6 +171,10 @@ select {
   transform: rotate(45deg);
 }
 
+.picture-ribbon {
+  width: 55px;
+  margin-left: 25px;
+}
 @media screen and (max-width: 1340px) {
   .time-tracker {
     display: grid !important;
@@ -187,6 +191,16 @@ select {
   }
   .indicator-section {
     width: 50%;
+  }
+  .ribbon {
+    width: 95px;
+    height: 124px;
+    overflow: hidden;
+    position: absolute;
+  }
+  .picture-ribbon {
+    width: 43px;
+    margin-left: -52px;
   }
 }
 

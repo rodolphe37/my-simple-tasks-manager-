@@ -31,7 +31,7 @@ is a drag-and-drop task manager as well as a time tracker (not for a team, but f
 
 **You can try My Simple Task Manager** **[here](https://my-simple-tasks-manager.netlify.app/)**,
 
-![alt text](demo/demoApp.png "My Simple Tasks Manager")
+![alt text](demo/pwa-check-all.png "My Simple Tasks Manager")
 
 >**This is Progressive Web App (PWA)**
 

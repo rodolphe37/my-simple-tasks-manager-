@@ -124,11 +124,7 @@ function App() {
           </div>
           <div class="ribbon ribbon-top-right">
             <span>
-              <img
-                style={{ width: 55, marginLeft: 25 }}
-                src={PwaLogo}
-                alt="ribbon"
-              />
+              <img class="picture-ribbon" src={PwaLogo} alt="ribbon" />
             </span>
           </div>
         </div>
