@@ -117,7 +117,7 @@ export default function TimeTracker() {
               : { backgroundColor: "orange" }
           }
         ></span>
-        <div>Status: {status}</div>
+        <div>{status}</div>
       </div>
     </div>
   );
