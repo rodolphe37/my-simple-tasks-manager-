@@ -8,6 +8,7 @@ import ok from "./components/assets/ok.svg";
 import supp from "./components/assets/supp.svg";
 import BacklogImg from "./components/assets/backlog.svg";
 import Alert from "./components/alertComponent/customAlert/Alert";
+import PwaLogo from "./components/assets/pwa-pass-3.svg";
 
 const StyledLayout = styled(Layout)`
   /* We can't use "height: 100vh; width: 100vw;" here.
@@ -120,6 +121,15 @@ function App() {
           <div className="logoApp">
             <img className="logo" src={BacklogImg} alt="" />
             <strong>My Simple Tasks manager</strong>
+          </div>
+          <div class="ribbon ribbon-top-right">
+            <span>
+              <img
+                style={{ width: 55, marginLeft: 25 }}
+                src={PwaLogo}
+                alt="ribbon"
+              />
+            </span>
           </div>
         </div>
       </StyledHeader>

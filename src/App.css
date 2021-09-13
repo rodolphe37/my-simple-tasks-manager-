@@ -92,3 +92,116 @@ select {
   font-size: 20px;
   margin-left: 4%;
 }
+
+/* RIBBON */
+/* common */
+.ribbon {
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  position: absolute;
+}
+.ribbon::before,
+.ribbon::after {
+  position: absolute;
+  z-index: -1;
+  content: "";
+  display: block;
+  border: 5px solid #3c743c;
+}
+.ribbon span {
+  position: absolute;
+  display: block;
+  width: 225px;
+  padding: 15px 0;
+  background-color: #3cbb3c;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  font: 700 18px/1 "Lato", sans-serif;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* top left*/
+.ribbon-top-left {
+  top: -10px;
+  left: -10px;
+}
+.ribbon-top-left::before,
+.ribbon-top-left::after {
+  border-top-color: transparent;
+  border-left-color: transparent;
+}
+.ribbon-top-left::before {
+  top: 0;
+  right: 0;
+}
+.ribbon-top-left::after {
+  bottom: 0;
+  left: 0;
+}
+.ribbon-top-left span {
+  right: -25px;
+  top: 30px;
+  transform: rotate(-45deg);
+}
+
+/* top right*/
+.ribbon-top-right {
+  top: -10px;
+  right: 0px;
+}
+.ribbon-top-right::before,
+.ribbon-top-right::after {
+  border-top-color: transparent;
+  border-right-color: transparent;
+}
+.ribbon-top-right::before {
+  top: 0;
+  left: 0;
+}
+.ribbon-top-right::after {
+  bottom: 0;
+  right: 0;
+}
+.ribbon-top-right span {
+  left: -25px;
+  top: 30px;
+  transform: rotate(45deg);
+}
+
+@media screen and (max-width: 1340px) {
+  .time-tracker {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    grid-gap: 30px !important;
+    max-width: 100%;
+    padding: 30px;
+    height: auto !important;
+  }
+  .time-lapse {
+    padding: 0 !important;
+    text-align: left;
+    margin-left: 10%;
+  }
+  .indicator-section {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 1050px) {
+  .logoApp {
+    margin-right: 8%;
+  }
+  .indicator-section > .status-indicator {
+    border-radius: 100px;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .logoApp > strong {
+    font-size: 14px;
+    margin-left: 4%;
+  }
+}

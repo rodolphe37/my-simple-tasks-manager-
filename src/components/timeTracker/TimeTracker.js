@@ -95,7 +95,7 @@ export default function TimeTracker() {
           Reset
         </button>
       </div>
-      <div style={{ padding: 20 }}>
+      <div className="time-lapse">
         {threeDigits(hoursToDisplay)}:{twoDigits(minutesToDisplay)}:
         {twoDigits(secondsToDisplay)}
       </div>
