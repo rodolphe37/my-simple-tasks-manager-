@@ -138,7 +138,7 @@ Your site starts at `http://localhost:3000`.
 
 Enjoy the World :smirk:
 
->:memo:**To Do for the next version:**
+>**:memo:To Do for the next version:**
 >
 >Add a dashboard of statistics (number of tasks created for each day & total project tasks, time spent - with chronology (date - time - time spent for each work day), total number of hours on the project).
 
