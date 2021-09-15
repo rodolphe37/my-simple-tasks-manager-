@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Card, Modal, Typography, Dropdown, Menu } from "antd";
 import { DeleteOutlined, EditOutlined, MoreOutlined } from "@ant-design/icons";
 import { red } from "@ant-design/colors";
 import styled from "styled-components";
 import BaseTooltip from "../shared/BaseTooltip";
+import Checklist from "../assets/arrows.svg";
+import List from "../assets/lists.svg";
+import Clipboard from "../assets/clipboard.svg";
 
 const StyledCard = styled(Card)`
   margin: 0.5rem;
@@ -20,9 +23,22 @@ const DeleteMenuItem = styled(Menu.Item)`
   color: ${red.primary};
 `;
 
-function TaskboardItemCard({ item, status, isDragging, onEdit, onDelete }) {
+function TaskboardItemCard({
+  item,
+  status,
+  isDragging,
+  onEdit,
+  onDelete,
+  items,
+  itemsByStatus,
+}) {
   let d = new Date();
   let n = d.toLocaleString();
+
+  useEffect(() => {
+    console.log("items", itemsByStatus["In Progress"]);
+    console.log("item", item);
+  }, [itemsByStatus, item]);
 
   return (
     <StyledCard
@@ -34,7 +50,13 @@ function TaskboardItemCard({ item, status, isDragging, onEdit, onDelete }) {
           forwarding ref in function components.
           Because Typography.Title doesn't accept a ref.
           So, we just placed a span tag here. */}
-          <span>
+          <span
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
             <TaskboardItemCardTitle level={5} ellipsis={{ rows: 2 }}>
               {item.title}
             </TaskboardItemCardTitle>
@@ -46,7 +68,7 @@ function TaskboardItemCard({ item, status, isDragging, onEdit, onDelete }) {
           overlay={
             <Menu>
               <Menu.Item
-                key={item.title}
+                key={item.id}
                 icon={<EditOutlined />}
                 onClick={() => onEdit(item)}
               >
@@ -77,9 +99,28 @@ function TaskboardItemCard({ item, status, isDragging, onEdit, onDelete }) {
       }
     >
       <BaseTooltip key={item.id}>
-        <Typography.Paragraph type="secondary" ellipsis={{ rows: 2 }}>
-          {item.timestamp ?? n}
-        </Typography.Paragraph>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <Typography.Paragraph type="secondary" ellipsis={{ rows: 2 }}>
+            {item.timestamp ?? n}
+          </Typography.Paragraph>
+          <div className="">
+            {status === "In Progress" ? (
+              <img style={{ width: 30 }} src={Checklist} alt="progress" />
+            ) : null}
+            {status === "To Do" ? (
+              <img style={{ width: 24 }} src={List} alt="progress" />
+            ) : null}
+            {status === "Done" ? (
+              <img style={{ width: 24 }} src={Clipboard} alt="progress" />
+            ) : null}
+          </div>
+        </div>
       </BaseTooltip>
       <BaseTooltip key={item.title} overlay={item.description}>
         <Typography.Paragraph type="secondary" ellipsis={{ rows: 2 }}>

@@ -1,5 +1,5 @@
 import { DragDropContext } from "react-beautiful-dnd";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import produce from "immer";
 import styled from "styled-components";
 // eslint-disable-next-line no-unused-vars
@@ -36,6 +36,9 @@ function Taskboard() {
     "itemsByStatus",
     defaultItems
   );
+  useEffect(() => {
+    console.log(itemsByStatus["In Progress"]);
+  }, [itemsByStatus]);
 
   const handleDragEnd = ({ source, destination }) => {
     setItemsByStatus((current) =>
@@ -96,6 +99,7 @@ function Taskboard() {
                 key={status}
                 status={status}
                 items={itemsByStatus[status]}
+                itemsByStatus={itemsByStatus}
                 onClickAdd={
                   status === TaskboardItemStatus.TO_DO
                     ? () => openTaskItemModal(null)

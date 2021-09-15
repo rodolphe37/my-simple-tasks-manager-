@@ -25,7 +25,14 @@ const DroppableRoot = styled.div`
     isDraggingOver ? "#e0e0e0" : "#f5f5f5"};
 `;
 
-function TaskboardCol({ items, status, onClickAdd, onEdit, onDelete }) {
+function TaskboardCol({
+  items,
+  status,
+  onClickAdd,
+  onEdit,
+  onDelete,
+  itemsByStatus,
+}) {
   return (
     <TaskboardColRoot
       title={`${status} (${items.length})`}
@@ -56,6 +63,8 @@ function TaskboardCol({ items, status, onClickAdd, onEdit, onDelete }) {
                     >
                       <TaskboardItemCard
                         item={item}
+                        itemsByStatus={itemsByStatus}
+                        items={itemsByStatus[status]}
                         status={status}
                         isDragging={snapshot.isDragging}
                         onEdit={onEdit}

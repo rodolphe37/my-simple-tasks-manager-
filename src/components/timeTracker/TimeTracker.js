@@ -73,7 +73,7 @@ export default function TimeTracker() {
     }
     // If the total of seconds is at least 8 hours -> it increments one day then,
     // beyond 1 day, it automatically synchronizes the number of days worked (two digits after the decimal point).
-    if (secondsRemaining >= 28800) {
+    if (secondsRemaining >= 3600) {
       getDaysWork();
     }
   }, [secondsRemaining]);
