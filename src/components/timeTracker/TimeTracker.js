@@ -22,7 +22,7 @@ export default function TimeTracker() {
   const hoursToDisplay = (minutesRemaining - minutesToDisplay) / 60;
 
   useEffect(() => {
-    console.log("INITIAL_COUNT", INITIAL_COUNT);
+    // console.log("INITIAL_COUNT", INITIAL_COUNT);
   }, []);
   const handleStart = () => {
     setStatus(STATUS.STARTED);

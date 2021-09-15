@@ -31,14 +31,19 @@ function TaskboardItemCard({
   onDelete,
   items,
   itemsByStatus,
+  setItemsByStatus,
 }) {
   let d = new Date();
   let n = d.toLocaleString();
 
   useEffect(() => {
-    console.log("items", itemsByStatus["In Progress"]);
-    console.log("item", item);
-  }, [itemsByStatus, item]);
+    if (status === "In Progress") {
+      // setItemsByStatus((current) => (current["In Progress"].startWork = n));
+      // console.log("current", itemsByStatus["In Progress"]);
+    }
+    // console.log("itemsByStatus", itemsByStatus);
+    // console.log("item", item);
+  }, [itemsByStatus, item, status, setItemsByStatus, n]);
 
   return (
     <StyledCard

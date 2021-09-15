@@ -32,6 +32,7 @@ function TaskboardCol({
   onEdit,
   onDelete,
   itemsByStatus,
+  setItemsByStatus,
 }) {
   return (
     <TaskboardColRoot
@@ -64,6 +65,7 @@ function TaskboardCol({
                       <TaskboardItemCard
                         item={item}
                         itemsByStatus={itemsByStatus}
+                        setItemsByStatus={setItemsByStatus}
                         items={itemsByStatus[status]}
                         status={status}
                         isDragging={snapshot.isDragging}

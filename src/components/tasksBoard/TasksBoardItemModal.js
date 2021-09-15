@@ -111,7 +111,7 @@ function TaskboardItemModal({ visible, initialValues, onCancel, onOk }) {
         layout="vertical"
         initialValues={initialValues}
         onFinish={(values) => {
-          console.log(values);
+          // console.log(values);
           onOk(values);
           form.resetFields();
           onCancel();

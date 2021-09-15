@@ -37,7 +37,7 @@ function Taskboard() {
     defaultItems
   );
   useEffect(() => {
-    console.log(itemsByStatus["In Progress"]);
+    // console.log(itemsByStatus["In Progress"]);
   }, [itemsByStatus]);
 
   const handleDragEnd = ({ source, destination }) => {
@@ -100,6 +100,7 @@ function Taskboard() {
                 status={status}
                 items={itemsByStatus[status]}
                 itemsByStatus={itemsByStatus}
+                setItemsByStatus={setItemsByStatus}
                 onClickAdd={
                   status === TaskboardItemStatus.TO_DO
                     ? () => openTaskItemModal(null)
@@ -118,7 +119,7 @@ function Taskboard() {
         onOk={(values) => {
           setItemsByStatus((current) =>
             produce(current, (draft) => {
-              console.log("current", current);
+              // console.log("current", current);
               if (itemToEdit) {
                 // Editing existing item
                 const draftItem = Object.values(draft)
