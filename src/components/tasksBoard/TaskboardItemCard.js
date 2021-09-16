@@ -7,6 +7,10 @@ import BaseTooltip from "../shared/BaseTooltip";
 import Checklist from "../assets/arrows.svg";
 import List from "../assets/lists.svg";
 import Clipboard from "../assets/clipboard.svg";
+import { useRecoilState } from "recoil";
+import timeAllCardsAtom from "../../statesManager/atoms/timeAllCardsAtom";
+import TimerEndIcon from "../assets/timer.svg";
+import StartIcon from "../assets/start.svg";
 
 const StyledCard = styled(Card)`
   margin: 0.5rem;
@@ -35,21 +39,19 @@ function TaskboardItemCard({
 }) {
   let d = new Date();
   let n = d.toLocaleString();
-  const [startTimeToSeconds, setStartTimeToSeconds] = useState("");
+  // const [startTimeToSeconds, setStartTimeToSeconds] = useState("");
+  const [completCardsTimeArray, setCompletCardsTimeArray] =
+    useRecoilState(timeAllCardsAtom);
+  const [timeAllCards, setTimeAllCards] = useState([]);
+
   const [startWorkState, setStartWorkState] = useState(
-    JSON.stringify(localStorage.getItem("startTimeWork")) ?? ""
+    localStorage.getItem("startTimeWork") ?? ""
   );
   const [stopWorkState, setStopWorkState] = useState("");
+  const [cardId, setCardId] = useState(0);
 
-  const [timeAllCards, setTimeAllCards] = useState(
-    JSON.parse(localStorage.getItem("timeAllCards")) ?? [
-      {
-        cardId: item.id,
-        cardTitle: item.title,
-        start: "",
-        stop: "",
-      },
-    ]
+  let cardIdFromTimeAll = timeAllCards.map((res) =>
+    JSON.parse(`${res.cardId}`)
   );
 
   useEffect(() => {
@@ -62,8 +64,10 @@ function TaskboardItemCard({
       localStorage.setItem("timeAllCards", JSON.stringify(timeAllCards));
     }
     if (status === "Done") {
+      setCardId(cardIdFromTimeAll);
       setStopWorkState(n);
       setStartWorkState(localStorage.getItem("startTimeWork"));
+
       setTimeAllCards([
         {
           cardId: item.id,
@@ -72,59 +76,81 @@ function TaskboardItemCard({
           stop: `${n}`,
         },
       ]);
+      if (completCardsTimeArray.length === 0) {
+        setCompletCardsTimeArray(timeAllCards);
+      }
+
+      if (Number(item.id) !== cardId[0]) {
+        setCompletCardsTimeArray((completCardsTimeArray) =>
+          completCardsTimeArray.concat(timeAllCards)
+        );
+      }
+
+      console.log("totalCardsTime", completCardsTimeArray);
+      console.log("item id", Number(item.id));
+      console.log("totalCardsTime id", cardId[0]);
+      // console.log(
+      //   "timeAllCards[0].id",
+      //   timeAllCards.map((res) => res.id)
+      // );
+      localStorage.setItem(
+        "completCardsTimeArray",
+        JSON.stringify(completCardsTimeArray)
+      );
+
+      if (timeAllCards) {
+        localStorage.setItem("allCardsTime", JSON.stringify(timeAllCards));
+      }
+
       localStorage.setItem("stopTimeWork", stopWorkState);
       localStorage.setItem("timeAllCards", JSON.stringify(timeAllCards));
     }
+
     if (JSON.parse(localStorage.getItem("timeAllCards")) !== null) {
       setTimeAllCards((prevState) => prevState, timeAllCards);
     }
     return () => {
       // localStorage.removeItem("startTimeWork");
       localStorage.removeItem("stopTimeWork");
+      localStorage.removeItem("allCarsTime");
     };
     // console.log("itemsByStatus", itemsByStatus);
     // console.log("item", item);
-  }, [status, item, startWorkState, stopWorkState]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [status, item, startWorkState, stopWorkState, completCardsTimeArray]);
 
   useEffect(() => {
-    var val = timeAllCards.map((res, id) => res.start);
-    setStartTimeToSeconds(String(val));
-    // var response = val.substring(val.indexOf(":"));
-
-    console.log("response", val);
+    // var val = timeAllCards.map((res, id) => res.start);
+    // setStartTimeToSeconds(String(val));
+    // // var response = val.substring(val.indexOf(":"));
+    // console.log("response", val);
     // const stopTime = timeAllCards.map((res) =>
     //   res.stop?.substring(res.stop.indexOf(",", 1)).split(",")
     // );
-
     // const startTime = timeAllCards.map((res) =>
     //   res.start?.substring(res.start.indexOf(",", 1)).split(",")
     // );
-
     // var sta = startTime; // split it at the colons
-
     // // minutes are worth 60 seconds. Hours are worth 60 minutes.
     // var secondsStart = +sta[0] * 60 * 60 + +sta[1] * 60 + +sta[2];
-
     // var sto = stopTime; // split it at the colons
-
     // // minutes are worth 60 seconds. Hours are worth 60 minutes.
     // var secondsStop = +sto[0] * 60 * 60 + +sto[1] * 60 + +sto[2];
     // function hmsToSecondsOnly(str) {
     //   var p = str.split(":"),
     //     s = 0,
     //     m = 1;
-
     //   while (p.length > 0) {
     //     s += m * parseInt(p.pop(), 10);
     //     m *= 60;
     //   }
-
     //   return s;
     // }
+    console.log("timeAllCards", timeAllCards);
 
-    // console.log("secondsStart", startTime);
-    // console.log("secondsStop", sto);
-  }, []);
+    console.log("compar id", item.id === timeAllCards.id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [completCardsTimeArray, timeAllCards]);
 
   return (
     <StyledCard
@@ -212,47 +238,95 @@ function TaskboardItemCard({
       {status === "In Progress" ? (
         <BaseTooltip overlay={item.startWork}>
           <Form>
-            <Typography.Paragraph type="secondary" ellipsis={{ rows: 2 }}>
-              <Form.Item
-                shouldUpdate={(prevValues, curValues) =>
-                  prevValues.additional !== curValues.additional
-                }
-              >
-                {() => {
-                  return (
-                    <Form.Item label="Start Working">
-                      {startWorkState}
-                    </Form.Item>
-                  );
-                }}
-              </Form.Item>
-            </Typography.Paragraph>
+            <hr />
+            <div
+              style={{
+                height: "20px",
+              }}
+            >
+              <Typography.Paragraph type="secondary" ellipsis={{ rows: 2 }}>
+                <Form.Item
+                  style={{ fontSize: 11 }}
+                  shouldUpdate={(prevValues, curValues) =>
+                    prevValues.additional !== curValues.additional
+                  }
+                >
+                  {() => {
+                    return (
+                      <Form.Item>
+                        <img
+                          style={{ width: 21, marginRight: 20 }}
+                          src={StartIcon}
+                          alt=""
+                        />{" "}
+                        {startWorkState}
+                      </Form.Item>
+                    );
+                  }}
+                </Form.Item>
+              </Typography.Paragraph>
+            </div>
           </Form>
         </BaseTooltip>
       ) : null}
-      {status === "Done" ? (
-        <BaseTooltip overlay={item.stopWork}>
-          <Form.Item label="Start Working:">
-            {" "}
-            {timeAllCards.map((res) => res.start)}
-          </Form.Item>
-          <Typography.Paragraph type="secondary" ellipsis={{ rows: 2 }}>
-            <Form.Item
-              shouldUpdate={(prevValuesStop, curValuesStop) =>
-                prevValuesStop.additional !== curValuesStop.additional
-              }
-            >
-              {() => {
-                return (
-                  <Form.Item label="Stop Working">
-                    {timeAllCards.map((res) => res.stop)}
-                  </Form.Item>
-                );
+      <div
+        style={
+          status === "Done"
+            ? { border: "1px dotted gray", padding: 8 }
+            : { display: "none" }
+        }
+      >
+        {status === "Done" ? (
+          <BaseTooltip overlay={item.stopWork}>
+            {completCardsTimeArray.map((res) => (
+              <Form key={res.id} className="myForm">
+                {item.id === res.cardId ? (
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-around",
+                      height: "20px",
+                    }}
+                  >
+                    <Form.Item key={res.cardId}>
+                      <p style={{ fontSize: 10 }}>{res.start}</p>
+                    </Form.Item>
+                    <Typography.Paragraph
+                      type="secondary"
+                      ellipsis={{ rows: 2 }}
+                    >
+                      <Form.Item
+                        shouldUpdate={(prevValuesStop, curValuesStop) =>
+                          prevValuesStop.additional !== curValuesStop.additional
+                        }
+                      >
+                        {() => {
+                          return (
+                            <Form.Item>
+                              <p style={{ fontSize: 10 }}>{res.stop}</p>
+                            </Form.Item>
+                          );
+                        }}
+                      </Form.Item>
+                    </Typography.Paragraph>
+                  </div>
+                ) : null}
+              </Form>
+            ))}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "flex-start",
+                justifyContent: "space-around",
               }}
-            </Form.Item>
-          </Typography.Paragraph>
-        </BaseTooltip>
-      ) : null}
+            >
+              <img style={{ width: 28 }} src={StartIcon} alt="" />
+              <img style={{ width: 28 }} src={TimerEndIcon} alt="" />
+            </div>
+          </BaseTooltip>
+        ) : null}
+      </div>
     </StyledCard>
   );
 }
