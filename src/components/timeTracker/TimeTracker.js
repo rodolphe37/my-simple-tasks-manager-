@@ -119,7 +119,7 @@ export default function TimeTracker() {
         {threeDigits(hoursToDisplay)}:{twoDigits(minutesToDisplay)}:
         {twoDigits(secondsToDisplay)}
       </div>
-      <span>{`${dayWork} ${dayWork >= 2 || 2.0 ? "days" : "day"}`}</span>
+      <span>{`${dayWork} day(s)`}</span>
       <div className="indicator-section">
         <span
           className="status-indicator"

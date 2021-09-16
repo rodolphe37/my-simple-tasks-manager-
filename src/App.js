@@ -55,6 +55,9 @@ function App() {
 
   const handleEraseprojectName = () => {
     setErasedDemand(true);
+    // localStorage.removeItem("projectName");
+    // localStorage.removeItem("validate");
+    // setValidateProjectName(false);
   };
 
   return (
