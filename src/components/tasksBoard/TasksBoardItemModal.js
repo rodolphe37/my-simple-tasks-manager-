@@ -144,6 +144,8 @@ function TaskboardItemModal({ visible, initialValues, onCancel, onOk }) {
         >
           <Input.TextArea rows={4} />
         </Form.Item>
+        <Form.Item></Form.Item>
+        <Form.Item></Form.Item>
         {/*<Form.Item>
           <EditorOption
             ref={inputRef}

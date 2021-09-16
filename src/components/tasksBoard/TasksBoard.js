@@ -85,9 +85,34 @@ function Taskboard() {
       timestamp: itemToEdit?.timestamp ?? "",
       title: itemToEdit?.title ?? "",
       description: itemToEdit?.description ?? "",
+      startWork: 0,
+      stopWork: 0,
+      totalTime: 0,
     }),
     [itemToEdit]
   );
+
+  const statusOf = Object.values(TaskboardItemStatus).map((status) => status);
+
+  useEffect(() => {
+    const syncTrackTime = (values) => {
+      setItemsByStatus((current) =>
+        produce(current, (draft) => {
+          // console.log("current", current);
+
+          // Editing existing item
+          const draftItem = Object.values(draft);
+          // .flatMap((items) => items)
+          // .find((item) => item.id === itemToEdit.id);
+
+          draftItem.startWork = n;
+        })
+      );
+    };
+    syncTrackTime();
+    console.log("initialValues", initialValues);
+    console.log("statusOf", statusOf);
+  }, [initialValues, statusOf]);
 
   return (
     <>
@@ -129,6 +154,7 @@ function Taskboard() {
                   draftItem.timestamp = n;
                   draftItem.title = values.title;
                   draftItem.description = values.description;
+                  draftItem.startWork = values.startWork;
                 }
               } else {
                 // Adding new item as "to do"
