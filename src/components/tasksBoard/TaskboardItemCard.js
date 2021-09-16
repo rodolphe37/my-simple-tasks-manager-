@@ -122,7 +122,7 @@ function TaskboardItemCard({
               <img style={{ width: 24 }} src={List} alt="progress" />
             ) : null}
             {status === "Done" ? (
-              <img style={{ width: 24 }} src={Clipboard} alt="progress" />
+              <img style={{ width: 28 }} src={Clipboard} alt="progress" />
             ) : null}
           </div>
         </div>
