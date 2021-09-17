@@ -9,6 +9,7 @@ import supp from "./components/assets/supp.svg";
 import BacklogImg from "./components/assets/backlog.svg";
 import Alert from "./components/alertComponent/customAlert/Alert";
 import PwaLogo from "./components/assets/pwa-pass-3.svg";
+import TimeTracker from "./components/timeTracker/TimeTracker";
 
 const StyledLayout = styled(Layout)`
   /* We can't use "height: 100vh; width: 100vw;" here.
@@ -132,6 +133,7 @@ function App() {
           </div>
         </div>
       </StyledHeader>
+      <TimeTracker />
       <StyledContent>
         <Taskboard />
       </StyledContent>

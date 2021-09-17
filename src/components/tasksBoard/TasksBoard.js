@@ -118,7 +118,6 @@ function Taskboard() {
 
   return (
     <>
-      <TimeTracker />
       <DragDropContext onDragEnd={handleDragEnd}>
         <TaskboardRoot>
           <TaskboardContent>
