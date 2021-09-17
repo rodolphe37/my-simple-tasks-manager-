@@ -13,7 +13,9 @@ const INITIAL_COUNT = JSON.parse(localStorage.getItem("time")) ?? 0;
 export default function TimeTracker() {
   const { n } = useDateTime();
   const [secondsRemaining, setSecondsRemaining] = useState(INITIAL_COUNT);
-  const [status, setStatus] = useState(STATUS.STOPPED);
+  const [status, setStatus] = useState(
+    localStorage.getItem("status") ?? STATUS.STOPPED
+  );
   const [dayWork, setDayWork] = useState(0);
   const secondsToDisplay = secondsRemaining % 60;
   const minutesRemaining = (secondsRemaining - secondsToDisplay) / 60;
@@ -25,9 +27,11 @@ export default function TimeTracker() {
   }, []);
   const handleStart = () => {
     setStatus(STATUS.STARTED);
+    localStorage.setItem("status", "Started");
   };
   const handleStop = () => {
     setStatus(STATUS.STOPPED);
+    localStorage.setItem("status", "Stopped");
   };
 
   useEffect(() => {
