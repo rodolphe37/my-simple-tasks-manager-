@@ -29,12 +29,10 @@ const Alert = ({
 
   const deteleAll = () => {
     setProjectName("");
-    localStorage.removeItem("projectName");
-    localStorage.removeItem("validate");
+    localStorage.clear();
     setValidateProjectName(false);
     setClickedAlert(false);
-    localStorage.removeItem("time");
-    localStorage.removeItem("itemsByStatus");
+
     window.location.reload();
   };
 

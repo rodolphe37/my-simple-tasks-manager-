@@ -7,6 +7,7 @@ import { TaskboardItemStatus } from "./TaskboardTypes";
 import TaskboardItemModal from "./TasksBoardItemModal";
 import TaskboardCol from "./TaskboardCol";
 import { useSyncedState } from "../shared/SharedHooks";
+import TimeTracker from "../timeTracker/TimeTracker";
 
 const generateId = () => Date.now().toString();
 
@@ -85,12 +86,39 @@ function Taskboard() {
       timestamp: itemToEdit?.timestamp ?? "",
       title: itemToEdit?.title ?? "",
       description: itemToEdit?.description ?? "",
+      startWork: 0,
+      stopWork: 0,
+      totalTime: 0,
     }),
     [itemToEdit]
   );
 
+  const statusOf = Object.values(TaskboardItemStatus).map((status) => status);
+
+  useEffect(() => {
+    const syncTrackTime = (values) => {
+      setItemsByStatus((current) =>
+        produce(current, (draft) => {
+          // console.log("current", current);
+
+          // Editing existing item
+          const draftItem = Object.values(draft);
+          // .flatMap((items) => items)
+          // .find((item) => item.id === itemToEdit.id);
+
+          draftItem.startWork = n;
+        })
+      );
+    };
+    syncTrackTime();
+    console.log("initialValues", initialValues);
+    console.log("statusOf", statusOf);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialValues, statusOf]);
+
   return (
     <>
+      <TimeTracker />
       <DragDropContext onDragEnd={handleDragEnd}>
         <TaskboardRoot>
           <TaskboardContent>
@@ -129,6 +157,7 @@ function Taskboard() {
                   draftItem.timestamp = n;
                   draftItem.title = values.title;
                   draftItem.description = values.description;
+                  draftItem.startWork = values.startWork;
                 }
               } else {
                 // Adding new item as "to do"

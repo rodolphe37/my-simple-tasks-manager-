@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./timeTracker.css";
 import TimerImg from "../assets/time-management.svg";
+import useDateTime from "../../hooks/useDateTime";
 
 const STATUS = {
   STARTED: "Started",
@@ -9,10 +10,8 @@ const STATUS = {
 
 const INITIAL_COUNT = JSON.parse(localStorage.getItem("time")) ?? 0;
 
-let d = new Date();
-let n = d.toLocaleString();
-
 export default function TimeTracker() {
+  const { n } = useDateTime();
   const [secondsRemaining, setSecondsRemaining] = useState(INITIAL_COUNT);
   const [status, setStatus] = useState(STATUS.STOPPED);
   const [dayWork, setDayWork] = useState(0);
@@ -120,7 +119,7 @@ export default function TimeTracker() {
         {threeDigits(hoursToDisplay)}:{twoDigits(minutesToDisplay)}:
         {twoDigits(secondsToDisplay)}
       </div>
-      <span>{`${dayWork} ${dayWork > "2,0" ? "days" : "day"}`}</span>
+      <span>{`${dayWork} day(s)`}</span>
       <div className="indicator-section">
         <span
           className="status-indicator"

@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Button, Card, Modal, Typography, Dropdown, Menu } from "antd";
+import React, { useEffect, useState } from "react";
+import { Button, Card, Modal, Typography, Dropdown, Menu, Form } from "antd";
 import { DeleteOutlined, EditOutlined, MoreOutlined } from "@ant-design/icons";
 import { red } from "@ant-design/colors";
 import styled from "styled-components";
@@ -7,6 +7,10 @@ import BaseTooltip from "../shared/BaseTooltip";
 import Checklist from "../assets/arrows.svg";
 import List from "../assets/lists.svg";
 import Clipboard from "../assets/clipboard.svg";
+import { useRecoilState } from "recoil";
+import timeAllCardsAtom from "../../statesManager/atoms/timeAllCardsAtom";
+import TimerEndIcon from "../assets/timer.svg";
+import StartIcon from "../assets/start.svg";
 
 const StyledCard = styled(Card)`
   margin: 0.5rem;
@@ -35,22 +39,146 @@ function TaskboardItemCard({
 }) {
   let d = new Date();
   let n = d.toLocaleString();
+  const [totalTimeToSeconds, setTotalTimeToSeconds] = useState([]);
+  const [completCardsTimeArray, setCompletCardsTimeArray] =
+    useRecoilState(timeAllCardsAtom);
+  const [timeAllCards, setTimeAllCards] = useState([]);
+
+  const [startWorkState, setStartWorkState] = useState(
+    localStorage.getItem("startTimeWork") ?? ""
+  );
+  const [stopWorkState, setStopWorkState] = useState("");
+  const [cardId, setCardId] = useState(0);
+
+  let cardIdFromTimeAll = timeAllCards.map((res) =>
+    JSON.parse(`${res.cardId}`)
+  );
 
   useEffect(() => {
     if (status === "In Progress") {
-      // setItemsByStatus((current) => (current["In Progress"].startWork = n));
-      // console.log("current", itemsByStatus["In Progress"]);
+      setStartWorkState(n);
+      setTimeAllCards([
+        { cardId: item.id, cardTitle: item.title, start: `${n}`, stop: "" },
+      ]);
+      localStorage.setItem("startTimeWork", startWorkState);
+      localStorage.setItem("timeAllCards", JSON.stringify(timeAllCards));
     }
+    if (status === "Done") {
+      setCardId(cardIdFromTimeAll);
+      setStopWorkState(n);
+      setStartWorkState(localStorage.getItem("startTimeWork"));
+
+      setTimeAllCards([
+        {
+          cardId: item.id,
+          cardTitle: item.title,
+          start: startWorkState,
+          stop: `${n}`,
+        },
+      ]);
+      if (completCardsTimeArray.length === 0) {
+        setCompletCardsTimeArray(timeAllCards);
+      }
+
+      if (Number(item.id) !== cardId[0]) {
+        setCompletCardsTimeArray((completCardsTimeArray) =>
+          completCardsTimeArray.concat(timeAllCards)
+        );
+      }
+
+      console.log("totalCardsTime", completCardsTimeArray);
+      console.log("item id", Number(item.id));
+      console.log("totalCardsTime id", cardId[0]);
+      // console.log(
+      //   "timeAllCards[0].id",
+      //   timeAllCards.map((res) => res.id)
+      // );
+      localStorage.setItem(
+        "completCardsTimeArray",
+        JSON.stringify(completCardsTimeArray)
+      );
+
+      localStorage.setItem("stopTimeWork", stopWorkState);
+      localStorage.setItem("timeAllCards", JSON.stringify(timeAllCards));
+    }
+
+    if (JSON.parse(localStorage.getItem("timeAllCards")) !== null) {
+      setTimeAllCards((prevState) => prevState, timeAllCards);
+    }
+    return () => {
+      // localStorage.removeItem("startTimeWork");
+      localStorage.removeItem("stopTimeWork");
+      localStorage.removeItem("allCarsTime");
+    };
     // console.log("itemsByStatus", itemsByStatus);
     // console.log("item", item);
-  }, [itemsByStatus, item, status, setItemsByStatus, n]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [status, item, startWorkState, stopWorkState, completCardsTimeArray]);
+
+  useEffect(() => {
+    console.log("timeAllCards", timeAllCards);
+
+    console.log("compar id", item.id === timeAllCards.id);
+
+    if (startWorkState && stopWorkState) {
+      totalTimeAddition();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [completCardsTimeArray, timeAllCards]);
+
+  const totalTimeAddition = () => {
+    const numberKeeped = 8;
+
+    const startTask = startWorkState;
+    const hoursToMinStartTask = startTask.substring(
+      startTask.length - numberKeeped
+    );
+    const stopTask = stopWorkState;
+    const hoursToMinStopTask = stopTask.substring(
+      stopTask.length - numberKeeped
+    );
+    console.log("startTask", hoursToMinStartTask);
+    console.log("stopTask", hoursToMinStopTask);
+
+    function hmsToSecondsOnly(str) {
+      let p = str.split(":"),
+        s = 0,
+        m = 1;
+      while (p.length > 0) {
+        s += m * parseInt(p.pop(), 10);
+        m *= 60;
+      }
+      return s;
+    }
+    const startTaskResult = hmsToSecondsOnly(hoursToMinStartTask);
+    const stopTaskResult = hmsToSecondsOnly(hoursToMinStopTask);
+    console.log("result :", startTaskResult);
+    console.log("result :", stopTaskResult);
+
+    // setTotalTimeToSeconds((totalTimeToSeconds) =>
+    //   totalTimeToSeconds.concat({
+    //     cardId: item.id,
+    //     totalTime: stopTaskResult - startTaskResult,
+    //   })
+    // );
+
+    setTotalTimeToSeconds({
+      cardId: item.id,
+      totalTime: stopTaskResult - startTaskResult,
+    });
+
+    localStorage.setItem(
+      "totalTimeInSeconds",
+      JSON.stringify(totalTimeToSeconds)
+    );
+  };
 
   return (
     <StyledCard
       $isDragging={isDragging}
       size="small"
       title={
-        <BaseTooltip key={item.title} overlay={item.title}>
+        <BaseTooltip overlay={item.title}>
           {/* styled(Typography.Title) throws an error in console about
           forwarding ref in function components.
           Because Typography.Title doesn't accept a ref.
@@ -72,11 +200,7 @@ function TaskboardItemCard({
         <Dropdown
           overlay={
             <Menu>
-              <Menu.Item
-                key={item.id}
-                icon={<EditOutlined />}
-                onClick={() => onEdit(item)}
-              >
+              <Menu.Item icon={<EditOutlined />} onClick={() => onEdit(item)}>
                 Edit
               </Menu.Item>
               <DeleteMenuItem
@@ -103,7 +227,7 @@ function TaskboardItemCard({
         </Dropdown>
       }
     >
-      <BaseTooltip key={item.id}>
+      <BaseTooltip>
         <div
           style={{
             display: "flex",
@@ -127,11 +251,103 @@ function TaskboardItemCard({
           </div>
         </div>
       </BaseTooltip>
-      <BaseTooltip key={item.title} overlay={item.description}>
+      <BaseTooltip overlay={item.description}>
         <Typography.Paragraph type="secondary" ellipsis={{ rows: 2 }}>
           {item.description}
         </Typography.Paragraph>
       </BaseTooltip>
+      {status === "In Progress" ? (
+        <BaseTooltip overlay={item.startWork}>
+          <Form>
+            <hr />
+            <div
+              style={{
+                height: "20px",
+              }}
+            >
+              <Typography.Paragraph type="secondary" ellipsis={{ rows: 2 }}>
+                <Form.Item
+                  style={{ fontSize: 11 }}
+                  shouldUpdate={(prevValues, curValues) =>
+                    prevValues.additional !== curValues.additional
+                  }
+                >
+                  {() => {
+                    return (
+                      <Form.Item>
+                        <img
+                          style={{ width: 21, marginRight: 20 }}
+                          src={StartIcon}
+                          alt=""
+                        />{" "}
+                        {startWorkState}
+                      </Form.Item>
+                    );
+                  }}
+                </Form.Item>
+              </Typography.Paragraph>
+            </div>
+          </Form>
+        </BaseTooltip>
+      ) : null}
+      <div
+        style={
+          status === "Done"
+            ? { border: "1px dotted gray", padding: 8 }
+            : { display: "none" }
+        }
+      >
+        {status === "Done" ? (
+          <BaseTooltip overlay={item.stopWork}>
+            {completCardsTimeArray.map((res) => (
+              <Form key={res.id} className="myForm">
+                {item.id === res.cardId ? (
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "space-around",
+                      height: "20px",
+                    }}
+                  >
+                    <Form.Item key={res.cardId}>
+                      <p style={{ fontSize: 10 }}>{res.start}</p>
+                    </Form.Item>
+                    <Typography.Paragraph
+                      type="secondary"
+                      ellipsis={{ rows: 2 }}
+                    >
+                      <Form.Item
+                        shouldUpdate={(prevValuesStop, curValuesStop) =>
+                          prevValuesStop.additional !== curValuesStop.additional
+                        }
+                      >
+                        {() => {
+                          return (
+                            <Form.Item>
+                              <p style={{ fontSize: 10 }}>{res.stop}</p>
+                            </Form.Item>
+                          );
+                        }}
+                      </Form.Item>
+                    </Typography.Paragraph>
+                  </div>
+                ) : null}
+              </Form>
+            ))}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "flex-start",
+                justifyContent: "space-around",
+              }}
+            >
+              <img style={{ width: 28 }} src={StartIcon} alt="" />
+              <img style={{ width: 28 }} src={TimerEndIcon} alt="" />
+            </div>
+          </BaseTooltip>
+        ) : null}
+      </div>
     </StyledCard>
   );
 }
