@@ -1,5 +1,5 @@
 import { DragDropContext } from "react-beautiful-dnd";
-import { useEffect, useMemo, useState } from "react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import produce from "immer";
 import styled from "styled-components";
 // eslint-disable-next-line no-unused-vars
@@ -7,6 +7,9 @@ import { TaskboardItemStatus } from "./TaskboardTypes";
 import TaskboardItemModal from "./TasksBoardItemModal";
 import TaskboardCol from "./TaskboardCol";
 import { useSyncedState } from "../shared/SharedHooks";
+import InfoMessage from "../infoMessage/InfoMessage";
+import { useRecoilState } from "recoil";
+import closedStateAtom from "../../statesManager/atoms/closedStateAtom";
 
 const generateId = () => Date.now().toString();
 
@@ -36,6 +39,7 @@ function Taskboard() {
     "itemsByStatus",
     defaultItems
   );
+  const [closed] = useRecoilState(closedStateAtom);
   useEffect(() => {
     // console.log(itemsByStatus["In Progress"]);
   }, [itemsByStatus]);
@@ -117,6 +121,17 @@ function Taskboard() {
 
   return (
     <>
+      {localStorage.getItem("completCardsTimeArray") &&
+      itemsByStatus["In Progress"].length === 0 &&
+      itemsByStatus["Done"].length === 0 ? (
+        <Fragment>
+          <div className={closed ? "none" : "overlay"}></div>
+          <InfoMessage
+            type="warning"
+            content="You want to delete individual cards working time history?"
+          />
+        </Fragment>
+      ) : null}
       <DragDropContext onDragEnd={handleDragEnd}>
         <TaskboardRoot>
           <TaskboardContent>

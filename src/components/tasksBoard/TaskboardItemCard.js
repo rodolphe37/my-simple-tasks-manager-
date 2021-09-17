@@ -47,7 +47,9 @@ function TaskboardItemCard({
   const [startWorkState, setStartWorkState] = useState(
     localStorage.getItem("startTimeWork") ?? ""
   );
-  const [stopWorkState, setStopWorkState] = useState("");
+  const [stopWorkState, setStopWorkState] = useState(
+    localStorage.getItem("stopTimeWork") ?? ""
+  );
   const [cardId, setCardId] = useState(0);
 
   let cardIdFromTimeAll = timeAllCards.map((res) =>
@@ -55,6 +57,7 @@ function TaskboardItemCard({
   );
 
   useEffect(() => {
+    console.log("itms status", itemsByStatus["Done"].length);
     if (status === "In Progress") {
       setStartWorkState(n);
       setTimeAllCards([
@@ -76,6 +79,7 @@ function TaskboardItemCard({
           stop: `${n}`,
         },
       ]);
+
       if (completCardsTimeArray.length === 0) {
         setCompletCardsTimeArray(timeAllCards);
       }
@@ -98,18 +102,32 @@ function TaskboardItemCard({
         JSON.stringify(completCardsTimeArray)
       );
 
-      localStorage.setItem("stopTimeWork", stopWorkState);
+      if (!stopWorkState) {
+        localStorage.setItem("stopTimeWork", stopWorkState);
+      }
       localStorage.setItem("timeAllCards", JSON.stringify(timeAllCards));
+    }
+
+    if (itemsByStatus["In Progress"].length === 0) {
+      localStorage.removeItem("startTimeWork");
+      localStorage.removeItem("timeAllCards");
+    }
+
+    if (itemsByStatus["Done"].length === 0) {
+      localStorage.removeItem("totalTimeInSeconds");
+      localStorage.removeItem("stopTimeWork");
     }
 
     if (JSON.parse(localStorage.getItem("timeAllCards")) !== null) {
       setTimeAllCards((prevState) => prevState, timeAllCards);
     }
+
     return () => {
       // localStorage.removeItem("startTimeWork");
       localStorage.removeItem("stopTimeWork");
       localStorage.removeItem("allCarsTime");
     };
+
     // console.log("itemsByStatus", itemsByStatus);
     // console.log("item", item);
     // eslint-disable-next-line react-hooks/exhaustive-deps
