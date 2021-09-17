@@ -84,7 +84,10 @@ function App() {
               buttonNo={`Reset all`}
             />
           ) : null}
-          <div style={{ position: "relative" }} className="projectName-content">
+          <div
+            style={{ position: "relative", width: "42%" }}
+            className="projectName-content"
+          >
             {projectName && (
               <Fragment>
                 {!validateprojectName && (
@@ -153,12 +156,12 @@ function App() {
             <div
               className="noteButton"
               style={{
-                position: "absolute",
+                // position: "absolute",
                 cursor: "pointer",
                 border: "1px solid purple",
                 padding: "8px",
                 height: 63,
-                width: 63,
+                width: 73,
               }}
             >
               <img

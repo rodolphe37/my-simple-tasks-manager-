@@ -17,6 +17,7 @@ textarea {
   color: rgba(0, 0, 0, 0.1);
   font: 220px "Helvetica", sans-serif;
   line-height: 185px;
+  margin-left: 8px;
 }
 
 #create:hover {
