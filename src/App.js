@@ -96,12 +96,20 @@ function App() {
                         : "valid-projectName-button simple"
                     }
                   >
-                    <img
-                      style={{ opacity: 1 }}
-                      className="projectName-icons"
-                      src={ok}
-                      alt="ok"
-                    />
+                    <span className="infoEraser">
+                      <img
+                        style={{ opacity: 1 }}
+                        className="projectName-icons"
+                        src={ok}
+                        alt="ok"
+                      />
+                      <span
+                        style={{ marginTop: -22 }}
+                        className="tooltip tooltipProjectName"
+                      >
+                        Click for validate project name!
+                      </span>
+                    </span>
                   </button>
                 )}
                 {validateprojectName && (
@@ -109,7 +117,19 @@ function App() {
                     onClick={handleEraseprojectName}
                     className="erase-urername-button simple opacityfull"
                   >
-                    <img className="projectName-icons" src={supp} alt="supp" />
+                    <span className="infoEraser">
+                      <img
+                        className="projectName-icons"
+                        src={supp}
+                        alt="supp"
+                      />
+                      <span
+                        style={{ marginTop: -22 }}
+                        className="tooltip tooltipProjectName"
+                      >
+                        Delete project name or reset all
+                      </span>
+                    </span>
                   </button>
                 )}
               </Fragment>

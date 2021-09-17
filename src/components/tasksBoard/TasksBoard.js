@@ -114,8 +114,8 @@ function Taskboard() {
       );
     };
     syncTrackTime();
-    console.log("initialValues", initialValues);
-    console.log("statusOf", statusOf);
+    // console.log("initialValues", initialValues);
+    // console.log("statusOf", statusOf);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialValues, statusOf]);
 

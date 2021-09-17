@@ -222,3 +222,20 @@ select {
   transition: all 0.6s ease-in-out;
   border-radius: 8px;
 }
+button.erase-urername-button > .infoEraser,
+.valid-projectName-button > .infoEraser {
+  height: 55px !important;
+  position: absolute !important;
+  top: -1px !important;
+}
+.tooltipProjectName {
+  position: relative !important;
+  top: 37px !important;
+  left: -38px !important;
+  background: rgba(0, 0, 0, 0.4) !important;
+  padding: 7px !important;
+  z-index: 98 !important;
+  border-radius: 7px !important;
+  box-shadow: 0px 1px 6px grey;
+  color: white !important;
+}

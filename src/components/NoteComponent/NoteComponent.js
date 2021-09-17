@@ -4,10 +4,20 @@ import Erasericon from "../assets/eraser.svg";
 
 const NoteComponent = () => {
   // eslint-disable-next-line no-unused-vars
+  const [noteNumberToDisplay, setNoteNumberToDisplay] = useState(
+    localStorage.getItem("noteNumberToDisplay") ?? 1
+  );
+  // eslint-disable-next-line no-unused-vars
   const [newNote1, setNewNote1] = useState(true);
-  const [newNote2, setNewNote2] = useState(false);
-  const [newNote3, setNewNote3] = useState(false);
-  const [newNote4, setNewNote4] = useState(false);
+  const [newNote2, setNewNote2] = useState(
+    JSON.parse(localStorage.getItem("newNote2")) === true ? true : false
+  );
+  const [newNote3, setNewNote3] = useState(
+    JSON.parse(localStorage.getItem("newNote3")) === true ? true : false
+  );
+  const [newNote4, setNewNote4] = useState(
+    JSON.parse(localStorage.getItem("newNote4")) === true ? true : false
+  );
   const [createButtonState, setCreateButtonState] = useState(true);
   const [valueNote1, setValueNote1] = useState(
     localStorage.getItem("valueNote1") ?? ""
@@ -24,15 +34,20 @@ const NoteComponent = () => {
 
   const handleCreateNote2 = () => {
     setNewNote2((newNote2) => !newNote2);
-    localStorage.setItem("newNote2", newNote2);
+    setNoteNumberToDisplay(2);
+    localStorage.setItem("newNote2", true);
   };
   const handleCreateNote3 = () => {
     setNewNote3((newNote3) => !newNote3);
-    localStorage.setItem("newNote3", newNote3);
+    setNoteNumberToDisplay(3);
+    localStorage.setItem("noteNumberToDisplay", noteNumberToDisplay);
+    localStorage.setItem("newNote3", true);
   };
   const handleCreateNote4 = () => {
     setNewNote4((newNote4) => !newNote4);
-    localStorage.setItem("newNote4", newNote4);
+    setNoteNumberToDisplay(4);
+    localStorage.setItem("noteNumberToDisplay", noteNumberToDisplay);
+    localStorage.setItem("newNote4", true);
   };
 
   const handleCreateNotes = () => {
@@ -49,30 +64,49 @@ const NoteComponent = () => {
 
   const handleDeleteNote2 = () => {
     setNewNote2(false);
+    setNoteNumberToDisplay(noteNumberToDisplay - 1);
+    localStorage.setItem("noteNumberToDisplay", noteNumberToDisplay);
     setValueNote2("");
     localStorage.removeItem("valueNote2");
+    localStorage.setItem("newNote2", false);
   };
   const handleDeleteNote3 = () => {
     setNewNote3(false);
+    setNoteNumberToDisplay(noteNumberToDisplay - 1);
+    localStorage.setItem("noteNumberToDisplay", noteNumberToDisplay);
     setValueNote3("");
     localStorage.removeItem("valueNote3");
+    localStorage.setItem("newNote3", false);
   };
   const handleDeleteNote4 = () => {
     setNewNote4(false);
+    setNoteNumberToDisplay(noteNumberToDisplay - 1);
+    localStorage.setItem("noteNumberToDisplay", noteNumberToDisplay);
     setValueNote4("");
     localStorage.removeItem("valueNote4");
+    localStorage.setItem("newNote4", false);
   };
   const handleEraseNoteOne = () => {
     setValueNote1("");
     localStorage.removeItem("valueNote1");
   };
 
+  const NoteNumberFromLocalStore = localStorage.getItem("noteNumberToDisplay");
+
   useEffect(() => {
+    if (newNote1 && newNote2 && newNote3 && newNote4) {
+      setCreateButtonState(false);
+    }
+    // if (NoteNumberFromLocalStore === 1) {
+    //   setNoteNumberToDisplay(2);
+    // }
     if (newNote1 && newNote2 && newNote3 && newNote4) {
       setCreateButtonState(false);
     }
     if (newNote1 && !newNote2 && !newNote3 && !newNote4) {
       setCreateButtonState(true);
+      setNoteNumberToDisplay(1);
+      localStorage.setItem("noteNumberToDisplay", 1);
     }
     if (valueNote1) {
       localStorage.setItem("valueNote1", valueNote1);
@@ -86,27 +120,34 @@ const NoteComponent = () => {
     if (valueNote4) {
       localStorage.setItem("valueNote4", valueNote4);
     }
+
+    console.log("noteNumberToDisplay", NoteNumberFromLocalStore);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    newNote1,
-    newNote2,
-    newNote3,
-    newNote4,
-    valueNote1,
-    valueNote2,
-    valueNote3,
-    valueNote4,
-  ]);
+  }, [valueNote1, valueNote2, valueNote3, valueNote4]);
 
   return (
     <div style={{ display: "flex", marginTop: 7 }}>
       <button
+        style={{ position: "relative", zIndex: 5 }}
         disabled={createButtonState ? false : true}
         className={createButtonState ? "" : "opacity"}
         onClick={handleCreateNotes}
         id="create"
       >
         +
+        <sub
+          style={{
+            fontSize: 22,
+            position: "absolute",
+            bottom: 0,
+            right: 0,
+            width: 65,
+            zIndex: 99,
+            height: 16,
+          }}
+        >
+          {noteNumberToDisplay}/4
+        </sub>
       </button>
       <div
         style={{
@@ -122,11 +163,14 @@ const NoteComponent = () => {
             onClick={handleEraseNoteOne}
             className="button remove noColor"
           >
-            <img
-              style={{ width: 24, marginLeft: -2, marginTop: -2 }}
-              src={Erasericon}
-              alt="eraser"
-            />
+            <span className="infoEraser">
+              <img
+                style={{ width: 24, marginLeft: -2, marginTop: -2 }}
+                src={Erasericon}
+                alt="eraser"
+              />
+              <span className="tooltip tooltipEraser">Erase content</span>
+            </span>
           </button>
           <textarea
             value={valueNote1}

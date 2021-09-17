@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { Button, Card, Modal, Typography, Dropdown, Menu, Form } from "antd";
 import { DeleteOutlined, EditOutlined, MoreOutlined } from "@ant-design/icons";
@@ -40,6 +41,7 @@ function TaskboardItemCard({
 }) {
   let d = new Date();
   let n = d.toLocaleString();
+  const [timeForCard, setTimeForCard] = useState("");
   const [totalTimeToSeconds, setTotalTimeToSeconds] = useState(
     JSON.parse(localStorage.getItem("totalTimeInSeconds")) ?? []
   );
@@ -63,6 +65,11 @@ function TaskboardItemCard({
   );
 
   useEffect(() => {
+    // console.log("timestamp", item.timestamp);
+    if (item.timestamp === undefined) {
+      setTimeForCard(n);
+    }
+    localStorage.setItem("timeStamp", timeForCard);
     // console.log("itms status", itemsByStatus["Done"].length);
     if (status === "In Progress") {
       setStartWorkState(n);
@@ -95,21 +102,21 @@ function TaskboardItemCard({
           completCardsTimeArray.concat(timeAllCards)
         );
       }
-      if (totalTimeToSeconds !== null && cumuledTimeCards === null) {
-        setCumuledTimeCards([totalTimeToSeconds]);
-        localStorage.removeItem("totalTimeInSeconds");
-      }
-      if (cumuledTimeCards.length >= 1) {
-        setCumuledTimeCards((cumuledTimeCards) =>
-          cumuledTimeCards.concat(totalTimeToSeconds)
-        );
-        localStorage.removeItem("totalTimeInSeconds");
-      }
+      // if (totalTimeToSeconds !== null && cumuledTimeCards === null) {
+      //   setCumuledTimeCards([totalTimeToSeconds]);
+      //   localStorage.removeItem("totalTimeInSeconds");
+      // }
+      // if (cumuledTimeCards.length >= 1) {
+      //   setCumuledTimeCards((cumuledTimeCards) =>
+      //     cumuledTimeCards.concat(totalTimeToSeconds)
+      //   );
+      //   localStorage.removeItem("totalTimeInSeconds");
+      // }
 
-      console.log(
-        "cumuledTimeCards",
-        cumuledTimeCards.map((res) => res.cardId)
-      );
+      // console.log(
+      //   "cumuledTimeCards",
+      //   cumuledTimeCards.map((res) => res.cardId)
+      // );
       // console.log("item id", Number(item.id));
       // console.log("totalCardsTime id", cardId[0]);
       // console.log(
@@ -120,10 +127,10 @@ function TaskboardItemCard({
         "completCardsTimeArray",
         JSON.stringify(completCardsTimeArray)
       );
-      localStorage.setItem(
-        "cumulTimeCardsTask",
-        JSON.stringify(cumuledTimeCards)
-      );
+      // localStorage.setItem(
+      //   "cumulTimeCardsTask",
+      //   JSON.stringify(cumuledTimeCards)
+      // );
 
       if (!stopWorkState) {
         localStorage.setItem("stopTimeWork", stopWorkState);
@@ -131,7 +138,7 @@ function TaskboardItemCard({
       localStorage.setItem("timeAllCards", JSON.stringify(timeAllCards));
 
       return () => {
-        localStorage.removeItem("totalTimeInSeconds");
+        // localStorage.removeItem("totalTimeInSeconds");
       };
     }
 
@@ -158,24 +165,24 @@ function TaskboardItemCard({
     // console.log("itemsByStatus", itemsByStatus);
     // console.log("item", item);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [status, item, startWorkState, stopWorkState, completCardsTimeArray]);
+  }, [status, startWorkState, stopWorkState, completCardsTimeArray]);
 
   useEffect(() => {
     // console.log("compar id", item.id === timeAllCards.id);
 
-    if (totalTimeToSeconds !== null && status === "Done") {
-      localStorage.setItem(
-        "totalTimeInSeconds",
-        JSON.stringify(totalTimeToSeconds)
-      );
-    }
+    // if (totalTimeToSeconds !== null && status === "Done") {
+    //   localStorage.setItem(
+    //     "totalTimeInSeconds",
+    //     JSON.stringify(totalTimeToSeconds)
+    //   );
+    // }
 
     if (startWorkState && stopWorkState) {
       totalTimeAddition();
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [completCardsTimeArray, timeAllCards, totalTimeToSeconds]);
+  }, [completCardsTimeArray, timeAllCards]);
 
   const totalTimeAddition = () => {
     const numberKeeped = 8;
@@ -286,7 +293,7 @@ function TaskboardItemCard({
           }}
         >
           <Typography.Paragraph type="secondary" ellipsis={{ rows: 2 }}>
-            {item.timestamp ?? n}
+            {item.timestamp ?? timeForCard}
           </Typography.Paragraph>
           <div className="">
             {status === "In Progress" ? (
