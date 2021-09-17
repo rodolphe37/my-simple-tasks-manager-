@@ -217,3 +217,8 @@ select {
     margin-left: 4%;
   }
 }
+.noteButton:hover {
+  background-color: purple;
+  transition: all 0.6s ease-in-out;
+  border-radius: 8px;
+}

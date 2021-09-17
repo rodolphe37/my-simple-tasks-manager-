@@ -11,6 +11,7 @@ import { useRecoilState } from "recoil";
 import timeAllCardsAtom from "../../statesManager/atoms/timeAllCardsAtom";
 import TimerEndIcon from "../assets/timer.svg";
 import StartIcon from "../assets/start.svg";
+import cumulTimeCardsTaskAtom from "../../statesManager/atoms/cumulTimeCardsTaskAtom";
 
 const StyledCard = styled(Card)`
   margin: 0.5rem;
@@ -39,7 +40,12 @@ function TaskboardItemCard({
 }) {
   let d = new Date();
   let n = d.toLocaleString();
-  const [totalTimeToSeconds, setTotalTimeToSeconds] = useState([]);
+  const [totalTimeToSeconds, setTotalTimeToSeconds] = useState(
+    JSON.parse(localStorage.getItem("totalTimeInSeconds")) ?? []
+  );
+  const [cumuledTimeCards, setCumuledTimeCards] = useRecoilState(
+    cumulTimeCardsTaskAtom
+  );
   const [completCardsTimeArray, setCompletCardsTimeArray] =
     useRecoilState(timeAllCardsAtom);
   const [timeAllCards, setTimeAllCards] = useState([]);
@@ -57,7 +63,7 @@ function TaskboardItemCard({
   );
 
   useEffect(() => {
-    console.log("itms status", itemsByStatus["Done"].length);
+    // console.log("itms status", itemsByStatus["Done"].length);
     if (status === "In Progress") {
       setStartWorkState(n);
       setTimeAllCards([
@@ -89,10 +95,23 @@ function TaskboardItemCard({
           completCardsTimeArray.concat(timeAllCards)
         );
       }
+      if (totalTimeToSeconds !== null && cumuledTimeCards === null) {
+        setCumuledTimeCards([totalTimeToSeconds]);
+        localStorage.removeItem("totalTimeInSeconds");
+      }
+      if (cumuledTimeCards.length >= 1) {
+        setCumuledTimeCards((cumuledTimeCards) =>
+          cumuledTimeCards.concat(totalTimeToSeconds)
+        );
+        localStorage.removeItem("totalTimeInSeconds");
+      }
 
-      console.log("totalCardsTime", completCardsTimeArray);
-      console.log("item id", Number(item.id));
-      console.log("totalCardsTime id", cardId[0]);
+      console.log(
+        "cumuledTimeCards",
+        cumuledTimeCards.map((res) => res.cardId)
+      );
+      // console.log("item id", Number(item.id));
+      // console.log("totalCardsTime id", cardId[0]);
       // console.log(
       //   "timeAllCards[0].id",
       //   timeAllCards.map((res) => res.id)
@@ -101,11 +120,19 @@ function TaskboardItemCard({
         "completCardsTimeArray",
         JSON.stringify(completCardsTimeArray)
       );
+      localStorage.setItem(
+        "cumulTimeCardsTask",
+        JSON.stringify(cumuledTimeCards)
+      );
 
       if (!stopWorkState) {
         localStorage.setItem("stopTimeWork", stopWorkState);
       }
       localStorage.setItem("timeAllCards", JSON.stringify(timeAllCards));
+
+      return () => {
+        localStorage.removeItem("totalTimeInSeconds");
+      };
     }
 
     if (itemsByStatus["In Progress"].length === 0) {
@@ -114,7 +141,7 @@ function TaskboardItemCard({
     }
 
     if (itemsByStatus["Done"].length === 0) {
-      localStorage.removeItem("totalTimeInSeconds");
+      // localStorage.removeItem("totalTimeInSeconds");
       localStorage.removeItem("stopTimeWork");
     }
 
@@ -134,15 +161,21 @@ function TaskboardItemCard({
   }, [status, item, startWorkState, stopWorkState, completCardsTimeArray]);
 
   useEffect(() => {
-    console.log("timeAllCards", timeAllCards);
+    // console.log("compar id", item.id === timeAllCards.id);
 
-    console.log("compar id", item.id === timeAllCards.id);
+    if (totalTimeToSeconds !== null && status === "Done") {
+      localStorage.setItem(
+        "totalTimeInSeconds",
+        JSON.stringify(totalTimeToSeconds)
+      );
+    }
 
     if (startWorkState && stopWorkState) {
       totalTimeAddition();
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [completCardsTimeArray, timeAllCards]);
+  }, [completCardsTimeArray, timeAllCards, totalTimeToSeconds]);
 
   const totalTimeAddition = () => {
     const numberKeeped = 8;
@@ -155,8 +188,8 @@ function TaskboardItemCard({
     const hoursToMinStopTask = stopTask.substring(
       stopTask.length - numberKeeped
     );
-    console.log("startTask", hoursToMinStartTask);
-    console.log("stopTask", hoursToMinStopTask);
+    // console.log("startTask", hoursToMinStartTask);
+    // console.log("stopTask", hoursToMinStopTask);
 
     function hmsToSecondsOnly(str) {
       let p = str.split(":"),
@@ -170,8 +203,8 @@ function TaskboardItemCard({
     }
     const startTaskResult = hmsToSecondsOnly(hoursToMinStartTask);
     const stopTaskResult = hmsToSecondsOnly(hoursToMinStopTask);
-    console.log("result :", startTaskResult);
-    console.log("result :", stopTaskResult);
+    // console.log("result :", startTaskResult);
+    // console.log("result :", stopTaskResult);
 
     // setTotalTimeToSeconds((totalTimeToSeconds) =>
     //   totalTimeToSeconds.concat({
@@ -184,12 +217,11 @@ function TaskboardItemCard({
       cardId: item.id,
       totalTime: stopTaskResult - startTaskResult,
     });
-
-    localStorage.setItem(
-      "totalTimeInSeconds",
-      JSON.stringify(totalTimeToSeconds)
-    );
   };
+
+  // useEffect(() => {
+
+  // }, [cumuledTimeCards, totalTimeToSeconds]);
 
   return (
     <StyledCard
@@ -309,6 +341,7 @@ function TaskboardItemCard({
         </BaseTooltip>
       ) : null}
       <div
+        key={item.id}
         style={
           status === "Done"
             ? { border: "1px dotted gray", padding: 8 }
