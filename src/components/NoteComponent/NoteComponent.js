@@ -87,7 +87,16 @@ const NoteComponent = () => {
       localStorage.setItem("valueNote4", valueNote4);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [
+    newNote1,
+    newNote2,
+    newNote3,
+    newNote4,
+    valueNote1,
+    valueNote2,
+    valueNote3,
+    valueNote4,
+  ]);
 
   return (
     <div style={{ display: "flex", marginTop: 7 }}>
