@@ -3,7 +3,7 @@ import { Fragment, useEffect, useState } from "react";
 import styled from "styled-components";
 import "./App.css";
 import Taskboard from "./components/tasksBoard/TasksBoard";
-import TimeTracker from "./components/timeTracker/TimeTracker";
+
 import ok from "./components/assets/ok.svg";
 import supp from "./components/assets/supp.svg";
 import BacklogImg from "./components/assets/backlog.svg";
@@ -132,7 +132,6 @@ function App() {
           </div>
         </div>
       </StyledHeader>
-      <TimeTracker />
       <StyledContent>
         <Taskboard />
       </StyledContent>

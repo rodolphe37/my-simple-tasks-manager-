@@ -7,6 +7,7 @@ import { TaskboardItemStatus } from "./TaskboardTypes";
 import TaskboardItemModal from "./TasksBoardItemModal";
 import TaskboardCol from "./TaskboardCol";
 import { useSyncedState } from "../shared/SharedHooks";
+import TimeTracker from "../timeTracker/TimeTracker";
 
 const generateId = () => Date.now().toString();
 
@@ -117,6 +118,7 @@ function Taskboard() {
 
   return (
     <>
+      <TimeTracker />
       <DragDropContext onDragEnd={handleDragEnd}>
         <TaskboardRoot>
           <TaskboardContent>

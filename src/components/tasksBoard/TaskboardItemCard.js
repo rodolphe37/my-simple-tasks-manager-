@@ -39,7 +39,7 @@ function TaskboardItemCard({
 }) {
   let d = new Date();
   let n = d.toLocaleString();
-  // const [startTimeToSeconds, setStartTimeToSeconds] = useState("");
+  const [totalTimeToSeconds, setTotalTimeToSeconds] = useState([]);
   const [completCardsTimeArray, setCompletCardsTimeArray] =
     useRecoilState(timeAllCardsAtom);
   const [timeAllCards, setTimeAllCards] = useState([]);
@@ -116,71 +116,62 @@ function TaskboardItemCard({
   }, [status, item, startWorkState, stopWorkState, completCardsTimeArray]);
 
   useEffect(() => {
-    // var val = timeAllCards.map((res, id) => res.start);
-    // setStartTimeToSeconds(String(val));
-    // // var response = val.substring(val.indexOf(":"));
-    // console.log("response", val);
-    // const stopTime = timeAllCards.map((res) =>
-    //   res.stop?.substring(res.stop.indexOf(",", 1)).split(",")
-    // );
-    // const startTime = timeAllCards.map((res) =>
-    //   res.start?.substring(res.start.indexOf(",", 1)).split(",")
-    // );
-    // var sta = startTime; // split it at the colons
-    // // minutes are worth 60 seconds. Hours are worth 60 minutes.
-    // var secondsStart = +sta[0] * 60 * 60 + +sta[1] * 60 + +sta[2];
-    // var sto = stopTime; // split it at the colons
-    // // minutes are worth 60 seconds. Hours are worth 60 minutes.
-    // var secondsStop = +sto[0] * 60 * 60 + +sto[1] * 60 + +sto[2];
-    // function hmsToSecondsOnly(str) {
-    //   var p = str.split(":"),
-    //     s = 0,
-    //     m = 1;
-    //   while (p.length > 0) {
-    //     s += m * parseInt(p.pop(), 10);
-    //     m *= 60;
-    //   }
-    //   return s;
-    // }
     console.log("timeAllCards", timeAllCards);
 
     console.log("compar id", item.id === timeAllCards.id);
+
+    if (startWorkState && stopWorkState) {
+      totalTimeAddition();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [completCardsTimeArray, timeAllCards]);
 
-  // var val = completCardsTimeArray.map((res, id) => res.start);
+  const totalTimeAddition = () => {
+    const numberKeeped = 8;
 
-  // // var response = val.substring(val.indexOf(":"));
-  // console.log("response", val);
+    const startTask = startWorkState;
+    const hoursToMinStartTask = startTask.substring(
+      startTask.length - numberKeeped
+    );
+    const stopTask = stopWorkState;
+    const hoursToMinStopTask = stopTask.substring(
+      stopTask.length - numberKeeped
+    );
+    console.log("startTask", hoursToMinStartTask);
+    console.log("stopTask", hoursToMinStopTask);
 
-  // const stopTime = timeAllCards.map((res) =>
-  //   res.stop?.substring(res.stop.indexOf(",", 1)).split(",")
-  // );
+    function hmsToSecondsOnly(str) {
+      let p = str.split(":"),
+        s = 0,
+        m = 1;
+      while (p.length > 0) {
+        s += m * parseInt(p.pop(), 10);
+        m *= 60;
+      }
+      return s;
+    }
+    const startTaskResult = hmsToSecondsOnly(hoursToMinStartTask);
+    const stopTaskResult = hmsToSecondsOnly(hoursToMinStopTask);
+    console.log("result :", startTaskResult);
+    console.log("result :", stopTaskResult);
 
-  // const startTime = completCardsTimeArray.map((res) =>
-  //   res.start?.substring(res.start[1][1].indexOf(",", 1)).split(",")
-  // );
+    // setTotalTimeToSeconds((totalTimeToSeconds) =>
+    //   totalTimeToSeconds.concat({
+    //     cardId: item.id,
+    //     totalTime: stopTaskResult - startTaskResult,
+    //   })
+    // );
 
-  // var sta = startTime; // split it at the colons
-  // // minutes are worth 60 seconds. Hours are worth 60 minutes.
-  // var secondsStart = +sta[0] * 60 * 60 + +sta[1] * 60 + +sta[2];
+    setTotalTimeToSeconds({
+      cardId: item.id,
+      totalTime: stopTaskResult - startTaskResult,
+    });
 
-  // var sto = stopTime; // split it at the colons
-  // // minutes are worth 60 seconds. Hours are worth 60 minutes.
-  // var secondsStop = +sto[0] * 60 * 60 + +sto[1] * 60 + +sto[2];
-
-  // console.log("secondsStart", sta);
-
-  // function hmsToSecondsOnly(str) {
-  //   var p = str.split(":"),
-  //     s = 0,
-  //     m = 1;
-  //   while (p.length > 0) {
-  //     s += m * parseInt(p.pop(), 10);
-  //     m *= 60;
-  //   }
-  //   return s;
-  // }
+    localStorage.setItem(
+      "totalTimeInSeconds",
+      JSON.stringify(totalTimeToSeconds)
+    );
+  };
 
   return (
     <StyledCard
