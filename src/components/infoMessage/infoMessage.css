@@ -1,3 +1,12 @@
+::-webkit-scrollbar {
+  width: 6px;
+  border-left: 1px solid #e6ecf8;
+  cursor: pointer;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #36373b;
+}
+
 .offlineMessCOntainer {
   position: absolute;
   top: 3em;

@@ -62,33 +62,54 @@ const NoteComponent = () => {
     }
   };
 
+  const MessageDeleteCard =
+    "Once you delete this sticky Note, there is no going back.";
+
   const handleDeleteNote2 = () => {
-    setNewNote2(false);
-    setNoteNumberToDisplay(noteNumberToDisplay - 1);
-    localStorage.setItem("noteNumberToDisplay", noteNumberToDisplay);
-    setValueNote2("");
-    localStorage.removeItem("valueNote2");
-    localStorage.setItem("newNote2", false);
+    if (window.confirm(MessageDeleteCard)) {
+      setNewNote2(false);
+      setNoteNumberToDisplay(noteNumberToDisplay - 1);
+      localStorage.setItem("noteNumberToDisplay", noteNumberToDisplay);
+      setValueNote2("");
+      localStorage.removeItem("valueNote2");
+      localStorage.setItem("newNote2", false);
+    } else {
+      // Code à éxécuter si l'utilisateur clique sur "Annuler"
+    }
   };
   const handleDeleteNote3 = () => {
-    setNewNote3(false);
-    setNoteNumberToDisplay(noteNumberToDisplay - 1);
-    localStorage.setItem("noteNumberToDisplay", noteNumberToDisplay);
-    setValueNote3("");
-    localStorage.removeItem("valueNote3");
-    localStorage.setItem("newNote3", false);
+    if (window.confirm(MessageDeleteCard)) {
+      setNewNote3(false);
+      setNoteNumberToDisplay(noteNumberToDisplay - 1);
+      localStorage.setItem("noteNumberToDisplay", noteNumberToDisplay);
+      setValueNote3("");
+      localStorage.removeItem("valueNote3");
+      localStorage.setItem("newNote3", false);
+    } else {
+      // Code à éxécuter si l'utilisateur clique sur "Annuler"
+    }
   };
   const handleDeleteNote4 = () => {
-    setNewNote4(false);
-    setNoteNumberToDisplay(noteNumberToDisplay - 1);
-    localStorage.setItem("noteNumberToDisplay", noteNumberToDisplay);
-    setValueNote4("");
-    localStorage.removeItem("valueNote4");
-    localStorage.setItem("newNote4", false);
+     if (window.confirm(MessageDeleteCard)) {
+       setNewNote4(false);
+       setNoteNumberToDisplay(noteNumberToDisplay - 1);
+       localStorage.setItem("noteNumberToDisplay", noteNumberToDisplay);
+       setValueNote4("");
+       localStorage.removeItem("valueNote4");
+       localStorage.setItem("newNote4", false);
+     } else {
+       // Code à éxécuter si l'utilisateur clique sur "Annuler"
+     }
+
   };
   const handleEraseNoteOne = () => {
-    setValueNote1("");
-    localStorage.removeItem("valueNote1");
+    if (window.confirm(MessageDeleteCard)) {
+     setValueNote1("");
+     localStorage.removeItem("valueNote1");
+    } else {
+      // Code à éxécuter si l'utilisateur clique sur "Annuler"
+    }
+
   };
 
   // const NoteNumberFromLocalStore = localStorage.getItem("noteNumberToDisplay");

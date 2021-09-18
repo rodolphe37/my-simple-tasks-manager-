@@ -46,9 +46,17 @@ export default function TimeTracker() {
   }, [secondsRemaining, status]);
 
   const handleReset = () => {
-    setStatus(STATUS.STOPPED);
-    localStorage.removeItem("time");
-    setSecondsRemaining(0);
+    if (
+      window.confirm(
+        "You are sure you want to reset the global counter, this action is irreversible!"
+      )
+    ) {
+      setStatus(STATUS.STOPPED);
+      localStorage.removeItem("time");
+      setSecondsRemaining(0);
+    } else {
+      // Code à éxécuter si l'utilisateur clique sur "Annuler"
+    }
   };
   useInterval(
     () => {
