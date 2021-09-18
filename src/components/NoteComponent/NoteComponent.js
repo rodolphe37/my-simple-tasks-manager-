@@ -90,26 +90,24 @@ const NoteComponent = () => {
     }
   };
   const handleDeleteNote4 = () => {
-     if (window.confirm(MessageDeleteCard)) {
-       setNewNote4(false);
-       setNoteNumberToDisplay(noteNumberToDisplay - 1);
-       localStorage.setItem("noteNumberToDisplay", noteNumberToDisplay);
-       setValueNote4("");
-       localStorage.removeItem("valueNote4");
-       localStorage.setItem("newNote4", false);
-     } else {
-       // Code à éxécuter si l'utilisateur clique sur "Annuler"
-     }
-
-  };
-  const handleEraseNoteOne = () => {
     if (window.confirm(MessageDeleteCard)) {
-     setValueNote1("");
-     localStorage.removeItem("valueNote1");
+      setNewNote4(false);
+      setNoteNumberToDisplay(noteNumberToDisplay - 1);
+      localStorage.setItem("noteNumberToDisplay", noteNumberToDisplay);
+      setValueNote4("");
+      localStorage.removeItem("valueNote4");
+      localStorage.setItem("newNote4", false);
     } else {
       // Code à éxécuter si l'utilisateur clique sur "Annuler"
     }
-
+  };
+  const handleEraseNoteOne = () => {
+    if (window.confirm(MessageDeleteCard)) {
+      setValueNote1("");
+      localStorage.removeItem("valueNote1");
+    } else {
+      // Code à éxécuter si l'utilisateur clique sur "Annuler"
+    }
   };
 
   // const NoteNumberFromLocalStore = localStorage.getItem("noteNumberToDisplay");
@@ -142,7 +140,7 @@ const NoteComponent = () => {
       localStorage.setItem("valueNote4", valueNote4);
     }
 
-    console.log("noteNumberToDisplay", noteNumberToDisplay);
+    // console.log("noteNumberToDisplay", noteNumberToDisplay);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [valueNote1, valueNote2, valueNote3, valueNote4, noteNumberToDisplay]);
 

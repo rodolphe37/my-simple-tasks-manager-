@@ -2,6 +2,7 @@ import { Droppable, Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
 import { Button, Card } from "antd";
 import TaskboardItemCard from "./TaskboardItemCard";
+// import { useEffect } from "react";
 
 const TaskboardColRoot = styled(Card)`
   user-select: none;
@@ -34,6 +35,26 @@ function TaskboardCol({
   itemsByStatus,
   setItemsByStatus,
 }) {
+  // useEffect(() => {
+  //   if (
+  //     itemsByStatus["In Progress"].length === 1 &&
+  //     localStorage.getItem("status") === "Stopped"
+  //   ) {
+  //     localStorage.setItem("status", "Started");
+  //     window.location.reload();
+  //   }
+
+  //   if (
+  //     itemsByStatus["In Progress"].length === 0 &&
+  //     itemsByStatus["Done"].length === 0 &&
+  //     localStorage.getItem("status") === "Started" &&
+  //     localStorage.getItem("completCardsTimeArray") === null
+  //   ) {
+  //     localStorage.setItem("status", "Stopped");
+  //     window.location.reload();
+  //   }
+  // }, [itemsByStatus]);
+
   return (
     <TaskboardColRoot
       title={`${status} (${items.length})`}

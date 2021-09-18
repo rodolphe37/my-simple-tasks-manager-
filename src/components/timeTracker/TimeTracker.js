@@ -14,7 +14,9 @@ export default function TimeTracker() {
   const { n } = useDateTime();
   const [secondsRemaining, setSecondsRemaining] = useState(INITIAL_COUNT);
   const [status, setStatus] = useState(
-    localStorage.getItem("status") ?? STATUS.STOPPED
+    localStorage.getItem("status") === "Started"
+      ? localStorage.getItem("status")
+      : STATUS.STOPPED
   );
   const [dayWork, setDayWork] = useState(0);
   const secondsToDisplay = secondsRemaining % 60;

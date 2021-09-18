@@ -49,7 +49,7 @@ function App() {
       setValidateProjectName(true);
     }
 
-    console.log("openNote", openNote);
+    // console.log("openNote", openNote);
   }, [projectName, openNote, validateprojectName]);
 
   const handleValidateprojectName = () => {
