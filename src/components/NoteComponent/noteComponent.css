@@ -32,7 +32,7 @@ textarea {
   border-radius: 3px;
   background: linear-gradient(#f9efaf, #f7e98d);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
+  overflow: scroll;
   transition: box-shadow 0.5s ease;
   margin-right: 22px !important;
   max-width: 520px;
