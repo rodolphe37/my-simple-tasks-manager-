@@ -8,7 +8,7 @@
 
 
 [![Website](https://i.imgur.com/xSu6S5v.png)](https://rodolphe-augusto.fr)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/41e44fe0-616b-4f7e-9c8d-0175fb39e7b9/deploy-status)](https://app.netlify.com/sites/musing-ardinghelli-36fa8c/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/3f08bfe2-42f5-4e96-9b2f-e0f366e1440c/deploy-status)](https://app.netlify.com/sites/tender-tereshkova-e24d47/deploys)
 
 # Tutorial Intro
 
@@ -126,6 +126,9 @@ The elapsed seconds are sent to the localstorage in real time, if you close the 
 ![alt text](demo/localStore.png "My Simple Tasks Manager")
 
 ---
+Can I use Compatibility:
+
+![alt text](demo/new-version/canIuse.png "My Simple Tasks Manager")
 
 ## :microscope: Getting Started!
 
