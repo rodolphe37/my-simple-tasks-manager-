@@ -85,7 +85,7 @@ You can create up to 4 sticky notes in order to store all the information needed
 ![alt text](demo/new-version/notes-all.png "My Simple Tasks Manager")
 
 ---
-
+## END OF UPDATE New Version
 ---
 
 >**:heavy_exclamation_mark: When you want to delete the Project name!**
