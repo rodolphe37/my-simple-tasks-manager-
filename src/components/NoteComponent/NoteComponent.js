@@ -158,20 +158,23 @@ const NoteComponent = () => {
         }}
       >
         <div style={{ position: "relative" }}>
-          <button
-            style={{ marginRight: 2 }}
-            onClick={handleEraseNoteOne}
-            className="button remove noColor"
-          >
-            <span className="infoEraser">
-              <img
-                style={{ width: 24, marginLeft: -2, marginTop: -2 }}
-                src={Erasericon}
-                alt="eraser"
-              />
-              <span className="tooltip tooltipEraser">Erase content</span>
-            </span>
-          </button>
+          {valueNote1 ? (
+            <button
+              style={{ marginRight: 2 }}
+              onClick={handleEraseNoteOne}
+              className="button remove noColor"
+            >
+              <span className="infoEraser">
+                <img
+                  style={{ width: 24, marginLeft: -2, marginTop: -2 }}
+                  src={Erasericon}
+                  alt="eraser"
+                />
+                <span className="tooltip tooltipEraser">Erase content</span>
+              </span>
+            </button>
+          ) : null}
+
           <textarea
             value={valueNote1}
             onChange={(e) => setValueNote1(e.target.value)}

@@ -47,6 +47,45 @@ You can easily install this application on a Windows, Mac or Linux computer.
 >Install on Mac OSX :heavy_check_mark:
 >
 >![alt text](demo/install-mac-osx.png "My Simple Tasks Manager")
+
+---
+## UPDATE New Version (18 sept 2021)
+
+---
+
+>**:heavy_exclamation_mark: When you put the card on "In Progress" column**
+You have the day and the hour of the beginning of the treatment of the task to do.
+
+![alt text](demo/new-version/inProgress.png "My Simple Tasks Manager")
+
+---
+
+>**:heavy_exclamation_mark: When you put the card on "Done" column**
+In addition to the information of the beginning of the work on this card, the information of the end of the work is added.
+
+![alt text](demo/new-version/done.png "My Simple Tasks Manager")
+
+---
+
+>**:heavy_exclamation_mark: If you work several times on the same card**
+The start/end information for each session is displayed.
+
+![alt text](demo/new-version/done-resume.png "My Simple Tasks Manager")
+
+---
+>**:heavy_exclamation_mark: If you put all the cards back in the "To Do" column**
+You will be asked if you want to reset the history of the time spent working on the cards!
+
+![alt text](demo/new-version/reinitHistory.png "My Simple Tasks Manager")
+
+---
+>**:heavy_exclamation_mark: I also added a "note taking or Post It" section**
+You can create up to 4 sticky notes in order to store all the information needed for the project and to access them at any time.!
+
+![alt text](demo/new-version/note-all.png "My Simple Tasks Manager")
+
+---
+
 ---
 
 >**:heavy_exclamation_mark: When you want to delete the Project name!**
