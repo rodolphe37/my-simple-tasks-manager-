@@ -127,7 +127,7 @@ function App() {
                         alt="supp"
                       />
                       <span
-                        style={{ marginTop: -22 }}
+                        style={{ marginTop: -22, fontSize: 15 }}
                         className="tooltip tooltipProjectName"
                       >
                         Delete project name or reset all
