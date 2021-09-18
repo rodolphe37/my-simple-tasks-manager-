@@ -91,7 +91,7 @@ const NoteComponent = () => {
     localStorage.removeItem("valueNote1");
   };
 
-  const NoteNumberFromLocalStore = localStorage.getItem("noteNumberToDisplay");
+  // const NoteNumberFromLocalStore = localStorage.getItem("noteNumberToDisplay");
 
   useEffect(() => {
     if (newNote1 && newNote2 && newNote3 && newNote4) {
@@ -101,7 +101,7 @@ const NoteComponent = () => {
     //   setNoteNumberToDisplay(2);
     // }
     if (newNote1 && newNote2 && newNote3 && newNote4) {
-      setCreateButtonState(false);
+      setNoteNumberToDisplay(4);
     }
     if (newNote1 && !newNote2 && !newNote3 && !newNote4) {
       setCreateButtonState(true);
@@ -121,9 +121,9 @@ const NoteComponent = () => {
       localStorage.setItem("valueNote4", valueNote4);
     }
 
-    console.log("noteNumberToDisplay", NoteNumberFromLocalStore);
+    console.log("noteNumberToDisplay", noteNumberToDisplay);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [valueNote1, valueNote2, valueNote3, valueNote4]);
+  }, [valueNote1, valueNote2, valueNote3, valueNote4, noteNumberToDisplay]);
 
   return (
     <div style={{ display: "flex", marginTop: 7 }}>

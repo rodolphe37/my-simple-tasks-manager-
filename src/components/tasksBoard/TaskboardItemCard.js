@@ -13,6 +13,7 @@ import timeAllCardsAtom from "../../statesManager/atoms/timeAllCardsAtom";
 import TimerEndIcon from "../assets/timer.svg";
 import StartIcon from "../assets/start.svg";
 import cumulTimeCardsTaskAtom from "../../statesManager/atoms/cumulTimeCardsTaskAtom";
+import { v4 as uuidv4 } from "uuid";
 
 const StyledCard = styled(Card)`
   margin: 0.5rem;
@@ -59,10 +60,20 @@ function TaskboardItemCard({
     localStorage.getItem("stopTimeWork") ?? ""
   );
   const [cardId, setCardId] = useState(0);
+  const [UniqueUuid, setUniqueUuid] = useState();
 
   let cardIdFromTimeAll = timeAllCards.map((res) =>
     JSON.parse(`${res.cardId}`)
   );
+
+  // USE UUIDV4 FOR GENERATE unique id
+  useEffect(() => {
+    setUniqueUuid(uuidv4());
+
+    return () => {
+      setUniqueUuid("");
+    };
+  }, [status]);
 
   useEffect(() => {
     // console.log("timestamp", item.timestamp);
@@ -90,6 +101,7 @@ function TaskboardItemCard({
           cardTitle: item.title,
           start: startWorkState,
           stop: `${n}`,
+          uuid: UniqueUuid,
         },
       ]);
 
@@ -223,6 +235,7 @@ function TaskboardItemCard({
     setTotalTimeToSeconds({
       cardId: item.id,
       totalTime: stopTaskResult - startTaskResult,
+      uuid: UniqueUuid,
     });
   };
 
@@ -348,7 +361,7 @@ function TaskboardItemCard({
         </BaseTooltip>
       ) : null}
       <div
-        key={item.id}
+        // key={item.id}
         style={
           status === "Done"
             ? { border: "1px dotted gray", padding: 8 }
@@ -358,7 +371,7 @@ function TaskboardItemCard({
         {status === "Done" ? (
           <BaseTooltip overlay={item.stopWork}>
             {completCardsTimeArray.map((res) => (
-              <Form key={res.id} className="myForm">
+              <Form key={res.uuid} className="myForm">
                 {item.id === res.cardId ? (
                   <div
                     style={{
