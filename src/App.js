@@ -138,7 +138,7 @@ function App() {
               </Fragment>
             )}
             <input
-              style={{ width: "100%" }}
+              style={{ width: "100%", height: "100%" }}
               readOnly={validateprojectName ? true : false}
               type="text"
               autoComplete="off"
