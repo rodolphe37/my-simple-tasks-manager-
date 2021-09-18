@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Button, Card, Modal, Typography, Dropdown, Menu, Form } from "antd";
 import { DeleteOutlined, EditOutlined, MoreOutlined } from "@ant-design/icons";
 import { red } from "@ant-design/colors";
@@ -381,27 +381,32 @@ function TaskboardItemCard({
                       height: "20px",
                     }}
                   >
-                    <Form.Item key={res.cardId}>
-                      <p style={{ fontSize: 10 }}>{res.start}</p>
-                    </Form.Item>
-                    <Typography.Paragraph
-                      type="secondary"
-                      ellipsis={{ rows: 2 }}
-                    >
-                      <Form.Item
-                        shouldUpdate={(prevValuesStop, curValuesStop) =>
-                          prevValuesStop.additional !== curValuesStop.additional
-                        }
-                      >
-                        {() => {
-                          return (
-                            <Form.Item>
-                              <p style={{ fontSize: 10 }}>{res.stop}</p>
-                            </Form.Item>
-                          );
-                        }}
-                      </Form.Item>
-                    </Typography.Paragraph>
+                    {res.start && res.stop ? (
+                      <Fragment>
+                        <Form.Item key={res.cardId}>
+                          <p style={{ fontSize: 10 }}>{res.start}</p>
+                        </Form.Item>
+                        <Typography.Paragraph
+                          type="secondary"
+                          ellipsis={{ rows: 2 }}
+                        >
+                          <Form.Item
+                            shouldUpdate={(prevValuesStop, curValuesStop) =>
+                              prevValuesStop.additional !==
+                              curValuesStop.additional
+                            }
+                          >
+                            {() => {
+                              return (
+                                <Form.Item>
+                                  <p style={{ fontSize: 10 }}>{res.stop}</p>
+                                </Form.Item>
+                              );
+                            }}
+                          </Form.Item>
+                        </Typography.Paragraph>
+                      </Fragment>
+                    ) : null}
                   </div>
                 ) : null}
               </Form>
