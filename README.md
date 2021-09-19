@@ -8,7 +8,7 @@
 
 
 [![Website](https://i.imgur.com/xSu6S5v.png)](https://rodolphe-augusto.fr)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/24bb2cb7-2c26-48b3-84b3-d361093009fd/deploy-status)](https://app.netlify.com/sites/my-simple-tasks-manager/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/5fc34191-d1e3-41b4-83ea-bc788948163c/deploy-status)](https://app.netlify.com/sites/stoic-swanson-4b33ba/deploys)
 
 # Tutorial Intro
 
