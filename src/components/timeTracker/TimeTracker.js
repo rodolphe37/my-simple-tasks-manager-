@@ -65,6 +65,7 @@ export default function TimeTracker({ itemsByStatus }) {
       if (itemsByStatus["In Progress"].length === 0) {
         setStatus(STATUS.STOPPED);
       }
+
       // eslint-disable-next-line no-self-compare
       if (itemsByStatus["Done"].length > itemsByStatus["Done"].length) {
         setStatus(STATUS.STOPPED);
