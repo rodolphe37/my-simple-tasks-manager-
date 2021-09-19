@@ -81,7 +81,7 @@ You will be asked if you want to reset the history of the time spent working on 
 ![alt text](demo/new-version/reinitHistory.gif "My Simple Tasks Manager")
 
 ---
->**:heavy_exclamation_mark: I also added a "note taking or Post It" section**
+>**:heavy_exclamation_mark: I also added a "Sticky Notes or Post It" section**
 You can create up to 4 sticky notes in order to store all the information needed for the project and to access them at any time.!
 
 ![alt text](demo/new-version/note-section.gif "My Simple Tasks Manager")
