@@ -12,7 +12,7 @@ const FloatingButton = () => {
 
       <nav className="float-action-button">
         <a
-          href="https://github.com/rodolphe37"
+          href="https://github.com/rodolphe37/my-simple-tasks-manager-"
           target="new"
           className="buttons"
           title="Github"
