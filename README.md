@@ -14,7 +14,7 @@
 
 ---
 
-## <img  style =" float: left; margin-top: 5px; margin-right: 22px " src="demo/backlog.svg" alt="drawing" height="30" width="25"/>My Simple Task Manager (V1.7.0)
+## <img  style =" float: left; margin-top: 5px; margin-right: 22px " src="demo/backlog.svg" alt="drawing" height="30" width="25"/>My Simple Task Manager
 
 is a drag-and-drop task manager as well as a time tracker (not for a team, but for a single freelance developer for example)!
 
@@ -53,7 +53,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 ---
 
-### New Version (18 sept 2021)
+### New Version (18 sept 2021 - V_1.6.0)
 
 **:heavy_exclamation_mark: When you put the card on "In Progress" column**
 
@@ -93,7 +93,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 ---
 
-### New Version (19 sept 2021)
+### New Version (19 sept 2021 -V_1.7.0)
 
 **:heavy_exclamation_mark: Time Tracker : Manual or automatic mode ?**
 
