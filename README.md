@@ -8,7 +8,7 @@
 
 
 [![Website](https://i.imgur.com/xSu6S5v.png)](https://rodolphe-augusto.fr)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/abb08804-1ef5-43f6-a4e7-6db0dce1d909/deploy-status)](https://app.netlify.com/sites/distracted-tesla-c3729a/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/24bb2cb7-2c26-48b3-84b3-d361093009fd/deploy-status)](https://app.netlify.com/sites/my-simple-tasks-manager/deploys)
 
 # Tutorial Intro
 
@@ -49,9 +49,11 @@ You can easily install this application on a Windows, Mac or Linux computer.
 >![alt text](demo/install-mac-osx.png "My Simple Tasks Manager")
 
 ---
-## UPDATE New Version (18 sept 2021)
+## UPDATE
 
 ---
+
+### New Version (18 sept 2021)
 
 >**:heavy_exclamation_mark: When you put the card on "In Progress" column**
 You have the day and the hour of the beginning of the treatment of the task to do.
@@ -85,6 +87,56 @@ You can create up to 4 sticky notes in order to store all the information needed
 ![alt text](demo/new-version/notes-all.png "My Simple Tasks Manager")
 
 ---
+
+### New Version (19 sept 2021)
+
+>**:heavy_exclamation_mark: Time Tracker : Manual or automatic mode ?**
+A configuration button has been added to allow you to choose between two modes for the Time Tracker.
+
+![alt text](demo/update-09-21/config.png "My Simple Tasks Manager")
+
+---
+
+>**:heavy_exclamation_mark: When you are in manuel mode (default configuration)**
+The manual mode leaves the "Time Tracker" toolbar at the top of your page (header), This mode allows you to manage the time tracking independently from the task card dashboard..
+
+![alt text](demo/update-09-21/manualTimer.png "My Simple Tasks Manager")
+
+---
+
+>**:heavy_exclamation_mark: When you click on the configuration button when you are in manual mode**
+A modal appears telling you which mode you are in and the possibility to change the default configuration to automatic mode.
+
+![alt text](demo/update-09-21/config-modal.png "My Simple Tasks Manager")
+
+---
+
+>**:heavy_exclamation_mark: When you are in automatic mode**
+The automatic mode moves the "Time Tracker" toolbar to the bottom of your page (footer). The management of the timer start/stop is done automatically depending on whether you are working on a task or not.
+
+![alt text](demo/update-09-21/autoTimer.png "My Simple Tasks Manager")
+
+---
+>**:heavy_exclamation_mark: When you drag a task card into the "In Progress" column**
+The timer starts automatically...
+
+![alt text](demo/update-09-21/autoStart.png "My Simple Tasks Manager")
+
+---
+>**:heavy_exclamation_mark: Then, when you drag the card to the "Done" column**
+The timer stops automatically.!
+
+![alt text](demo/update-09-21/autoStop.png "My Simple Tasks Manager")
+
+---
+
+>**:heavy_exclamation_mark: When you click on the configuration button when you are in automatic mode**
+A modal appears showing you in which mode you are and the possibility to change the default configuration in manual mode.
+
+![alt text](demo/update-09-21/config-modal2.png "My Simple Tasks Manager")
+
+---
+
 ## END OF UPDATE New Version
 ---
 
