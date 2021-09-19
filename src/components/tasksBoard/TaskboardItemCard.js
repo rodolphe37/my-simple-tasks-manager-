@@ -308,7 +308,7 @@ function TaskboardItemCard({
           }}
         >
           <Typography.Paragraph type="secondary" ellipsis={{ rows: 2 }}>
-            {item.timestamp ?? timeForCard}
+            {item.timestamp ?? "edit to set the Date/time"}
           </Typography.Paragraph>
           <div className="">
             {status === "In Progress" ? (
