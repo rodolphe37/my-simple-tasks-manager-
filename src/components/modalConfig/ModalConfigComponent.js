@@ -7,7 +7,7 @@ import { useRecoilState } from "recoil";
 import automaticTrackTimerAtom from "../../statesManager/atoms/automaticTrackTimerAtom";
 import { useEffect } from "react";
 
-const ModalConfigComponent = () => {
+const ModalConfigComponent = ({ status }) => {
   const [clickedConfig, setClickedConfig] = useRecoilState(clickedConfigAtom);
   const [autoTrackTime, setAutoTrackTime] = useRecoilState(
     automaticTrackTimerAtom

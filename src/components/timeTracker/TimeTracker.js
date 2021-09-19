@@ -9,6 +9,7 @@ import withReactContent from "sweetalert2-react-content";
 import ModalConfigComponent from "../modalConfig/ModalConfigComponent";
 import clickedConfigAtom from "../../statesManager/atoms/clickedConfigAtom";
 import clickedAddToDoAtom from "../../statesManager/atoms/clickedAddToDoAtom";
+import { Fragment } from "react";
 
 const STATUS = {
   STARTED: "Started",
@@ -192,7 +193,17 @@ export default function TimeTracker({ itemsByStatus }) {
           <ModalConfigComponent />
         </div>
       ) : (
-        <ModalConfigComponent />
+        <Fragment>
+          <button
+            disabled={status === STATUS.STARTED ? true : false}
+            className="small blue button"
+            onClick={handleReset}
+            type="button"
+          >
+            Reset
+          </button>
+          <ModalConfigComponent />
+        </Fragment>
       )}
 
       <div className="time-lapse">
