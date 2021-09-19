@@ -214,6 +214,9 @@ select {
   .indicator-section > .status-indicator {
     border-radius: 100px;
   }
+  .autoTime {
+    display: none !important;
+  }
 }
 
 @media screen and (max-width: 850px) {

@@ -196,7 +196,7 @@ export default function TimeTracker({ itemsByStatus }) {
         <Fragment>
           <button
             disabled={status === STATUS.STARTED ? true : false}
-            className="small blue button"
+            className="small blue button autoTime"
             onClick={handleReset}
             type="button"
           >
