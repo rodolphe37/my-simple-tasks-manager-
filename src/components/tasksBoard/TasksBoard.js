@@ -12,6 +12,7 @@ import { useRecoilState } from "recoil";
 import closedStateAtom from "../../statesManager/atoms/closedStateAtom";
 import TimeTracker from "../timeTracker/TimeTracker";
 import automaticTrackTimerAtom from "../../statesManager/atoms/automaticTrackTimerAtom";
+import CustomConfirm from "../customConfirm/CustomConfirm";
 
 const generateId = () => Date.now().toString();
 
@@ -46,6 +47,8 @@ function Taskboard() {
     defaultItems
   );
   const [closed] = useRecoilState(closedStateAtom);
+  const { JSalert } = CustomConfirm();
+
   useEffect(() => {
     console.log("in progress", itemsByStatus["In Progress"].length);
   }, [itemsByStatus]);
@@ -56,7 +59,7 @@ function Taskboard() {
       itemsByStatus["In Progress"].length === 1 &&
       destination.droppableId === "In Progress"
     ) {
-      alert("NOT ALLOWED - You can only process one task at a time!");
+      JSalert();
     } else {
       setItemsByStatus((current) =>
         produce(current, (draft) => {

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import "./noteComponent.css";
 import Erasericon from "../assets/eraser.svg";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 const NoteComponent = () => {
   // eslint-disable-next-line no-unused-vars
@@ -31,6 +33,8 @@ const NoteComponent = () => {
   const [valueNote4, setValueNote4] = useState(
     localStorage.getItem("valueNote4") ?? ""
   );
+
+  const MySwal = withReactContent(Swal);
 
   const handleCreateNote2 = () => {
     setNewNote2((newNote2) => !newNote2);
@@ -66,48 +70,84 @@ const NoteComponent = () => {
     "Once you delete this sticky Note, there is no going back.";
 
   const handleDeleteNote2 = () => {
-    if (window.confirm(MessageDeleteCard)) {
-      setNewNote2(false);
-      setNoteNumberToDisplay(noteNumberToDisplay - 1);
-      localStorage.setItem("noteNumberToDisplay", noteNumberToDisplay);
-      setValueNote2("");
-      localStorage.removeItem("valueNote2");
-      localStorage.setItem("newNote2", false);
-    } else {
-      // Code à éxécuter si l'utilisateur clique sur "Annuler"
-    }
+    MySwal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setNewNote2(false);
+        setNoteNumberToDisplay(noteNumberToDisplay - 1);
+        localStorage.setItem("noteNumberToDisplay", noteNumberToDisplay);
+        setValueNote2("");
+        localStorage.removeItem("valueNote2");
+        localStorage.setItem("newNote2", false);
+        MySwal.fire("Deleted!", "Your file has been deleted.", "success");
+      }
+    });
   };
   const handleDeleteNote3 = () => {
-    if (window.confirm(MessageDeleteCard)) {
-      setNewNote3(false);
-      setNoteNumberToDisplay(noteNumberToDisplay - 1);
-      localStorage.setItem("noteNumberToDisplay", noteNumberToDisplay);
-      setValueNote3("");
-      localStorage.removeItem("valueNote3");
-      localStorage.setItem("newNote3", false);
-    } else {
-      // Code à éxécuter si l'utilisateur clique sur "Annuler"
-    }
+    MySwal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setNewNote3(false);
+        setNoteNumberToDisplay(noteNumberToDisplay - 1);
+        localStorage.setItem("noteNumberToDisplay", noteNumberToDisplay);
+        setValueNote3("");
+        localStorage.removeItem("valueNote3");
+        localStorage.setItem("newNote3", false);
+        MySwal.fire("Deleted!", "Your file has been deleted.", "success");
+      }
+    });
   };
   const handleDeleteNote4 = () => {
-    if (window.confirm(MessageDeleteCard)) {
-      setNewNote4(false);
-      setNoteNumberToDisplay(noteNumberToDisplay - 1);
-      localStorage.setItem("noteNumberToDisplay", noteNumberToDisplay);
-      setValueNote4("");
-      localStorage.removeItem("valueNote4");
-      localStorage.setItem("newNote4", false);
-    } else {
-      // Code à éxécuter si l'utilisateur clique sur "Annuler"
-    }
+    MySwal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setNewNote4(false);
+        setNoteNumberToDisplay(noteNumberToDisplay - 1);
+        localStorage.setItem("noteNumberToDisplay", noteNumberToDisplay);
+        setValueNote4("");
+        localStorage.removeItem("valueNote4");
+        localStorage.setItem("newNote4", false);
+        MySwal.fire("Deleted!", "Your file has been deleted.", "success");
+      }
+    });
   };
   const handleEraseNoteOne = () => {
-    if (window.confirm(MessageDeleteCard)) {
-      setValueNote1("");
-      localStorage.removeItem("valueNote1");
-    } else {
-      // Code à éxécuter si l'utilisateur clique sur "Annuler"
-    }
+    MySwal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setValueNote1("");
+        localStorage.removeItem("valueNote1");
+        MySwal.fire("Deleted!", "Your file has been deleted.", "success");
+      }
+    });
   };
 
   // const NoteNumberFromLocalStore = localStorage.getItem("noteNumberToDisplay");

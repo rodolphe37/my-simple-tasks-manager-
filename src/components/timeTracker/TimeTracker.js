@@ -4,7 +4,8 @@ import TimerImg from "../assets/time-management.svg";
 import useDateTime from "../../hooks/useDateTime";
 import { useRecoilState } from "recoil";
 import automaticTrackTimerAtom from "../../statesManager/atoms/automaticTrackTimerAtom";
-
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 import ModalConfigComponent from "../modalConfig/ModalConfigComponent";
 import clickedConfigAtom from "../../statesManager/atoms/clickedConfigAtom";
 
@@ -16,6 +17,7 @@ const STATUS = {
 const INITIAL_COUNT = JSON.parse(localStorage.getItem("time")) ?? 0;
 
 export default function TimeTracker({ itemsByStatus }) {
+  const MySwal = withReactContent(Swal);
   const { n } = useDateTime();
   const [secondsRemaining, setSecondsRemaining] = useState(INITIAL_COUNT);
   const [status, setStatus] = useState(
@@ -81,17 +83,22 @@ export default function TimeTracker({ itemsByStatus }) {
   }, [secondsRemaining, status, itemsByStatus, autoTrackTime]);
 
   const handleReset = () => {
-    if (
-      window.confirm(
-        "You are sure you want to reset the global counter, this action is irreversible!"
-      )
-    ) {
-      setStatus(STATUS.STOPPED);
-      localStorage.removeItem("time");
-      setSecondsRemaining(0);
-    } else {
-      // Code à éxécuter si l'utilisateur clique sur "Annuler"
-    }
+    MySwal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setStatus(STATUS.STOPPED);
+        localStorage.removeItem("time");
+        setSecondsRemaining(0);
+        Swal.fire("Deleted!", "the Time Tracker is well reset.", "success");
+      }
+    });
   };
   useInterval(
     () => {
