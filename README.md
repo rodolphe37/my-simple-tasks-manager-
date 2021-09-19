@@ -93,7 +93,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 ---
 
-### New Version (19 sept 2021 -V_1.7.0)
+### New Version (19 sept 2021 - V_1.7.0)
 
 **:heavy_exclamation_mark: Time Tracker : Manual or automatic mode ?**
 
