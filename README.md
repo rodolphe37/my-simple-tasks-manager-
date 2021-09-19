@@ -103,7 +103,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 ---
 
-**:heavy_exclamation_mark: When you are in manuel mode (default configuration)**
+**:heavy_exclamation_mark: When you are in manual mode (default configuration)**
 
 >The manual mode leaves the "Time Tracker" toolbar at the top of your page (header), This mode allows you to manage the time tracking independently from the task card dashboard..
 
