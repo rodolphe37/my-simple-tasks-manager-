@@ -55,34 +55,39 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 ### New Version (18 sept 2021)
 
->**:heavy_exclamation_mark: When you put the card on "In Progress" column**
-You have the day and the hour of the beginning of the treatment of the task to do.
+**:heavy_exclamation_mark: When you put the card on "In Progress" column**
+
+>You have the day and the hour of the beginning of the treatment of the task to do.
 
 ![alt text](demo/new-version/inProgress.png "My Simple Tasks Manager")
 
 ---
 
->**:heavy_exclamation_mark: When you put the card on "Done" column**
-In addition to the information of the beginning of the work on this card, the information of the end of the work is added.
+**:heavy_exclamation_mark: When you put the card on "Done" column**
+
+>In addition to the information of the beginning of the work on this card, the information of the end of the work is added.
 
 ![alt text](demo/new-version/done.png "My Simple Tasks Manager")
 
 ---
 
->**:heavy_exclamation_mark: If you work several times on the same card**
-The start/end information for each session is displayed.
+**:heavy_exclamation_mark: If you work several times on the same card**
+
+>The start/end information for each session is displayed.
 
 ![alt text](demo/new-version/done-resume.png "My Simple Tasks Manager")
 
 ---
->**:heavy_exclamation_mark: If you put all the cards back in the "To Do" column**
-You will be asked if you want to reset the history of the time spent working on the cards!
+**:heavy_exclamation_mark: If you put all the cards back in the "To Do" column**
+
+>You will be asked if you want to reset the history of the time spent working on the cards!
 
 ![alt text](demo/new-version/reinitHistory.gif "My Simple Tasks Manager")
 
 ---
->**:heavy_exclamation_mark: I also added a "Sticky Notes or Post It" section**
-You can create up to 4 sticky notes in order to store all the information needed for the project and to access them at any time.!
+**:heavy_exclamation_mark: I also added a "Sticky Notes or Post It" section**
+
+>You can create up to 4 sticky notes in order to store all the information needed for the project and to access them at any time.!
 
 ![alt text](demo/new-version/note-section.gif "My Simple Tasks Manager")
 
@@ -90,72 +95,90 @@ You can create up to 4 sticky notes in order to store all the information needed
 
 ### New Version (19 sept 2021)
 
->**:heavy_exclamation_mark: Time Tracker : Manual or automatic mode ?**
-A configuration button has been added to allow you to choose between two modes for the Time Tracker.
+**:heavy_exclamation_mark: Time Tracker : Manual or automatic mode ?**
+
+>A configuration button has been added to allow you to choose between two modes for the Time Tracker.
 
 ![alt text](demo/update-09-21/config.png "My Simple Tasks Manager")
 
 ---
 
->**:heavy_exclamation_mark: When you are in manuel mode (default configuration)**
-The manual mode leaves the "Time Tracker" toolbar at the top of your page (header), This mode allows you to manage the time tracking independently from the task card dashboard..
+**:heavy_exclamation_mark: When you are in manuel mode (default configuration)**
+
+>The manual mode leaves the "Time Tracker" toolbar at the top of your page (header), This mode allows you to manage the time tracking independently from the task card dashboard..
 
 ![alt text](demo/update-09-21/manualTimer.png "My Simple Tasks Manager")
 
 ---
 
->**:heavy_exclamation_mark: When you click on the configuration button when you are in manual mode**
-A modal appears telling you which mode you are in and the possibility to change the default configuration to automatic mode.
+**:heavy_exclamation_mark: When you click on the configuration button when you are in manual mode**
+
+>A modal appears telling you which mode you are in and the possibility to change the default configuration to automatic mode.
 
 ![alt text](demo/update-09-21/config-modal.gif "My Simple Tasks Manager")
 
 ---
 
->**:heavy_exclamation_mark: When you are in automatic mode**
-The automatic mode moves the "Time Tracker" toolbar to the bottom of your page (footer). The management of the timer start/stop is done automatically depending on whether you are working on a task or not.
+**:heavy_exclamation_mark: When you are in automatic mode**
+
+>The automatic mode moves the "Time Tracker" toolbar to the bottom of your page (footer). The management of the timer start/stop is done automatically depending on whether you are working on a task or not.
 
 ![alt text](demo/update-09-21/autoTimer.png "My Simple Tasks Manager")
 
 ---
->**:heavy_exclamation_mark: When you drag a task card into the "In Progress" column**
-The timer starts automatically...
+**:heavy_exclamation_mark: When you drag a task card into the "In Progress" column**
+
+>The timer starts automatically...
 
 ![alt text](demo/update-09-21/autoStart.gif "My Simple Tasks Manager")
 
 ---
->**:heavy_exclamation_mark: Then, when you drag the card to the "Done" column**
-The timer stops automatically.!
+**:heavy_exclamation_mark: Then, when you drag the card to the "Done" column**
+
+>The timer stops automatically.!
 
 ![alt text](demo/update-09-21/autoStop.gif "My Simple Tasks Manager")
 
 ---
 
->**:heavy_exclamation_mark: When you click on the configuration button when you are in automatic mode**
-A modal appears showing you in which mode you are and the possibility to change the default configuration in manual mode.
+**:heavy_exclamation_mark: When you click on the configuration button when you are in automatic mode**
+
+>A modal appears showing you in which mode you are and the possibility to change the default configuration in manual mode.
 
 ![alt text](demo/update-09-21/config-modal2.gif "My Simple Tasks Manager")
+
+---
+
+**:heavy_exclamation_mark: You can only do one task at a time**
+
+>If you drag more than one card into the "In Progress" column an alert informs you that it is not allowed and your card goes back to the box it came from automatically.
+
+![alt text](demo/update-09-21/onlyOneTask.gif "My Simple Tasks Manager")
 
 ---
 
 ## END OF UPDATE New Version
 ---
 
->**:heavy_exclamation_mark: When you want to delete the Project name!**
-You have two choices, delete only the project name or reset all (Project name, timer & all cards)
+**:heavy_exclamation_mark: When you want to delete the Project name!**
+
+>You have two choices, delete only the project name or reset all (Project name, timer & all cards)
 
 ![alt text](demo/delete.gif "My Simple Tasks Manager")
 
 ---
 
->**:heavy_exclamation_mark: When you want to delete an task card!**
-You have one alert for confirm your wish to delete this card (with name card)
+**:heavy_exclamation_mark: When you want to delete an task card!**
+
+>You have one alert for confirm your wish to delete this card (with name card)
 
 ![alt text](demo/confirm-delete-card.gif "My Simple Tasks Manager")
 
 ---
 
->**:heavy_exclamation_mark: When you Start the counter!**
-The elapsed seconds are sent to the localstorage in real time, if you close the window inadvertently without stopping the counter, the elapsed time is automatically saved in the localStorage, adding to the time already present (seconds)!
+**:heavy_exclamation_mark: When you Start the counter!**
+
+>The elapsed seconds are sent to the localstorage in real time, if you close the window inadvertently without stopping the counter, the elapsed time is automatically saved in the localStorage, adding to the time already present (seconds)!
 
 ![alt text](demo/real-time-seconds.gif "My Simple Tasks Manager")
 

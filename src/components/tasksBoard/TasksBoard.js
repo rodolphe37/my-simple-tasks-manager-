@@ -47,20 +47,28 @@ function Taskboard() {
   );
   const [closed] = useRecoilState(closedStateAtom);
   useEffect(() => {
-    // console.log(itemsByStatus["In Progress"]);
+    console.log("in progress", itemsByStatus["In Progress"].length);
   }, [itemsByStatus]);
 
   const handleDragEnd = ({ source, destination }) => {
-    setItemsByStatus((current) =>
-      produce(current, (draft) => {
-        // dropped outside the list
-        if (!destination) {
-          return;
-        }
-        const [removed] = draft[source.droppableId].splice(source.index, 1);
-        draft[destination.droppableId].splice(destination.index, 0, removed);
-      })
-    );
+    console.log("destination", destination);
+    if (
+      itemsByStatus["In Progress"].length === 1 &&
+      destination.droppableId === "In Progress"
+    ) {
+      alert("NOT ALLOWED - You can only process one task at a time!");
+    } else {
+      setItemsByStatus((current) =>
+        produce(current, (draft) => {
+          // dropped outside the list
+          if (!destination) {
+            return;
+          }
+          const [removed] = draft[source.droppableId].splice(source.index, 1);
+          draft[destination.droppableId].splice(destination.index, 0, removed);
+        })
+      );
+    }
   };
 
   const [isModalVisible, setIsModalVisible] = useState(false);
