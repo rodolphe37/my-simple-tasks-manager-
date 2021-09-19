@@ -115,7 +115,7 @@ function TaskboardItemCard({
           completCardsTimeArray.concat(timeAllCards)
         );
       }
-      console.log(re[0]);
+      // console.log(re[0]);
       // if (totalTimeToSeconds !== null && cumuledTimeCards === null) {
       //   setCumuledTimeCards([totalTimeToSeconds]);
       //   localStorage.removeItem("totalTimeInSeconds");

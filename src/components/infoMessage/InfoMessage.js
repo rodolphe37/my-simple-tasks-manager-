@@ -19,7 +19,7 @@ const InfoMessage = ({ type, content }) => {
   };
 
   useEffect(() => {
-    console.log("closed:", closed);
+    // console.log("closed:", closed);
   }, [closed]);
   return (
     <div className={closed ? "none" : "offlineMessCOntainer"}>

@@ -1,6 +1,8 @@
 // eslint-disable-next-line no-unused-vars
 import { useEffect, useRef, useState } from "react";
 import { Modal, Form, Input } from "antd";
+import { useRecoilState } from "recoil";
+import clickedAddToDoAtom from "../../statesManager/atoms/clickedAddToDoAtom";
 // import Item from "antd/lib/list/Item";
 // import { Editor } from "react-draft-wysiwyg";
 // import { EditorState } from "draft-js";
@@ -9,6 +11,8 @@ import { Modal, Form, Input } from "antd";
 function TaskboardItemModal({ visible, initialValues, onCancel, onOk }) {
   const [form] = Form.useForm();
   const inputRef = useRef(null);
+  const [clickedAddButton, setClickedAddButton] =
+    useRecoilState(clickedAddToDoAtom);
 
   useEffect(() => {
     if (visible) {
@@ -93,7 +97,9 @@ function TaskboardItemModal({ visible, initialValues, onCancel, onOk }) {
   //   );
   // };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    // console.log("setClickedAddButton", clickedAddButton);
+  }, [clickedAddButton]);
 
   return (
     <Modal
@@ -103,6 +109,7 @@ function TaskboardItemModal({ visible, initialValues, onCancel, onOk }) {
       // To make dynamically changing initialValues work with Form
       forceRender
       onCancel={onCancel}
+      setClickedAddButton={setClickedAddButton}
       onOk={() => form.submit()}
     >
       <Form
@@ -112,6 +119,7 @@ function TaskboardItemModal({ visible, initialValues, onCancel, onOk }) {
         initialValues={initialValues}
         onFinish={(values) => {
           // console.log(values);
+          setClickedAddButton(false);
           onOk(values);
           form.resetFields();
           onCancel();

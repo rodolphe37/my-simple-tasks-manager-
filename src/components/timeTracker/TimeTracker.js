@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import ModalConfigComponent from "../modalConfig/ModalConfigComponent";
 import clickedConfigAtom from "../../statesManager/atoms/clickedConfigAtom";
+import clickedAddToDoAtom from "../../statesManager/atoms/clickedAddToDoAtom";
 
 const STATUS = {
   STARTED: "Started",
@@ -36,9 +37,10 @@ export default function TimeTracker({ itemsByStatus }) {
     automaticTrackTimerAtom
   );
   const [clickedConfig, setClickedConfig] = useRecoilState(clickedConfigAtom);
+  const [clickedAddButton] = useRecoilState(clickedAddToDoAtom);
 
   useEffect(() => {
-    console.log("itemsByStatus", itemsByStatus);
+    // console.log("itemsByStatus", itemsByStatus);
   }, [itemsByStatus]);
   const handleStart = () => {
     setStatus(STATUS.STARTED);
@@ -60,6 +62,11 @@ export default function TimeTracker({ itemsByStatus }) {
   };
 
   useEffect(() => {
+    if (autoTrackTime && clickedAddButton) {
+      setStatus(STATUS.STARTED);
+    } else if (autoTrackTime && !clickedAddButton) {
+      setStatus(STATUS.STOPPED);
+    }
     if (autoTrackTime) {
       if (itemsByStatus["In Progress"].length > 0) {
         setStatus(STATUS.STARTED);
@@ -80,7 +87,13 @@ export default function TimeTracker({ itemsByStatus }) {
     return () => {
       localStorage.setItem("time", secondsRemaining);
     };
-  }, [secondsRemaining, status, itemsByStatus, autoTrackTime]);
+  }, [
+    secondsRemaining,
+    status,
+    itemsByStatus,
+    autoTrackTime,
+    clickedAddButton,
+  ]);
 
   const handleReset = () => {
     MySwal.fire({
@@ -147,36 +160,41 @@ export default function TimeTracker({ itemsByStatus }) {
         </h1>
       </div>
       <h2>Date - {n}</h2>
-      <div className="button-group">
-        <button
-          disabled={status === STATUS.STARTED ? true : false}
-          className="small green button"
-          onClick={handleStart}
-          type="button"
-        >
-          Start
-        </button>
-        <button
-          disabled={status === STATUS.STOPPED ? true : false}
-          className="small red button"
-          onClick={handleStop}
-          type="button"
-        >
-          Stop
-        </button>
-        <button
-          disabled={status === STATUS.STARTED ? true : false}
-          className="small blue button"
-          onClick={handleReset}
-          type="button"
-        >
-          Reset
-        </button>
-        {/*<button onClick={handleclickConfig}>
+      {!autoTrackTime ? (
+        <div className="button-group">
+          <button
+            disabled={status === STATUS.STARTED ? true : false}
+            className="small green button"
+            onClick={handleStart}
+            type="button"
+          >
+            Start
+          </button>
+          <button
+            disabled={status === STATUS.STOPPED ? true : false}
+            className="small red button"
+            onClick={handleStop}
+            type="button"
+          >
+            Stop
+          </button>
+          <button
+            disabled={status === STATUS.STARTED ? true : false}
+            className="small blue button"
+            onClick={handleReset}
+            type="button"
+          >
+            Reset
+          </button>
+          {/*<button onClick={handleclickConfig}>
           <img style={{ width: 34 }} src={configIcon} alt="config" />
   </button>*/}
+          <ModalConfigComponent />
+        </div>
+      ) : (
         <ModalConfigComponent />
-      </div>
+      )}
+
       <div className="time-lapse">
         {threeDigits(hoursToDisplay)}:{twoDigits(minutesToDisplay)}:
         {twoDigits(secondsToDisplay)}

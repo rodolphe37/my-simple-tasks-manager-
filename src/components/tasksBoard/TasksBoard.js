@@ -13,6 +13,7 @@ import closedStateAtom from "../../statesManager/atoms/closedStateAtom";
 import TimeTracker from "../timeTracker/TimeTracker";
 import automaticTrackTimerAtom from "../../statesManager/atoms/automaticTrackTimerAtom";
 import CustomConfirm from "../customConfirm/CustomConfirm";
+import clickedAddToDoAtom from "../../statesManager/atoms/clickedAddToDoAtom";
 
 const generateId = () => Date.now().toString();
 
@@ -50,11 +51,11 @@ function Taskboard() {
   const { JSalert } = CustomConfirm();
 
   useEffect(() => {
-    console.log("in progress", itemsByStatus["In Progress"].length);
+    // console.log("in progress", itemsByStatus["In Progress"].length);
   }, [itemsByStatus]);
 
   const handleDragEnd = ({ source, destination }) => {
-    console.log("destination", destination);
+    // console.log("destination", destination);
     if (
       itemsByStatus["In Progress"].length === 1 &&
       destination.droppableId === "In Progress"
@@ -86,6 +87,7 @@ function Taskboard() {
   const closeTaskItemModal = () => {
     setItemToEdit(null);
     setIsModalVisible(false);
+    setClickedAddButton(false);
   };
 
   const handleDelete = ({ status, itemToDelete }) =>
@@ -115,6 +117,9 @@ function Taskboard() {
 
   const statusOf = Object.values(TaskboardItemStatus).map((status) => status);
 
+  const [clickedAddButton, setClickedAddButton] =
+    useRecoilState(clickedAddToDoAtom);
+
   useEffect(() => {
     const syncTrackTime = (values) => {
       setItemsByStatus((current) =>
@@ -132,7 +137,7 @@ function Taskboard() {
     };
     syncTrackTime();
     // console.log("initialValues", initialValues);
-    // console.log("statusOf", statusOf);
+    // console.log("clickedAddButton taskboard", clickedAddButton);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialValues, statusOf]);
 
@@ -163,9 +168,14 @@ function Taskboard() {
                 setItemsByStatus={setItemsByStatus}
                 onClickAdd={
                   status === TaskboardItemStatus.TO_DO
-                    ? () => openTaskItemModal(null)
+                    ? () => {
+                        openTaskItemModal(null);
+                        setClickedAddButton(true);
+                      }
                     : undefined
                 }
+                setClickedAddButton={setClickedAddButton}
+                clickedAddButton={clickedAddButton}
                 onEdit={openTaskItemModal}
                 onDelete={handleDelete}
               />
