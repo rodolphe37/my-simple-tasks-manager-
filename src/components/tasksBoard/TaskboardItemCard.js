@@ -91,6 +91,7 @@ function TaskboardItemCard({
       localStorage.setItem("timeAllCards", JSON.stringify(timeAllCards));
     }
     if (status === "Done") {
+      const re = timeAllCards.map((res) => res.start);
       setCardId(cardIdFromTimeAll);
       setStopWorkState(n);
       setStartWorkState(localStorage.getItem("startTimeWork"));
@@ -114,6 +115,7 @@ function TaskboardItemCard({
           completCardsTimeArray.concat(timeAllCards)
         );
       }
+      console.log(re[0]);
       // if (totalTimeToSeconds !== null && cumuledTimeCards === null) {
       //   setCumuledTimeCards([totalTimeToSeconds]);
       //   localStorage.removeItem("totalTimeInSeconds");
@@ -381,7 +383,7 @@ function TaskboardItemCard({
                       height: "20px",
                     }}
                   >
-                    {res.start && res.stop ? (
+                    {res.start && res.stop && (
                       <Fragment>
                         <Form.Item key={res.cardId}>
                           <p style={{ fontSize: 10 }}>{res.start}</p>
@@ -406,7 +408,7 @@ function TaskboardItemCard({
                           </Form.Item>
                         </Typography.Paragraph>
                       </Fragment>
-                    ) : null}
+                    )}
                   </div>
                 ) : null}
               </Form>

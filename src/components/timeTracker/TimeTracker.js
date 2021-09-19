@@ -2,6 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 import "./timeTracker.css";
 import TimerImg from "../assets/time-management.svg";
 import useDateTime from "../../hooks/useDateTime";
+import { useRecoilState } from "recoil";
+import automaticTrackTimerAtom from "../../statesManager/atoms/automaticTrackTimerAtom";
+
+import ModalConfigComponent from "../modalConfig/ModalConfigComponent";
+import clickedConfigAtom from "../../statesManager/atoms/clickedConfigAtom";
 
 const STATUS = {
   STARTED: "Started",
@@ -10,7 +15,7 @@ const STATUS = {
 
 const INITIAL_COUNT = JSON.parse(localStorage.getItem("time")) ?? 0;
 
-export default function TimeTracker() {
+export default function TimeTracker({ itemsByStatus }) {
   const { n } = useDateTime();
   const [secondsRemaining, setSecondsRemaining] = useState(INITIAL_COUNT);
   const [status, setStatus] = useState(
@@ -24,9 +29,15 @@ export default function TimeTracker() {
   const minutesToDisplay = minutesRemaining % 60;
   const hoursToDisplay = (minutesRemaining - minutesToDisplay) / 60;
 
+  // eslint-disable-next-line no-unused-vars
+  const [autoTrackTime, setAutoTrackTime] = useRecoilState(
+    automaticTrackTimerAtom
+  );
+  const [clickedConfig, setClickedConfig] = useRecoilState(clickedConfigAtom);
+
   useEffect(() => {
-    // console.log("INITIAL_COUNT", INITIAL_COUNT);
-  }, []);
+    console.log("itemsByStatus", itemsByStatus);
+  }, [itemsByStatus]);
   const handleStart = () => {
     setStatus(STATUS.STARTED);
     localStorage.setItem("status", "Started");
@@ -36,16 +47,38 @@ export default function TimeTracker() {
     localStorage.setItem("status", "Stopped");
   };
 
+  // eslint-disable-next-line no-unused-vars
+  const handleclickConfig = () => {
+    if (!clickedConfig) {
+      setClickedConfig(true);
+    }
+    if (clickedConfig) {
+      setClickedConfig(false);
+    }
+  };
+
   useEffect(() => {
-    // If you close the window whitout stop the counter
+    if (autoTrackTime) {
+      if (itemsByStatus["In Progress"].length > 0) {
+        setStatus(STATUS.STARTED);
+      }
+      if (itemsByStatus["In Progress"].length === 0) {
+        setStatus(STATUS.STOPPED);
+      }
+      // eslint-disable-next-line no-self-compare
+      if (itemsByStatus["Done"].length > itemsByStatus["Done"].length) {
+        setStatus(STATUS.STOPPED);
+      }
+    }
     if (status === STATUS.STOPPED) {
+      // If you close the window whitout stop the counter
       localStorage.setItem("time", secondsRemaining);
     }
     // If the status is started that send the time each second elapsed
     return () => {
       localStorage.setItem("time", secondsRemaining);
     };
-  }, [secondsRemaining, status]);
+  }, [secondsRemaining, status, itemsByStatus, autoTrackTime]);
 
   const handleReset = () => {
     if (
@@ -128,6 +161,10 @@ export default function TimeTracker() {
         >
           Reset
         </button>
+        {/*<button onClick={handleclickConfig}>
+          <img style={{ width: 34 }} src={configIcon} alt="config" />
+  </button>*/}
+        <ModalConfigComponent />
       </div>
       <div className="time-lapse">
         {threeDigits(hoursToDisplay)}:{twoDigits(minutesToDisplay)}:

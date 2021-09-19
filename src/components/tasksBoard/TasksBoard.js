@@ -10,6 +10,8 @@ import { useSyncedState } from "../shared/SharedHooks";
 import InfoMessage from "../infoMessage/InfoMessage";
 import { useRecoilState } from "recoil";
 import closedStateAtom from "../../statesManager/atoms/closedStateAtom";
+import TimeTracker from "../timeTracker/TimeTracker";
+import automaticTrackTimerAtom from "../../statesManager/atoms/automaticTrackTimerAtom";
 
 const generateId = () => Date.now().toString();
 
@@ -35,6 +37,10 @@ const defaultItems = {
 };
 
 function Taskboard() {
+  // eslint-disable-next-line no-unused-vars
+  const [autoTrackTime, setAutoTrackTime] = useRecoilState(
+    automaticTrackTimerAtom
+  );
   const [itemsByStatus, setItemsByStatus] = useSyncedState(
     "itemsByStatus",
     defaultItems
@@ -134,7 +140,9 @@ function Taskboard() {
       ) : null}
       <DragDropContext onDragEnd={handleDragEnd}>
         <TaskboardRoot>
-          <TaskboardContent>
+          <TaskboardContent
+            style={autoTrackTime ? { paddingBottom: "7em" } : {}}
+          >
             {Object.values(TaskboardItemStatus).map((status) => (
               <TaskboardCol
                 key={status}
@@ -154,6 +162,12 @@ function Taskboard() {
           </TaskboardContent>
         </TaskboardRoot>
       </DragDropContext>
+      {autoTrackTime ? (
+        <div style={{ position: "absolute", bottom: 0, width: "100%" }}>
+          <TimeTracker itemsByStatus={itemsByStatus} />
+        </div>
+      ) : null}
+
       <TaskboardItemModal
         visible={isModalVisible}
         onCancel={closeTaskItemModal}

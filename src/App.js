@@ -11,6 +11,10 @@ import Alert from "./components/alertComponent/customAlert/Alert";
 import PwaLogo from "./components/assets/pwa-pass-3.svg";
 import TimeTracker from "./components/timeTracker/TimeTracker";
 import NoteComponent from "./components/NoteComponent/NoteComponent";
+import automaticTrackTimerAtom from "./statesManager/atoms/automaticTrackTimerAtom";
+import { useRecoilState } from "recoil";
+import ModalConfigComponent from "./components/modalConfig/ModalConfigComponent";
+import clickedConfigAtom from "./statesManager/atoms/clickedConfigAtom";
 
 const StyledLayout = styled(Layout)`
   /* We can't use "height: 100vh; width: 100vw;" here.
@@ -34,6 +38,12 @@ const StyledContent = styled(Content)`
 `;
 
 function App() {
+  // eslint-disable-next-line no-unused-vars
+  const [clickedConfig, setClickedConfig] = useRecoilState(clickedConfigAtom);
+  // eslint-disable-next-line no-unused-vars
+  const [autoTrackTime, setAutoTrackTime] = useRecoilState(
+    automaticTrackTimerAtom
+  );
   const [projectName, setProjectName] = useState(
     localStorage.getItem("projectName") ?? ""
   );
@@ -74,6 +84,7 @@ function App() {
       {openNote ? <NoteComponent /> : null}
       <StyledHeader>
         <div className="projectName-container">
+          {clickedConfig ? <ModalConfigComponent /> : null}
           {erasedDemand ? (
             <Alert
               setValidateProjectName={setValidateProjectName}
@@ -183,7 +194,7 @@ function App() {
           </div>
         </div>
       </StyledHeader>
-      <TimeTracker />
+      {!autoTrackTime ? <TimeTracker /> : null}
       <StyledContent>
         <Taskboard />
       </StyledContent>
