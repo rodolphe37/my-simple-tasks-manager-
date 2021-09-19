@@ -66,9 +66,6 @@ const NoteComponent = () => {
     }
   };
 
-  const MessageDeleteCard =
-    "Once you delete this sticky Note, there is no going back.";
-
   const handleDeleteNote2 = () => {
     MySwal.fire({
       title: "Are you sure?",
@@ -86,7 +83,7 @@ const NoteComponent = () => {
         setValueNote2("");
         localStorage.removeItem("valueNote2");
         localStorage.setItem("newNote2", false);
-        MySwal.fire("Deleted!", "Your file has been deleted.", "success");
+        MySwal.fire("Deleted!", "Your note has been deleted.", "success");
       }
     });
   };
@@ -107,7 +104,7 @@ const NoteComponent = () => {
         setValueNote3("");
         localStorage.removeItem("valueNote3");
         localStorage.setItem("newNote3", false);
-        MySwal.fire("Deleted!", "Your file has been deleted.", "success");
+        MySwal.fire("Deleted!", "Your note has been deleted.", "success");
       }
     });
   };
@@ -128,7 +125,7 @@ const NoteComponent = () => {
         setValueNote4("");
         localStorage.removeItem("valueNote4");
         localStorage.setItem("newNote4", false);
-        MySwal.fire("Deleted!", "Your file has been deleted.", "success");
+        MySwal.fire("Deleted!", "Your note has been deleted.", "success");
       }
     });
   };
@@ -145,7 +142,7 @@ const NoteComponent = () => {
       if (result.isConfirmed) {
         setValueNote1("");
         localStorage.removeItem("valueNote1");
-        MySwal.fire("Deleted!", "Your file has been deleted.", "success");
+        MySwal.fire("Erased!", "Your note has been erased.", "success");
       }
     });
   };

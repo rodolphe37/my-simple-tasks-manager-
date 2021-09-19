@@ -96,7 +96,11 @@ export default function TimeTracker({ itemsByStatus }) {
         setStatus(STATUS.STOPPED);
         localStorage.removeItem("time");
         setSecondsRemaining(0);
-        Swal.fire("Deleted!", "the Time Tracker is well reset.", "success");
+        Swal.fire(
+          "Reinitialized!",
+          "the Time Tracker is well reset.",
+          "success"
+        );
       }
     });
   };

@@ -9,7 +9,7 @@ const CustomConfirm = () => {
       icon: "error",
       title: "NOT ALLOWED!",
       text: "You can only process one task at a time!",
-      footer: "",
+      footer: "Just for better organization",
     });
   }
   return { JSalert };

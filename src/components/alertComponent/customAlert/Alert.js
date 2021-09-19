@@ -5,6 +5,8 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 import "./alert.css";
 import "../checkboxAlert/checkbox-alert.css";
 import BacklogImg from "../../assets/backlog.svg";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 const Alert = ({
   title,
@@ -17,6 +19,7 @@ const Alert = ({
 }) => {
   // eslint-disable-next-line no-unused-vars
   const [clickedAlert, setClickedAlert] = useState(false);
+  const MySwal = withReactContent(Swal);
 
   function stepConfirm() {
     setProjectName("");
@@ -28,12 +31,29 @@ const Alert = ({
   }
 
   const deteleAll = () => {
-    setProjectName("");
-    localStorage.clear();
-    setValidateProjectName(false);
-    setClickedAlert(false);
+    MySwal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, reset it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          "Reinitialized!",
+          "the Time Tracker is well reset.",
+          "success"
+        );
+        setProjectName("");
+        localStorage.clear();
+        setValidateProjectName(false);
+        setClickedAlert(false);
 
-    window.location.reload();
+        window.location.reload();
+      }
+    });
   };
 
   useEffect(() => {
