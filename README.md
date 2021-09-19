@@ -78,7 +78,7 @@ The start/end information for each session is displayed.
 >**:heavy_exclamation_mark: If you put all the cards back in the "To Do" column**
 You will be asked if you want to reset the history of the time spent working on the cards!
 
-![alt text](demo/new-version/reinitHistory.png "My Simple Tasks Manager")
+![alt text](demo/new-version/reinitHistory.gif "My Simple Tasks Manager")
 
 ---
 >**:heavy_exclamation_mark: I also added a "note taking or Post It" section**
@@ -143,14 +143,14 @@ A modal appears showing you in which mode you are and the possibility to change 
 >**:heavy_exclamation_mark: When you want to delete the Project name!**
 You have two choices, delete only the project name or reset all (Project name, timer & all cards)
 
-![alt text](demo/delete.png "My Simple Tasks Manager")
+![alt text](demo/delete.gif "My Simple Tasks Manager")
 
 ---
 
 >**:heavy_exclamation_mark: When you want to delete an task card!**
 You have one alert for confirm your wish to delete this card (with name card)
 
-![alt text](demo/confirm-delete-card.png "My Simple Tasks Manager")
+![alt text](demo/confirm-delete-card.gif "My Simple Tasks Manager")
 
 ---
 
