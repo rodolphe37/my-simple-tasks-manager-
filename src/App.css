@@ -181,7 +181,7 @@ select {
   margin-left: 25px;
 }
 
-@media screen and (max-width: 1050px) {
+@media screen and (max-width: 1330px) {
   .time-tracker {
     display: grid !important;
     grid-template-columns: repeat(3, 1fr) !important;

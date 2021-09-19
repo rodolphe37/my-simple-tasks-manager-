@@ -173,6 +173,7 @@ function Taskboard() {
           </TaskboardContent>
         </TaskboardRoot>
       </DragDropContext>
+
       {autoTrackTime ? (
         <div style={{ position: "absolute", bottom: 0, width: "100%" }}>
           <TimeTracker itemsByStatus={itemsByStatus} />

@@ -15,6 +15,7 @@ import automaticTrackTimerAtom from "./statesManager/atoms/automaticTrackTimerAt
 import { useRecoilState } from "recoil";
 import ModalConfigComponent from "./components/modalConfig/ModalConfigComponent";
 import clickedConfigAtom from "./statesManager/atoms/clickedConfigAtom";
+import FloatingButton from "./components/githubFloatingButton/FloatingButton";
 
 const StyledLayout = styled(Layout)`
   /* We can't use "height: 100vh; width: 100vw;" here.
@@ -187,6 +188,7 @@ function App() {
             <img className="logo" src={BacklogImg} alt="" />
             <strong>My Simple Tasks manager</strong>
           </div>
+
           <div className="ribbon ribbon-top-right">
             <span>
               <img className="picture-ribbon" src={PwaLogo} alt="ribbon" />
@@ -197,6 +199,7 @@ function App() {
       {!autoTrackTime ? <TimeTracker /> : null}
       <StyledContent>
         <Taskboard />
+        <FloatingButton />
       </StyledContent>
     </StyledLayout>
   );
