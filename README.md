@@ -107,7 +107,7 @@ The manual mode leaves the "Time Tracker" toolbar at the top of your page (heade
 >**:heavy_exclamation_mark: When you click on the configuration button when you are in manual mode**
 A modal appears telling you which mode you are in and the possibility to change the default configuration to automatic mode.
 
-![alt text](demo/update-09-21/config-modal.png "My Simple Tasks Manager")
+![alt text](demo/update-09-21/config-modal.gif "My Simple Tasks Manager")
 
 ---
 
@@ -120,20 +120,20 @@ The automatic mode moves the "Time Tracker" toolbar to the bottom of your page (
 >**:heavy_exclamation_mark: When you drag a task card into the "In Progress" column**
 The timer starts automatically...
 
-![alt text](demo/update-09-21/autoStart.png "My Simple Tasks Manager")
+![alt text](demo/update-09-21/autoStart.gif "My Simple Tasks Manager")
 
 ---
 >**:heavy_exclamation_mark: Then, when you drag the card to the "Done" column**
 The timer stops automatically.!
 
-![alt text](demo/update-09-21/autoStop.png "My Simple Tasks Manager")
+![alt text](demo/update-09-21/autoStop.gif "My Simple Tasks Manager")
 
 ---
 
 >**:heavy_exclamation_mark: When you click on the configuration button when you are in automatic mode**
 A modal appears showing you in which mode you are and the possibility to change the default configuration in manual mode.
 
-![alt text](demo/update-09-21/config-modal2.png "My Simple Tasks Manager")
+![alt text](demo/update-09-21/config-modal2.gif "My Simple Tasks Manager")
 
 ---
 

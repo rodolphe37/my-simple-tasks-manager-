@@ -48,7 +48,7 @@ const ModalConfigComponent = () => {
       <aside id="config" className="modalConfig">
         <div style={{ color: "#000" }}>
           <h2 style={{ fontSize: 18, color: "#000" }}>
-            Automatic timer configuration
+            {autoTrackTime ? "Automatic" : "Manual"} timer configuration
           </h2>
           <p>
             {`You can choose the automatic TrackTime or
