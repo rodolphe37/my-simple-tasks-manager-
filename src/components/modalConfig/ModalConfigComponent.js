@@ -30,7 +30,9 @@ const ModalConfigComponent = () => {
       setAutoTrackTime(false);
     }
     setClickedConfig(false);
-    window.location.replace("/");
+    setTimeout(() => {
+      window.location.replace("/");
+    }, 400);
   };
 
   useEffect(() => {
