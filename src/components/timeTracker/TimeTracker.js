@@ -7,7 +7,7 @@ import automaticTrackTimerAtom from "../../statesManager/atoms/automaticTrackTim
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import ModalConfigComponent from "../modalConfig/ModalConfigComponent";
-import clickedConfigAtom from "../../statesManager/atoms/clickedConfigAtom";
+// import clickedConfigAtom from "../../statesManager/atoms/clickedConfigAtom";
 import clickedAddToDoAtom from "../../statesManager/atoms/clickedAddToDoAtom";
 import { Fragment } from "react";
 
