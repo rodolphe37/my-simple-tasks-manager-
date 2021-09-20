@@ -14,6 +14,7 @@ import TimerEndIcon from "../assets/timer.svg";
 import StartIcon from "../assets/start.svg";
 import cumulTimeCardsTaskAtom from "../../statesManager/atoms/cumulTimeCardsTaskAtom";
 import { v4 as uuidv4 } from "uuid";
+import completCardsTimeArrayAtom from "../../statesManager/atoms/completCardsTimeArrayAtom";
 
 const StyledCard = styled(Card)`
   margin: 0.5rem;
@@ -47,7 +48,7 @@ function TaskboardItemCard({
     JSON.parse(localStorage.getItem("totalTimeInSeconds")) ?? []
   );
   const [cumuledTimeCards, setCumuledTimeCards] = useRecoilState(
-    cumulTimeCardsTaskAtom
+    completCardsTimeArrayAtom
   );
   const [completCardsTimeArray, setCompletCardsTimeArray] =
     useRecoilState(timeAllCardsAtom);
@@ -108,11 +109,15 @@ function TaskboardItemCard({
 
       if (completCardsTimeArray.length === 0) {
         setCompletCardsTimeArray(timeAllCards);
+        setCumuledTimeCards(timeAllCards);
       }
 
       if (Number(item.id) !== cardId[0]) {
         setCompletCardsTimeArray((completCardsTimeArray) =>
           completCardsTimeArray.concat(timeAllCards)
+        );
+        setCumuledTimeCards((cumuledTimeCards) =>
+          cumuledTimeCards.concat(timeAllCards)
         );
       }
       // console.log(re[0]);
@@ -179,7 +184,13 @@ function TaskboardItemCard({
     // console.log("itemsByStatus", itemsByStatus);
     // console.log("item", item);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [status, startWorkState, stopWorkState, completCardsTimeArray]);
+  }, [
+    status,
+    startWorkState,
+    stopWorkState,
+    completCardsTimeArray,
+    cumuledTimeCards,
+  ]);
 
   useEffect(() => {
     // console.log("compar id", item.id === timeAllCards.id);

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import automaticTrackTimerAtom from "../../statesManager/atoms/automaticTrackTimerAtom";
+import completCardsTimeArrayAtom from "../../statesManager/atoms/completCardsTimeArrayAtom";
 import itemsByStautsAtom from "../../statesManager/atoms/itemsByStatusAtom";
 import openDashAtom from "../../statesManager/atoms/openDashAtom";
 
@@ -8,6 +9,7 @@ const Dashboard = () => {
   const [autoTrackTime] = useRecoilState(automaticTrackTimerAtom);
   const [totalTimeLocalStore] = useState(localStorage.getItem("time"));
   const [stockItemsByStatus] = useRecoilState(itemsByStautsAtom);
+  const [completCardsTimeArray] = useRecoilState(completCardsTimeArrayAtom);
   // eslint-disable-next-line no-unused-vars
   const [openDash, setOpenDash] = useRecoilState(openDashAtom);
 
@@ -18,8 +20,8 @@ const Dashboard = () => {
   }
 
   useEffect(() => {
-    console.log("stockItemsByStatus", stockItemsByStatus);
-  }, [stockItemsByStatus]);
+    console.log("completCardsTimeArray", completCardsTimeArray);
+  }, [completCardsTimeArray]);
   return (
     <div
       className={
@@ -61,26 +63,48 @@ const Dashboard = () => {
         <div className="tasks-dash graphs">
           <div className="todo-dash">
             <div className="list-dash graphDash">
-              <strong>Graph title</strong>
+              <strong>Graph Hours</strong>
               <div>Graph</div>
             </div>
           </div>
           <div className="inProgress-dash">
             <div className="list-dash graphDash">
-              <strong>Graph title</strong>
+              <strong>Graph Days</strong>
               <div>Graph</div>
             </div>
           </div>
           <div className="done-dash">
             <div className="list-dash graphDash">
-              <strong>Graph title</strong>
+              <strong>Graph Tasks</strong>
               <div>Graph</div>
             </div>
           </div>
         </div>
         <div className="tasks-dash cardsRapport">
+          <div className="done-dash">
+            <span className="dashTask-title">Tasks Done</span>
+            <div className="list-dash">
+              {stockItemsByStatus["Done"].length > 0 ? (
+                stockItemsByStatus["Done"].map((res, i) => (
+                  <ul key={res.id}>
+                    <li>
+                      <strong style={{ fontSize: 11 }}>
+                        Name: {res.title}
+                      </strong>
+                      <p style={{ fontSize: 12 }}>desc: {res.description}</p>
+                      <p style={{ fontSize: 12 }}>Created: {res.timestamp}</p>
+                    </li>
+                  </ul>
+                ))
+              ) : (
+                <strong style={{ color: "darkred", fontWeight: "bold" }}>
+                  No tasks in this section
+                </strong>
+              )}
+            </div>
+          </div>
           <div className="todo-dash">
-            <span className="dashTask-title">Task In To Do</span>
+            <span className="dashTask-title">Task that required more time</span>
             <div className="list-dash">
               {stockItemsByStatus["To Do"].length > 0 ? (
                 stockItemsByStatus["To Do"].map((res, i) => (
@@ -98,28 +122,10 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="inProgress-dash">
-            <span className="dashTask-title">Task In Progress</span>
+            <span className="dashTask-title">Task that required less time</span>
             <div className="list-dash">
               {stockItemsByStatus["In Progress"].length > 0 ? (
                 stockItemsByStatus["In Progress"].map((res, i) => (
-                  <ul key={i}>
-                    <li>
-                      <p style={{ fontSize: 11 }}>{res.title}</p>
-                    </li>
-                  </ul>
-                ))
-              ) : (
-                <strong style={{ color: "darkred", fontWeight: "bold" }}>
-                  No tasks in this section
-                </strong>
-              )}
-            </div>
-          </div>
-          <div className="done-dash">
-            <span className="dashTask-title">Task In Done</span>
-            <div className="list-dash">
-              {stockItemsByStatus["Done"].length > 0 ? (
-                stockItemsByStatus["Done"].map((res, i) => (
                   <ul key={i}>
                     <li>
                       <p style={{ fontSize: 11 }}>{res.title}</p>
@@ -170,6 +176,21 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
+        <div className="bottom-dash">
+          <span className="dashTask-title">Time Elapsed For each Task</span>
+          <div className="list-dash bottom">
+            {completCardsTimeArray.map((res) => (
+              <div key={res.cardId}>
+                <p>{res.cardTitle}</p>
+                <hr />
+                <p>{res.start}</p>
+                <hr />
+                <p>{res.stop}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <br />
       </div>
     </div>
   );

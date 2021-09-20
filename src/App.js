@@ -19,6 +19,7 @@ import FloatingButton from "./components/githubFloatingButton/FloatingButton";
 import ButtonDashboard from "./components/dashboard/ButtonDashboard";
 import openDashAtom from "./statesManager/atoms/openDashAtom";
 import Dashboard from "./components/dashboard/Dashboard";
+import itemsByStautsAtom from "./statesManager/atoms/itemsByStatusAtom";
 
 const StyledLayout = styled(Layout)`
   /* We can't use "height: 100vh; width: 100vw;" here.
@@ -43,6 +44,7 @@ const StyledContent = styled(Content)`
 
 function App() {
   const [openDash] = useRecoilState(openDashAtom);
+  const [stockItemsByStatus] = useRecoilState(itemsByStautsAtom);
   // eslint-disable-next-line no-unused-vars
   const [clickedConfig, setClickedConfig] = useRecoilState(clickedConfigAtom);
   // eslint-disable-next-line no-unused-vars
@@ -202,7 +204,6 @@ function App() {
       </StyledHeader>
       {!autoTrackTime ? <TimeTracker /> : null}
       <StyledContent>
-        <ButtonDashboard />
         {openDash ? <Dashboard /> : null}
         {!openDash ? <Taskboard /> : null}
         <FloatingButton />

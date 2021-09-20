@@ -172,3 +172,17 @@
   background-color: whitesmoke;
   z-index: 150;
 }
+.bottom-dash {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 15px;
+  flex-wrap: wrap;
+}
+.list-dash.bottom {
+  width: 100%;
+  justify-content: space-around;
+  text-align: center;
+}

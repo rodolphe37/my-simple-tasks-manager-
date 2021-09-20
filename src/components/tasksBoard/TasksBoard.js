@@ -17,6 +17,7 @@ import clickedAddToDoAtom from "../../statesManager/atoms/clickedAddToDoAtom";
 import chevron from "../assets/chevron.svg";
 import pinIcon from "../assets/pin.svg";
 import pinGreen from "../assets/pin-green.svg";
+import ButtonDashboard from "../dashboard/ButtonDashboard";
 
 const generateId = () => Date.now().toString();
 
@@ -170,6 +171,10 @@ function Taskboard() {
       ) : null}
       <DragDropContext onDragEnd={handleDragEnd}>
         <TaskboardRoot>
+          {itemsByStatus["In Progress"].length === 0 &&
+          itemsByStatus["To Do"].length === 0 ? (
+            <ButtonDashboard />
+          ) : null}
           <TaskboardContent
             style={autoTrackTime ? { paddingBottom: "7em" } : {}}
           >
