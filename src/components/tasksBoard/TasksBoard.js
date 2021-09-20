@@ -172,7 +172,8 @@ function Taskboard() {
       <DragDropContext onDragEnd={handleDragEnd}>
         <TaskboardRoot>
           {itemsByStatus["In Progress"].length === 0 &&
-          itemsByStatus["To Do"].length === 0 ? (
+          itemsByStatus["To Do"].length === 0 &&
+          itemsByStatus["Done"].length !== 0 ? (
             <ButtonDashboard />
           ) : null}
           <TaskboardContent

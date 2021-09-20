@@ -63,8 +63,6 @@ function App() {
     if (projectName !== "" && validateprojectName) {
       setValidateProjectName(true);
     }
-
-    console.log("origine", window.location.origin);
   }, [projectName, openNote, validateprojectName]);
 
   const handleValidateprojectName = () => {
