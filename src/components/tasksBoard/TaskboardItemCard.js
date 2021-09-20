@@ -152,6 +152,7 @@ function TaskboardItemCard({
         //   "timeAllCards[0].id",
         //   timeAllCards.map((res) => res.id)
         // );
+
         localStorage.setItem(
           "completCardsTimeArray",
           JSON.stringify(completCardsTimeArray)
@@ -164,16 +165,21 @@ function TaskboardItemCard({
         if (!stopWorkState) {
           localStorage.setItem("stopTimeWork", stopWorkState);
         }
-        localStorage.setItem("timeAllCards", JSON.stringify(timeAllCards));
+        localStorage.setItem(
+          "totalTimeInSeconds",
+          JSON.stringify(totalTimeToSeconds)
+        );
 
         return () => {
-          // localStorage.removeItem("totalTimeInSeconds");
+          localStorage.removeItem("timeAllCards");
         };
       }
     }
 
     if (itemsByStatus["In Progress"].length === 0) {
-      localStorage.removeItem("startTimeWork");
+      setTimeout(() => {
+        localStorage.removeItem("startTimeWork");
+      }, 1000);
       localStorage.removeItem("timeAllCards");
     }
 
@@ -204,6 +210,52 @@ function TaskboardItemCard({
   ]);
 
   useEffect(() => {
+    const totalTimeAddition = () => {
+      const numberKeeped = 8;
+
+      const startTask = startWorkState;
+      const hoursToMinStartTask = startTask.substring(
+        startTask.length - numberKeeped
+      );
+      const stopTask = stopWorkState;
+      const hoursToMinStopTask = stopTask.substring(
+        stopTask.length - numberKeeped
+      );
+      // console.log("startTask", hoursToMinStartTask);
+      // console.log("stopTask", hoursToMinStopTask);
+
+      function hmsToSecondsOnly(str) {
+        let p = str.split(":"),
+          s = 0,
+          m = 1;
+        while (p.length > 0) {
+          s += m * parseInt(p.pop(), 10);
+          m *= 60;
+        }
+        return s;
+      }
+      const startTaskResult = hmsToSecondsOnly(hoursToMinStartTask);
+      const stopTaskResult = hmsToSecondsOnly(hoursToMinStopTask);
+      // console.log("result :", startTaskResult);
+      // console.log("result :", stopTaskResult);
+
+      // setTotalTimeToSeconds((totalTimeToSeconds) =>
+      //   totalTimeToSeconds.concat({
+      //     cardId: item.id,
+      //     totalTime: stopTaskResult - startTaskResult,
+      //   })
+      // );
+
+      if (startWorkState && stopWorkState) {
+        setTotalTimeToSeconds((totalTimeToSeconds) =>
+          totalTimeToSeconds.concat({
+            cardId: item.id,
+            totalTime: stopTaskResult - startTaskResult,
+            uuid: uuidv4(),
+          })
+        );
+      }
+    };
     // console.log("compar id", item.id === timeAllCards.id);
 
     // if (totalTimeToSeconds !== null && status === "Done") {
@@ -216,52 +268,7 @@ function TaskboardItemCard({
     if (startWorkState && stopWorkState) {
       totalTimeAddition();
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [completCardsTimeArray, timeAllCards]);
-
-  const totalTimeAddition = () => {
-    const numberKeeped = 8;
-
-    const startTask = startWorkState;
-    const hoursToMinStartTask = startTask.substring(
-      startTask.length - numberKeeped
-    );
-    const stopTask = stopWorkState;
-    const hoursToMinStopTask = stopTask.substring(
-      stopTask.length - numberKeeped
-    );
-    // console.log("startTask", hoursToMinStartTask);
-    // console.log("stopTask", hoursToMinStopTask);
-
-    function hmsToSecondsOnly(str) {
-      let p = str.split(":"),
-        s = 0,
-        m = 1;
-      while (p.length > 0) {
-        s += m * parseInt(p.pop(), 10);
-        m *= 60;
-      }
-      return s;
-    }
-    const startTaskResult = hmsToSecondsOnly(hoursToMinStartTask);
-    const stopTaskResult = hmsToSecondsOnly(hoursToMinStopTask);
-    // console.log("result :", startTaskResult);
-    // console.log("result :", stopTaskResult);
-
-    // setTotalTimeToSeconds((totalTimeToSeconds) =>
-    //   totalTimeToSeconds.concat({
-    //     cardId: item.id,
-    //     totalTime: stopTaskResult - startTaskResult,
-    //   })
-    // );
-
-    setTotalTimeToSeconds({
-      cardId: item.id,
-      totalTime: stopTaskResult - startTaskResult,
-      uuid: UniqueUuid,
-    });
-  };
+  }, [startWorkState, stopWorkState, setTotalTimeToSeconds, item]);
 
   // useEffect(() => {
 
@@ -421,32 +428,30 @@ function TaskboardItemCard({
                       height: "20px",
                     }}
                   >
-                    {res.start && res.stop && (
-                      <Fragment>
-                        <Form.Item key={res.uuid}>
-                          <p style={{ fontSize: 10 }}>{res.start}</p>
-                        </Form.Item>
-                        <Typography.Paragraph
-                          type="secondary"
-                          ellipsis={{ rows: 2 }}
+                    <Fragment>
+                      <Form.Item key={res.uuid}>
+                        <p style={{ fontSize: 10 }}>{res.start}</p>
+                      </Form.Item>
+                      <Typography.Paragraph
+                        type="secondary"
+                        ellipsis={{ rows: 2 }}
+                      >
+                        <Form.Item
+                          shouldUpdate={(prevValuesStop, curValuesStop) =>
+                            prevValuesStop.additional !==
+                            curValuesStop.additional
+                          }
                         >
-                          <Form.Item
-                            shouldUpdate={(prevValuesStop, curValuesStop) =>
-                              prevValuesStop.additional !==
-                              curValuesStop.additional
-                            }
-                          >
-                            {() => {
-                              return (
-                                <Form.Item key={res.uuid}>
-                                  <p style={{ fontSize: 10 }}>{res.stop}</p>
-                                </Form.Item>
-                              );
-                            }}
-                          </Form.Item>
-                        </Typography.Paragraph>
-                      </Fragment>
-                    )}
+                          {() => {
+                            return (
+                              <Form.Item key={res.uuid}>
+                                <p style={{ fontSize: 10 }}>{res.stop}</p>
+                              </Form.Item>
+                            );
+                          }}
+                        </Form.Item>
+                      </Typography.Paragraph>
+                    </Fragment>
                   </div>
                 ) : null}
               </Form>

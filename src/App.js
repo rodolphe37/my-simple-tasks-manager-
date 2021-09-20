@@ -18,6 +18,7 @@ import clickedConfigAtom from "./statesManager/atoms/clickedConfigAtom";
 import FloatingButton from "./components/githubFloatingButton/FloatingButton";
 import openDashAtom from "./statesManager/atoms/openDashAtom";
 import Dashboard from "./components/dashboard/Dashboard";
+import useDateTime from "./hooks/useDateTime";
 
 const StyledLayout = styled(Layout)`
   /* We can't use "height: 100vh; width: 100vw;" here.
@@ -42,6 +43,7 @@ const StyledContent = styled(Content)`
 
 function App() {
   const [openDash] = useRecoilState(openDashAtom);
+  const { dateStartSession } = useDateTime();
 
   // eslint-disable-next-line no-unused-vars
   const [clickedConfig, setClickedConfig] = useRecoilState(clickedConfigAtom);
@@ -60,10 +62,11 @@ function App() {
   const [openNote, setOpenNote] = useState(false);
 
   useEffect(() => {
-    if (projectName !== "" && validateprojectName) {
-      setValidateProjectName(true);
-    }
-  }, [projectName, openNote, validateprojectName]);
+    if (localStorage.getItem("startSession", dateStartSession))
+      if (projectName !== "" && validateprojectName) {
+        setValidateProjectName(true);
+      }
+  }, [projectName, openNote, validateprojectName, dateStartSession]);
 
   const handleValidateprojectName = () => {
     setValidateProjectName(true);
