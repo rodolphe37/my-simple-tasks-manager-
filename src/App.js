@@ -16,6 +16,9 @@ import { useRecoilState } from "recoil";
 import ModalConfigComponent from "./components/modalConfig/ModalConfigComponent";
 import clickedConfigAtom from "./statesManager/atoms/clickedConfigAtom";
 import FloatingButton from "./components/githubFloatingButton/FloatingButton";
+import ButtonDashboard from "./components/dashboard/ButtonDashboard";
+import openDashAtom from "./statesManager/atoms/openDashAtom";
+import Dashboard from "./components/dashboard/Dashboard";
 
 const StyledLayout = styled(Layout)`
   /* We can't use "height: 100vh; width: 100vw;" here.
@@ -39,6 +42,7 @@ const StyledContent = styled(Content)`
 `;
 
 function App() {
+  const [openDash, setOpenDash] = useRecoilState(openDashAtom);
   // eslint-disable-next-line no-unused-vars
   const [clickedConfig, setClickedConfig] = useRecoilState(clickedConfigAtom);
   // eslint-disable-next-line no-unused-vars
@@ -198,6 +202,8 @@ function App() {
       </StyledHeader>
       {!autoTrackTime ? <TimeTracker /> : null}
       <StyledContent>
+        <ButtonDashboard />
+        {openDash ? <Dashboard /> : null}
         <Taskboard />
         <FloatingButton />
       </StyledContent>
