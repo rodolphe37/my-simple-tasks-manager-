@@ -21,13 +21,17 @@ const Alert = ({
   const [clickedAlert, setClickedAlert] = useState(false);
   const MySwal = withReactContent(Swal);
 
+  const nextURL = "/";
+  const nextTitle = "My Simple Tasks Manager";
+  const nextState = { additionalInformation: "Updated the URL with JS" };
+
   function stepConfirm() {
     setProjectName("");
     localStorage.removeItem("projectName");
     localStorage.removeItem("validate");
     setValidateProjectName(false);
     setClickedAlert(false);
-    window.location.reload();
+    window.history.pushState(nextState, nextTitle, nextURL);
   }
 
   const deteleAll = () => {
