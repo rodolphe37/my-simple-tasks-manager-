@@ -290,3 +290,6 @@ button.erase-urername-button > .infoEraser,
   box-shadow: 0px 1px 6px grey;
   color: white !important;
 }
+.slideBottom {
+  overflow: hidden;
+}

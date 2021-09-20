@@ -204,7 +204,7 @@ function App() {
       <StyledContent>
         <ButtonDashboard />
         {openDash ? <Dashboard /> : null}
-        <Taskboard />
+        {!openDash ? <Taskboard /> : null}
         <FloatingButton />
       </StyledContent>
     </StyledLayout>

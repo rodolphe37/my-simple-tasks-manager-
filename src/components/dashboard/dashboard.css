@@ -158,3 +158,17 @@
   max-width: 100%;
   padding: 10px;
 }
+.cardsRapport {
+  display: grid !important;
+  grid-template-columns: repeat(1, 1fr) !important;
+  grid-gap: 30px !important;
+  max-width: 100%;
+  padding: 30px;
+  text-align: center;
+}
+.dashContent-container {
+  width: 100%;
+  top: 0;
+  background-color: whitesmoke;
+  z-index: 150;
+}

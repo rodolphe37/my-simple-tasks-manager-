@@ -1,10 +1,26 @@
+import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import automaticTrackTimerAtom from "../../statesManager/atoms/automaticTrackTimerAtom";
+import itemsByStautsAtom from "../../statesManager/atoms/itemsByStatusAtom";
 import openDashAtom from "../../statesManager/atoms/openDashAtom";
 
 const Dashboard = () => {
   const [autoTrackTime] = useRecoilState(automaticTrackTimerAtom);
+  const [totalTimeLocalStore] = useState(localStorage.getItem("time"));
+  const [stockItemsByStatus, setStockItemsByStatus] =
+    useRecoilState(itemsByStautsAtom);
+  // eslint-disable-next-line no-unused-vars
   const [openDash, setOpenDash] = useRecoilState(openDashAtom);
+
+  function cutDecimals(number, decimals) {
+    return number.toLocaleString("fullwide", {
+      maximumFractionDigits: decimals,
+    });
+  }
+
+  useEffect(() => {
+    console.log("stockItemsByStatus", stockItemsByStatus);
+  }, [stockItemsByStatus]);
   return (
     <div
       className={
@@ -21,13 +37,26 @@ const Dashboard = () => {
         <div className="dashContainer-header">
           <div className="dashContainer-content-header">
             <strong>Total Time:</strong>
-            <p>00H00m00s</p>
+            <p style={{ fontWeight: "bold", fontSize: 25 }}>
+              {cutDecimals(totalTimeLocalStore / 3600, 2)}{" "}
+              <sub style={{ fontSize: 11, fontStyle: "italic" }}>hours</sub>
+            </p>
           </div>
           <div className="dashContainer-content-header">
-            <strong>Total days work:</strong> <p>165 days</p>
+            <strong>Total days work:</strong>{" "}
+            <p style={{ fontWeight: "bold", fontSize: 25 }}>
+              {cutDecimals(totalTimeLocalStore / 28800, 2)}{" "}
+              <sub style={{ fontSize: 11, fontStyle: "italic" }}>days</sub>
+            </p>
           </div>
           <div className="dashContainer-content-header">
-            <strong> Number Tasks:</strong> <p>25 Tasks</p>
+            <strong> Number Tasks:</strong>{" "}
+            <p style={{ fontWeight: "bold", fontSize: 25 }}>
+              {stockItemsByStatus["To Do"].length +
+                stockItemsByStatus["In Progress"].length +
+                stockItemsByStatus["Done"].length}{" "}
+              <sub style={{ fontSize: 11, fontStyle: "italic" }}>tasks</sub>
+            </p>
           </div>
         </div>
         <div className="tasks-dash graphs">
@@ -50,56 +79,59 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        <div className="tasks-dash">
+        <div className="tasks-dash cardsRapport">
           <div className="todo-dash">
             <span className="dashTask-title">Task In To Do</span>
             <div className="list-dash">
-              <ul>
-                <li>Task 1</li>
-                <li>Task 1</li>
-                <li>Task 1</li>
-                <li>Task 1</li>
-                <li>Task 1</li>
-                <li>Task 1</li>
-                <li>Task 1</li>
-                <li>Task 1</li>
-                <li>Task 1</li>
-                <li>Task 1</li>
-              </ul>
+              {stockItemsByStatus["To Do"].length > 0 ? (
+                stockItemsByStatus["To Do"].map((res, i) => (
+                  <ul key={i}>
+                    <li>
+                      <p style={{ fontSize: 11 }}>{res.title}</p>
+                    </li>
+                  </ul>
+                ))
+              ) : (
+                <strong style={{ color: "darkred", fontWeight: "bold" }}>
+                  No tasks in this section
+                </strong>
+              )}
             </div>
           </div>
           <div className="inProgress-dash">
             <span className="dashTask-title">Task In Progress</span>
             <div className="list-dash">
-              <ul>
-                <li>Task 1</li>
-                <li>Task 1</li>
-                <li>Task 1</li>
-                <li>Task 1</li>
-                <li>Task 1</li>
-                <li>Task 1</li>
-                <li>Task 1</li>
-                <li>Task 1</li>
-                <li>Task 1</li>
-                <li>Task 1</li>
-              </ul>
+              {stockItemsByStatus["In Progress"].length > 0 ? (
+                stockItemsByStatus["In Progress"].map((res, i) => (
+                  <ul key={i}>
+                    <li>
+                      <p style={{ fontSize: 11 }}>{res.title}</p>
+                    </li>
+                  </ul>
+                ))
+              ) : (
+                <strong style={{ color: "darkred", fontWeight: "bold" }}>
+                  No tasks in this section
+                </strong>
+              )}
             </div>
           </div>
           <div className="done-dash">
             <span className="dashTask-title">Task In Done</span>
             <div className="list-dash">
-              <ul>
-                <li>Task 1</li>
-                <li>Task 1</li>
-                <li>Task 1</li>
-                <li>Task 1</li>
-                <li>Task 1</li>
-                <li>Task 1</li>
-                <li>Task 1</li>
-                <li>Task 1</li>
-                <li>Task 1</li>
-                <li>Task 1</li>
-              </ul>
+              {stockItemsByStatus["Done"].length > 0 ? (
+                stockItemsByStatus["Done"].map((res, i) => (
+                  <ul key={i}>
+                    <li>
+                      <p style={{ fontSize: 11 }}>{res.title}</p>
+                    </li>
+                  </ul>
+                ))
+              ) : (
+                <strong style={{ color: "darkred", fontWeight: "bold" }}>
+                  No tasks in this section
+                </strong>
+              )}
             </div>
           </div>
         </div>

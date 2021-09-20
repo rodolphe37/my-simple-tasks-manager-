@@ -10,6 +10,7 @@ import ModalConfigComponent from "../modalConfig/ModalConfigComponent";
 // import clickedConfigAtom from "../../statesManager/atoms/clickedConfigAtom";
 import clickedAddToDoAtom from "../../statesManager/atoms/clickedAddToDoAtom";
 import { Fragment } from "react";
+import itemsByStautsAtom from "../../statesManager/atoms/itemsByStatusAtom";
 
 const STATUS = {
   STARTED: "Started",
@@ -36,10 +37,15 @@ export default function TimeTracker({ itemsByStatus }) {
   const [autoTrackTime] = useRecoilState(automaticTrackTimerAtom);
   // const [clickedConfig, setClickedConfig] = useRecoilState(clickedConfigAtom);
   const [clickedAddButton] = useRecoilState(clickedAddToDoAtom);
+  const [stockItemsByStatus, setStockItemsByStatus] =
+    useRecoilState(itemsByStautsAtom);
 
   useEffect(() => {
-    console.log("itemsByStatus", itemsByStatus);
-  }, [itemsByStatus]);
+    // console.log("itemsByStatus", itemsByStatus);
+    if (itemsByStatus) {
+      setStockItemsByStatus(itemsByStatus);
+    }
+  }, [setStockItemsByStatus, itemsByStatus]);
   const handleStart = () => {
     setStatus(STATUS.STARTED);
     localStorage.setItem("status", "Started");
