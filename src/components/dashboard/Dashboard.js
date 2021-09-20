@@ -7,8 +7,7 @@ import openDashAtom from "../../statesManager/atoms/openDashAtom";
 const Dashboard = () => {
   const [autoTrackTime] = useRecoilState(automaticTrackTimerAtom);
   const [totalTimeLocalStore] = useState(localStorage.getItem("time"));
-  const [stockItemsByStatus, setStockItemsByStatus] =
-    useRecoilState(itemsByStautsAtom);
+  const [stockItemsByStatus] = useRecoilState(itemsByStautsAtom);
   // eslint-disable-next-line no-unused-vars
   const [openDash, setOpenDash] = useRecoilState(openDashAtom);
 

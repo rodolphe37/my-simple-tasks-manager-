@@ -37,6 +37,7 @@ export default function TimeTracker({ itemsByStatus }) {
   const [autoTrackTime] = useRecoilState(automaticTrackTimerAtom);
   // const [clickedConfig, setClickedConfig] = useRecoilState(clickedConfigAtom);
   const [clickedAddButton] = useRecoilState(clickedAddToDoAtom);
+  // eslint-disable-next-line no-unused-vars
   const [stockItemsByStatus, setStockItemsByStatus] =
     useRecoilState(itemsByStautsAtom);
 
