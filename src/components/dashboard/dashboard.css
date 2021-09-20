@@ -108,7 +108,8 @@
   border: 1px dotted gray;
   margin-top: 15px;
 }
-.dashContainer-header {
+.dashContainer-header,
+.headerDash-logo {
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -118,6 +119,15 @@
   padding: 10px;
   box-shadow: 0 0 4px gray;
   margin-top: 15px;
+  border-radius: 7px;
+}
+.headerDash-logo h1 {
+  color: white;
+  text-indent: 12px;
+}
+.headerDash-logo img {
+  background-color: whiteSmoke;
+  padding: 4px;
   border-radius: 7px;
 }
 .dashContainer-content-header:first-child {
@@ -185,4 +195,32 @@
   width: 100%;
   justify-content: space-around;
   text-align: center;
+}
+.closeButtonDash {
+  background-color: darkred;
+  border: 0.02rem solid white;
+  border-radius: 4px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+}
+.closeButtonDash strong:hover {
+  width: 72px;
+}
+button {
+  cursor: pointer;
+}
+.tjm-button {
+  width: 57px;
+  height: 57px;
+  position: absolute;
+  right: 8px;
+  top: 7px;
+  padding: 7px;
+  transition: all 0.5s ease-in-out;
+}
+.tjm-button img:hover {
+  width: 66px !important;
+  transform: translate(-12px, -12px);
+  transition: all 0.5s ease-in-out;
 }

@@ -4,6 +4,10 @@ import automaticTrackTimerAtom from "../../statesManager/atoms/automaticTrackTim
 import completCardsTimeArrayAtom from "../../statesManager/atoms/completCardsTimeArrayAtom";
 import itemsByStatusAtom from "../../statesManager/atoms/itemsByStatusAtom";
 import openDashAtom from "../../statesManager/atoms/openDashAtom";
+import PriceIcon from "../assets/price.svg";
+import DashIcon from "../assets/increase.svg";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 const Dashboard = () => {
   const [autoTrackTime] = useRecoilState(automaticTrackTimerAtom);
@@ -12,12 +16,41 @@ const Dashboard = () => {
   const [completCardsTimeArray] = useRecoilState(completCardsTimeArrayAtom);
   // eslint-disable-next-line no-unused-vars
   const [openDash, setOpenDash] = useRecoilState(openDashAtom);
-
+  const [tjm, setTjm] = useState(localStorage.getItem("tjm") ?? 0);
+  const [eurTjm, setEurTjm] = useState(0);
+  const MySwal = withReactContent(Swal);
   function cutDecimals(number, decimals) {
     return number.toLocaleString("fullwide", {
       maximumFractionDigits: decimals,
     });
   }
+  let totalEuro = eurTjm * 0.85;
+
+  useEffect(() => {
+    if (tjm) {
+      localStorage.setItem("tjm", tjm);
+      setEurTjm(tjm);
+    }
+    console.log(eurTjm);
+  }, [tjm, setEurTjm, eurTjm]);
+  const handlePrice = () => {
+    MySwal.fire({
+      title: "Enter your Daily Rate in dollars",
+      input: "number",
+      inputAttributes: {
+        autocapitalize: "off",
+      },
+      showCancelButton: true,
+      confirmButtonText: "Look up",
+      showLoaderOnConfirm: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        console.log(result);
+        setTjm(result.value);
+        Swal.fire("Saved!", "Your daily rate has been saved.", "success");
+      }
+    });
+  };
 
   useEffect(() => {
     console.log("completCardsTimeArray", completCardsTimeArray);
@@ -31,10 +64,34 @@ const Dashboard = () => {
       }
     >
       <div className="header-dash">
-        <h1>Dashboard</h1>
-        <button onClick={() => setOpenDash(false)}>Close</button>
+        <div className="headerDash-logo">
+          <img src={DashIcon} alt="dash" style={{ width: 55 }} />
+          <h1>Dashboard</h1>
+        </div>
+
+        <div className="closeButton-container">
+          <button
+            className="closeButtonDash"
+            onClick={() => setOpenDash(false)}
+          >
+            <strong>X</strong>
+          </button>
+        </div>
       </div>
-      <div className="dashContent-container">
+      <div style={{ position: "relative" }} className="dashContent-container">
+        <div onClick={handlePrice} className="tjm-button">
+          <img
+            src={PriceIcon}
+            alt="price"
+            style={{
+              width: 44,
+
+              cursor: "pointer",
+            }}
+          />
+          <p>${tjm}</p>
+          <p>{totalEuro}€</p>
+        </div>
         <div className="dashContainer-header">
           <div className="dashContainer-content-header">
             <strong>Total Time:</strong>
@@ -179,15 +236,17 @@ const Dashboard = () => {
         <div className="bottom-dash">
           <span className="dashTask-title">Time Elapsed For each Task</span>
           <div className="list-dash bottom">
-            {completCardsTimeArray.map((res) => (
-              <div key={res.cardId}>
-                <p>{res.cardTitle}</p>
-                <hr />
-                <p>{res.start}</p>
-                <hr />
-                <p>{res.stop}</p>
-              </div>
-            ))}
+            {completCardsTimeArray
+              .filter((resFiltered) => resFiltered.start !== "")
+              .map((res) => (
+                <div key={res.cardId}>
+                  <p>{res.cardTitle}</p>
+                  <hr />
+                  <p>{res.start}</p>
+                  <hr />
+                  <p>{res.stop}</p>
+                </div>
+              ))}
           </div>
         </div>
         <br />

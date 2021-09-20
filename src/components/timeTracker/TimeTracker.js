@@ -17,12 +17,14 @@ const STATUS = {
   STOPPED: "Stopped",
 };
 
-const INITIAL_COUNT = JSON.parse(localStorage.getItem("time")) ?? 0;
+// const INITIAL_COUNT = JSON.parse(localStorage.getItem("time")) ?? 0;
 
 export default function TimeTracker({ itemsByStatus }) {
   const MySwal = withReactContent(Swal);
   const { n } = useDateTime();
-  const [secondsRemaining, setSecondsRemaining] = useState(INITIAL_COUNT);
+  const [secondsRemaining, setSecondsRemaining] = useState(
+    JSON.parse(localStorage.getItem("time"))
+  );
   const [status, setStatus] = useState(
     localStorage.getItem("status") === "Started"
       ? localStorage.getItem("status")
@@ -184,7 +186,7 @@ export default function TimeTracker({ itemsByStatus }) {
           {/*<button onClick={handleclickConfig}>
           <img style={{ width: 34 }} src={configIcon} alt="config" />
   </button>*/}
-          <ModalConfigComponent />
+          {status === STATUS.STOPPED ? <ModalConfigComponent /> : null}
         </div>
       ) : (
         <Fragment>
@@ -196,7 +198,7 @@ export default function TimeTracker({ itemsByStatus }) {
           >
             Reset
           </button>
-          <ModalConfigComponent />
+          {status === STATUS.STOPPED ? <ModalConfigComponent /> : null}
         </Fragment>
       )}
 
