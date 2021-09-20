@@ -102,3 +102,24 @@
   border: 1px dotted gray;
   margin-top: 15px;
 }
+.dashContainer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.dashContainer-content-header {
+  border: 1px solid gray;
+  padding: 10px;
+  box-shadow: 0 0 4px gray;
+  margin-top: 15px;
+  border-radius: 7px;
+}
+.dashContainer-content-header:first-child {
+  background-color: green;
+}
+.dashContainer-content-header:nth-child(2) {
+  background-color: yellow;
+}
+.dashContainer-content-header:nth-child(3) {
+  background-color: red;
+}

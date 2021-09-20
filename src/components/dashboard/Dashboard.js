@@ -11,7 +11,11 @@ const Dashboard = () => {
         <button onClick={() => setOpenDash(false)}>Close</button>
       </div>
       <div className="dashContent-container">
-        <div>Content</div>
+        <div className="dashContainer-header">
+          <div className="dashContainer-content-header">Content</div>
+          <div className="dashContainer-content-header">Content</div>
+          <div className="dashContainer-content-header">Content</div>
+        </div>
         <div className="tasks-dash">
           <div className="todo-dash">
             <span className="dashTask-title">Task In To Do</span>
