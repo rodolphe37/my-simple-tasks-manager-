@@ -1,6 +1,5 @@
 .buttonDashboard {
   left: 5px;
-  top: 8%;
   position: absolute;
   z-index: 100;
   background: rgba(0, 0, 0, 0.2);
@@ -63,22 +62,22 @@
     opacity: 1;
   }
 }
-.scale-out-ver-bottom {
-  animation: scale-out-ver-bottom 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53)
-    both;
+.scale-in-ver-top {
+  animation: scale-in-ver-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
-@keyframes scale-out-ver-bottom {
+@keyframes scale-in-ver-top {
   0% {
-    transform: scaleY(1);
-    transform-origin: 0% 100%;
+    transform: scaleY(0);
+    transform-origin: 100% 0%;
     opacity: 1;
   }
   100% {
-    transform: scaleY(0);
-    transform-origin: 0% 100%;
+    transform: scaleY(1);
+    transform-origin: 100% 0%;
     opacity: 1;
   }
 }
+
 .tasks-dash {
   display: grid !important;
   grid-template-columns: repeat(3, 1fr) !important;
@@ -86,6 +85,13 @@
   max-width: 100%;
   padding: 30px;
   text-align: center;
+}
+.bottomSection {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  grid-gap: 30px !important;
+  max-width: 100%;
+  padding: 30px;
 }
 .list-dash > ul > li {
   list-style: none;
@@ -115,11 +121,40 @@
   border-radius: 7px;
 }
 .dashContainer-content-header:first-child {
-  background-color: green;
+  background-color: #57a957;
 }
 .dashContainer-content-header:nth-child(2) {
-  background-color: yellow;
+  background-color: #269ce9;
 }
 .dashContainer-content-header:nth-child(3) {
-  background-color: red;
+  background-color: #ca3535;
+}
+.dashContainer-content-header > strong {
+  color: whitesmoke;
+  border-bottom: 1px dotted lightgray;
+}
+.dashContainer-content-header > p {
+  text-align: center;
+  color: whitesmoke;
+  font-style: italic;
+  margin-top: 5px;
+}
+.graphDash {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.stickyNotes {
+  width: 100%;
+  align-items: flex-start;
+  justify-content: space-around !important;
+  flex-direction: column !important;
+}
+.stickyListNote {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  grid-gap: 10px !important;
+  max-width: 100%;
+  padding: 10px;
 }
