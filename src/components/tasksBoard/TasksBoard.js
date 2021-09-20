@@ -14,6 +14,9 @@ import TimeTracker from "../timeTracker/TimeTracker";
 import automaticTrackTimerAtom from "../../statesManager/atoms/automaticTrackTimerAtom";
 import CustomConfirm from "../customConfirm/CustomConfirm";
 import clickedAddToDoAtom from "../../statesManager/atoms/clickedAddToDoAtom";
+import chevron from "../assets/chevron.svg";
+import pinIcon from "../assets/pin.svg";
+import pinGreen from "../assets/pin-green.svg";
 
 const generateId = () => Date.now().toString();
 
@@ -120,6 +123,8 @@ function Taskboard() {
   const [clickedAddButton, setClickedAddButton] =
     useRecoilState(clickedAddToDoAtom);
 
+  const [viewBottomToolbar, setViewBottomToolbar] = useState(false);
+
   useEffect(() => {
     const syncTrackTime = (values) => {
       setItemsByStatus((current) =>
@@ -140,6 +145,15 @@ function Taskboard() {
     // console.log("clickedAddButton taskboard", clickedAddButton);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialValues, statusOf]);
+
+  const handleViewBottomToolbar = () => {
+    if (viewBottomToolbar) {
+      setViewBottomToolbar(false);
+    }
+    if (!viewBottomToolbar) {
+      setViewBottomToolbar(true);
+    }
+  };
 
   return (
     <>
@@ -185,7 +199,29 @@ function Taskboard() {
       </DragDropContext>
 
       {autoTrackTime ? (
-        <div style={{ position: "absolute", bottom: 0, width: "100%" }}>
+        <div
+          className={viewBottomToolbar ? "" : "slideBottom"}
+          style={{ position: "absolute", bottom: 0, width: "100%" }}
+        >
+          <span className="chevron-container">
+            <img
+              className={
+                viewBottomToolbar ? "chevronIcon rotate" : "chevronIcon"
+              }
+              src={chevron}
+              alt="chevron"
+              style={{ width: 22 }}
+            />
+          </span>
+          <span className="pinIcon-container">
+            <img
+              onClick={handleViewBottomToolbar}
+              className={viewBottomToolbar ? "pinIcon-green" : "pinIcon"}
+              src={viewBottomToolbar ? pinGreen : pinIcon}
+              alt="pin"
+              style={{ width: 22 }}
+            />
+          </span>
           <TimeTracker itemsByStatus={itemsByStatus} />
         </div>
       ) : null}
