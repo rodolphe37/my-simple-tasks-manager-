@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import automaticTrackTimerAtom from "../../statesManager/atoms/automaticTrackTimerAtom";
 import completCardsTimeArrayAtom from "../../statesManager/atoms/completCardsTimeArrayAtom";
-import itemsByStautsAtom from "../../statesManager/atoms/itemsByStatusAtom";
+import itemsByStatusAtom from "../../statesManager/atoms/itemsByStatusAtom";
 import openDashAtom from "../../statesManager/atoms/openDashAtom";
 
 const Dashboard = () => {
   const [autoTrackTime] = useRecoilState(automaticTrackTimerAtom);
   const [totalTimeLocalStore] = useState(localStorage.getItem("time"));
-  const [stockItemsByStatus] = useRecoilState(itemsByStautsAtom);
+  const [stockItemsByStatus] = useRecoilState(itemsByStatusAtom);
   const [completCardsTimeArray] = useRecoilState(completCardsTimeArrayAtom);
   // eslint-disable-next-line no-unused-vars
   const [openDash, setOpenDash] = useRecoilState(openDashAtom);
