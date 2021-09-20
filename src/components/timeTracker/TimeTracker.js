@@ -33,15 +33,12 @@ export default function TimeTracker({ itemsByStatus }) {
   const minutesToDisplay = minutesRemaining % 60;
   const hoursToDisplay = (minutesRemaining - minutesToDisplay) / 60;
 
-  // eslint-disable-next-line no-unused-vars
-  const [autoTrackTime, setAutoTrackTime] = useRecoilState(
-    automaticTrackTimerAtom
-  );
-  const [clickedConfig, setClickedConfig] = useRecoilState(clickedConfigAtom);
+  const [autoTrackTime] = useRecoilState(automaticTrackTimerAtom);
+  // const [clickedConfig, setClickedConfig] = useRecoilState(clickedConfigAtom);
   const [clickedAddButton] = useRecoilState(clickedAddToDoAtom);
 
   useEffect(() => {
-    // console.log("itemsByStatus", itemsByStatus);
+    console.log("itemsByStatus", itemsByStatus);
   }, [itemsByStatus]);
   const handleStart = () => {
     setStatus(STATUS.STARTED);
@@ -50,16 +47,6 @@ export default function TimeTracker({ itemsByStatus }) {
   const handleStop = () => {
     setStatus(STATUS.STOPPED);
     localStorage.setItem("status", "Stopped");
-  };
-
-  // eslint-disable-next-line no-unused-vars
-  const handleclickConfig = () => {
-    if (!clickedConfig) {
-      setClickedConfig(true);
-    }
-    if (clickedConfig) {
-      setClickedConfig(false);
-    }
   };
 
   useEffect(() => {

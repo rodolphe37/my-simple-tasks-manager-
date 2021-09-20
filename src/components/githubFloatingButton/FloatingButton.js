@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import MyAvatar from "../assets/perso.png";
 
 import "./floatingButton.css";
 
@@ -12,21 +13,62 @@ const FloatingButton = () => {
 
       <nav className="float-action-button">
         <a
-          href="https://github.com/rodolphe37/my-simple-tasks-manager-"
+          href="https://github.com/rodolphe37/my-simple-tasks-manager-/blob/main/README.md"
           target="new"
           className="buttons"
-          title="Github"
+          title="Application Infos"
           data-toggle="tooltip"
           data-placement="left"
         >
           <svg
-            height="36"
+            version="1.1"
+            id="Layer_1"
+            xmlns="http://www.w3.org/2000/svg"
+            x="0px"
+            y="0px"
+            viewBox="0 0 496.158 496.158"
+            style={{ enableBackground: "new 0 0 496.158 496.158" }}
+          >
+            <path
+              style={{ fill: "#25B7D3" }}
+              d="M496.158,248.085c0-137.022-111.069-248.082-248.075-248.082C111.07,0.003,0,111.063,0,248.085
+	c0,137.001,111.07,248.07,248.083,248.07C385.089,496.155,496.158,385.086,496.158,248.085z"
+            />
+            <path
+              style={{ fill: "#FFFFFF" }}
+              d="M138.216,173.592c0-13.915,4.467-28.015,13.403-42.297c8.933-14.282,21.973-26.11,39.111-35.486
+	c17.139-9.373,37.134-14.062,59.985-14.062c21.238,0,39.99,3.921,56.25,11.755c16.26,7.838,28.818,18.495,37.683,31.97
+	c8.861,13.479,13.293,28.125,13.293,43.945c0,12.452-2.527,23.367-7.581,32.739c-5.054,9.376-11.062,17.469-18.018,24.279
+	c-6.959,6.812-19.446,18.275-37.463,34.388c-4.981,4.542-8.975,8.535-11.975,11.976c-3.004,3.443-5.239,6.592-6.702,9.447
+	c-1.466,2.857-2.603,5.713-3.406,8.57c-0.807,2.855-2.015,7.875-3.625,15.051c-2.784,15.236-11.501,22.852-26.147,22.852
+	c-7.618,0-14.028-2.489-19.226-7.471c-5.201-4.979-7.8-12.377-7.8-22.192c0-12.305,1.902-22.962,5.713-31.97
+	c3.808-9.01,8.861-16.92,15.161-23.73c6.296-6.812,14.794-14.904,25.488-24.28c9.373-8.202,16.15-14.392,20.325-18.567
+	c4.175-4.175,7.69-8.823,10.547-13.953c2.856-5.126,4.285-10.691,4.285-16.699c0-11.718-4.36-21.605-13.074-29.663
+	c-8.717-8.054-19.961-12.085-33.728-12.085c-16.116,0-27.981,4.065-35.596,12.195c-7.618,8.13-14.062,20.105-19.336,35.925
+	c-4.981,16.555-14.43,24.829-28.345,24.829c-8.206,0-15.127-2.891-20.764-8.679C141.035,186.593,138.216,180.331,138.216,173.592z
+	 M245.442,414.412c-8.937,0-16.737-2.895-23.401-8.68c-6.667-5.784-9.998-13.877-9.998-24.279c0-9.229,3.22-16.991,9.668-23.291
+	c6.444-6.297,14.354-9.448,23.73-9.448c9.229,0,16.991,3.151,23.291,9.448c6.296,6.3,9.448,14.062,9.448,23.291
+	c0,10.255-3.296,18.312-9.888,24.17C261.7,411.481,254.084,414.412,245.442,414.412z"
+            />
+          </svg>
+        </a>
+        <a
+          href="https://github.com/rodolphe37/"
+          target="new"
+          className="buttons"
+          title="My Github"
+          data-toggle="tooltip"
+          data-placement="left"
+        >
+          <svg
+            height="38"
             aria-hidden="true"
             viewBox="0 0 16 16"
             version="1.1"
-            width="36"
+            width="38"
             data-view-component="true"
             className="octicon octicon-mark-github v-align-middle"
+            style={{ background: "white", borderRadius: "50%" }}
           >
             <path
               fillRule="evenodd"
@@ -35,10 +77,25 @@ const FloatingButton = () => {
           </svg>
         </a>
         <a
+          href="https://www.rodolphe-augusto.fr/"
+          target="new"
+          className="buttons"
+          title="My Portfolio"
+          data-toggle="tooltip"
+          data-placement="left"
+        >
+          <img
+            src={MyAvatar}
+            alt="avatar"
+            style={{ width: 46, marginTop: -10 }}
+          />
+        </a>
+        <a
+          style={{ marginTop: 10 }}
           href="https://www.linkedin.com/in/rodolphe-augusto-auteur-d%C3%A9veloppeur-fullstack-react-node-1a20b759/"
           target="new"
           className="buttons"
-          title="Linkedin"
+          title="My Linkedin"
           data-toggle="tooltip"
           data-placement="left"
         >
@@ -65,38 +122,6 @@ const FloatingButton = () => {
 		c7.538,0,13.656-6.118,13.656-13.656S103.127,72.83,95.589,72.83s-13.656,6.118-13.656,13.656S88.051,100.141,95.589,100.141z"
               />
             </g>
-          </svg>
-        </a>
-        <a
-          href="https://www.facebook.com/rodolphe.augusto.7"
-          target="new"
-          className="buttons"
-          title="Facebook"
-          data-toggle="tooltip"
-          data-placement="left"
-        >
-          <svg
-            height="36"
-            viewBox="0 0 512 512"
-            width="36"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="m512 256c0 141.386719-114.613281 256-256 256s-256-114.613281-256-256 114.613281-256 256-256 256 114.613281 256 256zm0 0"
-              fill="#4a7aff"
-            />
-            <path
-              d="m267.234375 511.738281c136.171875-5.878906 244.765625-118.121093 244.765625-255.738281 0-.996094-.027344-1.988281-.039062-2.984375l-177.699219-177.703125-190 198.59375 105.566406 105.566406-48.675781 66.183594zm0 0"
-              fill="#0053bf"
-            />
-            <path
-              d="m334.261719 75.3125v57.96875s-66.554688-9.660156-66.554688 33.277344v42.9375h60.113281l-7.511718 65.480468h-52.601563v170.679688h-66.554687v-170.679688l-56.894532-1.074218v-64.40625h55.820313v-49.378906s-3.683594-73.457032 68.703125-86.949219c30.058594-5.605469 65.480469 2.144531 65.480469 2.144531zm0 0"
-              fill="#fff"
-            />
-            <path
-              d="m334.261719 133.28125v-57.96875s-35.421875-7.75-65.480469-2.144531c-4.695312.875-9.0625 2.007812-13.136719 3.347656v369.140625h12.0625v-170.679688h52.597657l7.515624-65.480468h-60.113281s0 0 0-42.9375 66.554688-33.277344 66.554688-33.277344zm0 0"
-              fill="#dce1eb"
-            />
           </svg>
         </a>
         <a
