@@ -1,10 +1,10 @@
-import { useState } from "react";
 import { useRecoilState } from "recoil";
 import openDashAtom from "../../statesManager/atoms/openDashAtom";
 import dashIcon from "../assets/dashboards.svg";
 import "./dashboard.css";
 
 const ButtonDashboard = () => {
+  // eslint-disable-next-line no-unused-vars
   const [openDash, setOpenDash] = useRecoilState(openDashAtom);
 
   const handleOpenDash = () => {

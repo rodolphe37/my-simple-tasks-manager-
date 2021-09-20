@@ -42,7 +42,7 @@ const StyledContent = styled(Content)`
 `;
 
 function App() {
-  const [openDash, setOpenDash] = useRecoilState(openDashAtom);
+  const [openDash] = useRecoilState(openDashAtom);
   // eslint-disable-next-line no-unused-vars
   const [clickedConfig, setClickedConfig] = useRecoilState(clickedConfigAtom);
   // eslint-disable-next-line no-unused-vars

@@ -10,7 +10,62 @@ const Dashboard = () => {
         <h1>Dashboard</h1>
         <button onClick={() => setOpenDash(false)}>Close</button>
       </div>
-      <div>Content</div>
+      <div className="dashContent-container">
+        <div>Content</div>
+        <div className="tasks-dash">
+          <div className="todo-dash">
+            <span className="dashTask-title">Task In To Do</span>
+            <div className="list-dash">
+              <ul>
+                <li>Task 1</li>
+                <li>Task 1</li>
+                <li>Task 1</li>
+                <li>Task 1</li>
+                <li>Task 1</li>
+                <li>Task 1</li>
+                <li>Task 1</li>
+                <li>Task 1</li>
+                <li>Task 1</li>
+                <li>Task 1</li>
+              </ul>
+            </div>
+          </div>
+          <div className="inProgress-dash">
+            <span className="dashTask-title">Task In Progress</span>
+            <div className="list-dash">
+              <ul>
+                <li>Task 1</li>
+                <li>Task 1</li>
+                <li>Task 1</li>
+                <li>Task 1</li>
+                <li>Task 1</li>
+                <li>Task 1</li>
+                <li>Task 1</li>
+                <li>Task 1</li>
+                <li>Task 1</li>
+                <li>Task 1</li>
+              </ul>
+            </div>
+          </div>
+          <div className="done-dash">
+            <span className="dashTask-title">Task In Done</span>
+            <div className="list-dash">
+              <ul>
+                <li>Task 1</li>
+                <li>Task 1</li>
+                <li>Task 1</li>
+                <li>Task 1</li>
+                <li>Task 1</li>
+                <li>Task 1</li>
+                <li>Task 1</li>
+                <li>Task 1</li>
+                <li>Task 1</li>
+                <li>Task 1</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
