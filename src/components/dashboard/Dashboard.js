@@ -59,13 +59,7 @@ const Dashboard = () => {
     console.log("itemsByStatusAtom", itemsByStatus);
   }, [completCardsTimeArray, itemsByStatus]);
   return (
-    <div
-      className={
-        autoTrackTime
-          ? "dash-content scale-in-ver-bottom"
-          : "dash-content scale-in-ver-top"
-      }
-    >
+    <div className="dash-content scale-in-ver-bottom">
       <div className="header-dash">
         <div className="headerDash-logo">
           <img src={DashIcon} alt="dash" style={{ width: 55 }} />
