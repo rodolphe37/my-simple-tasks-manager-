@@ -230,8 +230,8 @@ button,
   transition: all 0.5s ease-in-out;
 }
 .tjm-button .priceIcon:hover {
-  width: 66px !important;
-  transform: translate(-12px, -12px);
+  width: 64px !important;
+  transform: translate(-10px, -10px);
   transition: all 0.5s ease-in-out;
 }
 .priceTextContainer {
@@ -255,6 +255,11 @@ button,
   right: 25px;
   top: 10px; */
 }
+
+/* .priceTextContainerEuro {
+  flex-direction: column-reverse;
+  display: flex;
+} */
 /* .priceContainer img:hover {
   width: 66px !important;
 
@@ -309,4 +314,9 @@ button,
   100% {
     transform: scale3d(1, 1, 1);
   }
+}
+
+.bump:hover {
+  width: 44px;
+  transition: width 0.7s ease-in-out;
 }

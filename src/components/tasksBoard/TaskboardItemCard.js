@@ -102,7 +102,7 @@ function TaskboardItemCard({
     }
     if (localStorage.getItem("finishedData") !== null)
       setFinishedDatas(JSON.parse(localStorage.getItem("finishedData")));
-    console.log("projectDone", projectDone);
+    // console.log("projectDone", projectDone);
   }, [
     setProjectDone,
     itemsByStatus,
@@ -308,7 +308,7 @@ function TaskboardItemCard({
     //   "compar id",
     //   cardIdCompleteTask.map((resu) => resu.cardId)
     // );
-    console.log("finishedDatas", finishedDatas);
+    // console.log("finishedDatas", finishedDatas);
     // if (totalTimeToSeconds !== null && status === "Done") {
     //   localStorage.setItem(
     //     "totalTimeInSeconds",

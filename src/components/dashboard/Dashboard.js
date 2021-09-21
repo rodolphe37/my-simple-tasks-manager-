@@ -9,9 +9,12 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import finishedDatasAtom from "../../statesManager/atoms/finishedDatasAtom";
 import projectDoneAtom from "../../statesManager/atoms/projectDoneAtom";
+import DollarIcon from "../assets/symbole-du-dollar.svg";
+import EuroIcon from "../assets/piece-en-euro.svg";
 
 const Dashboard = () => {
   const [itemsByStatus] = useRecoilState(itemsByStatusAtom);
+  const [changeDevise, setChangeDevise] = useState(false);
   // const [autoTrackTime] = useRecoilState(automaticTrackTimerAtom);
   const [totalTimeLocalStore] = useState(localStorage.getItem("time"));
   const [stockItemsByStatus] = useState(
@@ -36,6 +39,11 @@ const Dashboard = () => {
     });
   }
   let totalEuro = eurTjm * 0.85;
+  useEffect(() => {
+    if (!tjm) {
+      setEurTjm(0);
+    }
+  }, [tjm]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handlePrice = () => {
     MySwal.fire({
@@ -55,6 +63,10 @@ const Dashboard = () => {
       }
     });
   };
+
+  const handleChangeDevise = () => {
+    setChangeDevise((changeDevise) => !changeDevise);
+  };
   useEffect(() => {
     if (tjm) {
       localStorage.setItem("tjm", tjm);
@@ -65,7 +77,7 @@ const Dashboard = () => {
     if (projectDone && tjm === 0) {
       return handlePrice();
     }
-    // console.log(stockItemsByStatus);
+    console.log("changeDevise", changeDevise);
   }, [
     tjm,
     setEurTjm,
@@ -74,6 +86,7 @@ const Dashboard = () => {
     projectDone,
     handlePrice,
     stockItemsByStatus,
+    changeDevise,
   ]);
 
   const taskPerHour =
@@ -87,10 +100,10 @@ const Dashboard = () => {
     // if (tjm === 0) {
     //   localStorage.setItem("tjm", 0);
     // }
-    console.log(
-      "totalAllCArdsTimeSeconds",
-      totalAllCArdsTimeSeconds.filter((res, i) => res.totalTime !== 0)
-    );
+    // console.log(
+    //   "totalAllCArdsTimeSeconds",
+    //   totalAllCArdsTimeSeconds.filter((res, i) => res.totalTime !== 0)
+    // );
   }, [
     completCardsTimeArray,
     itemsByStatus,
@@ -157,9 +170,38 @@ const Dashboard = () => {
           />
 
           <span className="priceTextContainer">
-            <p>${tjm}</p>
-            <p>{tjm !== 0 ? totalEuro : 0}€</p>
+            <p>
+              {!changeDevise ? "€" : "$"}
+              {changeDevise ? tjm : totalEuro}
+            </p>
+            <p>
+              {changeDevise ? "€" : "$"}
+              {changeDevise ? totalEuro : !changeDevise ? tjm : 0}
+            </p>
           </span>
+          <button
+            onClick={handleChangeDevise}
+            style={{
+              width: 35,
+              marginLeft: 25,
+              background: "transparent",
+              border: "none",
+            }}
+          >
+            <img
+              className="bump"
+              title={
+                changeDevise
+                  ? "You are in Dollars, you can change the value to Euros"
+                  : "You are in Euros, you can change the value to Dollars"
+              }
+              data-toggle="tooltip"
+              data-placement="left"
+              src={changeDevise ? DollarIcon : EuroIcon}
+              alt=""
+              style={{ width: 35 }}
+            />
+          </button>
         </div>
         <div className="dashContainer-header">
           <div className="dashContainer-content-header">
