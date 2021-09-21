@@ -49,7 +49,7 @@ const Dashboard = () => {
       showLoaderOnConfirm: true,
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log(result);
+        // console.log(result);
         setTjm(result.value);
         Swal.fire("Saved!", "Your daily rate has been saved.", "success");
       }
@@ -65,7 +65,7 @@ const Dashboard = () => {
     if (projectDone && tjm === 0) {
       return handlePrice();
     }
-    console.log(stockItemsByStatus);
+    // console.log(stockItemsByStatus);
   }, [
     tjm,
     setEurTjm,
@@ -82,13 +82,22 @@ const Dashboard = () => {
     stockItemsByStatus["Done"].length;
 
   useEffect(() => {
-    console.log("completCardsTimeArray", completCardsTimeArray);
-    console.log("taskPerHour", taskPerHour);
+    // console.log("completCardsTimeArray", completCardsTimeArray);
+    // console.log("taskPerHour", taskPerHour);
     // if (tjm === 0) {
     //   localStorage.setItem("tjm", 0);
     // }
-    console.log("finishedDatas", finishedDatas);
-  }, [completCardsTimeArray, itemsByStatus, finishedDatas, taskPerHour]);
+    console.log(
+      "totalAllCArdsTimeSeconds",
+      totalAllCArdsTimeSeconds.filter((res, i) => res.totalTime !== 0)
+    );
+  }, [
+    completCardsTimeArray,
+    itemsByStatus,
+    finishedDatas,
+    taskPerHour,
+    totalAllCArdsTimeSeconds,
+  ]);
 
   return (
     <div className="dash-content scale-in-ver-bottom">
@@ -251,14 +260,16 @@ const Dashboard = () => {
             <span className="dashTask-title">Task that required more time</span>
             <div className="list-dash">
               {finishedDatas !== [] ? (
-                totalAllCArdsTimeSeconds.map((res, i) => (
-                  <ul key={i}>
-                    <li>
-                      <p>{res.cardId}</p>
-                      <p style={{ fontSize: 11 }}>{res.totalTime}</p>
-                    </li>
-                  </ul>
-                ))
+                totalAllCArdsTimeSeconds
+                  .filter((res) => res.totalTime !== 0)
+                  .map((res, i) => (
+                    <ul key={i}>
+                      <li>
+                        <p>{res.cardId}</p>
+                        <p style={{ fontSize: 11 }}>{res.totalTime}</p>
+                      </li>
+                    </ul>
+                  ))
               ) : (
                 <strong style={{ color: "darkred", fontWeight: "bold" }}>
                   No tasks in this section

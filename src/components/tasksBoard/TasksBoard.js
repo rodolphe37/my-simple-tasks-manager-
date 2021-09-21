@@ -68,13 +68,19 @@ function Taskboard() {
   const { JSalert } = CustomConfirm();
 
   useEffect(() => {
-    if (projectDone && itemsByStatus["In Progress"].length === 0) {
+    if (
+      projectDone &&
+      itemsByStatus["In Progress"].length === 0 &&
+      itemsByStatus["To Do"].length === 0
+    ) {
       MySwal.fire({
         position: "top-end",
         icon: "success",
         title: "Your project has been finished!",
+        text: "You can check the dashboard for information & statistics of your work done!",
+        footer: "Always Just for better organization",
         showConfirmButton: false,
-        timer: 1800,
+        timer: 2800,
       });
     }
     localStorage.setItem("DoneAlert", true);
@@ -82,7 +88,7 @@ function Taskboard() {
     if (!projectDone) {
       localStorage.removeItem("DoneAlert");
     }
-    console.log("Done", DoneAlert);
+    // console.log("Done", DoneAlert);
   }, [projectDone, MySwal, clickedOnDashButton, DoneAlert, itemsByStatus]);
 
   const handleDragEnd = ({ source, destination }) => {
