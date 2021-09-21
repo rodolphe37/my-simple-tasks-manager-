@@ -15,7 +15,7 @@ import backlog from "../assets/backlog.svg";
 
 const Dashboard = () => {
   const [itemsByStatus] = useRecoilState(itemsByStatusAtom);
-  const [changeDevise, setChangeDevise] = useState(false);
+  const [changeDevise, setChangeDevise] = useState(true);
   // const [autoTrackTime] = useRecoilState(automaticTrackTimerAtom);
   const [totalTimeLocalStore] = useState(localStorage.getItem("time"));
   const [stockItemsByStatus] = useState(
@@ -130,7 +130,7 @@ const Dashboard = () => {
             className="closeButtonDash"
             onClick={() => setOpenDash(false)}
           >
-            <strong>X</strong>
+            <strong className="rotate">X</strong>
           </button>
         </div>
       </div>
