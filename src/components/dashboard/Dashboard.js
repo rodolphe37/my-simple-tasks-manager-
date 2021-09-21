@@ -10,7 +10,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 const Dashboard = () => {
-  const [itemsByStatus, setItemsByStatus] = useRecoilState(itemsByStatusAtom);
+  const [itemsByStatus] = useRecoilState(itemsByStatusAtom);
   const [autoTrackTime] = useRecoilState(automaticTrackTimerAtom);
   const [totalTimeLocalStore] = useState(localStorage.getItem("time"));
   const [stockItemsByStatus] = useRecoilState(itemsByStatusAtom);

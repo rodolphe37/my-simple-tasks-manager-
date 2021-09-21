@@ -73,18 +73,31 @@ function TaskboardItemCard({
   const [projectDone, setProjectDone] = useRecoilState(projectDoneAtom);
 
   // USE UUIDV4 FOR GENERATE unique id
+
+  let tasksCount =
+    itemsByStatus["In Progress"].length === 0 &&
+    itemsByStatus["To Do"].length === 0 &&
+    itemsByStatus["Done"].length !== 0;
+
   useEffect(() => {
-    if (
-      itemsByStatus["In Progress"].length === 0 &&
-      itemsByStatus["To Do"].length === 0 &&
-      itemsByStatus["Done"].length !== 0
-    ) {
+    if (tasksCount) {
       setProjectDone(true);
+      localStorage.setItem(
+        "finishedData",
+        JSON.stringify(completCardsTimeArray)
+      );
     } else {
       setProjectDone(false);
+      localStorage.removeItem("finishedData");
     }
     console.log("projectDone", projectDone);
-  }, [setProjectDone, itemsByStatus, projectDone]);
+  }, [
+    setProjectDone,
+    itemsByStatus,
+    projectDone,
+    completCardsTimeArray,
+    tasksCount,
+  ]);
 
   useEffect(() => {
     // console.log("timestamp", item.timestamp);
@@ -125,10 +138,12 @@ function TaskboardItemCard({
         // }
 
         if (Number(item.id) !== cardId[0]) {
-          setCompletCardsTimeArray(completCardsTimeArray.concat(timeAllCards));
-          setCumuledTimeCards((cumuledTimeCards) =>
-            cumuledTimeCards.concat(timeAllCards)
+          setCompletCardsTimeArray((completCardsTimeArray) =>
+            completCardsTimeArray.concat(timeAllCards)
           );
+          // setCumuledTimeCards((cumuledTimeCards) =>
+          //   cumuledTimeCards.concat(timeAllCards)
+          // );
         }
         // console.log(re[0]);
         // if (totalTimeToSeconds !== null && cumuledTimeCards === null) {
@@ -207,7 +222,7 @@ function TaskboardItemCard({
     startWorkState,
     stopWorkState,
     completCardsTimeArray,
-    cumuledTimeCards,
+    totalTimeToSeconds,
   ]);
 
   useEffect(() => {
