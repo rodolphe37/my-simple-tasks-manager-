@@ -180,10 +180,12 @@ function TaskboardItemCard({
         if (!stopWorkState) {
           localStorage.setItem("stopTimeWork", stopWorkState);
         }
-        localStorage.setItem(
-          "totalTimeInSeconds",
-          JSON.stringify(totalTimeToSeconds)
-        );
+        if (itemsByStatus["Done"].length > 0) {
+          localStorage.setItem(
+            "totalTimeInSeconds",
+            JSON.stringify(totalTimeToSeconds)
+          );
+        }
 
         // return () => {
 
@@ -199,7 +201,7 @@ function TaskboardItemCard({
     }
 
     if (itemsByStatus["Done"].length === 0) {
-      // localStorage.removeItem("totalTimeInSeconds");
+      localStorage.removeItem("totalTimeInSeconds");
       localStorage.removeItem("stopTimeWork");
     }
 
@@ -226,6 +228,18 @@ function TaskboardItemCard({
   ]);
 
   useEffect(() => {
+    const TotalTimeStart = completCardsTimeArray
+      .filter((res) => res.start)
+      .map((result) => result.start !== "");
+
+    const TotalTimeStop = completCardsTimeArray
+      .filter((res) => res.stop)
+      .map((result) => result.stop !== "");
+
+    const cardIdCompleteTask = completCardsTimeArray
+      .filter((res) => res.cardId)
+      .map((result) => !result.cardId);
+
     const totalTimeAddition = () => {
       const numberKeeped = 8;
 
@@ -262,7 +276,7 @@ function TaskboardItemCard({
       //   })
       // );
 
-      if (startWorkState && stopWorkState) {
+      if (TotalTimeStart && TotalTimeStop) {
         setTotalTimeToSeconds((totalTimeToSeconds) =>
           totalTimeToSeconds.concat({
             cardId: item.id,
@@ -284,11 +298,13 @@ function TaskboardItemCard({
     if (startWorkState && stopWorkState) {
       totalTimeAddition();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [startWorkState, stopWorkState, setTotalTimeToSeconds, item.id]);
 
   // useEffect(() => {
-
-  // }, [cumuledTimeCards, totalTimeToSeconds]);
+  //   // console.log("TotalTime Start:", TotalTimeStart);
+  //   // console.log("TotalTime Stop:", TotalTimeStop);
+  // }, [TotalTimeStart, TotalTimeStop]);
 
   return (
     <StyledCard
