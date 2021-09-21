@@ -116,6 +116,7 @@ export default function TimeTracker({ itemsByStatus }) {
           "the Time Tracker is well reset.",
           "success"
         );
+        window.location.reload();
       }
     });
   };
@@ -151,86 +152,90 @@ export default function TimeTracker({ itemsByStatus }) {
   }, [secondsRemaining]);
   return (
     <div className="time-tracker">
-      <div className="trackTimeTitle">
-        <img
-          src={TimerImg}
-          alt=""
-          className={status === STATUS.STARTED ? "logo heartbeat" : "logo"}
-        />
-        <h1 className={status === STATUS.STARTED ? "redColor" : ""}>
-          {status === STATUS.STARTED ? "Track Time" : "Time Tracker"}
-        </h1>
-      </div>
-      <h2>Date - {n}</h2>
-      {!autoTrackTime && !projectDone ? (
-        <div className="button-group">
-          <button
-            disabled={status === STATUS.STARTED ? true : false}
-            className="small green button"
-            onClick={handleStart}
-            type="button"
-          >
-            Start
-          </button>
-          <button
-            disabled={status === STATUS.STOPPED ? true : false}
-            className="small red button"
-            onClick={handleStop}
-            type="button"
-          >
-            Stop
-          </button>
-          <button
-            disabled={status === STATUS.STARTED ? true : false}
-            className="small blue button"
-            onClick={handleReset}
-            type="button"
-          >
-            Reset
-          </button>
-          {/*<button onClick={handleclickConfig}>
+      {!projectDone ? (
+        <Fragment>
+          <div className="trackTimeTitle">
+            <img
+              src={TimerImg}
+              alt=""
+              className={status === STATUS.STARTED ? "logo heartbeat" : "logo"}
+            />
+            <h1 className={status === STATUS.STARTED ? "redColor" : ""}>
+              {status === STATUS.STARTED ? "Track Time" : "Time Tracker"}
+            </h1>
+          </div>
+          <h2>Date - {n}</h2>
+          {!autoTrackTime && !projectDone ? (
+            <div className="button-group">
+              <button
+                disabled={status === STATUS.STARTED ? true : false}
+                className="small green button"
+                onClick={handleStart}
+                type="button"
+              >
+                Start
+              </button>
+              <button
+                disabled={status === STATUS.STOPPED ? true : false}
+                className="small red button"
+                onClick={handleStop}
+                type="button"
+              >
+                Stop
+              </button>
+              <button
+                disabled={status === STATUS.STARTED ? true : false}
+                className="small blue button"
+                onClick={handleReset}
+                type="button"
+              >
+                Reset
+              </button>
+              {/*<button onClick={handleclickConfig}>
           <img style={{ width: 34 }} src={configIcon} alt="config" />
   </button>*/}
-          {status === STATUS.STOPPED ? <ModalConfigComponent /> : null}
-        </div>
-      ) : (
-        <Fragment>
-          <button
-            disabled={status === STATUS.STARTED ? true : false}
-            className="small blue button autoTime"
-            onClick={handleReset}
-            type="button"
-          >
-            Reset
-          </button>
-          {status === STATUS.STOPPED ? <ModalConfigComponent /> : null}
-        </Fragment>
-      )}
+              {status === STATUS.STOPPED ? <ModalConfigComponent /> : null}
+            </div>
+          ) : (
+            <Fragment>
+              <button
+                disabled={status === STATUS.STARTED ? true : false}
+                className="small blue button autoTime"
+                onClick={handleReset}
+                type="button"
+              >
+                Reset
+              </button>
+              {status === STATUS.STOPPED ? <ModalConfigComponent /> : null}
+            </Fragment>
+          )}
 
-      <div className="time-lapse">
-        {threeDigits(hoursToDisplay)}:{twoDigits(minutesToDisplay)}:
-        {twoDigits(secondsToDisplay)}
-      </div>
-      <span>{`${dayWork} day(s)`}</span>
-      <div className="indicator-section">
-        <span
-          className="status-indicator"
-          style={
-            status === STATUS.STARTED
-              ? {
-                  backgroundColor: "green",
-                  animation: "backgroundColor 0.6s ease-in-out",
-                }
-              : status === STATUS.STOPPED
-              ? {
-                  backgroundColor: "red",
-                  animation: "backgroundColor 0.6s ease-in-out",
-                }
-              : { backgroundColor: "orange" }
-          }
-        ></span>
-        <div>{status}</div>
-      </div>
+          <div className="time-lapse">
+            {threeDigits(hoursToDisplay)}:{twoDigits(minutesToDisplay)}:
+            {twoDigits(secondsToDisplay)}
+          </div>
+          <span>{`${dayWork} day(s)`}</span>
+          <div className="indicator-section">
+            <span
+              className="status-indicator"
+              style={
+                status === STATUS.STARTED
+                  ? {
+                      backgroundColor: "green",
+                      animation: "backgroundColor 0.6s ease-in-out",
+                    }
+                  : status === STATUS.STOPPED
+                  ? {
+                      backgroundColor: "red",
+                      animation: "backgroundColor 0.6s ease-in-out",
+                    }
+                  : { backgroundColor: "orange" }
+              }
+            ></span>
+            <div>{status}</div>
+          </div>
+        </Fragment>
+      ) : null}
     </div>
   );
 }

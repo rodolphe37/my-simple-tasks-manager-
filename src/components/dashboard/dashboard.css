@@ -320,3 +320,13 @@ button,
   width: 44px;
   transition: width 0.7s ease-in-out;
 }
+
+.footerDash {
+  background: rgb(85 4 135);
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}

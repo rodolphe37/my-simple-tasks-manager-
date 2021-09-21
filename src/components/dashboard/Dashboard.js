@@ -11,6 +11,7 @@ import finishedDatasAtom from "../../statesManager/atoms/finishedDatasAtom";
 import projectDoneAtom from "../../statesManager/atoms/projectDoneAtom";
 import DollarIcon from "../assets/symbole-du-dollar.svg";
 import EuroIcon from "../assets/piece-en-euro.svg";
+import backlog from "../assets/backlog.svg";
 
 const Dashboard = () => {
   const [itemsByStatus] = useRecoilState(itemsByStatusAtom);
@@ -391,6 +392,27 @@ const Dashboard = () => {
           </div>
         </div>
         <br />
+        <div className="footerDash">
+          <div className="copyrightContent">
+            <img
+              src={backlog}
+              alt="backlog"
+              width="34"
+              style={{ marginRight: 10 }}
+            />
+            Copyright - 2021 © Created by{" "}
+            <a
+              title="Visit my WebSite if you want!"
+              data-toggle="tooltip"
+              data-placement="top"
+              style={{ color: "rgb(121 204 82)" }}
+              href="https://www.rodolphe-augusto.fr"
+              target="new"
+            >
+              rodolphe Augusto
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   );
