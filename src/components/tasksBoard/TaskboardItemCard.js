@@ -16,6 +16,7 @@ import cumulTimeCardsTaskAtom from "../../statesManager/atoms/cumulTimeCardsTask
 import { v4 as uuidv4 } from "uuid";
 import completCardsTimeArrayAtom from "../../statesManager/atoms/completCardsTimeArrayAtom";
 import projectDoneAtom from "../../statesManager/atoms/projectDoneAtom";
+import totalListTimeInSecondAtom from "../../statesManager/atoms/totalListTimeInSecondAtom";
 
 const StyledCard = styled(Card)`
   margin: 0.5rem;
@@ -45,14 +46,15 @@ function TaskboardItemCard({
   let d = new Date();
   let n = d.toLocaleString();
   const [timeForCard, setTimeForCard] = useState("");
-  const [totalTimeToSeconds, setTotalTimeToSeconds] = useState(
-    JSON.parse(localStorage.getItem("totalTimeInSeconds")) ?? []
+  const [totalTimeToSeconds, setTotalTimeToSeconds] = useRecoilState(
+    totalListTimeInSecondAtom
   );
   const [cumuledTimeCards, setCumuledTimeCards] = useRecoilState(
     completCardsTimeArrayAtom
   );
-  const [completCardsTimeArray, setCompletCardsTimeArray] =
-    useRecoilState(timeAllCardsAtom);
+  const [completCardsTimeArray, setCompletCardsTimeArray] = useRecoilState(
+    completCardsTimeArrayAtom
+  );
   const [timeAllCards, setTimeAllCards] = useState([]);
 
   const [startWorkState, setStartWorkState] = useState(
@@ -71,18 +73,31 @@ function TaskboardItemCard({
   const [projectDone, setProjectDone] = useRecoilState(projectDoneAtom);
 
   // USE UUIDV4 FOR GENERATE unique id
+
+  let tasksCount =
+    itemsByStatus["In Progress"].length === 0 &&
+    itemsByStatus["To Do"].length === 0 &&
+    itemsByStatus["Done"].length !== 0;
+
   useEffect(() => {
-    if (
-      itemsByStatus["In Progress"].length === 0 &&
-      itemsByStatus["To Do"].length === 0 &&
-      itemsByStatus["Done"].length !== 0
-    ) {
+    if (tasksCount) {
       setProjectDone(true);
+      localStorage.setItem(
+        "finishedData",
+        JSON.stringify(completCardsTimeArray)
+      );
     } else {
       setProjectDone(false);
+      localStorage.removeItem("finishedData");
     }
     console.log("projectDone", projectDone);
-  }, [setProjectDone, itemsByStatus, projectDone]);
+  }, [
+    setProjectDone,
+    itemsByStatus,
+    projectDone,
+    completCardsTimeArray,
+    tasksCount,
+  ]);
 
   useEffect(() => {
     // console.log("timestamp", item.timestamp);
@@ -126,9 +141,9 @@ function TaskboardItemCard({
           setCompletCardsTimeArray((completCardsTimeArray) =>
             completCardsTimeArray.concat(timeAllCards)
           );
-          setCumuledTimeCards((cumuledTimeCards) =>
-            cumuledTimeCards.concat(timeAllCards)
-          );
+          // setCumuledTimeCards((cumuledTimeCards) =>
+          //   cumuledTimeCards.concat(timeAllCards)
+          // );
         }
         // console.log(re[0]);
         // if (totalTimeToSeconds !== null && cumuledTimeCards === null) {
@@ -165,14 +180,16 @@ function TaskboardItemCard({
         if (!stopWorkState) {
           localStorage.setItem("stopTimeWork", stopWorkState);
         }
-        localStorage.setItem(
-          "totalTimeInSeconds",
-          JSON.stringify(totalTimeToSeconds)
-        );
+        if (itemsByStatus["Done"].length > 0) {
+          localStorage.setItem(
+            "totalTimeInSeconds",
+            JSON.stringify(totalTimeToSeconds)
+          );
+        }
 
-        return () => {
-          localStorage.removeItem("timeAllCards");
-        };
+        // return () => {
+
+        // };
       }
     }
 
@@ -184,7 +201,7 @@ function TaskboardItemCard({
     }
 
     if (itemsByStatus["Done"].length === 0) {
-      // localStorage.removeItem("totalTimeInSeconds");
+      localStorage.removeItem("totalTimeInSeconds");
       localStorage.removeItem("stopTimeWork");
     }
 
@@ -196,6 +213,7 @@ function TaskboardItemCard({
       // localStorage.removeItem("startTimeWork");
       localStorage.removeItem("stopTimeWork");
       localStorage.removeItem("allCarsTime");
+      localStorage.removeItem("timeAllCards");
     };
 
     // console.log("itemsByStatus", itemsByStatus);
@@ -206,10 +224,22 @@ function TaskboardItemCard({
     startWorkState,
     stopWorkState,
     completCardsTimeArray,
-    cumuledTimeCards,
+    totalTimeToSeconds,
   ]);
 
   useEffect(() => {
+    const TotalTimeStart = completCardsTimeArray
+      .filter((res) => res.start)
+      .map((result) => result.start !== "");
+
+    const TotalTimeStop = completCardsTimeArray
+      .filter((res) => res.stop)
+      .map((result) => result.stop !== "");
+
+    const cardIdCompleteTask = completCardsTimeArray
+      .filter((res) => res.cardId)
+      .map((result) => !result.cardId);
+
     const totalTimeAddition = () => {
       const numberKeeped = 8;
 
@@ -246,7 +276,7 @@ function TaskboardItemCard({
       //   })
       // );
 
-      if (startWorkState && stopWorkState) {
+      if (TotalTimeStart && TotalTimeStop) {
         setTotalTimeToSeconds((totalTimeToSeconds) =>
           totalTimeToSeconds.concat({
             cardId: item.id,
@@ -268,11 +298,13 @@ function TaskboardItemCard({
     if (startWorkState && stopWorkState) {
       totalTimeAddition();
     }
-  }, [startWorkState, stopWorkState, setTotalTimeToSeconds, item]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [startWorkState, stopWorkState, setTotalTimeToSeconds, item.id]);
 
   // useEffect(() => {
-
-  // }, [cumuledTimeCards, totalTimeToSeconds]);
+  //   // console.log("TotalTime Start:", TotalTimeStart);
+  //   // console.log("TotalTime Stop:", TotalTimeStop);
+  // }, [TotalTimeStart, TotalTimeStop]);
 
   return (
     <StyledCard
@@ -416,9 +448,9 @@ function TaskboardItemCard({
         }
       >
         {status === "Done" ? (
-          <BaseTooltip overlay={item.stopWork}>
+          <BaseTooltip key={uuidv4()} overlay={item.stopWork}>
             {completCardsTimeArray.map((res) => (
-              <Form key={res.uuid} className="myForm">
+              <Form key={uuidv4()} className="myForm">
                 {item.id === res.cardId ? (
                   <div
                     style={{
@@ -429,7 +461,7 @@ function TaskboardItemCard({
                     }}
                   >
                     <Fragment>
-                      <Form.Item key={res.uuid}>
+                      <Form.Item key={uuidv4()}>
                         <p style={{ fontSize: 10 }}>{res.start}</p>
                       </Form.Item>
                       <Typography.Paragraph
@@ -444,7 +476,7 @@ function TaskboardItemCard({
                         >
                           {() => {
                             return (
-                              <Form.Item key={res.uuid}>
+                              <Form.Item key={uuidv4()}>
                                 <p style={{ fontSize: 10 }}>{res.stop}</p>
                               </Form.Item>
                             );

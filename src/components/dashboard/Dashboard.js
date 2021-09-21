@@ -10,6 +10,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 const Dashboard = () => {
+  const [itemsByStatus] = useRecoilState(itemsByStatusAtom);
   const [autoTrackTime] = useRecoilState(automaticTrackTimerAtom);
   const [totalTimeLocalStore] = useState(localStorage.getItem("time"));
   const [stockItemsByStatus] = useRecoilState(itemsByStatusAtom);
@@ -55,7 +56,8 @@ const Dashboard = () => {
 
   useEffect(() => {
     console.log("completCardsTimeArray", completCardsTimeArray);
-  }, [completCardsTimeArray]);
+    console.log("itemsByStatusAtom", itemsByStatus);
+  }, [completCardsTimeArray, itemsByStatus]);
   return (
     <div
       className={
@@ -99,7 +101,10 @@ const Dashboard = () => {
             <p style={{ fontWeight: "bold", fontSize: 25 }}>
               {cutDecimals(totalTimeLocalStore / 3600, 2)}{" "}
               <sub style={{ fontSize: 11, fontStyle: "italic" }}>hours</sub>
-              <p>${cutDecimals(tjm / 8, 2)} per hour</p>
+              <hr />
+              <p>
+                ${cutDecimals(tjm / 8, 2)} <sub>per hour</sub>
+              </p>
             </p>
           </div>
           <div className="dashContainer-content-header">
@@ -107,8 +112,10 @@ const Dashboard = () => {
             <p style={{ fontWeight: "bold", fontSize: 25 }}>
               {cutDecimals(totalTimeLocalStore / 28800, 2)}{" "}
               <sub style={{ fontSize: 11, fontStyle: "italic" }}>days</sub>
+              <hr />
               <p>
-                ${cutDecimals((tjm * totalTimeLocalStore) / 28800, 2)} total
+                ${cutDecimals((tjm * totalTimeLocalStore) / 28800, 2)}{" "}
+                <sub>total</sub>
               </p>
             </p>
           </div>
