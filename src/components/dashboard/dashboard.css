@@ -330,3 +330,11 @@ button,
   color: white;
   font-weight: bold;
 }
+.linkName {
+  font-size: 14px;
+  transition: font-size 0.8s ease-in-out;
+}
+.linkName:hover {
+  font-size: 16px;
+  transition: font-size 0.8s ease-in-out;
+}

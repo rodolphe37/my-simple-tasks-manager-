@@ -71,7 +71,8 @@ function Taskboard() {
     if (
       projectDone &&
       itemsByStatus["In Progress"].length === 0 &&
-      itemsByStatus["To Do"].length === 0
+      itemsByStatus["To Do"].length === 0 &&
+      localStorage.getItem("DoneAlert") === null
     ) {
       MySwal.fire({
         position: "top-end",
@@ -80,10 +81,10 @@ function Taskboard() {
         text: "You can check the dashboard for information & statistics of your work done!",
         footer: "Always Just for better organization",
         showConfirmButton: false,
-        timer: 2800,
+        timer: 5000,
       });
+      localStorage.setItem("DoneAlert", true);
     }
-    localStorage.setItem("DoneAlert", true);
 
     if (!projectDone) {
       localStorage.removeItem("DoneAlert");
@@ -300,10 +301,3 @@ function Taskboard() {
 }
 
 export default Taskboard;
-
-// ({
-//   icon: DashIcon,
-//   title: "You can now visit your Dashboard!",
-//   text: "You will find all stats of you work",
-//   footer: "Always Just for better organization",
-// });

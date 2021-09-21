@@ -39,7 +39,8 @@ const Dashboard = () => {
       maximumFractionDigits: decimals,
     });
   }
-  let totalEuro = eurTjm * 0.85;
+  const changeEurDoll = 0.85;
+  let totalEuro = eurTjm * changeEurDoll;
   useEffect(() => {
     if (!tjm) {
       setEurTjm(0);
@@ -212,7 +213,11 @@ const Dashboard = () => {
               <sub style={{ fontSize: 11, fontStyle: "italic" }}>hours</sub>
               <hr />
               <p>
-                ${cutDecimals(tjm / 8, 2)} <sub>per hour</sub>
+                {!changeDevise ? "€" : "$"}
+                {changeDevise
+                  ? cutDecimals(tjm / 8, 2)
+                  : cutDecimals((tjm / 8) * changeEurDoll, 2)}{" "}
+                <sub>per hour</sub>
               </p>
             </p>
           </div>
@@ -223,7 +228,13 @@ const Dashboard = () => {
               <sub style={{ fontSize: 11, fontStyle: "italic" }}>days</sub>
               <hr />
               <p>
-                ${cutDecimals((tjm * totalTimeLocalStore) / 28800, 2)}{" "}
+                {!changeDevise ? "€" : "$"}
+                {changeDevise
+                  ? cutDecimals((tjm * totalTimeLocalStore) / 28800, 2)
+                  : cutDecimals(
+                      ((tjm * totalTimeLocalStore) / 28800) * changeEurDoll,
+                      2
+                    )}{" "}
                 <sub>total</sub>
               </p>
             </p>
@@ -285,7 +296,7 @@ const Dashboard = () => {
                         <strong style={{ fontSize: 11 }}>
                           Name: {res.title}
                         </strong>
-                        <p>{res.id}</p>
+                        <p>id :{res.id}</p>
                         <p style={{ fontSize: 12 }}>desc: {res.description}</p>
                         <p style={{ fontSize: 12 }}>Created: {res.timestamp}</p>
                       </li>
@@ -384,9 +395,9 @@ const Dashboard = () => {
                 <div key={res.cardId}>
                   <p>{res.cardTitle}</p>
                   <hr />
-                  <p>{res.start}</p>
+                  <p>Start: {res.start}</p>
+                  <p>Stop: {res.stop}</p>
                   <hr />
-                  <p>{res.stop}</p>
                 </div>
               ))}
           </div>
@@ -400,8 +411,9 @@ const Dashboard = () => {
               width="34"
               style={{ marginRight: 10 }}
             />
-            Copyright - 2021 © Created by{" "}
+            Copyright - 2021 © Created with React by{" "}
             <a
+              className="linkName"
               title="Visit my WebSite if you want!"
               data-toggle="tooltip"
               data-placement="top"
