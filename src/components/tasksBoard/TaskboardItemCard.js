@@ -470,18 +470,19 @@ function TaskboardItemCard({
       >
         {status === "Done" && !projectDone ? (
           <BaseTooltip key={uuidv4()} overlay={item.stopWork}>
-            {completCardsTimeArray.map((res) => (
-              <Form key={uuidv4()} className="myForm">
-                {item.id === res.cardId ? (
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "flex-start",
-                      justifyContent: "space-around",
-                      height: "20px",
-                    }}
-                  >
-                    {res.start && res.stop && (
+            {completCardsTimeArray
+              .filter((resu) => resu.start !== "")
+              .map((res) => (
+                <Form key={uuidv4()} className="myForm">
+                  {item.id === res.cardId ? (
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "flex-start",
+                        justifyContent: "space-around",
+                        height: "20px",
+                      }}
+                    >
                       <Fragment>
                         <Form.Item key={uuidv4()}>
                           <p style={{ fontSize: 10 }}>{res.start}</p>
@@ -506,11 +507,10 @@ function TaskboardItemCard({
                           </Form.Item>
                         </Typography.Paragraph>
                       </Fragment>
-                    )}
-                  </div>
-                ) : null}
-              </Form>
-            ))}
+                    </div>
+                  ) : null}
+                </Form>
+              ))}
             <div
               style={{
                 display: "flex",
@@ -524,45 +524,47 @@ function TaskboardItemCard({
           </BaseTooltip>
         ) : projectDone ? (
           <BaseTooltip key={uuidv4()} overlay={item.stopWork}>
-            {finishedDatas.map((res) => (
-              <Form key={uuidv4()} className="myForm">
-                {item.id === res.cardId ? (
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "flex-start",
-                      justifyContent: "space-around",
-                      height: "20px",
-                    }}
-                  >
-                    <Fragment>
-                      <Form.Item key={uuidv4()}>
-                        <p style={{ fontSize: 10 }}>{res.start}</p>
-                      </Form.Item>
-                      <Typography.Paragraph
-                        type="secondary"
-                        ellipsis={{ rows: 2 }}
-                      >
-                        <Form.Item
-                          shouldUpdate={(prevValuesStop, curValuesStop) =>
-                            prevValuesStop.additional !==
-                            curValuesStop.additional
-                          }
-                        >
-                          {() => {
-                            return (
-                              <Form.Item key={uuidv4()}>
-                                <p style={{ fontSize: 10 }}>{res.stop}</p>
-                              </Form.Item>
-                            );
-                          }}
+            {finishedDatas
+              .filter((resu) => resu.start !== "")
+              .map((res) => (
+                <Form key={uuidv4()} className="myForm">
+                  {item.id === res.cardId ? (
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "flex-start",
+                        justifyContent: "space-around",
+                        height: "20px",
+                      }}
+                    >
+                      <Fragment>
+                        <Form.Item key={uuidv4()}>
+                          <p style={{ fontSize: 10 }}>{res.start}</p>
                         </Form.Item>
-                      </Typography.Paragraph>
-                    </Fragment>
-                  </div>
-                ) : null}
-              </Form>
-            ))}
+                        <Typography.Paragraph
+                          type="secondary"
+                          ellipsis={{ rows: 2 }}
+                        >
+                          <Form.Item
+                            shouldUpdate={(prevValuesStop, curValuesStop) =>
+                              prevValuesStop.additional !==
+                              curValuesStop.additional
+                            }
+                          >
+                            {() => {
+                              return (
+                                <Form.Item key={uuidv4()}>
+                                  <p style={{ fontSize: 10 }}>{res.stop}</p>
+                                </Form.Item>
+                              );
+                            }}
+                          </Form.Item>
+                        </Typography.Paragraph>
+                      </Fragment>
+                    </div>
+                  ) : null}
+                </Form>
+              ))}
             <div
               style={{
                 display: "flex",
