@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import automaticTrackTimerAtom from "../../statesManager/atoms/automaticTrackTimerAtom";
+// import automaticTrackTimerAtom from "../../statesManager/atoms/automaticTrackTimerAtom";
 import completCardsTimeArrayAtom from "../../statesManager/atoms/completCardsTimeArrayAtom";
 import itemsByStatusAtom from "../../statesManager/atoms/itemsByStatusAtom";
 import openDashAtom from "../../statesManager/atoms/openDashAtom";
@@ -11,7 +11,7 @@ import withReactContent from "sweetalert2-react-content";
 
 const Dashboard = () => {
   const [itemsByStatus] = useRecoilState(itemsByStatusAtom);
-  const [autoTrackTime] = useRecoilState(automaticTrackTimerAtom);
+  // const [autoTrackTime] = useRecoilState(automaticTrackTimerAtom);
   const [totalTimeLocalStore] = useState(localStorage.getItem("time"));
   const [stockItemsByStatus] = useRecoilState(itemsByStatusAtom);
   const [completCardsTimeArray] = useRecoilState(completCardsTimeArrayAtom);

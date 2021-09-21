@@ -236,9 +236,7 @@ function TaskboardItemCard({
       .filter((res) => res.stop)
       .map((result) => result.stop !== "");
 
-    const cardIdCompleteTask = completCardsTimeArray
-      .filter((res) => res.cardId)
-      .map((result) => !result.cardId);
+    const cardIdCompleteTask = totalTimeToSeconds.filter((res) => res.cardId);
 
     const totalTimeAddition = () => {
       const numberKeeped = 8;
@@ -252,7 +250,7 @@ function TaskboardItemCard({
         stopTask.length - numberKeeped
       );
       // console.log("startTask", hoursToMinStartTask);
-      // console.log("stopTask", hoursToMinStopTask);
+      // console.log("cardIdCompleteTask", cardIdCompleteTask);
 
       function hmsToSecondsOnly(str) {
         let p = str.split(":"),
@@ -276,8 +274,13 @@ function TaskboardItemCard({
       //   })
       // );
 
-      if (TotalTimeStart && TotalTimeStop) {
-        setTotalTimeToSeconds((totalTimeToSeconds) =>
+      if (
+        TotalTimeStart &&
+        TotalTimeStop &&
+        status === "Done" &&
+        item.id !== cardId
+      ) {
+        setTotalTimeToSeconds(
           totalTimeToSeconds.concat({
             cardId: item.id,
             totalTime: stopTaskResult - startTaskResult,
@@ -286,7 +289,10 @@ function TaskboardItemCard({
         );
       }
     };
-    // console.log("compar id", item.id === timeAllCards.id);
+    console.log(
+      "compar id",
+      cardIdCompleteTask.map((resu) => resu.cardId)
+    );
 
     // if (totalTimeToSeconds !== null && status === "Done") {
     //   localStorage.setItem(
