@@ -120,6 +120,7 @@
   box-shadow: 0 0 4px gray;
   margin-top: 15px;
   border-radius: 7px;
+  width: 218px;
 }
 .headerDash-logo h1 {
   color: white;
@@ -207,9 +208,11 @@
 .closeButtonDash strong:hover {
   width: 72px;
 }
-button {
+button,
+.eraseTjmButton {
   cursor: pointer;
 }
+
 .tjm-button {
   width: 57px;
   height: 57px;
@@ -219,8 +222,57 @@ button {
   padding: 7px;
   transition: all 0.5s ease-in-out;
 }
-.tjm-button img:hover {
+.tjm-button .priceIcon:hover {
   width: 66px !important;
   transform: translate(-12px, -12px);
   transition: all 0.5s ease-in-out;
+}
+.priceTextContainer {
+  border: 1px dotted black;
+  padding-left: 8px;
+  padding-right: 8px;
+  margin-left: 8px;
+}
+.priceTextContainer > p {
+  margin-bottom: 0;
+}
+.priceContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 55px;
+  margin-top: 20px;
+  margin-left: 15px;
+  transition: all 0.5s ease-in-out;
+  /* position: relative;
+  right: 25px;
+  top: 10px; */
+}
+/* .priceContainer img:hover {
+  width: 66px !important;
+
+  transition: all 0.5s ease-in-out;
+} */
+/* .priceContainer:hover .priceTextContainer {
+  display: none;
+} */
+.tjmButtonActif {
+  background: transparent !important;
+  border: none !important;
+}
+
+.priceIcon {
+  /* transition: all 0.5s ease-in-out;
+  border: 1px solid black; */
+  padding: 3px;
+  border-radius: 8px;
+  border: 1px solid darkred;
+}
+.sepia {
+  filter: sepia(1);
+  transition: all 0.5s ease-in-out;
+  border: 1px solid blue;
+}
+.none {
+  display: none;
 }

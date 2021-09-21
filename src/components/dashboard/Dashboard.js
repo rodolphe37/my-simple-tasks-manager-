@@ -1,20 +1,30 @@
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-// import automaticTrackTimerAtom from "../../statesManager/atoms/automaticTrackTimerAtom";
-import completCardsTimeArrayAtom from "../../statesManager/atoms/completCardsTimeArrayAtom";
+import supp from "../assets/supp.svg";
 import itemsByStatusAtom from "../../statesManager/atoms/itemsByStatusAtom";
 import openDashAtom from "../../statesManager/atoms/openDashAtom";
 import PriceIcon from "../assets/price.svg";
 import DashIcon from "../assets/increase.svg";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import finishedDatasAtom from "../../statesManager/atoms/finishedDatasAtom";
+import projectDoneAtom from "../../statesManager/atoms/projectDoneAtom";
 
 const Dashboard = () => {
   const [itemsByStatus] = useRecoilState(itemsByStatusAtom);
   // const [autoTrackTime] = useRecoilState(automaticTrackTimerAtom);
   const [totalTimeLocalStore] = useState(localStorage.getItem("time"));
-  const [stockItemsByStatus] = useRecoilState(itemsByStatusAtom);
-  const [completCardsTimeArray] = useRecoilState(completCardsTimeArrayAtom);
+  const [stockItemsByStatus] = useState(
+    JSON.parse(localStorage.getItem("itemsByStatus"))
+  );
+  const [completCardsTimeArray] = useState(
+    JSON.parse(localStorage.getItem("finishedData"))
+  );
+  const [totalAllCArdsTimeSeconds] = useState(
+    JSON.parse(localStorage.getItem("totalTimeInSeconds"))
+  );
+  const [finishedDatas] = useRecoilState(finishedDatasAtom);
+  const [projectDone] = useRecoilState(projectDoneAtom);
   // eslint-disable-next-line no-unused-vars
   const [openDash, setOpenDash] = useRecoilState(openDashAtom);
   const [tjm, setTjm] = useState(localStorage.getItem("tjm") ?? 0);
@@ -31,9 +41,29 @@ const Dashboard = () => {
     if (tjm) {
       localStorage.setItem("tjm", tjm);
       setEurTjm(tjm);
+    } else if (tjm === 0) {
+      localStorage.removeItem("tjm");
     }
-    console.log(eurTjm);
-  }, [tjm, setEurTjm, eurTjm]);
+    if (projectDone && tjm === 0) {
+      return MySwal.fire({
+        title: "Enter your Daily Rate in dollars",
+        input: "number",
+        inputAttributes: {
+          autocapitalize: "off",
+        },
+        showCancelButton: true,
+        confirmButtonText: "Look up",
+        showLoaderOnConfirm: true,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          console.log(result);
+          setTjm(result.value);
+          Swal.fire("Saved!", "Your daily rate has been saved.", "success");
+        }
+      });
+    }
+    console.log(stockItemsByStatus);
+  }, [tjm, setEurTjm, eurTjm, MySwal, projectDone, stockItemsByStatus]);
 
   const handlePrice = () => {
     MySwal.fire({
@@ -54,10 +84,20 @@ const Dashboard = () => {
     });
   };
 
+  const taskPerHour =
+    stockItemsByStatus["To Do"].length +
+    stockItemsByStatus["In Progress"].length +
+    stockItemsByStatus["Done"].length;
+
   useEffect(() => {
     console.log("completCardsTimeArray", completCardsTimeArray);
-    console.log("itemsByStatusAtom", itemsByStatus);
-  }, [completCardsTimeArray, itemsByStatus]);
+    console.log("taskPerHour", taskPerHour);
+    // if (tjm === 0) {
+    //   localStorage.setItem("tjm", 0);
+    // }
+    console.log("finishedDatas", finishedDatas);
+  }, [completCardsTimeArray, itemsByStatus, finishedDatas, taskPerHour]);
+
   return (
     <div className="dash-content scale-in-ver-bottom">
       <div className="header-dash">
@@ -68,6 +108,9 @@ const Dashboard = () => {
 
         <div className="closeButton-container">
           <button
+            title="Close the Dashboard!"
+            data-toggle="tooltip"
+            data-placement="left"
             className="closeButtonDash"
             onClick={() => setOpenDash(false)}
           >
@@ -77,17 +120,45 @@ const Dashboard = () => {
       </div>
       <div style={{ position: "relative" }} className="dashContent-container">
         <div onClick={handlePrice} className="tjm-button">
-          <img
-            src={PriceIcon}
-            alt="price"
-            style={{
-              width: 44,
+          <button
+            className="tjmButtonActif"
+            disabled={tjm !== 0 ? true : false}
+          >
+            <img
+              title={
+                tjm === 0
+                  ? "Your Daily rate here!"
+                  : "Erase your Daily rate before enter an other"
+              }
+              data-toggle="tooltip"
+              data-placement="left"
+              className={tjm === 0 ? "priceIcon" : "priceIcon sepia"}
+              src={PriceIcon}
+              alt="price"
+              style={{
+                width: 44,
 
-              cursor: "pointer",
-            }}
+                cursor: "pointer",
+              }}
+            />
+          </button>
+        </div>
+        <div className="priceContainer">
+          <img
+            onClick={() => setTjm(0)}
+            className={tjm !== 0 ? "eraseTjmButton" : "none"}
+            title="Erase your Daily rate here!"
+            data-toggle="tooltip"
+            data-placement="left"
+            src={supp}
+            alt="suppr"
+            style={{ width: 16 }}
           />
-          <p>${tjm}</p>
-          <p>{totalEuro}€</p>
+
+          <span className="priceTextContainer">
+            <p>${tjm}</p>
+            <p>{tjm !== 0 ? totalEuro : 0}€</p>
+          </span>
         </div>
         <div className="dashContainer-header">
           <div className="dashContainer-content-header">
@@ -115,12 +186,27 @@ const Dashboard = () => {
           </div>
           <div className="dashContainer-content-header">
             <strong> Number Tasks:</strong>{" "}
-            <p style={{ fontWeight: "bold", fontSize: 25 }}>
-              {stockItemsByStatus["To Do"].length +
-                stockItemsByStatus["In Progress"].length +
-                stockItemsByStatus["Done"].length}{" "}
-              <sub style={{ fontSize: 11, fontStyle: "italic" }}>tasks</sub>
-            </p>
+            {stockItemsByStatus && (
+              <p style={{ fontWeight: "bold", fontSize: 25 }}>
+                {stockItemsByStatus["To Do"].length +
+                  stockItemsByStatus["In Progress"].length +
+                  stockItemsByStatus["Done"].length}{" "}
+                <sub style={{ fontSize: 11, fontStyle: "italic" }}>tasks</sub>
+                <hr />
+                <span
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <p>
+                    {cutDecimals(totalTimeLocalStore / 3600 / taskPerHour, 2)}
+                  </p>
+                  <sub style={{ fontSize: 11 }}>hour/task</sub>
+                </span>
+              </p>
+            )}
           </div>
         </div>
         <div className="tasks-dash graphs">
@@ -146,34 +232,38 @@ const Dashboard = () => {
         <div className="tasks-dash cardsRapport">
           <div className="done-dash">
             <span className="dashTask-title">Tasks Done</span>
-            <div className="list-dash">
-              {stockItemsByStatus["Done"].length > 0 ? (
-                stockItemsByStatus["Done"].map((res, i) => (
-                  <ul key={res.id}>
-                    <li>
-                      <strong style={{ fontSize: 11 }}>
-                        Name: {res.title}
-                      </strong>
-                      <p style={{ fontSize: 12 }}>desc: {res.description}</p>
-                      <p style={{ fontSize: 12 }}>Created: {res.timestamp}</p>
-                    </li>
-                  </ul>
-                ))
-              ) : (
-                <strong style={{ color: "darkred", fontWeight: "bold" }}>
-                  No tasks in this section
-                </strong>
-              )}
-            </div>
+            {stockItemsByStatus && (
+              <div className="list-dash">
+                {stockItemsByStatus["Done"].length > 0 ? (
+                  stockItemsByStatus["Done"].map((res, i) => (
+                    <ul key={res.id}>
+                      <li>
+                        <strong style={{ fontSize: 11 }}>
+                          Name: {res.title}
+                        </strong>
+                        <p>{res.id}</p>
+                        <p style={{ fontSize: 12 }}>desc: {res.description}</p>
+                        <p style={{ fontSize: 12 }}>Created: {res.timestamp}</p>
+                      </li>
+                    </ul>
+                  ))
+                ) : (
+                  <strong style={{ color: "darkred", fontWeight: "bold" }}>
+                    No tasks in this section
+                  </strong>
+                )}
+              </div>
+            )}
           </div>
           <div className="todo-dash">
             <span className="dashTask-title">Task that required more time</span>
             <div className="list-dash">
-              {stockItemsByStatus["To Do"].length > 0 ? (
-                stockItemsByStatus["To Do"].map((res, i) => (
+              {finishedDatas !== [] ? (
+                totalAllCArdsTimeSeconds.map((res, i) => (
                   <ul key={i}>
                     <li>
-                      <p style={{ fontSize: 11 }}>{res.title}</p>
+                      <p>{res.cardId}</p>
+                      <p style={{ fontSize: 11 }}>{res.totalTime}</p>
                     </li>
                   </ul>
                 ))
