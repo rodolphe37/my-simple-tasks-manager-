@@ -293,3 +293,11 @@ button.erase-urername-button > .infoEraser,
 .slideBottom {
   overflow: hidden;
 }
+.main-button {
+  filter: opacity(0.5);
+  transition: filter 0.6s ease-in-out;
+}
+.main-button:hover {
+  filter: opacity(1);
+  transition: filter 0.6s ease-in-out;
+}
