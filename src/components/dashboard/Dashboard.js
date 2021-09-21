@@ -36,35 +36,7 @@ const Dashboard = () => {
     });
   }
   let totalEuro = eurTjm * 0.85;
-
-  useEffect(() => {
-    if (tjm) {
-      localStorage.setItem("tjm", tjm);
-      setEurTjm(tjm);
-    } else if (tjm === 0) {
-      localStorage.removeItem("tjm");
-    }
-    if (projectDone && tjm === 0) {
-      return MySwal.fire({
-        title: "Enter your Daily Rate in dollars",
-        input: "number",
-        inputAttributes: {
-          autocapitalize: "off",
-        },
-        showCancelButton: true,
-        confirmButtonText: "Look up",
-        showLoaderOnConfirm: true,
-      }).then((result) => {
-        if (result.isConfirmed) {
-          console.log(result);
-          setTjm(result.value);
-          Swal.fire("Saved!", "Your daily rate has been saved.", "success");
-        }
-      });
-    }
-    console.log(stockItemsByStatus);
-  }, [tjm, setEurTjm, eurTjm, MySwal, projectDone, stockItemsByStatus]);
-
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handlePrice = () => {
     MySwal.fire({
       title: "Enter your Daily Rate in dollars",
@@ -83,6 +55,26 @@ const Dashboard = () => {
       }
     });
   };
+  useEffect(() => {
+    if (tjm) {
+      localStorage.setItem("tjm", tjm);
+      setEurTjm(tjm);
+    } else if (tjm === 0) {
+      localStorage.removeItem("tjm");
+    }
+    if (projectDone && tjm === 0) {
+      return handlePrice();
+    }
+    console.log(stockItemsByStatus);
+  }, [
+    tjm,
+    setEurTjm,
+    eurTjm,
+    MySwal,
+    projectDone,
+    handlePrice,
+    stockItemsByStatus,
+  ]);
 
   const taskPerHour =
     stockItemsByStatus["To Do"].length +

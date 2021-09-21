@@ -11,6 +11,7 @@ import ModalConfigComponent from "../modalConfig/ModalConfigComponent";
 import clickedAddToDoAtom from "../../statesManager/atoms/clickedAddToDoAtom";
 import { Fragment } from "react";
 import itemsByStautsAtom from "../../statesManager/atoms/itemsByStatusAtom";
+import projectDoneAtom from "../../statesManager/atoms/projectDoneAtom";
 
 const STATUS = {
   STARTED: "Started",
@@ -20,6 +21,7 @@ const STATUS = {
 // const INITIAL_COUNT = JSON.parse(localStorage.getItem("time")) ?? 0;
 
 export default function TimeTracker({ itemsByStatus }) {
+  const [projectDone] = useRecoilState(projectDoneAtom);
   const MySwal = withReactContent(Swal);
   const { n } = useDateTime();
   const [secondsRemaining, setSecondsRemaining] = useState(
@@ -44,11 +46,14 @@ export default function TimeTracker({ itemsByStatus }) {
     useRecoilState(itemsByStautsAtom);
 
   useEffect(() => {
+    if (projectDone) {
+      setStatus(STATUS.STOPPED);
+    }
     // console.log("itemsByStatus", itemsByStatus);
     if (itemsByStatus) {
       setStockItemsByStatus(itemsByStatus);
     }
-  }, [setStockItemsByStatus, itemsByStatus]);
+  }, [setStockItemsByStatus, itemsByStatus, projectDone]);
   const handleStart = () => {
     setStatus(STATUS.STARTED);
     localStorage.setItem("status", "Started");
@@ -157,7 +162,7 @@ export default function TimeTracker({ itemsByStatus }) {
         </h1>
       </div>
       <h2>Date - {n}</h2>
-      {!autoTrackTime ? (
+      {!autoTrackTime && !projectDone ? (
         <div className="button-group">
           <button
             disabled={status === STATUS.STARTED ? true : false}

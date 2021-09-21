@@ -150,7 +150,11 @@ function TaskboardItemCard({
         //   setCumuledTimeCards(timeAllCards);
         // }
 
-        if (Number(item.id) !== cardId[0] && TotalTimeStop !== "") {
+        if (
+          Number(item.id) !== cardId[0] &&
+          TotalTimeStart !== "" &&
+          TotalTimeStop !== ""
+        ) {
           setCompletCardsTimeArray((completCardsTimeArray) =>
             completCardsTimeArray.concat(timeAllCards)
           );
@@ -212,10 +216,14 @@ function TaskboardItemCard({
       }, 1000);
       localStorage.removeItem("timeAllCards");
     }
+    if (itemsByStatus["In Progress"].length !== 0) {
+      localStorage.removeItem("clickedOnDashButton");
+    }
 
     if (itemsByStatus["Done"].length === 0) {
       localStorage.removeItem("totalTimeInSeconds");
       localStorage.removeItem("stopTimeWork");
+      localStorage.removeItem("clickedOnDashButton");
     }
 
     if (JSON.parse(localStorage.getItem("timeAllCards")) !== null) {
@@ -473,30 +481,32 @@ function TaskboardItemCard({
                       height: "20px",
                     }}
                   >
-                    <Fragment>
-                      <Form.Item key={uuidv4()}>
-                        <p style={{ fontSize: 10 }}>{res.start}</p>
-                      </Form.Item>
-                      <Typography.Paragraph
-                        type="secondary"
-                        ellipsis={{ rows: 2 }}
-                      >
-                        <Form.Item
-                          shouldUpdate={(prevValuesStop, curValuesStop) =>
-                            prevValuesStop.additional !==
-                            curValuesStop.additional
-                          }
-                        >
-                          {() => {
-                            return (
-                              <Form.Item key={uuidv4()}>
-                                <p style={{ fontSize: 10 }}>{res.stop}</p>
-                              </Form.Item>
-                            );
-                          }}
+                    {res.start && res.stop && (
+                      <Fragment>
+                        <Form.Item key={uuidv4()}>
+                          <p style={{ fontSize: 10 }}>{res.start}</p>
                         </Form.Item>
-                      </Typography.Paragraph>
-                    </Fragment>
+                        <Typography.Paragraph
+                          type="secondary"
+                          ellipsis={{ rows: 2 }}
+                        >
+                          <Form.Item
+                            shouldUpdate={(prevValuesStop, curValuesStop) =>
+                              prevValuesStop.additional !==
+                              curValuesStop.additional
+                            }
+                          >
+                            {() => {
+                              return (
+                                <Form.Item key={uuidv4()}>
+                                  <p style={{ fontSize: 10 }}>{res.stop}</p>
+                                </Form.Item>
+                              );
+                            }}
+                          </Form.Item>
+                        </Typography.Paragraph>
+                      </Fragment>
+                    )}
                   </div>
                 ) : null}
               </Form>

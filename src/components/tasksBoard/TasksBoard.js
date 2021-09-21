@@ -18,6 +18,9 @@ import chevron from "../assets/chevron.svg";
 import pinIcon from "../assets/pin.svg";
 import pinGreen from "../assets/pin-green.svg";
 import ButtonDashboard from "../dashboard/ButtonDashboard";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import projectDoneAtom from "../../statesManager/atoms/projectDoneAtom";
 
 const generateId = () => Date.now().toString();
 
@@ -43,20 +46,44 @@ const defaultItems = {
 };
 
 function Taskboard() {
+  const MySwal = withReactContent(Swal);
   // eslint-disable-next-line no-unused-vars
   const [autoTrackTime, setAutoTrackTime] = useRecoilState(
     automaticTrackTimerAtom
   );
+  const [projectDone] = useRecoilState(projectDoneAtom);
   const [itemsByStatus, setItemsByStatus] = useSyncedState(
     "itemsByStatus",
     defaultItems
   );
   const [closed] = useRecoilState(closedStateAtom);
+  const [clickedOnDashButton] = useState(
+    localStorage.getItem("clickedOnDashButton") ?? false
+  );
+
+  const [DoneAlert] = useState(
+    localStorage.getItem("DoneAlert") !== null ? true : false
+  );
+
   const { JSalert } = CustomConfirm();
 
   useEffect(() => {
-    // console.log("in progress", itemsByStatus["In Progress"].length);
-  }, [itemsByStatus]);
+    if (projectDone && itemsByStatus["In Progress"].length === 0) {
+      MySwal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Your project has been finished!",
+        showConfirmButton: false,
+        timer: 1800,
+      });
+    }
+    localStorage.setItem("DoneAlert", true);
+
+    if (!projectDone) {
+      localStorage.removeItem("DoneAlert");
+    }
+    console.log("Done", DoneAlert);
+  }, [projectDone, MySwal, clickedOnDashButton, DoneAlert, itemsByStatus]);
 
   const handleDragEnd = ({ source, destination }) => {
     // console.log("destination", destination);
@@ -267,3 +294,10 @@ function Taskboard() {
 }
 
 export default Taskboard;
+
+// ({
+//   icon: DashIcon,
+//   title: "You can now visit your Dashboard!",
+//   text: "You will find all stats of you work",
+//   footer: "Always Just for better organization",
+// });
