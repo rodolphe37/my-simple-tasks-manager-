@@ -16,6 +16,7 @@ import cumulTimeCardsTaskAtom from "../../statesManager/atoms/cumulTimeCardsTask
 import { v4 as uuidv4 } from "uuid";
 import completCardsTimeArrayAtom from "../../statesManager/atoms/completCardsTimeArrayAtom";
 import projectDoneAtom from "../../statesManager/atoms/projectDoneAtom";
+import totalListTimeInSecondAtom from "../../statesManager/atoms/totalListTimeInSecondAtom";
 
 const StyledCard = styled(Card)`
   margin: 0.5rem;
@@ -45,14 +46,15 @@ function TaskboardItemCard({
   let d = new Date();
   let n = d.toLocaleString();
   const [timeForCard, setTimeForCard] = useState("");
-  const [totalTimeToSeconds, setTotalTimeToSeconds] = useState(
-    JSON.parse(localStorage.getItem("totalTimeInSeconds")) ?? []
+  const [totalTimeToSeconds, setTotalTimeToSeconds] = useRecoilState(
+    totalListTimeInSecondAtom
   );
   const [cumuledTimeCards, setCumuledTimeCards] = useRecoilState(
     completCardsTimeArrayAtom
   );
-  const [completCardsTimeArray, setCompletCardsTimeArray] =
-    useRecoilState(timeAllCardsAtom);
+  const [completCardsTimeArray, setCompletCardsTimeArray] = useRecoilState(
+    completCardsTimeArrayAtom
+  );
   const [timeAllCards, setTimeAllCards] = useState([]);
 
   const [startWorkState, setStartWorkState] = useState(
@@ -123,9 +125,7 @@ function TaskboardItemCard({
         // }
 
         if (Number(item.id) !== cardId[0]) {
-          setCompletCardsTimeArray((completCardsTimeArray) =>
-            completCardsTimeArray.concat(timeAllCards)
-          );
+          setCompletCardsTimeArray(completCardsTimeArray.concat(timeAllCards));
           setCumuledTimeCards((cumuledTimeCards) =>
             cumuledTimeCards.concat(timeAllCards)
           );
@@ -170,9 +170,9 @@ function TaskboardItemCard({
           JSON.stringify(totalTimeToSeconds)
         );
 
-        return () => {
-          localStorage.removeItem("timeAllCards");
-        };
+        // return () => {
+
+        // };
       }
     }
 
@@ -196,6 +196,7 @@ function TaskboardItemCard({
       // localStorage.removeItem("startTimeWork");
       localStorage.removeItem("stopTimeWork");
       localStorage.removeItem("allCarsTime");
+      localStorage.removeItem("timeAllCards");
     };
 
     // console.log("itemsByStatus", itemsByStatus);
@@ -268,7 +269,7 @@ function TaskboardItemCard({
     if (startWorkState && stopWorkState) {
       totalTimeAddition();
     }
-  }, [startWorkState, stopWorkState, setTotalTimeToSeconds, item]);
+  }, [startWorkState, stopWorkState, setTotalTimeToSeconds, item.id]);
 
   // useEffect(() => {
 
@@ -416,9 +417,9 @@ function TaskboardItemCard({
         }
       >
         {status === "Done" ? (
-          <BaseTooltip overlay={item.stopWork}>
+          <BaseTooltip key={uuidv4()} overlay={item.stopWork}>
             {completCardsTimeArray.map((res) => (
-              <Form key={res.uuid} className="myForm">
+              <Form key={uuidv4()} className="myForm">
                 {item.id === res.cardId ? (
                   <div
                     style={{
@@ -429,7 +430,7 @@ function TaskboardItemCard({
                     }}
                   >
                     <Fragment>
-                      <Form.Item key={res.uuid}>
+                      <Form.Item key={uuidv4()}>
                         <p style={{ fontSize: 10 }}>{res.start}</p>
                       </Form.Item>
                       <Typography.Paragraph
@@ -444,7 +445,7 @@ function TaskboardItemCard({
                         >
                           {() => {
                             return (
-                              <Form.Item key={res.uuid}>
+                              <Form.Item key={uuidv4()}>
                                 <p style={{ fontSize: 10 }}>{res.stop}</p>
                               </Form.Item>
                             );
