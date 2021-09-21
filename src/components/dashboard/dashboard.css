@@ -215,9 +215,13 @@ button,
 .eraseTjmButton {
   cursor: pointer;
 }
+.eraseTjmButton {
+  transition: all 0.6s ease-in-out;
+}
 .eraseTjmButton:hover {
-  width: 70px !important;
-  transition: width 0.6s ease-in-out;
+  width: 50px !important;
+  transform: rotate(180deg);
+  transition: all 0.6s ease-in-out;
 }
 
 .tjm-button {
@@ -230,8 +234,8 @@ button,
   transition: all 0.5s ease-in-out;
 }
 .tjm-button .priceIcon:hover {
-  width: 64px !important;
-  transform: translate(-10px, -10px);
+  width: 54px !important;
+  transform: translate(-15px, -10px);
   transition: all 0.5s ease-in-out;
 }
 .priceTextContainer {
@@ -338,8 +342,13 @@ button,
   font-size: 16px;
   transition: font-size 0.8s ease-in-out;
 }
+.bump {
+  transition: transform 0.5s ease-in-out;
+}
 .closeButton-container > button:hover,
 .bump:hover {
-  transform: rotate(180deg);
-  transition: transform 0.5s ease-in-out;
+  border-radius: 15px;
+  border: none;
+  transform: rotate(-180deg);
+  transition: all 0.5s ease-in-out;
 }
