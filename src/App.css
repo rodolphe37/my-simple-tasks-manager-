@@ -212,6 +212,8 @@ hr {
   }
   .indicator-section {
     width: 50%;
+    transform: translate(19em, 10px);
+    justify-content: center !important;
   }
   .ribbon {
     width: 95px;

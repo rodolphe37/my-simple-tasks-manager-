@@ -146,11 +146,6 @@ function TaskboardItemCard({
           },
         ]);
 
-        // if (completCardsTimeArray.length === 0) {
-        //   setCompletCardsTimeArray(timeAllCards);
-        //   setCumuledTimeCards(timeAllCards);
-        // }
-
         if (
           Number(item.id) !== cardId[0] &&
           TotalTimeStart !== "" &&
@@ -159,55 +154,16 @@ function TaskboardItemCard({
           setCompletCardsTimeArray((completCardsTimeArray) =>
             completCardsTimeArray.concat(timeAllCards)
           );
-          // setCumuledTimeCards((cumuledTimeCards) =>
-          //   cumuledTimeCards.concat(timeAllCards)
-          // );
         }
-        // console.log(re[0]);
-        // if (totalTimeToSeconds !== null && cumuledTimeCards === null) {
-        //   setCumuledTimeCards([totalTimeToSeconds]);
-        //   localStorage.removeItem("totalTimeInSeconds");
-        // }
-        // if (cumuledTimeCards.length >= 1) {
-        //   setCumuledTimeCards((cumuledTimeCards) =>
-        //     cumuledTimeCards.concat(totalTimeToSeconds)
-        //   );
-        //   localStorage.removeItem("totalTimeInSeconds");
-        // }
-
-        // console.log(
-        //   "cumuledTimeCards",
-        //   cumuledTimeCards.map((res) => res.cardId)
-        // );
-        // console.log("item id", Number(item.id));
-        // console.log("totalCardsTime id", cardId[0]);
-        // console.log(
-        //   "timeAllCards[0].id",
-        //   timeAllCards.map((res) => res.id)
-        // );
 
         localStorage.setItem(
           "completCardsTimeArray",
           JSON.stringify(completCardsTimeArray)
         );
-        // localStorage.setItem(
-        //   "cumulTimeCardsTask",
-        //   JSON.stringify(cumuledTimeCards)
-        // );
 
         if (!stopWorkState) {
           localStorage.setItem("stopTimeWork", stopWorkState);
         }
-        if (itemsByStatus["Done"].length > 0) {
-          localStorage.setItem(
-            "totalTimeInSeconds",
-            JSON.stringify(totalTimeToSeconds)
-          );
-        }
-
-        // return () => {
-
-        // };
       }
     }
 
@@ -222,7 +178,6 @@ function TaskboardItemCard({
     }
 
     if (itemsByStatus["Done"].length === 0) {
-      localStorage.removeItem("totalTimeInSeconds");
       localStorage.removeItem("stopTimeWork");
       localStorage.removeItem("clickedOnDashButton");
     }
@@ -237,137 +192,15 @@ function TaskboardItemCard({
       localStorage.removeItem("allCarsTime");
       localStorage.removeItem("timeAllCards");
     };
-
-    // console.log("itemsByStatus", itemsByStatus);
-    // console.log("item", item);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     status,
     startWorkState,
     stopWorkState,
     completCardsTimeArray,
-    totalTimeToSeconds,
+    item.id,
+    projectDone,
   ]);
-
-  useEffect(() => {
-    const cardIdCompleteTask = totalTimeToSeconds.filter((res) => res.cardId);
-
-    const totalTimeAddition = () => {
-      const numberKeeped = 8;
-
-      const startTask = startWorkState;
-      const hoursToMinStartTask = startTask.substring(
-        startTask.length - numberKeeped
-      );
-      const stopTask = stopWorkState;
-      const hoursToMinStopTask = stopTask.substring(
-        stopTask.length - numberKeeped
-      );
-      // console.log("startTask", hoursToMinStartTask);
-      // console.log("cardIdCompleteTask", cardIdCompleteTask);
-
-      function hmsToSecondsOnly(str) {
-        let p = str.split(":"),
-          s = 0,
-          m = 1;
-        while (p.length > 0) {
-          s += m * parseInt(p.pop(), 10);
-          m *= 60;
-        }
-        return s;
-      }
-      const startTaskResult = hmsToSecondsOnly(hoursToMinStartTask);
-      const stopTaskResult = hmsToSecondsOnly(hoursToMinStopTask);
-
-      setStartTask(startTaskResult);
-      setStopTask(stopTaskResult);
-      // console.log("result :", startTaskResult);
-      // console.log("result :", stopTaskResult);
-
-      if (status === "Done" && totalTimeToSeconds.length === 0) {
-        setTotalTimeToSeconds([
-          {
-            cardId: item.id,
-            totalTime: stopTaskResult - startTaskResult,
-          },
-        ]);
-      } else if (
-        status === "Done" &&
-        itemsByStatus["In Progress"].length === 0 &&
-        totalTimeToSeconds.length > 0 &&
-        totalTimeToSeconds.cardId !== item.id
-      ) {
-        setTotalTimeToSeconds([
-          ...totalTimeToSeconds,
-          {
-            cardId: item.id,
-            totalTime: stopTaskResult - startTaskResult,
-          },
-        ]);
-      }
-    };
-
-    // const comparId = totalTimeToSeconds.filter(
-    //   (resu) => resu.cardId !== item.id
-    // );
-
-    // if (startWorkState && stopWorkState && status === "Done") {
-    //   setCumuledTimeCards({
-    //     cardId: item.id,
-    //     totalTime: stopTask - startTask,
-    //   });
-    //   if (cumuledTimeCards !== {} && totalTimeToSeconds.length === 0) {
-    //     setTotalTimeToSeconds([cumuledTimeCards]);
-    //   }
-    // }
-
-    // // if (status === "Done") {
-    // //   setTotalTimeToSeconds([...totalTimeToSeconds, cumuledTimeCards]);
-    // // }
-
-    // // if (totalTimeToSeconds.length === 0) {
-    // //   setTotalTimeToSeconds([cumuledTimeCards]);
-    // //   localStorage.setItem("totalTimeToSeconds", totalTimeToSeconds);
-    // // }
-    // if (totalTimeToSeconds.length > 0) {
-    //   setTotalTimeToSeconds((totalTimeToSeconds) =>
-    //     totalTimeToSeconds.concat(cumuledTimeCards)
-    //   );
-    //   localStorage.setItem(
-    //     "cumuledTimeCards",
-    //     JSON.stringify(cumuledTimeCards)
-    //   );
-    // }
-    // console.log(
-    //   "compar id",
-    //   cardIdCompleteTask.map((resu) => resu.cardId)
-    // );
-    // console.log("cumuledTimeCards", cumuledTimeCards);
-    console.log("totalTimeToSeconds", totalTimeToSeconds);
-    console.log("stopTask", stopTask);
-    console.log("startTask", startTask);
-    // if (totalTimeToSeconds !== null && status === "Done") {
-    //   localStorage.setItem(
-    //     "totalTimeInSeconds",
-    //     JSON.stringify(totalTimeToSeconds)
-    //   );
-    // }
-
-    if (startWorkState && stopWorkState) {
-      totalTimeAddition();
-      if (status === "Done") {
-        localStorage.setItem(
-          "cumuledTimeCards",
-          JSON.stringify(cumuledTimeCards)
-        );
-      }
-    }
-  }, [stopTask, startTask, startWorkState, stopWorkState, status]);
-
-  // useEffect(() => {
-  //   // console.log("TotalTime Start:", TotalTimeStart);
-  //   // console.log("TotalTime Stop:", TotalTimeStop);
-  // }, [TotalTimeStart, TotalTimeStop]);
 
   return (
     <StyledCard

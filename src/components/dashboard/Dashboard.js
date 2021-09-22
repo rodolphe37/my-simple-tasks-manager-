@@ -33,6 +33,7 @@ const Dashboard = () => {
     JSON.parse(localStorage.getItem("totalTimeInSeconds"))
   );
   const [finishedDatas] = useRecoilState(finishedDatasAtom);
+  const startArrayTimes = [];
   const [projectDone] = useRecoilState(projectDoneAtom);
   // eslint-disable-next-line no-unused-vars
   const [openDash, setOpenDash] = useRecoilState(openDashAtom);
@@ -85,6 +86,7 @@ const Dashboard = () => {
       return handlePrice();
     }
     console.log("changeDevise", changeDevise);
+    console.log(startArrayTimes);
   }, [
     tjm,
     setEurTjm,
@@ -94,6 +96,7 @@ const Dashboard = () => {
     handlePrice,
     stockItemsByStatus,
     changeDevise,
+    startArrayTimes,
   ]);
 
   const taskPerHour =
@@ -101,169 +104,59 @@ const Dashboard = () => {
     stockItemsByStatus["In Progress"].length +
     stockItemsByStatus["Done"].length;
 
-  // useEffect(() => {
-  //   const idTimeCards = finishedDatas.map((res) => res.cardId);
+  const numberKeeped = 8;
 
-  //   const startTimeCards = finishedDatas
-  //     .filter((result) => result.start !== "")
-  //     .map((res) => res.start);
+  function hmsToSecondsOnly(str) {
+    let p = str.split(":"),
+      s = 0,
+      m = 1;
+    while (p.length > 0) {
+      s += m * parseInt(p.pop(), 10);
+      m *= 60;
+    }
+    return s;
+  }
 
-  //   const stopTimeCards = finishedDatas
-  //     .filter((result) => result.stop !== "")
-  //     .map((res) => res.stop);
+  let stopArray = [];
 
-  //   const totalTimeAddition = () => {
-  //     const numberKeeped = 8;
+  useEffect(() => {
+    let startedTime = finishedDatas.map((res) => res.start);
+    let finishedTime = finishedDatas.map((res) => res.stop);
+    let cardIdTime = finishedDatas.map((res) => res.cardId);
 
-  //     const startTask = startTimeCards.map((res) => res.start);
-  //     const hoursToMinStartTask = startTask.substring(
-  //       startTask.length - numberKeeped
-  //     );
-  //     const stopTask = stopTimeCards.map((res) => res.stop);
-  //     const hoursToMinStopTask = stopTask.substring(
-  //       stopTask.length - numberKeeped
-  //     );
-  //     // console.log("startTask", hoursToMinStartTask);
-  //     // console.log("cardIdCompleteTask", cardIdCompleteTask);
+    for (let i = 0; i < startedTime.length; i++) {
+      // console.log("start", startedTime[i]);
+      const startTask = startedTime[i];
+      const hoursToMinStartTask = startTask.substring(
+        startTask.length - numberKeeped
+      );
 
-  //     function hmsToSecondsOnly(str) {
-  //       let p = str.split(":"),
-  //         s = 0,
-  //         m = 1;
-  //       while (p.length > 0) {
-  //         s += m * parseInt(p.pop(), 10);
-  //         m *= 60;
-  //       }
-  //       return s;
-  //     }
-  //     const startTaskResult = hmsToSecondsOnly(hoursToMinStartTask);
-  //     const stopTaskResult = hmsToSecondsOnly(hoursToMinStopTask);
-  //     // console.log("result :", startTaskResult);
-  //     // console.log("result :", stopTaskResult);
+      // console.log("startTask", hoursToMinStartTask);
 
-  //     // setTotalTimeToSeconds((totalTimeToSeconds) =>
-  //     //   totalTimeToSeconds.concat({
-  //     //     cardId: item.id,
-  //     //     totalTime: stopTaskResult - startTaskResult,
-  //     //   })
-  //     // );
+      const startTaskResult = hmsToSecondsOnly(hoursToMinStartTask);
+      startArrayTimes.push(startTaskResult);
+    }
 
-  //     if (startTimeCards !== "" && stopTimeCards !== "") {
-  //       setTotalTimeToSeconds((totalTimeToSeconds) =>
-  //         totalTimeToSeconds.concat({
-  //           cardId: idTimeCards,
-  //           totalTime: stopTaskResult - startTaskResult,
-  //           uuid: uuidv4(),
-  //         })
-  //       );
-  //       localStorage.setItem(
-  //         "totalTimeInSeconds",
-  //         JSON.stringify(totalTimeToSeconds)
-  //       );
-  //     } else {
-  //       return;
-  //     }
-  //   };
-  //   // console.log(
-  //   //   "compar id",
-  //   //   cardIdCompleteTask.map((resu) => resu.cardId)
-  //   // );
-  //   // console.log("finishedDatas", finishedDatas);
-  //   // if (totalTimeToSeconds !== null && status === "Done") {
-  //   //   localStorage.setItem(
-  //   //     "totalTimeInSeconds",
-  //   //     JSON.stringify(totalTimeToSeconds)
-  //   //   );
-  //   // }
+    for (let i = 0; i < finishedTime.length; i++) {
+      // console.log("start", finishedTime[i]);
 
-  //   // if (startTimeCards && stopTimeCards) {
-  //   //   totalTimeAddition();
-  //   // }
+      const stopTask = finishedTime[i];
+      const hoursToMinStopTask = stopTask.substring(
+        stopTask.length - numberKeeped
+      );
+      // console.log("startTask", hoursToMinStartTask);
+      // console.log("cardIdCompleteTask", cardIdCompleteTask);
 
-  //   console.log("startTimeCards", startTimeCards);
-  //   console.log("stopTimeCards", stopTimeCards);
-  //   // if (tjm === 0) {
-  //   //   localStorage.setItem("tjm", 0);
-  //   // }
-  //   // console.log(
-  //   //   "totalAllCArdsTimeSeconds",
-  //   //   totalAllCArdsTimeSeconds.filter((res, i) => res.totalTime !== 0)
-  //   // );
-  // }, [finishedDatas, setTotalTimeToSeconds, totalTimeToSeconds]);
+      const stopTaskResult = hmsToSecondsOnly(hoursToMinStopTask);
+      stopArray.push(stopTaskResult);
+    }
+    console.log("stopTaskForArray", stopArray);
+    // console.log("stop", finishedTime);
+    console.log("startTaskForArray", startArrayTimes);
 
-  // useEffect(() => {
-  //   const cardIdCompleteTask = totalTimeToSeconds.filter((res) => res.cardId);
-
-  //   const totalTimeAddition = () => {
-  //     const numberKeeped = 8;
-
-  //     const startTask = startWorkState;
-  //     const hoursToMinStartTask = startTask.substring(
-  //       startTask.length - numberKeeped
-  //     );
-  //     const stopTask = stopWorkState;
-  //     const hoursToMinStopTask = stopTask.substring(
-  //       stopTask.length - numberKeeped
-  //     );
-  //     // console.log("startTask", hoursToMinStartTask);
-  //     // console.log("cardIdCompleteTask", cardIdCompleteTask);
-
-  //     function hmsToSecondsOnly(str) {
-  //       let p = str.split(":"),
-  //         s = 0,
-  //         m = 1;
-  //       while (p.length > 0) {
-  //         s += m * parseInt(p.pop(), 10);
-  //         m *= 60;
-  //       }
-  //       return s;
-  //     }
-  //     const startTaskResult = hmsToSecondsOnly(hoursToMinStartTask);
-  //     const stopTaskResult = hmsToSecondsOnly(hoursToMinStopTask);
-  //     // console.log("result :", startTaskResult);
-  //     // console.log("result :", stopTaskResult);
-
-  //     // setTotalTimeToSeconds((totalTimeToSeconds) =>
-  //     //   totalTimeToSeconds.concat({
-  //     //     cardId: item.id,
-  //     //     totalTime: stopTaskResult - startTaskResult,
-  //     //   })
-  //     // );
-
-  //     if (
-  //       TotalTimeStart !== "" &&
-  //       TotalTimeStop !== "" &&
-  //       status === "Done" &&
-  //       item.id !== cardId
-  //     ) {
-  //       setTotalTimeToSeconds((totalTimeToSeconds) =>
-  //         totalTimeToSeconds.concat({
-  //           cardId: item.id,
-  //           totalTime: stopTaskResult - startTaskResult,
-  //           uuid: uuidv4(),
-  //         })
-  //       );
-  //     } else {
-  //       return;
-  //     }
-  //   };
-  //   // console.log(
-  //   //   "compar id",
-  //   //   cardIdCompleteTask.map((resu) => resu.cardId)
-  //   // );
-  //   // console.log("finishedDatas", finishedDatas);
-  //   // if (totalTimeToSeconds !== null && status === "Done") {
-  //   //   localStorage.setItem(
-  //   //     "totalTimeInSeconds",
-  //   //     JSON.stringify(totalTimeToSeconds)
-  //   //   );
-  //   // }
-
-  //   if (startWorkState && stopWorkState) {
-  //     totalTimeAddition();
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [startWorkState, stopWorkState, setTotalTimeToSeconds, item.id]);
+    // console.log("start", startedTime);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [finishedDatas, setTotalTimeToSeconds, totalTimeToSeconds]);
 
   return (
     <div className="dash-content scale-in-ver-bottom">
@@ -468,7 +361,7 @@ const Dashboard = () => {
           <div className="todo-dash">
             <span className="dashTask-title">Task that required more time</span>
             <div className="list-dash">
-              {finishedDatas !== [] ? (
+              {/*finishedDatas !== [] ? (
                 totalAllCArdsTimeSeconds
                   .filter((res) => res.totalTime !== 0)
                   .map((res) => (
@@ -483,7 +376,7 @@ const Dashboard = () => {
                 <strong style={{ color: "darkred", fontWeight: "bold" }}>
                   No tasks in this section
                 </strong>
-              )}
+              )*/}
             </div>
           </div>
           <div className="inProgress-dash">

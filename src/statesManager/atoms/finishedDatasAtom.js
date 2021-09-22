@@ -2,7 +2,10 @@ import { atom } from "recoil";
 
 const finishedDatasAtom = atom({
   key: "finishedDatasState",
-  default: [],
+  default:
+    localStorage.getItem("finishedData") !== null
+      ? JSON.parse(localStorage.getItem("finishedData"))
+      : [],
 });
 
 export default finishedDatasAtom;
