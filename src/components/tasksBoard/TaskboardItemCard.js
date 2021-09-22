@@ -291,7 +291,7 @@ function TaskboardItemCard({
         TotalTimeStart !== "" &&
         TotalTimeStop !== "" &&
         status === "Done" &&
-        item.id !== cardId
+        totalTimeToSeconds.filter((resu) => resu.cardId !== item.id)
       ) {
         setTotalTimeToSeconds((totalTimeToSeconds) =>
           totalTimeToSeconds.concat({
@@ -308,7 +308,7 @@ function TaskboardItemCard({
     //   "compar id",
     //   cardIdCompleteTask.map((resu) => resu.cardId)
     // );
-    // console.log("finishedDatas", finishedDatas);
+    console.log("finishedDatas", finishedDatas);
     // if (totalTimeToSeconds !== null && status === "Done") {
     //   localStorage.setItem(
     //     "totalTimeInSeconds",

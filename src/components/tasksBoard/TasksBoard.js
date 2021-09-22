@@ -74,15 +74,17 @@ function Taskboard() {
       itemsByStatus["To Do"].length === 0 &&
       localStorage.getItem("DoneAlert") === null
     ) {
-      MySwal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "Your project has been finished!",
-        text: "You can check the dashboard for information & statistics of your work done!",
-        footer: "Always Just for better organization",
-        showConfirmButton: false,
-        timer: 5000,
-      });
+      setTimeout(() => {
+        MySwal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Your project has been finished!",
+          text: "You can check the dashboard for information & statistics of your work done!",
+          footer: "Always Just for better organization",
+          showConfirmButton: false,
+          timer: 5000,
+        });
+      }, 1000);
       localStorage.setItem("DoneAlert", true);
     }
 

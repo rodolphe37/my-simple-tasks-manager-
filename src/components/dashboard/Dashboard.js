@@ -12,8 +12,13 @@ import projectDoneAtom from "../../statesManager/atoms/projectDoneAtom";
 import DollarIcon from "../assets/symbole-du-dollar.svg";
 import EuroIcon from "../assets/piece-en-euro.svg";
 import backlog from "../assets/backlog.svg";
+import { v4 as uuidv4 } from "uuid";
+import totalListTimeInSecondAtom from "../../statesManager/atoms/totalListTimeInSecondAtom";
 
 const Dashboard = () => {
+  const [totalTimeToSeconds, setTotalTimeToSeconds] = useRecoilState(
+    totalListTimeInSecondAtom
+  );
   const [itemsByStatus] = useRecoilState(itemsByStatusAtom);
   const [changeDevise, setChangeDevise] = useState(true);
   // const [autoTrackTime] = useRecoilState(automaticTrackTimerAtom);
@@ -96,23 +101,169 @@ const Dashboard = () => {
     stockItemsByStatus["In Progress"].length +
     stockItemsByStatus["Done"].length;
 
-  useEffect(() => {
-    // console.log("completCardsTimeArray", completCardsTimeArray);
-    // console.log("taskPerHour", taskPerHour);
-    // if (tjm === 0) {
-    //   localStorage.setItem("tjm", 0);
-    // }
-    // console.log(
-    //   "totalAllCArdsTimeSeconds",
-    //   totalAllCArdsTimeSeconds.filter((res, i) => res.totalTime !== 0)
-    // );
-  }, [
-    completCardsTimeArray,
-    itemsByStatus,
-    finishedDatas,
-    taskPerHour,
-    totalAllCArdsTimeSeconds,
-  ]);
+  // useEffect(() => {
+  //   const idTimeCards = finishedDatas.map((res) => res.cardId);
+
+  //   const startTimeCards = finishedDatas
+  //     .filter((result) => result.start !== "")
+  //     .map((res) => res.start);
+
+  //   const stopTimeCards = finishedDatas
+  //     .filter((result) => result.stop !== "")
+  //     .map((res) => res.stop);
+
+  //   const totalTimeAddition = () => {
+  //     const numberKeeped = 8;
+
+  //     const startTask = startTimeCards.map((res) => res.start);
+  //     const hoursToMinStartTask = startTask.substring(
+  //       startTask.length - numberKeeped
+  //     );
+  //     const stopTask = stopTimeCards.map((res) => res.stop);
+  //     const hoursToMinStopTask = stopTask.substring(
+  //       stopTask.length - numberKeeped
+  //     );
+  //     // console.log("startTask", hoursToMinStartTask);
+  //     // console.log("cardIdCompleteTask", cardIdCompleteTask);
+
+  //     function hmsToSecondsOnly(str) {
+  //       let p = str.split(":"),
+  //         s = 0,
+  //         m = 1;
+  //       while (p.length > 0) {
+  //         s += m * parseInt(p.pop(), 10);
+  //         m *= 60;
+  //       }
+  //       return s;
+  //     }
+  //     const startTaskResult = hmsToSecondsOnly(hoursToMinStartTask);
+  //     const stopTaskResult = hmsToSecondsOnly(hoursToMinStopTask);
+  //     // console.log("result :", startTaskResult);
+  //     // console.log("result :", stopTaskResult);
+
+  //     // setTotalTimeToSeconds((totalTimeToSeconds) =>
+  //     //   totalTimeToSeconds.concat({
+  //     //     cardId: item.id,
+  //     //     totalTime: stopTaskResult - startTaskResult,
+  //     //   })
+  //     // );
+
+  //     if (startTimeCards !== "" && stopTimeCards !== "") {
+  //       setTotalTimeToSeconds((totalTimeToSeconds) =>
+  //         totalTimeToSeconds.concat({
+  //           cardId: idTimeCards,
+  //           totalTime: stopTaskResult - startTaskResult,
+  //           uuid: uuidv4(),
+  //         })
+  //       );
+  //       localStorage.setItem(
+  //         "totalTimeInSeconds",
+  //         JSON.stringify(totalTimeToSeconds)
+  //       );
+  //     } else {
+  //       return;
+  //     }
+  //   };
+  //   // console.log(
+  //   //   "compar id",
+  //   //   cardIdCompleteTask.map((resu) => resu.cardId)
+  //   // );
+  //   // console.log("finishedDatas", finishedDatas);
+  //   // if (totalTimeToSeconds !== null && status === "Done") {
+  //   //   localStorage.setItem(
+  //   //     "totalTimeInSeconds",
+  //   //     JSON.stringify(totalTimeToSeconds)
+  //   //   );
+  //   // }
+
+  //   // if (startTimeCards && stopTimeCards) {
+  //   //   totalTimeAddition();
+  //   // }
+
+  //   console.log("startTimeCards", startTimeCards);
+  //   console.log("stopTimeCards", stopTimeCards);
+  //   // if (tjm === 0) {
+  //   //   localStorage.setItem("tjm", 0);
+  //   // }
+  //   // console.log(
+  //   //   "totalAllCArdsTimeSeconds",
+  //   //   totalAllCArdsTimeSeconds.filter((res, i) => res.totalTime !== 0)
+  //   // );
+  // }, [finishedDatas, setTotalTimeToSeconds, totalTimeToSeconds]);
+
+  // useEffect(() => {
+  //   const cardIdCompleteTask = totalTimeToSeconds.filter((res) => res.cardId);
+
+  //   const totalTimeAddition = () => {
+  //     const numberKeeped = 8;
+
+  //     const startTask = startWorkState;
+  //     const hoursToMinStartTask = startTask.substring(
+  //       startTask.length - numberKeeped
+  //     );
+  //     const stopTask = stopWorkState;
+  //     const hoursToMinStopTask = stopTask.substring(
+  //       stopTask.length - numberKeeped
+  //     );
+  //     // console.log("startTask", hoursToMinStartTask);
+  //     // console.log("cardIdCompleteTask", cardIdCompleteTask);
+
+  //     function hmsToSecondsOnly(str) {
+  //       let p = str.split(":"),
+  //         s = 0,
+  //         m = 1;
+  //       while (p.length > 0) {
+  //         s += m * parseInt(p.pop(), 10);
+  //         m *= 60;
+  //       }
+  //       return s;
+  //     }
+  //     const startTaskResult = hmsToSecondsOnly(hoursToMinStartTask);
+  //     const stopTaskResult = hmsToSecondsOnly(hoursToMinStopTask);
+  //     // console.log("result :", startTaskResult);
+  //     // console.log("result :", stopTaskResult);
+
+  //     // setTotalTimeToSeconds((totalTimeToSeconds) =>
+  //     //   totalTimeToSeconds.concat({
+  //     //     cardId: item.id,
+  //     //     totalTime: stopTaskResult - startTaskResult,
+  //     //   })
+  //     // );
+
+  //     if (
+  //       TotalTimeStart !== "" &&
+  //       TotalTimeStop !== "" &&
+  //       status === "Done" &&
+  //       item.id !== cardId
+  //     ) {
+  //       setTotalTimeToSeconds((totalTimeToSeconds) =>
+  //         totalTimeToSeconds.concat({
+  //           cardId: item.id,
+  //           totalTime: stopTaskResult - startTaskResult,
+  //           uuid: uuidv4(),
+  //         })
+  //       );
+  //     } else {
+  //       return;
+  //     }
+  //   };
+  //   // console.log(
+  //   //   "compar id",
+  //   //   cardIdCompleteTask.map((resu) => resu.cardId)
+  //   // );
+  //   // console.log("finishedDatas", finishedDatas);
+  //   // if (totalTimeToSeconds !== null && status === "Done") {
+  //   //   localStorage.setItem(
+  //   //     "totalTimeInSeconds",
+  //   //     JSON.stringify(totalTimeToSeconds)
+  //   //   );
+  //   // }
+
+  //   if (startWorkState && stopWorkState) {
+  //     totalTimeAddition();
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [startWorkState, stopWorkState, setTotalTimeToSeconds, item.id]);
 
   return (
     <div className="dash-content scale-in-ver-bottom">
@@ -291,7 +442,7 @@ const Dashboard = () => {
               <div className="list-dash">
                 {stockItemsByStatus["Done"].length > 0 ? (
                   stockItemsByStatus["Done"].map((res, i) => (
-                    <ul key={res.id}>
+                    <ul key={uuidv4()}>
                       <li>
                         <strong style={{ fontSize: 11 }}>
                           Name: {res.title}
@@ -316,8 +467,8 @@ const Dashboard = () => {
               {finishedDatas !== [] ? (
                 totalAllCArdsTimeSeconds
                   .filter((res) => res.totalTime !== 0)
-                  .map((res, i) => (
-                    <ul key={i}>
+                  .map((res) => (
+                    <ul key={uuidv4()}>
                       <li>
                         <p>{res.cardId}</p>
                         <p style={{ fontSize: 11 }}>{res.totalTime}</p>
@@ -336,7 +487,7 @@ const Dashboard = () => {
             <div className="list-dash">
               {stockItemsByStatus["In Progress"].length > 0 ? (
                 stockItemsByStatus["In Progress"].map((res, i) => (
-                  <ul key={i}>
+                  <ul key={uuidv4()}>
                     <li>
                       <p style={{ fontSize: 11 }}>{res.title}</p>
                     </li>
@@ -392,7 +543,7 @@ const Dashboard = () => {
             {completCardsTimeArray
               .filter((resFiltered) => resFiltered.start !== "")
               .map((res) => (
-                <div key={res.cardId}>
+                <div key={uuidv4()}>
                   <p>{res.cardTitle}</p>
                   <hr />
                   <p>Start: {res.start}</p>
