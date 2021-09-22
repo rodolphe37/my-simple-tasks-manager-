@@ -51,7 +51,7 @@ function TaskboardItemCard({
     totalListTimeInSecondAtom
   );
   const [cumuledTimeCards, setCumuledTimeCards] = useRecoilState(
-    completCardsTimeArrayAtom
+    cumulTimeCardsTaskAtom
   );
   const [completCardsTimeArray, setCompletCardsTimeArray] = useRecoilState(
     completCardsTimeArrayAtom
@@ -66,7 +66,8 @@ function TaskboardItemCard({
     localStorage.getItem("stopTimeWork") ?? ""
   );
   const [cardId, setCardId] = useState(0);
-  const [UniqueUuid, setUniqueUuid] = useState();
+  const [startTask, setStartTask] = useState(0);
+  const [stopTask, setStopTask] = useState(0);
 
   let cardIdFromTimeAll = timeAllCards.map((res) =>
     JSON.parse(`${res.cardId}`)
@@ -277,6 +278,9 @@ function TaskboardItemCard({
       }
       const startTaskResult = hmsToSecondsOnly(hoursToMinStartTask);
       const stopTaskResult = hmsToSecondsOnly(hoursToMinStopTask);
+
+      setStartTask(startTaskResult);
+      setStopTask(stopTaskResult);
       // console.log("result :", startTaskResult);
       // console.log("result :", stopTaskResult);
 
@@ -286,29 +290,36 @@ function TaskboardItemCard({
       //     totalTime: stopTaskResult - startTaskResult,
       //   })
       // );
-
-      if (
-        TotalTimeStart !== "" &&
-        TotalTimeStop !== "" &&
-        status === "Done" &&
-        totalTimeToSeconds.filter((resu) => resu.cardId !== item.id)
-      ) {
-        setTotalTimeToSeconds((totalTimeToSeconds) =>
-          totalTimeToSeconds.concat({
-            cardId: item.id,
-            totalTime: stopTaskResult - startTaskResult,
-            uuid: uuidv4(),
-          })
-        );
-      } else {
-        return;
-      }
     };
+
+    const comparId = totalTimeToSeconds.filter(
+      (resu) => resu.cardId !== item.id
+    );
+
+    if (
+      startWorkState &&
+      stopWorkState &&
+      localStorage.getItem("completCardsTimeArray") !== null &&
+      status === "Done"
+    ) {
+      setCumuledTimeCards({
+        cardId: item.id,
+        totalTime: stopTask - startTask,
+        uuid: uuidv4(),
+      });
+    }
+
+    if (status === "Done") {
+      setTotalTimeToSeconds([...totalTimeToSeconds, cumuledTimeCards]);
+    }
     // console.log(
     //   "compar id",
     //   cardIdCompleteTask.map((resu) => resu.cardId)
     // );
-    console.log("finishedDatas", finishedDatas);
+    console.log("cumuledTimeCards", cumuledTimeCards);
+    console.log("totalTimeToSeconds", totalTimeToSeconds);
+    console.log("stopTask", stopTask);
+    console.log("startTask", startTask);
     // if (totalTimeToSeconds !== null && status === "Done") {
     //   localStorage.setItem(
     //     "totalTimeInSeconds",
@@ -318,9 +329,23 @@ function TaskboardItemCard({
 
     if (startWorkState && stopWorkState) {
       totalTimeAddition();
+      if (status === "Done") {
+        localStorage.setItem(
+          "cumuledTimeCards",
+          JSON.stringify(cumuledTimeCards)
+        );
+      }
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [startWorkState, stopWorkState, setTotalTimeToSeconds, item.id]);
+  }, [
+    stopTask,
+    startTask,
+    startWorkState,
+    stopWorkState,
+    setTotalTimeToSeconds,
+    item.id,
+  ]);
 
   // useEffect(() => {
   //   // console.log("TotalTime Start:", TotalTimeStart);

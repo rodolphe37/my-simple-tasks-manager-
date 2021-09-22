@@ -5,7 +5,7 @@ const cumulTimeCardsTaskAtom = atom({
   default:
     localStorage.getItem("cumulTimeCardsTask") !== null
       ? JSON.parse(localStorage.getItem("cumulTimeCardsTask"))
-      : [],
+      : {},
 });
 
 export default cumulTimeCardsTaskAtom;

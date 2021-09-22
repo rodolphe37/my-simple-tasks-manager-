@@ -184,6 +184,17 @@ select {
 .pinIcon-container {
   display: none;
 }
+.modalConfig p {
+  font-size: 13px;
+  text-align: center;
+}
+.modalConfig sub {
+  font-size: 14px;
+  text-align: center;
+}
+hr {
+  color: white;
+}
 
 @media screen and (max-width: 1330px) {
   .time-tracker {

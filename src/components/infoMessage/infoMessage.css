@@ -9,7 +9,7 @@
 
 .offlineMessCOntainer {
   position: absolute;
-  top: 23em;
+  top: 7em;
   z-index: 99999;
   display: flex;
   align-items: center;

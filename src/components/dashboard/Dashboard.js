@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import supp from "../assets/supp.svg";
 import itemsByStatusAtom from "../../statesManager/atoms/itemsByStatusAtom";
@@ -362,14 +362,14 @@ const Dashboard = () => {
             <p style={{ fontWeight: "bold", fontSize: 25 }}>
               {cutDecimals(totalTimeLocalStore / 3600, 2)}{" "}
               <sub style={{ fontSize: 11, fontStyle: "italic" }}>hours</sub>
-              <hr />
-              <p>
-                {!changeDevise ? "€" : "$"}
-                {changeDevise
-                  ? cutDecimals(tjm / 8, 2)
-                  : cutDecimals((tjm / 8) * changeEurDoll, 2)}{" "}
-                <sub>per hour</sub>
-              </p>
+            </p>
+            <hr />
+            <p style={{ fontWeight: "bold", fontSize: 25 }}>
+              {!changeDevise ? "€" : "$"}
+              {changeDevise
+                ? cutDecimals(tjm / 8, 2)
+                : cutDecimals((tjm / 8) * changeEurDoll, 2)}{" "}
+              <sub style={{ fontSize: 11, fontStyle: "italic" }}>per hour</sub>
             </p>
           </div>
           <div className="dashContainer-content-header">
@@ -377,27 +377,29 @@ const Dashboard = () => {
             <p style={{ fontWeight: "bold", fontSize: 25 }}>
               {cutDecimals(totalTimeLocalStore / 28800, 2)}{" "}
               <sub style={{ fontSize: 11, fontStyle: "italic" }}>days</sub>
-              <hr />
-              <p>
-                {!changeDevise ? "€" : "$"}
-                {changeDevise
-                  ? cutDecimals((tjm * totalTimeLocalStore) / 28800, 2)
-                  : cutDecimals(
-                      ((tjm * totalTimeLocalStore) / 28800) * changeEurDoll,
-                      2
-                    )}{" "}
-                <sub>total</sub>
-              </p>
+            </p>
+            <hr />
+            <p style={{ fontWeight: "bold", fontSize: 25 }}>
+              {!changeDevise ? "€" : "$"}
+              {changeDevise
+                ? cutDecimals((tjm * totalTimeLocalStore) / 28800, 2)
+                : cutDecimals(
+                    ((tjm * totalTimeLocalStore) / 28800) * changeEurDoll,
+                    2
+                  )}{" "}
+              <sub style={{ fontSize: 11, fontStyle: "italic" }}>total</sub>
             </p>
           </div>
           <div className="dashContainer-content-header">
             <strong> Number Tasks:</strong>{" "}
             {stockItemsByStatus && (
-              <p style={{ fontWeight: "bold", fontSize: 25 }}>
-                {stockItemsByStatus["To Do"].length +
-                  stockItemsByStatus["In Progress"].length +
-                  stockItemsByStatus["Done"].length}{" "}
-                <sub style={{ fontSize: 11, fontStyle: "italic" }}>tasks</sub>
+              <Fragment>
+                <p style={{ fontWeight: "bold", fontSize: 25 }}>
+                  {stockItemsByStatus["To Do"].length +
+                    stockItemsByStatus["In Progress"].length +
+                    stockItemsByStatus["Done"].length}{" "}
+                  <sub style={{ fontSize: 11, fontStyle: "italic" }}>tasks</sub>
+                </p>
                 <hr />
                 <span
                   style={{
@@ -406,12 +408,14 @@ const Dashboard = () => {
                     justifyContent: "center",
                   }}
                 >
-                  <p>
+                  <p
+                    style={{ color: "white", fontWeight: "bold", fontSize: 25 }}
+                  >
                     {cutDecimals(totalTimeLocalStore / 3600 / taskPerHour, 2)}
                   </p>
-                  <sub style={{ fontSize: 11 }}>hour/task</sub>
+                  <sub style={{ fontSize: 11, color: "white" }}>hour/task</sub>
                 </span>
-              </p>
+              </Fragment>
             )}
           </div>
         </div>
