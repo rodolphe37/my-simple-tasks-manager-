@@ -284,39 +284,65 @@ function TaskboardItemCard({
       // console.log("result :", startTaskResult);
       // console.log("result :", stopTaskResult);
 
-      // setTotalTimeToSeconds((totalTimeToSeconds) =>
-      //   totalTimeToSeconds.concat({
-      //     cardId: item.id,
-      //     totalTime: stopTaskResult - startTaskResult,
-      //   })
-      // );
+      if (status === "Done" && totalTimeToSeconds.length === 0) {
+        setTotalTimeToSeconds([
+          {
+            cardId: item.id,
+            totalTime: stopTaskResult - startTaskResult,
+          },
+        ]);
+      } else if (
+        status === "Done" &&
+        itemsByStatus["In Progress"].length === 0 &&
+        totalTimeToSeconds.length > 0 &&
+        totalTimeToSeconds.cardId !== item.id
+      ) {
+        setTotalTimeToSeconds([
+          ...totalTimeToSeconds,
+          {
+            cardId: item.id,
+            totalTime: stopTaskResult - startTaskResult,
+          },
+        ]);
+      }
     };
 
-    const comparId = totalTimeToSeconds.filter(
-      (resu) => resu.cardId !== item.id
-    );
+    // const comparId = totalTimeToSeconds.filter(
+    //   (resu) => resu.cardId !== item.id
+    // );
 
-    if (
-      startWorkState &&
-      stopWorkState &&
-      localStorage.getItem("completCardsTimeArray") !== null &&
-      status === "Done"
-    ) {
-      setCumuledTimeCards({
-        cardId: item.id,
-        totalTime: stopTask - startTask,
-        uuid: uuidv4(),
-      });
-    }
+    // if (startWorkState && stopWorkState && status === "Done") {
+    //   setCumuledTimeCards({
+    //     cardId: item.id,
+    //     totalTime: stopTask - startTask,
+    //   });
+    //   if (cumuledTimeCards !== {} && totalTimeToSeconds.length === 0) {
+    //     setTotalTimeToSeconds([cumuledTimeCards]);
+    //   }
+    // }
 
-    if (status === "Done") {
-      setTotalTimeToSeconds([...totalTimeToSeconds, cumuledTimeCards]);
-    }
+    // // if (status === "Done") {
+    // //   setTotalTimeToSeconds([...totalTimeToSeconds, cumuledTimeCards]);
+    // // }
+
+    // // if (totalTimeToSeconds.length === 0) {
+    // //   setTotalTimeToSeconds([cumuledTimeCards]);
+    // //   localStorage.setItem("totalTimeToSeconds", totalTimeToSeconds);
+    // // }
+    // if (totalTimeToSeconds.length > 0) {
+    //   setTotalTimeToSeconds((totalTimeToSeconds) =>
+    //     totalTimeToSeconds.concat(cumuledTimeCards)
+    //   );
+    //   localStorage.setItem(
+    //     "cumuledTimeCards",
+    //     JSON.stringify(cumuledTimeCards)
+    //   );
+    // }
     // console.log(
     //   "compar id",
     //   cardIdCompleteTask.map((resu) => resu.cardId)
     // );
-    console.log("cumuledTimeCards", cumuledTimeCards);
+    // console.log("cumuledTimeCards", cumuledTimeCards);
     console.log("totalTimeToSeconds", totalTimeToSeconds);
     console.log("stopTask", stopTask);
     console.log("startTask", startTask);
@@ -336,16 +362,7 @@ function TaskboardItemCard({
         );
       }
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    stopTask,
-    startTask,
-    startWorkState,
-    stopWorkState,
-    setTotalTimeToSeconds,
-    item.id,
-  ]);
+  }, [stopTask, startTask, startWorkState, stopWorkState, status]);
 
   // useEffect(() => {
   //   // console.log("TotalTime Start:", TotalTimeStart);

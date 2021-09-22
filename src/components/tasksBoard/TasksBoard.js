@@ -82,7 +82,7 @@ function Taskboard() {
           text: "You can check the dashboard for information & statistics of your work done!",
           footer: "Always Just for better organization",
           showConfirmButton: false,
-          timer: 5000,
+          timer: 4200,
         });
       }, 1000);
       localStorage.setItem("DoneAlert", true);
