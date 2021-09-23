@@ -164,7 +164,13 @@ export default function TimeTracker({ itemsByStatus }) {
               {status === STATUS.STARTED ? "Track Time" : "Time Tracker"}
             </h1>
           </div>
-          <h2>Date - {n}</h2>
+          <h2
+            title="Current date and time"
+            data-toggle="tooltip"
+            data-placement="left"
+          >
+            Date - {n}
+          </h2>
           {!autoTrackTime && !projectDone ? (
             <div className="button-group">
               <button
@@ -210,13 +216,29 @@ export default function TimeTracker({ itemsByStatus }) {
             </Fragment>
           )}
 
-          <div className="time-lapse">
+          <div
+            title="Time spent since project start"
+            data-toggle="tooltip"
+            data-placement="left"
+            className="time-lapse"
+          >
             {threeDigits(hoursToDisplay)}:{twoDigits(minutesToDisplay)}:
             {twoDigits(secondsToDisplay)}
           </div>
-          <span>{`${dayWork} day(s)`}</span>
+          <span
+            title="Days worked"
+            data-toggle="tooltip"
+            data-placement="left"
+          >{`${dayWork} day(s)`}</span>
           <div className="indicator-section">
             <span
+              title={
+                status === STATUS.STARTED
+                  ? "The TimeTracker is Started"
+                  : "The TimeTracker is Stopped"
+              }
+              data-toggle="tooltip"
+              data-placement="left"
               className="status-indicator"
               style={
                 status === STATUS.STARTED

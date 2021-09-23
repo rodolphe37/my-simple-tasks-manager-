@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import supp from "../assets/supp.svg";
-import itemsByStatusAtom from "../../statesManager/atoms/itemsByStatusAtom";
+// import itemsByStatusAtom from "../../statesManager/atoms/itemsByStatusAtom";
 import openDashAtom from "../../statesManager/atoms/openDashAtom";
 import PriceIcon from "../assets/price.svg";
 import DashIcon from "../assets/increase.svg";
@@ -19,7 +19,7 @@ const Dashboard = () => {
   const [totalTimeToSeconds, setTotalTimeToSeconds] = useRecoilState(
     totalListTimeInSecondAtom
   );
-  const [itemsByStatus] = useRecoilState(itemsByStatusAtom);
+  // const [itemsByStatus] = useRecoilState(itemsByStatusAtom);
   const [changeDevise, setChangeDevise] = useState(true);
   // const [autoTrackTime] = useRecoilState(automaticTrackTimerAtom);
   const [totalTimeLocalStore] = useState(localStorage.getItem("time"));
@@ -30,10 +30,11 @@ const Dashboard = () => {
     JSON.parse(localStorage.getItem("finishedData"))
   );
   const [totalTimeSeconds, setTotalTimeSeconds] = useState([]);
-  const [totalStopTimeSeconds, setTotalStopTimeSeconds] = useState([
-    localStorage.getItem("stopArrayTimes"),
-  ]);
+  // const [totalStopTimeSeconds, setTotalStopTimeSeconds] = useState([
+  //   localStorage.getItem("stopArrayTimes"),
+  // ]);
   const [finishedDatas] = useRecoilState(finishedDatasAtom);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const startArrayTimes = [];
   const [projectDone] = useRecoilState(projectDoneAtom);
   // eslint-disable-next-line no-unused-vars
