@@ -92,8 +92,10 @@ function TaskboardItemCard({
 
   useEffect(() => {
     if (tasksCount) {
-      setProjectDone(true);
-      localStorage.setItem("ProjectDone", true);
+      setTimeout(() => {
+        setProjectDone(true);
+        localStorage.setItem("ProjectDone", true);
+      }, 1000);
       localStorage.setItem(
         "finishedData",
         JSON.stringify(completCardsTimeArray)

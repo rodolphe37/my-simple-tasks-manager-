@@ -398,10 +398,12 @@ const Dashboard = () => {
               {finishedDatas !== [] ? (
                 totalTimeSeconds.map((res, i) => (
                   <ul key={uuidv4()}>
-                    <li>
-                      <p>{i}</p>
-                      <p style={{ fontSize: 11 }}>{res}</p>
-                    </li>
+                    {res !== isNaN ? (
+                      <li>
+                        <p>{i}</p>
+                        <p style={{ fontSize: 11 }}>{res}</p>
+                      </li>
+                    ) : null}
                   </ul>
                 ))
               ) : (
