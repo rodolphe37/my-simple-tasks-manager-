@@ -96,9 +96,10 @@
 .list-dash > ul > li {
   list-style: none;
 }
-.dashTask-title {
+.dashTask-title,
+.inProgress-dash {
   font-weight: bold;
-  border-bottom: 1px solid black;
+  /* border-bottom: 1px solid black; */
   width: 100%;
   text-align: center;
 }

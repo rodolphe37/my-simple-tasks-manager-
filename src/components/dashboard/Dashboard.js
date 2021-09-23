@@ -377,6 +377,23 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
+        <div className="inProgress-dash">
+          <span className="dashTask-title">Number working sessions</span>
+          <div className="list-dash stickyNotes">
+            <div className="stickyListNote">
+              <span>Working session:</span>
+              <span>Time elapsed</span>
+            </div>
+            <div className="stickyListNote">
+              <span>Working session:</span>
+              <span>Time elapsed</span>
+            </div>
+            <div className="stickyListNote">
+              <span>Working session:</span>
+              <span>Time elapsed</span>
+            </div>
+          </div>
+        </div>
         <div className="tasks-dash cardsRapport">
           <div className="done-dash">
             <span className="dashTask-title">Tasks Done</span>
@@ -542,23 +559,6 @@ const Dashboard = () => {
                 ) : (
                   <strong style={{ color: "darkred" }}>None</strong>
                 )}
-              </div>
-            </div>
-          </div>
-          <div className="inProgress-dash">
-            <span className="dashTask-title">Number working sessions</span>
-            <div className="list-dash stickyNotes">
-              <div className="stickyListNote">
-                <span>Working session:</span>
-                <span>Time elapsed</span>
-              </div>
-              <div className="stickyListNote">
-                <span>Working session:</span>
-                <span>Time elapsed</span>
-              </div>
-              <div className="stickyListNote">
-                <span>Working session:</span>
-                <span>Time elapsed</span>
               </div>
             </div>
           </div>
