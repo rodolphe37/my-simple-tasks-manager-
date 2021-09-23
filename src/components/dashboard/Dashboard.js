@@ -385,23 +385,7 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        <div className="inProgress-dash">
-          <span className="dashTask-title">Number working sessions</span>
-          <div className="list-dash stickyNotes">
-            <div className="stickyListNote">
-              <span>Working session:</span>
-              <span>Time elapsed</span>
-            </div>
-            <div className="stickyListNote">
-              <span>Working session:</span>
-              <span>Time elapsed</span>
-            </div>
-            <div className="stickyListNote">
-              <span>Working session:</span>
-              <span>Time elapsed</span>
-            </div>
-          </div>
-        </div>
+
         <div className="tasks-dash cardsRapport">
           <div className="done-dash">
             <span className="dashTask-title">Tasks Done</span>
@@ -446,7 +430,7 @@ const Dashboard = () => {
           </div>
           <div className="todo-dash">
             <span className="dashTask-title">
-              Task that required more than 1 hour
+              Working session that required more than 1 hour
             </span>
             <div className="list-dash">
               {finishedDatas !== [] ? (
@@ -472,14 +456,14 @@ const Dashboard = () => {
                   ))
               ) : (
                 <strong style={{ color: "darkred", fontWeight: "bold" }}>
-                  No tasks in this section
+                  No Working session in this section
                 </strong>
               )}
             </div>
           </div>
           <div className="inProgress-dash">
             <span className="dashTask-title">
-              Task that required less than 1 hour
+              Working session that required less than 1 hour
             </span>
             <div className="list-dash">
               {finishedDatas !== [] ? (
@@ -504,13 +488,29 @@ const Dashboard = () => {
                   ))
               ) : (
                 <strong style={{ color: "darkred", fontWeight: "bold" }}>
-                  No tasks in this section
+                  No Working session in this section
                 </strong>
               )}
             </div>
           </div>
         </div>
-
+        <div className="inProgress-dash">
+          <span className="dashTask-title">Number working connexion</span>
+          <div className="list-dash stickyNotes">
+            <div className="stickyListNote">
+              <span>Working connexion:</span>
+              <span>Time elapsed</span>
+            </div>
+            <div className="stickyListNote">
+              <span>Working connexion:</span>
+              <span>Time elapsed</span>
+            </div>
+            <div className="stickyListNote">
+              <span>Working connexion:</span>
+              <span>Time elapsed</span>
+            </div>
+          </div>
+        </div>
         <div className="tasks-dash bottomSection">
           <div className="todo-dash">
             <span className="dashTask-title">Sticky Notes</span>
