@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 const NoteComponent = () => {
+  const [AllNotes, setAllNotes] = useState([]);
   // eslint-disable-next-line no-unused-vars
   const [noteNumberToDisplay, setNoteNumberToDisplay] = useState(
     localStorage.getItem("noteNumberToDisplay") ?? 1

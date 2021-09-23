@@ -352,3 +352,17 @@ button,
   transform: rotate(-180deg);
   transition: all 0.5s ease-in-out;
 }
+
+.stickyListNoteDash {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  font: 20px "Gloria Hallelujah", cursive;
+  line-height: 1.5;
+  border: 0;
+  border-radius: 3px;
+  background: linear-gradient(#f9efaf, #f7e98d);
+  box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
+}

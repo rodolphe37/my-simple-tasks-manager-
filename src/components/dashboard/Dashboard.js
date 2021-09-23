@@ -200,6 +200,11 @@ const Dashboard = () => {
     });
   };
 
+  let Note1Content = localStorage.getItem("valueNote1");
+  let Note2Content = localStorage.getItem("valueNote2") ?? null;
+  let Note3Content = localStorage.getItem("valueNote3") ?? null;
+  let Note4Content = localStorage.getItem("valueNote4") ?? null;
+
   return (
     <div className="dash-content scale-in-ver-bottom">
       <div className="header-dash">
@@ -408,7 +413,7 @@ const Dashboard = () => {
                   .filter((totMax) => totMax.total >= 3600)
                   .map((res, i) => (
                     <ul key={uuidv4()}>
-                      {res.total !== isNaN ? (
+                      {isNaN(res.total) === false ? (
                         <li>
                           <strong>{res.title}</strong>
                           <br />
@@ -439,7 +444,7 @@ const Dashboard = () => {
                   .filter((totMax) => totMax.total < 3600)
                   .map((res, i) => (
                     <ul key={uuidv4()}>
-                      {res.total !== isNaN ? (
+                      {isNaN(res.total) === false ? (
                         <li>
                           <strong>{res.title}</strong>
                           <br />
@@ -466,17 +471,58 @@ const Dashboard = () => {
           <div className="todo-dash">
             <span className="dashTask-title">Sticky Notes</span>
             <div className="list-dash stickyNotes">
-              <div className="stickyListNote">
-                <span>Sticky Note:</span>
-                <span>Content Note</span>
+              <div className="stickyListNoteDash">
+                {Note1Content ? (
+                  <Fragment>
+                    <span style={{ color: "darkblue", fontWeight: "bold" }}>
+                      Sticky Note:1
+                    </span>
+                    <br />
+                    <span>{Note1Content}</span>
+                  </Fragment>
+                ) : (
+                  <strong>None</strong>
+                )}
               </div>
-              <div className="stickyListNote">
-                <span>Sticky Note:</span>
-                <span>Content Note</span>
+              <div className="stickyListNoteDash">
+                {Note2Content ? (
+                  <Fragment>
+                    <span style={{ color: "darkblue", fontWeight: "bold" }}>
+                      Sticky Note:2
+                    </span>
+                    <br />
+                    <span>{Note2Content}</span>
+                  </Fragment>
+                ) : (
+                  <strong>None</strong>
+                )}
               </div>
-              <div className="stickyListNote">
-                <span>Sticky Note:</span>
-                <span>Content Note</span>
+              <div className="stickyListNoteDash">
+                {Note3Content ? (
+                  <Fragment>
+                    <span style={{ color: "darkblue", fontWeight: "bold" }}>
+                      Sticky Note:3
+                    </span>
+                    <br />
+                    <span>{Note3Content}</span>
+                  </Fragment>
+                ) : (
+                  <strong style={{ color: "darkred" }}>None</strong>
+                )}
+              </div>
+
+              <div className="stickyListNoteDash">
+                {Note4Content ? (
+                  <Fragment>
+                    <span style={{ color: "darkblue", fontWeight: "bold" }}>
+                      Sticky Note:4
+                    </span>
+                    <br />
+                    <span>{Note4Content}</span>
+                  </Fragment>
+                ) : (
+                  <strong>None</strong>
+                )}
               </div>
             </div>
           </div>
