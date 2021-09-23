@@ -206,7 +206,8 @@ function Taskboard() {
           <div className={closed ? "none" : "overlay"}></div>
           <InfoMessage
             type="warning"
-            content="You want to delete individual cards working time history?"
+            content="Do you want to delete the complete history of the time spent on the cards? "
+            subContent="You won't be able to revert this!"
           />
         </Fragment>
       ) : null}

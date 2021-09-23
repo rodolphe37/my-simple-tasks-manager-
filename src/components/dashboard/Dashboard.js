@@ -183,15 +183,23 @@ const Dashboard = () => {
       totalSum.map((res, i) => res)
     );
     console.log("total:", totalTimeSeconds);
+    // console.log("cardIdExists:", cardIdExists(cardIdTime));
 
     // console.log("start", startedTime);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [finishedDatas, setTotalTimeToSeconds, totalTimeToSeconds, projectDone]);
 
+  // function cardIdExists(id) {
+  //   return totalSum.some(function (el) {
+  //     return el.id === id;
+  //   });
+  // }
+
   const addSumStartStop = (arr1, arr2) => {
     arr1.forEach((num1, index) => {
       const num2 = arr2[index];
       console.log("addition:", num1 - num2, index);
+
       totalSum.push({
         total: num1 - num2,
         id: cardIdTime[index],
