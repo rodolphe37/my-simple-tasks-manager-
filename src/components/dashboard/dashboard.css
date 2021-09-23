@@ -100,6 +100,7 @@
   font-weight: bold;
   border-bottom: 1px solid black;
   width: 100%;
+  text-align: center;
 }
 .list-dash {
   display: grid !important;
@@ -164,6 +165,9 @@
   align-items: flex-start;
   justify-content: space-around !important;
   flex-direction: column !important;
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  grid-gap: 30px !important;
 }
 .stickyListNote {
   display: grid !important;

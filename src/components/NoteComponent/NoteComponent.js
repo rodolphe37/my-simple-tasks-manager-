@@ -183,7 +183,7 @@ const NoteComponent = () => {
   }, [valueNote1, valueNote2, valueNote3, valueNote4, noteNumberToDisplay]);
 
   return (
-    <div style={{ display: "flex", marginTop: 7 }}>
+    <div className="scale-in-ver-top" style={{ display: "flex", marginTop: 7 }}>
       <button
         style={{ position: "relative", zIndex: 5 }}
         disabled={createButtonState ? false : true}

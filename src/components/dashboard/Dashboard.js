@@ -166,7 +166,7 @@ const Dashboard = () => {
     if (
       projectDone &&
       localStorage.getItem("startArrayTimes") === null &&
-      localStorage.getItem("startArrayTimes") === null
+      localStorage.getItem("stopArrayTimes") === null
     ) {
       localStorage.setItem("startArrayTimes", [...startArrayTimes]);
       localStorage.setItem("stopArrayTimes", [...stopArray]);
@@ -335,9 +335,7 @@ const Dashboard = () => {
             {stockItemsByStatus && (
               <Fragment>
                 <p style={{ fontWeight: "bold", fontSize: 25 }}>
-                  {stockItemsByStatus["To Do"].length +
-                    stockItemsByStatus["In Progress"].length +
-                    stockItemsByStatus["Done"].length}{" "}
+                  {stockItemsByStatus["Done"].length}{" "}
                   <sub style={{ fontSize: 11, fontStyle: "italic" }}>tasks</sub>
                 </p>
                 <hr />
@@ -405,8 +403,26 @@ const Dashboard = () => {
               </div>
             )}
           </div>
+          <div className="bottom-dash">
+            <span className="dashTask-title">Time Elapsed For each Task</span>
+            <div className="list-dash bottom">
+              {completCardsTimeArray
+                .filter((resFiltered) => resFiltered.start !== "")
+                .map((res) => (
+                  <div key={uuidv4()}>
+                    <p>{res.cardTitle}</p>
+                    <hr />
+                    <p>Start: {res.start}</p>
+                    <p>Stop: {res.stop}</p>
+                    <hr />
+                  </div>
+                ))}
+            </div>
+          </div>
           <div className="todo-dash">
-            <span className="dashTask-title">Task that required more time</span>
+            <span className="dashTask-title">
+              Task that required more than 1 hour
+            </span>
             <div className="list-dash">
               {finishedDatas !== [] ? (
                 totalTimeSeconds
@@ -437,7 +453,9 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="inProgress-dash">
-            <span className="dashTask-title">Task that required less time</span>
+            <span className="dashTask-title">
+              Task that required less than 1 hour
+            </span>
             <div className="list-dash">
               {finishedDatas !== [] ? (
                 totalTimeSeconds
@@ -467,6 +485,7 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
+
         <div className="tasks-dash bottomSection">
           <div className="todo-dash">
             <span className="dashTask-title">Sticky Notes</span>
@@ -481,7 +500,7 @@ const Dashboard = () => {
                     <span>{Note1Content}</span>
                   </Fragment>
                 ) : (
-                  <strong>None</strong>
+                  <strong style={{ color: "darkred" }}>None</strong>
                 )}
               </div>
               <div className="stickyListNoteDash">
@@ -494,7 +513,7 @@ const Dashboard = () => {
                     <span>{Note2Content}</span>
                   </Fragment>
                 ) : (
-                  <strong>None</strong>
+                  <strong style={{ color: "darkred" }}>None</strong>
                 )}
               </div>
               <div className="stickyListNoteDash">
@@ -521,7 +540,7 @@ const Dashboard = () => {
                     <span>{Note4Content}</span>
                   </Fragment>
                 ) : (
-                  <strong>None</strong>
+                  <strong style={{ color: "darkred" }}>None</strong>
                 )}
               </div>
             </div>
@@ -544,22 +563,7 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        <div className="bottom-dash">
-          <span className="dashTask-title">Time Elapsed For each Task</span>
-          <div className="list-dash bottom">
-            {completCardsTimeArray
-              .filter((resFiltered) => resFiltered.start !== "")
-              .map((res) => (
-                <div key={uuidv4()}>
-                  <p>{res.cardTitle}</p>
-                  <hr />
-                  <p>Start: {res.start}</p>
-                  <p>Stop: {res.stop}</p>
-                  <hr />
-                </div>
-              ))}
-          </div>
-        </div>
+
         <br />
         <div className="footerDash">
           <div className="copyrightContent">
