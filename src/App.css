@@ -211,9 +211,16 @@ hr {
     margin-left: 10%;
   }
   .indicator-section {
-    width: 50%;
-    transform: translate(19em, 10px);
+    width: 16%;
+    transform: translate(8em, 0px);
     justify-content: center !important;
+  }
+  .status-indicator {
+    transform: translate(-2em);
+    position: absolute;
+  }
+  .indicator-section > div {
+    margin-left: 23px;
   }
   .ribbon {
     width: 95px;

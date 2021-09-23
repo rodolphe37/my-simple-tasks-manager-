@@ -29,9 +29,10 @@ const Dashboard = () => {
   const [completCardsTimeArray] = useState(
     JSON.parse(localStorage.getItem("finishedData"))
   );
-  const [totalAllCArdsTimeSeconds] = useState(
-    JSON.parse(localStorage.getItem("totalTimeInSeconds"))
-  );
+  const [totalTimeSeconds, setTotalTimeSeconds] = useState([]);
+  const [totalStopTimeSeconds, setTotalStopTimeSeconds] = useState([
+    localStorage.getItem("stopArrayTimes"),
+  ]);
   const [finishedDatas] = useRecoilState(finishedDatasAtom);
   const startArrayTimes = [];
   const [projectDone] = useRecoilState(projectDoneAtom);
@@ -85,8 +86,10 @@ const Dashboard = () => {
     if (projectDone && tjm === 0) {
       return handlePrice();
     }
-    console.log("changeDevise", changeDevise);
-    console.log(startArrayTimes);
+
+    // console.log(startArrayTimes);
+
+    console.log("totalStartTimeSeconds", totalTimeSeconds);
   }, [
     tjm,
     setEurTjm,
@@ -97,6 +100,8 @@ const Dashboard = () => {
     stockItemsByStatus,
     changeDevise,
     startArrayTimes,
+    setTotalTimeSeconds,
+    totalTimeSeconds,
   ]);
 
   const taskPerHour =
@@ -118,6 +123,8 @@ const Dashboard = () => {
   }
 
   let stopArray = [];
+
+  let totalSum = [];
 
   useEffect(() => {
     let startedTime = finishedDatas.map((res) => res.start);
@@ -154,9 +161,36 @@ const Dashboard = () => {
     // console.log("stop", finishedTime);
     console.log("startTaskForArray", startArrayTimes);
 
+    if (
+      projectDone &&
+      localStorage.getItem("startArrayTimes") === null &&
+      localStorage.getItem("startArrayTimes") === null
+    ) {
+      localStorage.setItem("startArrayTimes", [...startArrayTimes]);
+      localStorage.setItem("stopArrayTimes", [...stopArray]);
+    }
+    if (projectDone && startArrayTimes.length > 0 && stopArray.length > 0) {
+      addSumStartStop(stopArray, startArrayTimes);
+    }
+
+    console.log(
+      "totalSum:",
+      totalSum.map((res, i) => res)
+    );
+    console.log("totalSum lenght:", totalSum.length);
+
     // console.log("start", startedTime);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [finishedDatas, setTotalTimeToSeconds, totalTimeToSeconds]);
+  }, [finishedDatas, setTotalTimeToSeconds, totalTimeToSeconds, projectDone]);
+
+  const addSumStartStop = (arr1, arr2) => {
+    arr1.forEach((num1, index) => {
+      const num2 = arr2[index];
+      console.log("addition:", num1 - num2, index);
+      totalSum.push(num1 - num2);
+      setTotalTimeSeconds(...totalTimeSeconds, totalSum);
+    });
+  };
 
   return (
     <div className="dash-content scale-in-ver-bottom">
@@ -361,22 +395,20 @@ const Dashboard = () => {
           <div className="todo-dash">
             <span className="dashTask-title">Task that required more time</span>
             <div className="list-dash">
-              {/*finishedDatas !== [] ? (
-                totalAllCArdsTimeSeconds
-                  .filter((res) => res.totalTime !== 0)
-                  .map((res) => (
-                    <ul key={uuidv4()}>
-                      <li>
-                        <p>{res.cardId}</p>
-                        <p style={{ fontSize: 11 }}>{res.totalTime}</p>
-                      </li>
-                    </ul>
-                  ))
+              {finishedDatas !== [] ? (
+                totalTimeSeconds.map((res, i) => (
+                  <ul key={uuidv4()}>
+                    <li>
+                      <p>{i}</p>
+                      <p style={{ fontSize: 11 }}>{res}</p>
+                    </li>
+                  </ul>
+                ))
               ) : (
                 <strong style={{ color: "darkred", fontWeight: "bold" }}>
                   No tasks in this section
                 </strong>
-              )*/}
+              )}
             </div>
           </div>
           <div className="inProgress-dash">

@@ -178,10 +178,15 @@ function Taskboard() {
       );
     };
     syncTrackTime();
+
+    if (!projectDone) {
+      localStorage.removeItem("stopArrayTimes");
+      localStorage.removeItem("startArrayTimes");
+    }
     // console.log("initialValues", initialValues);
     // console.log("clickedAddButton taskboard", clickedAddButton);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [initialValues, statusOf]);
+  }, [initialValues, statusOf, projectDone]);
 
   const handleViewBottomToolbar = () => {
     if (viewBottomToolbar) {

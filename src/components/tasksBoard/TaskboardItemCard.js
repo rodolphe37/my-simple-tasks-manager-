@@ -93,15 +93,17 @@ function TaskboardItemCard({
   useEffect(() => {
     if (tasksCount) {
       setProjectDone(true);
+      localStorage.setItem("ProjectDone", true);
       localStorage.setItem(
         "finishedData",
         JSON.stringify(completCardsTimeArray)
       );
     } else {
       setProjectDone(false);
+      localStorage.setItem("ProjectDone", false);
       localStorage.removeItem("finishedData");
     }
-    if (localStorage.getItem("finishedData") !== null)
+    if (localStorage.getItem("finishedData") !== null && !projectDone)
       setFinishedDatas(JSON.parse(localStorage.getItem("finishedData")));
     // console.log("projectDone", projectDone);
   }, [
