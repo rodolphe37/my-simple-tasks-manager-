@@ -89,7 +89,7 @@ const Dashboard = () => {
 
     // console.log(startArrayTimes);
 
-    console.log("totalStartTimeSeconds", totalTimeSeconds);
+    // console.log("totalStartTimeSeconds", totalTimeSeconds);
   }, [
     tjm,
     setEurTjm,
@@ -125,11 +125,12 @@ const Dashboard = () => {
   let stopArray = [];
 
   let totalSum = [];
+  let cardIdTime = finishedDatas.map((res) => res.cardId);
+  let cardTitleTime = finishedDatas.map((res) => res.cardTitle);
 
   useEffect(() => {
     let startedTime = finishedDatas.map((res) => res.start);
     let finishedTime = finishedDatas.map((res) => res.stop);
-    let cardIdTime = finishedDatas.map((res) => res.cardId);
 
     for (let i = 0; i < startedTime.length; i++) {
       // console.log("start", startedTime[i]);
@@ -172,12 +173,15 @@ const Dashboard = () => {
     if (projectDone && startArrayTimes.length > 0 && stopArray.length > 0) {
       addSumStartStop(stopArray, startArrayTimes);
     }
+    if (totalSum !== []) {
+      setTotalTimeSeconds(...totalTimeSeconds, totalSum);
+    }
 
     console.log(
       "totalSum:",
       totalSum.map((res, i) => res)
     );
-    console.log("totalSum lenght:", totalSum.length);
+    console.log("total:", totalTimeSeconds);
 
     // console.log("start", startedTime);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -187,8 +191,11 @@ const Dashboard = () => {
     arr1.forEach((num1, index) => {
       const num2 = arr2[index];
       console.log("addition:", num1 - num2, index);
-      totalSum.push(num1 - num2);
-      setTotalTimeSeconds(...totalTimeSeconds, totalSum);
+      totalSum.push({
+        total: num1 - num2,
+        id: cardIdTime[index],
+        title: cardTitleTime[index],
+      });
     });
   };
 
@@ -396,16 +403,26 @@ const Dashboard = () => {
             <span className="dashTask-title">Task that required more time</span>
             <div className="list-dash">
               {finishedDatas !== [] ? (
-                totalTimeSeconds.map((res, i) => (
-                  <ul key={uuidv4()}>
-                    {res !== isNaN ? (
-                      <li>
-                        <p>{i}</p>
-                        <p style={{ fontSize: 11 }}>{res}</p>
-                      </li>
-                    ) : null}
-                  </ul>
-                ))
+                totalTimeSeconds
+                  .filter((totMax) => totMax.total >= 3600)
+                  .map((res, i) => (
+                    <ul key={uuidv4()}>
+                      {res.total !== isNaN ? (
+                        <li>
+                          <strong>{res.title}</strong>
+                          <br />
+                          <sub>{res.id}</sub>
+
+                          <p style={{ fontSize: 15, fontWeight: "bold" }}>
+                            {new Date(res.total * 1000)
+                              .toISOString()
+                              .substr(11, 8)}{" "}
+                            hour(s)
+                          </p>
+                        </li>
+                      ) : null}
+                    </ul>
+                  ))
               ) : (
                 <strong style={{ color: "darkred", fontWeight: "bold" }}>
                   No tasks in this section
@@ -416,14 +433,26 @@ const Dashboard = () => {
           <div className="inProgress-dash">
             <span className="dashTask-title">Task that required less time</span>
             <div className="list-dash">
-              {stockItemsByStatus["In Progress"].length > 0 ? (
-                stockItemsByStatus["In Progress"].map((res, i) => (
-                  <ul key={uuidv4()}>
-                    <li>
-                      <p style={{ fontSize: 11 }}>{res.title}</p>
-                    </li>
-                  </ul>
-                ))
+              {finishedDatas !== [] ? (
+                totalTimeSeconds
+                  .filter((totMax) => totMax.total < 3600)
+                  .map((res, i) => (
+                    <ul key={uuidv4()}>
+                      {res.total !== isNaN ? (
+                        <li>
+                          <strong>{res.title}</strong>
+                          <br />
+                          <sub>{res.id}</sub>
+                          <p style={{ fontSize: 15, fontWeight: "bold" }}>
+                            {new Date(res.total * 1000)
+                              .toISOString()
+                              .substr(11, 8)}{" "}
+                            hour(s)
+                          </p>
+                        </li>
+                      ) : null}
+                    </ul>
+                  ))
               ) : (
                 <strong style={{ color: "darkred", fontWeight: "bold" }}>
                   No tasks in this section
