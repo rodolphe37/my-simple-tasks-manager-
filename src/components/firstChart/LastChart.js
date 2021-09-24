@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
 
 const options = {
@@ -26,11 +26,11 @@ const HorizontalBarChart = () => {
   const [dataTasks] = useState([JSON.parse(localStorage.getItem("counts"))]);
 
   const data = {
-    labels: Object.keys(dataTasks[0]),
+    labels: dataTasks ? Object.keys(dataTasks[0]) : null,
     datasets: [
       {
         label: "Number of work sessions per task",
-        data: Object.values(dataTasks[0]),
+        data: dataTasks ? Object.values(dataTasks[0]) : null,
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
@@ -58,13 +58,17 @@ const HorizontalBarChart = () => {
   }, [dataTasks]);
   return (
     <>
-      <div className="header">
-        <h1 className="title">Number of work sessions per task </h1>
-        <sub style={{ fontWeight: "bold" }}>
-          (Task name on the left and number of work sessions on the bottom)
-        </sub>
-      </div>
-      <Bar data={data} options={options} />
+      {dataTasks ? (
+        <Fragment>
+          <div className="header">
+            <h1 className="title">Number of work sessions per task </h1>
+            <sub style={{ fontWeight: "bold" }}>
+              (Task name on the left and number of work sessions on the bottom)
+            </sub>
+          </div>
+          <Bar data={data} options={options} />
+        </Fragment>
+      ) : null}
     </>
   );
 };

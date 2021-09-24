@@ -89,7 +89,7 @@ const Dashboard = () => {
       newTaskArray.push(finishedDatas.filter((res) => res.start !== ""));
     }
 
-    console.log("completCardsTimeArray", newTaskArray[0]);
+    // console.log("completCardsTimeArray", newTaskArray[0]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     tjm,
@@ -163,22 +163,25 @@ const Dashboard = () => {
     localStorage.setItem("connexionNumber", totalSum.length);
     setConnexionNumber(localStorage.getItem("connexionNumber"));
 
-    const counts = newTaskArray[0]
-      .map((resu) => resu.cardTitle)
-      .reduce(
-        (acc, value) => ({
-          ...acc,
-          [value]: (acc[value] || 0) + 1,
-        }),
-        {}
-      );
-    localStorage.setItem("counts", JSON.stringify(counts));
+    if (newTaskArray) {
+      const counts = newTaskArray[0]
+        .map((resu) => resu.cardTitle)
+        .reduce(
+          (acc, value) => ({
+            ...acc,
+            [value]: (acc[value] || 0) + 1,
+          }),
+          {}
+        );
+      localStorage.setItem("counts", JSON.stringify(counts));
+      console.log("total:", counts);
+    }
 
     // console.log(
     //   "totalSum:",
     //   totalSum.map((res, i) => res)
     // );
-    console.log("total:", counts);
+
     // check();
     // console.log("ObjIdToFind", unifySameCard);
     // console.log("count", counts[0]);
