@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { Fragment, useEffect, useState } from "react";
 import { Button, Card, Modal, Typography, Dropdown, Menu, Form } from "antd";
 import { DeleteOutlined, EditOutlined, MoreOutlined } from "@ant-design/icons";
@@ -9,15 +8,13 @@ import Checklist from "../assets/arrows.svg";
 import List from "../assets/lists.svg";
 import Clipboard from "../assets/clipboard.svg";
 import { useRecoilState } from "recoil";
-import timeAllCardsAtom from "../../statesManager/atoms/timeAllCardsAtom";
 import TimerEndIcon from "../assets/timer.svg";
 import StartIcon from "../assets/start.svg";
-import cumulTimeCardsTaskAtom from "../../statesManager/atoms/cumulTimeCardsTaskAtom";
 import { v4 as uuidv4 } from "uuid";
 import completCardsTimeArrayAtom from "../../statesManager/atoms/completCardsTimeArrayAtom";
 import projectDoneAtom from "../../statesManager/atoms/projectDoneAtom";
-import totalListTimeInSecondAtom from "../../statesManager/atoms/totalListTimeInSecondAtom";
 import finishedDatasAtom from "../../statesManager/atoms/finishedDatasAtom";
+import useDateTime from "../../hooks/useDateTime";
 
 const StyledCard = styled(Card)`
   margin: 0.5rem;
@@ -40,19 +37,10 @@ function TaskboardItemCard({
   isDragging,
   onEdit,
   onDelete,
-  items,
   itemsByStatus,
-  setItemsByStatus,
 }) {
-  let d = new Date();
-  let n = d.toLocaleString();
-  const [timeForCard, setTimeForCard] = useState("");
-  const [totalTimeToSeconds, setTotalTimeToSeconds] = useRecoilState(
-    totalListTimeInSecondAtom
-  );
-  const [cumuledTimeCards, setCumuledTimeCards] = useRecoilState(
-    cumulTimeCardsTaskAtom
-  );
+  const { n } = useDateTime();
+
   const [completCardsTimeArray, setCompletCardsTimeArray] = useRecoilState(
     completCardsTimeArrayAtom
   );
@@ -66,8 +54,6 @@ function TaskboardItemCard({
     localStorage.getItem("stopTimeWork") ?? ""
   );
   const [cardId, setCardId] = useState(0);
-  const [startTask, setStartTask] = useState(0);
-  const [stopTask, setStopTask] = useState(0);
 
   let cardIdFromTimeAll = timeAllCards.map((res) =>
     JSON.parse(`${res.cardId}`)
@@ -82,8 +68,6 @@ function TaskboardItemCard({
   const TotalTimeStop = completCardsTimeArray
     .filter((res) => res.stop)
     .map((result) => result.stop !== "");
-
-  // USE UUIDV4 FOR GENERATE unique id
 
   let tasksCount =
     itemsByStatus["In Progress"].length === 0 &&
@@ -107,7 +91,6 @@ function TaskboardItemCard({
     }
     if (localStorage.getItem("finishedData") !== null && !projectDone)
       setFinishedDatas(JSON.parse(localStorage.getItem("finishedData")));
-    // console.log("projectDone", projectDone);
   }, [
     setProjectDone,
     itemsByStatus,
@@ -118,12 +101,6 @@ function TaskboardItemCard({
   ]);
 
   useEffect(() => {
-    // console.log("timestamp", item.timestamp);
-    if (item.timestamp === undefined) {
-      setTimeForCard(n);
-    }
-    // localStorage.setItem("timeStamp", timeForCard);
-    // console.log("itms status", itemsByStatus["Done"].length);
     if (status === "In Progress") {
       setStartWorkState(n);
       setTimeAllCards([
@@ -135,7 +112,6 @@ function TaskboardItemCard({
 
     if (!projectDone && finishedDatas !== []) {
       if (status === "Done") {
-        // const re = timeAllCards.map((res) => res.start);
         setCardId(cardIdFromTimeAll);
         setStopWorkState(n);
         setStartWorkState(localStorage.getItem("startTimeWork"));
@@ -212,10 +188,6 @@ function TaskboardItemCard({
       size="small"
       title={
         <BaseTooltip overlay={item.title}>
-          {/* styled(Typography.Title) throws an error in console about
-          forwarding ref in function components.
-          Because Typography.Title doesn't accept a ref.
-          So, we just placed a span tag here. */}
           <span
             style={{
               display: "flex",
@@ -340,7 +312,6 @@ function TaskboardItemCard({
         </BaseTooltip>
       ) : null}
       <div
-        // key={item.id}
         style={
           status === "Done"
             ? { border: "1px dotted gray", padding: 8 }

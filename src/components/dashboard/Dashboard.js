@@ -1,7 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import supp from "../assets/supp.svg";
-// import itemsByStatusAtom from "../../statesManager/atoms/itemsByStatusAtom";
 import openDashAtom from "../../statesManager/atoms/openDashAtom";
 import PriceIcon from "../assets/price.svg";
 import DashIcon from "../assets/increase.svg";
@@ -30,14 +29,15 @@ import SecondChart from "../firstChart/SecondChart";
 import LastChart from "../firstChart/LastChart";
 import useCustomAlertHook from "../../hooks/useCustomAlertHook";
 import useCutDecimals from "../../hooks/useCutDecimals";
+import useHmsToSeconds from "../../hooks/useHmsToSeconds";
+import useAddSumStartStop from "../../hooks/useAddSumStartStop";
 
 const Dashboard = () => {
   const [totalTimeToSeconds, setTotalTimeToSeconds] = useRecoilState(
     totalListTimeInSecondAtom
   );
-  // const [itemsByStatus] = useRecoilState(itemsByStatusAtom);
+
   const [changeDevise, setChangeDevise] = useState(true);
-  // const [autoTrackTime] = useRecoilState(automaticTrackTimerAtom);
   const [totalTimeLocalStore] = useState(localStorage.getItem("time"));
   const [stockItemsByStatus] = useState(
     JSON.parse(localStorage.getItem("itemsByStatus"))
@@ -46,9 +46,7 @@ const Dashboard = () => {
     JSON.parse(localStorage.getItem("finishedData"))
   );
   const [totalTimeSeconds, setTotalTimeSeconds] = useState([]);
-  // const [totalStopTimeSeconds, setTotalStopTimeSeconds] = useState([
-  //   localStorage.getItem("stopArrayTimes"),
-  // ]);
+
   let totalSum = [];
   const [connexionNumber, setConnexionNumber] = useState(0);
   const [finishedDatas] = useRecoilState(finishedDatasAtom);
@@ -58,13 +56,14 @@ const Dashboard = () => {
   const [projectDone] = useRecoilState(projectDoneAtom);
   // eslint-disable-next-line no-unused-vars
   const [openDash, setOpenDash] = useRecoilState(openDashAtom);
-  // const [tjm, setTjm] = useState(localStorage.getItem("tjm") ?? 0);
   const [eurTjm, setEurTjm] = useState(0);
   const { tjm, setTjm, handlePrice } = useCustomAlertHook();
-
+  const { hmsToSecondsOnly } = useHmsToSeconds();
   const { cutDecimals } = useCutDecimals();
+  const [unifySameCard, setUnifySameCard] = useState([]);
   const changeEurDoll = 0.85;
   let totalEuro = eurTjm * changeEurDoll;
+  let newTaskArray = [];
   useEffect(() => {
     if (!tjm) {
       setEurTjm(0);
@@ -74,6 +73,7 @@ const Dashboard = () => {
   const handleChangeDevise = () => {
     setChangeDevise((changeDevise) => !changeDevise);
   };
+
   useEffect(() => {
     if (tjm) {
       localStorage.setItem("tjm", tjm);
@@ -84,10 +84,14 @@ const Dashboard = () => {
     if (projectDone && tjm === 0) {
       return handlePrice();
     }
+    if (projectDone) {
+      newTaskArray.push(finishedDatas.filter((res) => res.start !== ""));
+    }
 
-    // console.log(startArrayTimes);
-
-    // console.log("totalStartTimeSeconds", totalTimeSeconds);
+    console.log(
+      "completCardsTimeArray",
+      newTaskArray[0].map((resu) => resu.cardId)
+    );
   }, [
     tjm,
     setEurTjm,
@@ -101,23 +105,14 @@ const Dashboard = () => {
     totalTimeSeconds,
   ]);
 
+  const { addSumStartStop } = useAddSumStartStop();
+
   const taskPerHour =
     stockItemsByStatus["To Do"].length +
     stockItemsByStatus["In Progress"].length +
     stockItemsByStatus["Done"].length;
 
   const numberKeeped = 8;
-
-  function hmsToSecondsOnly(str) {
-    let p = str.split(":"),
-      s = 0,
-      m = 1;
-    while (p.length > 0) {
-      s += m * parseInt(p.pop(), 10);
-      m *= 60;
-    }
-    return s;
-  }
 
   let cardIdTime = finishedDatas.map((res) => res.cardId);
   let cardTitleTime = finishedDatas.map((res) => res.cardTitle);
@@ -127,33 +122,24 @@ const Dashboard = () => {
     let finishedTime = finishedDatas.map((res) => res.stop);
 
     for (let i = 0; i < startedTime.length; i++) {
-      // console.log("start", startedTime[i]);
       const startTask = startedTime[i];
       const hoursToMinStartTask = startTask.substring(
         startTask.length - numberKeeped
       );
-
-      // console.log("startTask", hoursToMinStartTask);
-
       const startTaskResult = hmsToSecondsOnly(hoursToMinStartTask);
       startArrayTimes.push(startTaskResult);
     }
 
     for (let i = 0; i < finishedTime.length; i++) {
-      // console.log("start", finishedTime[i]);
-
       const stopTask = finishedTime[i];
       const hoursToMinStopTask = stopTask.substring(
         stopTask.length - numberKeeped
       );
-      // console.log("startTask", hoursToMinStartTask);
-      // console.log("cardIdCompleteTask", cardIdCompleteTask);
-
       const stopTaskResult = hmsToSecondsOnly(hoursToMinStopTask);
       stopArray.push(stopTaskResult);
     }
+
     console.log("stopTaskForArray", stopArray);
-    // console.log("stop", finishedTime);
     console.log("startTaskForArray", startArrayTimes);
 
     if (
@@ -165,8 +151,13 @@ const Dashboard = () => {
       localStorage.setItem("stopArrayTimes", [...stopArray]);
     }
     if (projectDone && startArrayTimes.length > 0 && stopArray.length > 0) {
-      addSumStartStop(stopArray, startArrayTimes);
-      // setConnexionNumber(totalSum.length);
+      addSumStartStop(
+        stopArray,
+        startArrayTimes,
+        totalSum,
+        cardIdTime,
+        cardTitleTime
+      );
     }
     if (totalSum !== []) {
       setTotalTimeSeconds(...totalTimeSeconds, totalSum);
@@ -174,42 +165,35 @@ const Dashboard = () => {
     localStorage.setItem("connexionNumber", totalSum.length);
     setConnexionNumber(localStorage.getItem("connexionNumber"));
 
-    console.log(
-      "totalSum:",
-      totalSum.map((res, i) => res)
-    );
-    console.log("total:", totalSum.length);
-    // console.log("cardIdExists:", cardIdExists(cardIdTime));
+    // console.log(
+    //   "totalSum:",
+    //   totalSum.map((res, i) => res)
+    // );
+    // console.log("total:", totalSum.length);
+    check();
+    // console.log("ObjIdToFind", unifySameCard);
+    console.log("cardIdTime", cardIdTime);
 
-    // console.log("start", startedTime);
+    // console.log("test", countInArray(finishedDatas, comparId)); // returns 2
+    console.log("newTaskArray", newTaskArray);
+    // console.log("finishedDatas", finishedDatas);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [finishedDatas, setTotalTimeToSeconds, totalTimeToSeconds, projectDone]);
 
-  // useEffect(() => {
-  //   if (totalSum !== []) {
-  //     setConnexionNumber(totalSum.length);
-  //     localStorage.setItem("connexionNumber", connexionNumber);
-  //   }
-  // }, [totalSum, connexionNumber]);
-
-  // function cardIdExists(id) {
-  //   return totalSum.some(function (el) {
-  //     return el.id === id;
-  //   });
-  // }
-
-  const addSumStartStop = (arr1, arr2) => {
-    arr1.forEach((num1, index) => {
-      const num2 = arr2[index];
-      console.log("addition:", num1 - num2, index);
-
-      totalSum.push({
-        total: num1 - num2,
-        id: cardIdTime[index],
-        title: cardTitleTime[index],
-      });
-    });
-  };
+  function check() {
+    let count = 0;
+    var arr = newTaskArray[0].map((resu) => resu.cardId);
+    for (let i = 0; i < arr.length; i++) {
+      for (let x = 0; x < arr.length; x++) {
+        if (arr[i] === arr[x] && i !== x && arr[i].start !== "") {
+          count++;
+          console.log("SAME ones in ARRAY: " + arr[i]);
+          console.log("count", count);
+        } else console.log("no same ones");
+      }
+    }
+    return count;
+  }
 
   let Note1Content = localStorage.getItem("valueNote1");
   let Note2Content = localStorage.getItem("valueNote2") ?? null;
@@ -551,6 +535,7 @@ const Dashboard = () => {
             </span>
             <div className="list-dash">
               {finishedDatas !== [] ? (
+                totalTimeSeconds &&
                 totalTimeSeconds
                   .filter((totMax) => totMax.total < -1)
                   .map((res, i) => (
@@ -701,14 +686,18 @@ const Dashboard = () => {
                 .filter((resFiltered) => resFiltered.start !== "")
                 .map((res) => (
                   <div key={uuidv4()}>
-                    <p>{res.cardTitle}</p>
+                    <strong>{res.cardTitle}</strong>
                     <hr />
                     <span>
                       <img src={StartIcon} alt="start" width="34" />
-                      <p>Start: {res.start}</p>
+                      <p style={{ fontWeight: "bold", color: "#57a957" }}>
+                        Start: {res.start}
+                      </p>
                     </span>
                     <img src={TimerEndIcon} alt="stop" width="34" />
-                    <p>Stop: {res.stop}</p>
+                    <p style={{ fontWeight: "bold", color: "#ca3535" }}>
+                      Stop: {res.stop}
+                    </p>
                     <hr />
                   </div>
                 ))}

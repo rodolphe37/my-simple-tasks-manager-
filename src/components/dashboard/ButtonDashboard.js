@@ -19,11 +19,6 @@ const ButtonDashboard = () => {
     localStorage.setItem("clickedOnDashButton", true);
   };
 
-  // useEffect(() => {
-  //   if (!clickedOnDashButton) {
-  //     localStorage.setItem("clickedOnDashButton", false);
-  //   }
-  // }, [clickedOnDashButton]);
   return (
     <div
       onClick={handleOpenDash}
