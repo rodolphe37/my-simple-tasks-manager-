@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { confirmAlert } from "react-confirm-alert"; // Import
 import "react-confirm-alert/src/react-confirm-alert.css";
 import "./alert.css";
 import "../checkboxAlert/checkbox-alert.css";
 import BacklogImg from "../../assets/backlog.svg";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
+
+import useCustomAlertHook from "../../../hooks/useCustomAlertHook";
 
 const Alert = ({
   title,
@@ -18,9 +18,7 @@ const Alert = ({
   buttonNo,
 }) => {
   // eslint-disable-next-line no-unused-vars
-  const [clickedAlert, setClickedAlert] = useState(false);
-  const MySwal = withReactContent(Swal);
-
+  const { deteleAll, setClickedAlert } = useCustomAlertHook();
   const nextURL = "/";
   const nextTitle = "My Simple Tasks Manager";
   const nextState = { additionalInformation: "Updated the URL with JS" };
@@ -33,32 +31,6 @@ const Alert = ({
     setClickedAlert(false);
     window.history.pushState(nextState, nextTitle, nextURL);
   }
-
-  const deteleAll = () => {
-    MySwal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, reset it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire(
-          "Reinitialized!",
-          "the Time Tracker is well reset.",
-          "success"
-        );
-        setProjectName("");
-        localStorage.clear();
-        setValidateProjectName(false);
-        setClickedAlert(false);
-
-        window.location.reload();
-      }
-    });
-  };
 
   useEffect(() => {
     const confirmDialog = () => {

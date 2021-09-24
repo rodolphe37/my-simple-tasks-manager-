@@ -6,8 +6,6 @@ import openDashAtom from "../../statesManager/atoms/openDashAtom";
 import PriceIcon from "../assets/price.svg";
 import DashIcon from "../assets/increase.svg";
 import ProductivityIcon from "../assets/productivity.svg";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 import finishedDatasAtom from "../../statesManager/atoms/finishedDatasAtom";
 import projectDoneAtom from "../../statesManager/atoms/projectDoneAtom";
 import DollarIcon from "../assets/symbole-du-dollar.svg";
@@ -30,6 +28,8 @@ import totalListTimeInSecondAtom from "../../statesManager/atoms/totalListTimeIn
 import FirstChart from "../firstChart/FirstChart";
 import SecondChart from "../firstChart/SecondChart";
 import LastChart from "../firstChart/LastChart";
+import useCustomAlertHook from "../../hooks/useCustomAlertHook";
+import useCutDecimals from "../../hooks/useCutDecimals";
 
 const Dashboard = () => {
   const [totalTimeToSeconds, setTotalTimeToSeconds] = useRecoilState(
@@ -58,15 +58,11 @@ const Dashboard = () => {
   const [projectDone] = useRecoilState(projectDoneAtom);
   // eslint-disable-next-line no-unused-vars
   const [openDash, setOpenDash] = useRecoilState(openDashAtom);
-  const [tjm, setTjm] = useState(localStorage.getItem("tjm") ?? 0);
+  // const [tjm, setTjm] = useState(localStorage.getItem("tjm") ?? 0);
   const [eurTjm, setEurTjm] = useState(0);
+  const { tjm, setTjm, handlePrice } = useCustomAlertHook();
 
-  const MySwal = withReactContent(Swal);
-  function cutDecimals(number, decimals) {
-    return number.toLocaleString("fullwide", {
-      maximumFractionDigits: decimals,
-    });
-  }
+  const { cutDecimals } = useCutDecimals();
   const changeEurDoll = 0.85;
   let totalEuro = eurTjm * changeEurDoll;
   useEffect(() => {
@@ -74,25 +70,6 @@ const Dashboard = () => {
       setEurTjm(0);
     }
   }, [tjm]);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const handlePrice = () => {
-    MySwal.fire({
-      title: "Enter your Daily Rate in dollars",
-      input: "number",
-      inputAttributes: {
-        autocapitalize: "off",
-      },
-      showCancelButton: true,
-      confirmButtonText: "Look up",
-      showLoaderOnConfirm: true,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // console.log(result);
-        setTjm(result.value);
-        Swal.fire("Saved!", "Your daily rate has been saved.", "success");
-      }
-    });
-  };
 
   const handleChangeDevise = () => {
     setChangeDevise((changeDevise) => !changeDevise);
@@ -115,7 +92,6 @@ const Dashboard = () => {
     tjm,
     setEurTjm,
     eurTjm,
-    MySwal,
     projectDone,
     handlePrice,
     stockItemsByStatus,

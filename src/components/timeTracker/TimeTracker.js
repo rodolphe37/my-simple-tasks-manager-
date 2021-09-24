@@ -1,17 +1,19 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import "./timeTracker.css";
 import TimerImg from "../assets/time-management.svg";
 import useDateTime from "../../hooks/useDateTime";
 import { useRecoilState } from "recoil";
 import automaticTrackTimerAtom from "../../statesManager/atoms/automaticTrackTimerAtom";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 import ModalConfigComponent from "../modalConfig/ModalConfigComponent";
 // import clickedConfigAtom from "../../statesManager/atoms/clickedConfigAtom";
 import clickedAddToDoAtom from "../../statesManager/atoms/clickedAddToDoAtom";
 import { Fragment } from "react";
 import itemsByStautsAtom from "../../statesManager/atoms/itemsByStatusAtom";
 import projectDoneAtom from "../../statesManager/atoms/projectDoneAtom";
+import useIntervalHook from "../../hooks/useIntervalHook";
+import useCustomAlertHook from "../../hooks/useCustomAlertHook";
+import useCutDecimals from "../../hooks/useCutDecimals";
+import useXDigits from "../../hooks/useXDigits";
 
 const STATUS = {
   STARTED: "Started",
@@ -22,7 +24,6 @@ const STATUS = {
 
 export default function TimeTracker({ itemsByStatus }) {
   const [projectDone] = useRecoilState(projectDoneAtom);
-  const MySwal = withReactContent(Swal);
   const { n } = useDateTime();
   const [secondsRemaining, setSecondsRemaining] = useState(
     JSON.parse(localStorage.getItem("time"))
@@ -32,14 +33,15 @@ export default function TimeTracker({ itemsByStatus }) {
       ? localStorage.getItem("status")
       : STATUS.STOPPED
   );
+  const { twoDigits, threeDigits } = useXDigits();
   const [dayWork, setDayWork] = useState(0);
   const secondsToDisplay = secondsRemaining % 60;
   const minutesRemaining = (secondsRemaining - secondsToDisplay) / 60;
   const minutesToDisplay = minutesRemaining % 60;
   const hoursToDisplay = (minutesRemaining - minutesToDisplay) / 60;
-
+  const { useInterval } = useIntervalHook();
   const [autoTrackTime] = useRecoilState(automaticTrackTimerAtom);
-  // const [clickedConfig, setClickedConfig] = useRecoilState(clickedConfigAtom);
+  const { handleReset } = useCustomAlertHook();
   const [clickedAddButton] = useRecoilState(clickedAddToDoAtom);
   // eslint-disable-next-line no-unused-vars
   const [stockItemsByStatus, setStockItemsByStatus] =
@@ -97,29 +99,6 @@ export default function TimeTracker({ itemsByStatus }) {
     clickedAddButton,
   ]);
 
-  const handleReset = () => {
-    MySwal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, reset it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        setStatus(STATUS.STOPPED);
-        localStorage.removeItem("time");
-        setSecondsRemaining(0);
-        Swal.fire(
-          "Reinitialized!",
-          "the Time Tracker is well reset.",
-          "success"
-        );
-        window.location.reload();
-      }
-    });
-  };
   useInterval(
     () => {
       if (secondsRemaining >= 0) {
@@ -133,11 +112,7 @@ export default function TimeTracker({ itemsByStatus }) {
   );
 
   // Function for cutting number at x decimal
-  function cutDecimals(number, decimals) {
-    return number.toLocaleString("fullwide", {
-      maximumFractionDigits: decimals,
-    });
-  }
+  const { cutDecimals } = useCutDecimals();
 
   useEffect(() => {
     function getDaysWork() {
@@ -149,6 +124,7 @@ export default function TimeTracker({ itemsByStatus }) {
     if (secondsRemaining >= 3600) {
       getDaysWork();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [secondsRemaining]);
   return (
     <div className="time-tracker">
@@ -261,28 +237,3 @@ export default function TimeTracker({ itemsByStatus }) {
     </div>
   );
 }
-
-// source: https://overreacted.io/making-setinterval-declarative-with-react-hooks/
-function useInterval(callback, delay) {
-  const savedCallback = useRef();
-
-  // Remember the latest callback.
-  useEffect(() => {
-    savedCallback.current = callback;
-  }, [callback]);
-
-  // Set up the interval.
-  useEffect(() => {
-    function tick() {
-      savedCallback.current();
-    }
-    if (delay !== null) {
-      let id = setInterval(tick, delay);
-      return () => clearInterval(id);
-    }
-  }, [delay]);
-}
-
-// https://stackoverflow.com/a/2998874/1673761
-const twoDigits = (num) => String(num).padStart(2, "0");
-const threeDigits = (num) => String(num).padStart(3, "0");

@@ -21,6 +21,7 @@ import ButtonDashboard from "../dashboard/ButtonDashboard";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import projectDoneAtom from "../../statesManager/atoms/projectDoneAtom";
+import useCustomAlertHook from "../../hooks/useCustomAlertHook";
 
 const generateId = () => Date.now().toString();
 
@@ -46,6 +47,7 @@ const defaultItems = {
 };
 
 function Taskboard() {
+  const { finishedProjectAlert } = useCustomAlertHook();
   const MySwal = withReactContent(Swal);
   // eslint-disable-next-line no-unused-vars
   const [autoTrackTime, setAutoTrackTime] = useRecoilState(
@@ -74,17 +76,7 @@ function Taskboard() {
       itemsByStatus["To Do"].length === 0 &&
       localStorage.getItem("DoneAlert") === null
     ) {
-      setTimeout(() => {
-        MySwal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Your project has been finished!",
-          text: "You can check the dashboard for information & statistics of your work done!",
-          footer: "Always Just for better organization",
-          showConfirmButton: false,
-          timer: 4200,
-        });
-      }, 1000);
+      finishedProjectAlert();
       localStorage.setItem("DoneAlert", true);
     }
 
@@ -92,6 +84,7 @@ function Taskboard() {
       localStorage.removeItem("DoneAlert");
     }
     // console.log("Done", DoneAlert);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projectDone, MySwal, clickedOnDashButton, DoneAlert, itemsByStatus]);
 
   const handleDragEnd = ({ source, destination }) => {
