@@ -601,7 +601,7 @@ const Dashboard = () => {
                 Working session that required less than 1 hour
               </span>
             </span>
-            <div className="list-dash">
+            <div className="list-dash less1hour">
               {finishedDatas !== [] ? (
                 totalTimeSeconds
                   .filter((totMax) => totMax.total > 0)
