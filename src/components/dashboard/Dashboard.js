@@ -397,7 +397,106 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
+        <div className="tasks-dash bottomSection">
+          <div className="todo-dash">
+            <span>
+              {" "}
+              <img
+                style={{ marginRight: 12 }}
+                src={ProjectIcon}
+                alt="start"
+                width="48"
+              />
+              <span className="dashTask-title">Sticky Notes</span>
+            </span>
+            <div className="list-dash stickyNotes">
+              <div className="stickyListNoteDash">
+                {Note1Content ? (
+                  <Fragment>
+                    <span style={{ color: "darkblue", fontWeight: "bold" }}>
+                      Sticky Note:1
+                    </span>
+                    <br />
+                    <span>{Note1Content}</span>
+                  </Fragment>
+                ) : (
+                  <strong style={{ color: "darkred" }}>None</strong>
+                )}
+              </div>
+              <div className="stickyListNoteDash">
+                {Note2Content ? (
+                  <Fragment>
+                    <span style={{ color: "darkblue", fontWeight: "bold" }}>
+                      Sticky Note:2
+                    </span>
+                    <br />
+                    <span>{Note2Content}</span>
+                  </Fragment>
+                ) : (
+                  <strong style={{ color: "darkred" }}>None</strong>
+                )}
+              </div>
+              <div className="stickyListNoteDash">
+                {Note3Content ? (
+                  <Fragment>
+                    <span style={{ color: "darkblue", fontWeight: "bold" }}>
+                      Sticky Note:3
+                    </span>
+                    <br />
+                    <span>{Note3Content}</span>
+                  </Fragment>
+                ) : (
+                  <strong style={{ color: "darkred" }}>None</strong>
+                )}
+              </div>
 
+              <div className="stickyListNoteDash">
+                {Note4Content ? (
+                  <Fragment>
+                    <span style={{ color: "darkblue", fontWeight: "bold" }}>
+                      Sticky Note:4
+                    </span>
+                    <br />
+                    <span>{Note4Content}</span>
+                  </Fragment>
+                ) : (
+                  <strong style={{ color: "darkred" }}>None</strong>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="inProgress-dash">
+          <span>
+            {" "}
+            <img
+              style={{ marginRight: 12 }}
+              src={TasksIcon}
+              alt="start"
+              width="48"
+            />
+            <span className="dashTask-title">Number working connexion</span>
+          </span>
+          <div className="list-dash workingConnexion">
+            <div className="workingConnexionContent">
+              <img
+                style={{ marginRight: 12 }}
+                src={WorkingConnexionIcon}
+                alt="start"
+                width="34"
+              />
+              {isNaN(connexionNumber) === false ? (
+                <span>
+                  Working connexion:{" "}
+                  {cutDecimals(
+                    connexionNumber / stockItemsByStatus["Done"].length,
+                    0
+                  )}
+                </span>
+              ) : null}
+            </div>
+          </div>
+        </div>
         <div className="tasks-dash cardsRapport">
           <div className="done-dash">
             <span>
@@ -436,34 +535,6 @@ const Dashboard = () => {
                 )}
               </div>
             )}
-          </div>
-          <div className="bottom-dash">
-            <span>
-              <img
-                style={{ marginRight: 12 }}
-                src={TimeIcon}
-                alt="start"
-                width="44"
-              />
-              <span className="dashTask-title">Time Elapsed For each Task</span>
-            </span>
-            <div className="list-dash bottom">
-              {completCardsTimeArray
-                .filter((resFiltered) => resFiltered.start !== "")
-                .map((res) => (
-                  <div key={uuidv4()}>
-                    <p>{res.cardTitle}</p>
-                    <hr />
-                    <span>
-                      <img src={StartIcon} alt="start" width="34" />
-                      <p>Start: {res.start}</p>
-                    </span>
-                    <img src={TimerEndIcon} alt="stop" width="34" />
-                    <p>Stop: {res.stop}</p>
-                    <hr />
-                  </div>
-                ))}
-            </div>
           </div>
           <div className="todo-dash">
             <span>
@@ -615,104 +686,32 @@ const Dashboard = () => {
               )}
             </div>
           </div>
-        </div>
-        <div className="inProgress-dash">
-          <span>
-            {" "}
-            <img
-              style={{ marginRight: 12 }}
-              src={TasksIcon}
-              alt="start"
-              width="48"
-            />
-            <span className="dashTask-title">Number working connexion</span>
-          </span>
-          <div className="list-dash workingConnexion">
-            <div className="workingConnexionContent">
-              <img
-                style={{ marginRight: 12 }}
-                src={WorkingConnexionIcon}
-                alt="start"
-                width="34"
-              />
-              {isNaN(connexionNumber) === false ? (
-                <span>
-                  Working connexion:{" "}
-                  {cutDecimals(
-                    connexionNumber / stockItemsByStatus["Done"].length,
-                    0
-                  )}
-                </span>
-              ) : null}
-            </div>
-          </div>
-        </div>
-        <div className="tasks-dash bottomSection">
-          <div className="todo-dash">
+          <div className="bottom-dash">
             <span>
-              {" "}
               <img
                 style={{ marginRight: 12 }}
-                src={ProjectIcon}
+                src={TimeIcon}
                 alt="start"
-                width="48"
+                width="44"
               />
-              <span className="dashTask-title">Sticky Notes</span>
+              <span className="dashTask-title">Time Elapsed For each Task</span>
             </span>
-            <div className="list-dash stickyNotes">
-              <div className="stickyListNoteDash">
-                {Note1Content ? (
-                  <Fragment>
-                    <span style={{ color: "darkblue", fontWeight: "bold" }}>
-                      Sticky Note:1
+            <div className="list-dash bottom">
+              {completCardsTimeArray
+                .filter((resFiltered) => resFiltered.start !== "")
+                .map((res) => (
+                  <div key={uuidv4()}>
+                    <p>{res.cardTitle}</p>
+                    <hr />
+                    <span>
+                      <img src={StartIcon} alt="start" width="34" />
+                      <p>Start: {res.start}</p>
                     </span>
-                    <br />
-                    <span>{Note1Content}</span>
-                  </Fragment>
-                ) : (
-                  <strong style={{ color: "darkred" }}>None</strong>
-                )}
-              </div>
-              <div className="stickyListNoteDash">
-                {Note2Content ? (
-                  <Fragment>
-                    <span style={{ color: "darkblue", fontWeight: "bold" }}>
-                      Sticky Note:2
-                    </span>
-                    <br />
-                    <span>{Note2Content}</span>
-                  </Fragment>
-                ) : (
-                  <strong style={{ color: "darkred" }}>None</strong>
-                )}
-              </div>
-              <div className="stickyListNoteDash">
-                {Note3Content ? (
-                  <Fragment>
-                    <span style={{ color: "darkblue", fontWeight: "bold" }}>
-                      Sticky Note:3
-                    </span>
-                    <br />
-                    <span>{Note3Content}</span>
-                  </Fragment>
-                ) : (
-                  <strong style={{ color: "darkred" }}>None</strong>
-                )}
-              </div>
-
-              <div className="stickyListNoteDash">
-                {Note4Content ? (
-                  <Fragment>
-                    <span style={{ color: "darkblue", fontWeight: "bold" }}>
-                      Sticky Note:4
-                    </span>
-                    <br />
-                    <span>{Note4Content}</span>
-                  </Fragment>
-                ) : (
-                  <strong style={{ color: "darkred" }}>None</strong>
-                )}
-              </div>
+                    <img src={TimerEndIcon} alt="stop" width="34" />
+                    <p>Stop: {res.stop}</p>
+                    <hr />
+                  </div>
+                ))}
             </div>
           </div>
         </div>
