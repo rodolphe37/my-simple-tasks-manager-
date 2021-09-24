@@ -178,11 +178,11 @@ const Dashboard = () => {
     //   "totalSum:",
     //   totalSum.map((res, i) => res)
     // );
-    // console.log("total:", totalSum.length);
+    console.log("total:", counts);
     // check();
     // console.log("ObjIdToFind", unifySameCard);
     // console.log("count", counts[0]);
-    console.log("totalSum", totalSum);
+    // console.log("totalSum", totalSum);
     // console.log("test", countInArray(finishedDatas, comparId)); // returns 2
     // console.log("newTaskArray", newTaskArray);
     // console.log("finishedDatas", finishedDatas);
