@@ -122,7 +122,7 @@ function TaskboardItemCard({
     if (item.timestamp === undefined) {
       setTimeForCard(n);
     }
-    localStorage.setItem("timeStamp", timeForCard);
+    // localStorage.setItem("timeStamp", timeForCard);
     // console.log("itms status", itemsByStatus["Done"].length);
     if (status === "In Progress") {
       setStartWorkState(n);

@@ -5,6 +5,7 @@ import supp from "../assets/supp.svg";
 import openDashAtom from "../../statesManager/atoms/openDashAtom";
 import PriceIcon from "../assets/price.svg";
 import DashIcon from "../assets/increase.svg";
+import ProductivityIcon from "../assets/productivity.svg";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import finishedDatasAtom from "../../statesManager/atoms/finishedDatasAtom";
@@ -12,6 +13,18 @@ import projectDoneAtom from "../../statesManager/atoms/projectDoneAtom";
 import DollarIcon from "../assets/symbole-du-dollar.svg";
 import EuroIcon from "../assets/piece-en-euro.svg";
 import backlog from "../assets/backlog.svg";
+import TimerEndIcon from "../assets/timer.svg";
+import StartIcon from "../assets/start.svg";
+import CreatedIcon from "../assets/pencil.svg";
+import CompletedIcon from "../assets/dash/completed-task.svg";
+import TimeIcon from "../assets/dash/time.svg";
+import ClockIcon from "../assets/dash/clock.svg";
+import ChronoIcon from "../assets/dash/chronometer.svg";
+import HourGlassIcon from "../assets/dash/hourglass.svg";
+import AdjustIcon from "../assets/dash/adjust.svg";
+import WorkingConnexionIcon from "../assets/dash/schedule.svg";
+import TasksIcon from "../assets/tasks.svg";
+import ProjectIcon from "../assets/project.svg";
 import { v4 as uuidv4 } from "uuid";
 import totalListTimeInSecondAtom from "../../statesManager/atoms/totalListTimeInSecondAtom";
 
@@ -33,14 +46,18 @@ const Dashboard = () => {
   // const [totalStopTimeSeconds, setTotalStopTimeSeconds] = useState([
   //   localStorage.getItem("stopArrayTimes"),
   // ]);
+  let totalSum = [];
+  const [connexionNumber, setConnexionNumber] = useState(0);
   const [finishedDatas] = useRecoilState(finishedDatasAtom);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const startArrayTimes = [];
+  let startArrayTimes = [];
+  let stopArray = [];
   const [projectDone] = useRecoilState(projectDoneAtom);
   // eslint-disable-next-line no-unused-vars
   const [openDash, setOpenDash] = useRecoilState(openDashAtom);
   const [tjm, setTjm] = useState(localStorage.getItem("tjm") ?? 0);
   const [eurTjm, setEurTjm] = useState(0);
+
   const MySwal = withReactContent(Swal);
   function cutDecimals(number, decimals) {
     return number.toLocaleString("fullwide", {
@@ -123,9 +140,6 @@ const Dashboard = () => {
     return s;
   }
 
-  let stopArray = [];
-
-  let totalSum = [];
   let cardIdTime = finishedDatas.map((res) => res.cardId);
   let cardTitleTime = finishedDatas.map((res) => res.cardTitle);
 
@@ -173,21 +187,31 @@ const Dashboard = () => {
     }
     if (projectDone && startArrayTimes.length > 0 && stopArray.length > 0) {
       addSumStartStop(stopArray, startArrayTimes);
+      // setConnexionNumber(totalSum.length);
     }
     if (totalSum !== []) {
       setTotalTimeSeconds(...totalTimeSeconds, totalSum);
     }
+    localStorage.setItem("connexionNumber", totalSum.length);
+    setConnexionNumber(localStorage.getItem("connexionNumber"));
 
     console.log(
       "totalSum:",
       totalSum.map((res, i) => res)
     );
-    console.log("total:", totalTimeSeconds);
+    console.log("total:", totalSum.length);
     // console.log("cardIdExists:", cardIdExists(cardIdTime));
 
     // console.log("start", startedTime);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [finishedDatas, setTotalTimeToSeconds, totalTimeToSeconds, projectDone]);
+
+  // useEffect(() => {
+  //   if (totalSum !== []) {
+  //     setConnexionNumber(totalSum.length);
+  //     localStorage.setItem("connexionNumber", connexionNumber);
+  //   }
+  // }, [totalSum, connexionNumber]);
 
   // function cardIdExists(id) {
   //   return totalSum.some(function (el) {
@@ -217,7 +241,7 @@ const Dashboard = () => {
     <div className="dash-content scale-in-ver-bottom">
       <div className="header-dash">
         <div className="headerDash-logo">
-          <img src={DashIcon} alt="dash" style={{ width: 55 }} />
+          <img src={ProductivityIcon} alt="dash" style={{ width: 55 }} />
           <h1>Dashboard</h1>
         </div>
 
@@ -304,6 +328,7 @@ const Dashboard = () => {
             />
           </button>
         </div>
+
         <div className="dashContainer-header">
           <div className="dashContainer-content-header">
             <strong>Total Time:</strong>
@@ -365,6 +390,17 @@ const Dashboard = () => {
             )}
           </div>
         </div>
+        <br />
+        <span className="statsTitle">
+          {" "}
+          <img
+            style={{ marginRight: 12 }}
+            src={DashIcon}
+            alt="start"
+            width="48"
+          />
+          <span className="dashTask-title">Stats</span>
+        </span>
         <div className="tasks-dash graphs">
           <div className="todo-dash">
             <div className="list-dash graphDash">
@@ -388,7 +424,15 @@ const Dashboard = () => {
 
         <div className="tasks-dash cardsRapport">
           <div className="done-dash">
-            <span className="dashTask-title">Tasks Done</span>
+            <span>
+              <img
+                style={{ marginRight: 12 }}
+                src={CompletedIcon}
+                alt="start"
+                width="44"
+              />
+              <span className="dashTask-title">Tasks Done</span>
+            </span>
             {stockItemsByStatus && (
               <div className="list-dash">
                 {stockItemsByStatus["Done"].length > 0 ? (
@@ -400,7 +444,12 @@ const Dashboard = () => {
                         </strong>
                         <p>id :{res.id}</p>
                         <p style={{ fontSize: 12 }}>desc: {res.description}</p>
-                        <p style={{ fontSize: 12 }}>Created: {res.timestamp}</p>
+                        <span className="createdTaskDash">
+                          <img src={CreatedIcon} alt="start" width="28" />
+                          <p style={{ fontSize: 12 }}>
+                            Created: {res.timestamp}
+                          </p>
+                        </span>
                       </li>
                     </ul>
                   ))
@@ -413,7 +462,15 @@ const Dashboard = () => {
             )}
           </div>
           <div className="bottom-dash">
-            <span className="dashTask-title">Time Elapsed For each Task</span>
+            <span>
+              <img
+                style={{ marginRight: 12 }}
+                src={TimeIcon}
+                alt="start"
+                width="44"
+              />
+              <span className="dashTask-title">Time Elapsed For each Task</span>
+            </span>
             <div className="list-dash bottom">
               {completCardsTimeArray
                 .filter((resFiltered) => resFiltered.start !== "")
@@ -421,7 +478,11 @@ const Dashboard = () => {
                   <div key={uuidv4()}>
                     <p>{res.cardTitle}</p>
                     <hr />
-                    <p>Start: {res.start}</p>
+                    <span>
+                      <img src={StartIcon} alt="start" width="34" />
+                      <p>Start: {res.start}</p>
+                    </span>
+                    <img src={TimerEndIcon} alt="stop" width="34" />
                     <p>Stop: {res.stop}</p>
                     <hr />
                   </div>
@@ -429,13 +490,22 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="todo-dash">
-            <span className="dashTask-title">
-              Working session that required more than 1 hour
+            <span>
+              {" "}
+              <img
+                style={{ marginRight: 12 }}
+                src={HourGlassIcon}
+                alt="start"
+                width="44"
+              />
+              <span className="dashTask-title">
+                Working session that required more than 2 hours
+              </span>
             </span>
             <div className="list-dash">
               {finishedDatas !== [] ? (
                 totalTimeSeconds
-                  .filter((totMax) => totMax.total >= 3600)
+                  .filter((totMax) => totMax.total < -1)
                   .map((res, i) => (
                     <ul key={uuidv4()}>
                       {isNaN(res.total) === false ? (
@@ -443,13 +513,71 @@ const Dashboard = () => {
                           <strong>{res.title}</strong>
                           <br />
                           <sub>{res.id}</sub>
+                          <br />
+                          <span className="timeContent">
+                            <img
+                              style={{ marginRight: 12 }}
+                              src={AdjustIcon}
+                              alt="start"
+                              width="24"
+                            />
+                            <p style={{ fontSize: 15, fontWeight: "bold" }}>
+                              {new Date(res.total * 1000)
+                                .toISOString()
+                                .substr(11, 8)}{" "}
+                              hour(s)
+                            </p>
+                          </span>
+                        </li>
+                      ) : null}
+                    </ul>
+                  ))
+              ) : (
+                <strong style={{ color: "darkred", fontWeight: "bold" }}>
+                  No Working session in this section
+                </strong>
+              )}
+            </div>
+          </div>
+          <div className="todo-dash">
+            <span>
+              <img
+                style={{ marginRight: 12 }}
+                src={ChronoIcon}
+                alt="start"
+                width="44"
+              />
+              <span className="dashTask-title">
+                Working session that required between 1 and 2 hour(s)
+              </span>
+            </span>
+            <div className="list-dash">
+              {finishedDatas !== [] ? (
+                totalTimeSeconds
 
-                          <p style={{ fontSize: 15, fontWeight: "bold" }}>
-                            {new Date(res.total * 1000)
-                              .toISOString()
-                              .substr(11, 8)}{" "}
-                            hour(s)
-                          </p>
+                  .filter((totMax) => totMax.total > 3600)
+                  .map((res, i) => (
+                    <ul key={uuidv4()}>
+                      {isNaN(res.total) === false ? (
+                        <li>
+                          <strong>{res.title}</strong>
+                          <br />
+                          <sub>{res.id}</sub>
+                          <br />
+                          <span className="timeContent">
+                            <img
+                              style={{ marginRight: 12 }}
+                              src={AdjustIcon}
+                              alt="start"
+                              width="24"
+                            />
+                            <p style={{ fontSize: 15, fontWeight: "bold" }}>
+                              {new Date(res.total * 1000)
+                                .toISOString()
+                                .substr(11, 8)}{" "}
+                              hour(s)
+                            </p>
+                          </span>
                         </li>
                       ) : null}
                     </ul>
@@ -462,12 +590,21 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="inProgress-dash">
-            <span className="dashTask-title">
-              Working session that required less than 1 hour
+            <span>
+              <img
+                style={{ marginRight: 12 }}
+                src={ClockIcon}
+                alt="start"
+                width="48"
+              />
+              <span className="dashTask-title">
+                Working session that required less than 1 hour
+              </span>
             </span>
             <div className="list-dash">
               {finishedDatas !== [] ? (
                 totalTimeSeconds
+                  .filter((totMax) => totMax.total > 0)
                   .filter((totMax) => totMax.total < 3600)
                   .map((res, i) => (
                     <ul key={uuidv4()}>
@@ -476,12 +613,21 @@ const Dashboard = () => {
                           <strong>{res.title}</strong>
                           <br />
                           <sub>{res.id}</sub>
-                          <p style={{ fontSize: 15, fontWeight: "bold" }}>
-                            {new Date(res.total * 1000)
-                              .toISOString()
-                              .substr(11, 8)}{" "}
-                            hour(s)
-                          </p>
+                          <br />
+                          <span className="timeContent">
+                            <img
+                              style={{ marginRight: 12 }}
+                              src={AdjustIcon}
+                              alt="start"
+                              width="24"
+                            />
+                            <p style={{ fontSize: 15, fontWeight: "bold" }}>
+                              {new Date(res.total * 1000)
+                                .toISOString()
+                                .substr(11, 8)}{" "}
+                              hour(s)
+                            </p>
+                          </span>
                         </li>
                       ) : null}
                     </ul>
@@ -495,25 +641,42 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="inProgress-dash">
-          <span className="dashTask-title">Number working connexion</span>
-          <div className="list-dash stickyNotes">
-            <div className="stickyListNote">
-              <span>Working connexion:</span>
-              <span>Time elapsed</span>
-            </div>
-            <div className="stickyListNote">
-              <span>Working connexion:</span>
-              <span>Time elapsed</span>
-            </div>
-            <div className="stickyListNote">
-              <span>Working connexion:</span>
-              <span>Time elapsed</span>
+          <span>
+            {" "}
+            <img
+              style={{ marginRight: 12 }}
+              src={TasksIcon}
+              alt="start"
+              width="48"
+            />
+            <span className="dashTask-title">Number working connexion</span>
+          </span>
+          <div className="list-dash workingConnexion">
+            <div className="workingConnexionContent">
+              <img
+                style={{ marginRight: 12 }}
+                src={WorkingConnexionIcon}
+                alt="start"
+                width="34"
+              />
+              {isNaN(connexionNumber) === false ? (
+                <span>Working connexion: {connexionNumber / 6}</span>
+              ) : null}
             </div>
           </div>
         </div>
         <div className="tasks-dash bottomSection">
           <div className="todo-dash">
-            <span className="dashTask-title">Sticky Notes</span>
+            <span>
+              {" "}
+              <img
+                style={{ marginRight: 12 }}
+                src={ProjectIcon}
+                alt="start"
+                width="48"
+              />
+              <span className="dashTask-title">Sticky Notes</span>
+            </span>
             <div className="list-dash stickyNotes">
               <div className="stickyListNoteDash">
                 {Note1Content ? (

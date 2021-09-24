@@ -110,8 +110,10 @@
   max-width: 100%;
   padding: 30px;
   height: auto !important;
-  border: 1px dotted gray;
   margin-top: 15px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 0 6px grey;
 }
 .dashContainer-header,
 .headerDash-logo {
@@ -160,6 +162,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  min-height: 107px;
 }
 .stickyNotes {
   width: 100%;
@@ -370,4 +373,29 @@ button,
   border-radius: 3px;
   background: linear-gradient(#f9efaf, #f7e98d);
   box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
+}
+
+.createdTaskDash,
+.statsTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.timeContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.timeContent > img {
+  margin-top: -13px;
+}
+.statsTitle {
+  margin-bottom: -30px;
+  margin-top: 20px;
+}
+.workingConnexion {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
