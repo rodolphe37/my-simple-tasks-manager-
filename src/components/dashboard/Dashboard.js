@@ -662,7 +662,10 @@ const Dashboard = () => {
               {isNaN(connexionNumber) === false ? (
                 <span>
                   Working connexion:{" "}
-                  {connexionNumber / stockItemsByStatus["Done"].length}
+                  {cutDecimals(
+                    connexionNumber / stockItemsByStatus["Done"].length,
+                    0
+                  )}
                 </span>
               ) : null}
             </div>
