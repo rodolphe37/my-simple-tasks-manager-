@@ -52,10 +52,10 @@ const HorizontalBarChart = () => {
     ],
   };
 
-  // useEffect(() => {
-  //   console.log("data keys", Object.keys(dataTasks[0]));
-  //   console.log("data values", Object.values(dataTasks[0]));
-  // }, [dataTasks]);
+  useEffect(() => {
+    // console.log("data keys", Object.keys(dataTasks[0]));
+    // console.log("data values", Object.values(dataTasks[0]));
+  }, [dataTasks]);
   return (
     <>
       <div className="header">

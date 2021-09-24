@@ -60,7 +60,6 @@ const Dashboard = () => {
   const { tjm, setTjm, handlePrice } = useCustomAlertHook();
   const { hmsToSecondsOnly } = useHmsToSeconds();
   const { cutDecimals } = useCutDecimals();
-  const [unifySameCard, setUnifySameCard] = useState([]);
   const changeEurDoll = 0.85;
   let totalEuro = eurTjm * changeEurDoll;
   let newTaskArray = [];
@@ -89,6 +88,7 @@ const Dashboard = () => {
     }
 
     console.log("completCardsTimeArray", newTaskArray[0]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     tjm,
     setEurTjm,
