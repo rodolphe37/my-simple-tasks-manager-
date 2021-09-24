@@ -27,6 +27,9 @@ import TasksIcon from "../assets/tasks.svg";
 import ProjectIcon from "../assets/project.svg";
 import { v4 as uuidv4 } from "uuid";
 import totalListTimeInSecondAtom from "../../statesManager/atoms/totalListTimeInSecondAtom";
+import FirstChart from "../firstChart/FirstChart";
+import SecondChart from "../firstChart/SecondChart";
+import LastChart from "../firstChart/LastChart";
 
 const Dashboard = () => {
   const [totalTimeToSeconds, setTotalTimeToSeconds] = useRecoilState(
@@ -404,20 +407,17 @@ const Dashboard = () => {
         <div className="tasks-dash graphs">
           <div className="todo-dash">
             <div className="list-dash graphDash">
-              <strong>Graph Hours</strong>
-              <div>Graph</div>
+              <FirstChart />
             </div>
           </div>
           <div className="inProgress-dash">
             <div className="list-dash graphDash">
-              <strong>Graph Days</strong>
-              <div>Graph</div>
+              <SecondChart />
             </div>
           </div>
           <div className="done-dash">
             <div className="list-dash graphDash">
-              <strong>Graph Tasks</strong>
-              <div>Graph</div>
+              <LastChart />
             </div>
           </div>
         </div>
