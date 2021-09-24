@@ -99,9 +99,12 @@
 .dashTask-title,
 .inProgress-dash {
   font-weight: bold;
-  /* border-bottom: 1px solid black; */
   width: 100%;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 .list-dash {
   display: grid !important;
@@ -158,11 +161,12 @@
   margin-top: 5px;
 }
 .graphDash {
-  display: flex;
+  display: flex !important;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   min-height: 107px;
+  width: 96%;
 }
 .stickyNotes {
   width: 100%;
@@ -400,12 +404,43 @@ button,
   justify-content: center !important;
   width: 96%;
 }
-.inProgress-dash {
+/* .inProgress-dash {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-}
+} */
 .less1hour {
   width: 98%;
+}
+/* .graphs {
+  grid-gap: 30px !important;
+  max-width: 100%;
+  padding: 30px;
+  text-align: center;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 41% !important;
+} */
+/* .graphs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 31%;
+  grid-gap: 20px;
+} */
+@media screen and (max-width: 1200px) {
+  .tasks-dash {
+    display: grid !important;
+    grid-template-columns: repeat(1, 1fr) !important;
+    grid-gap: 30px !important;
+    max-width: 100%;
+    padding: 30px;
+    text-align: center;
+  }
+
+  .graphDash {
+    width: 100% !important;
+  }
 }
