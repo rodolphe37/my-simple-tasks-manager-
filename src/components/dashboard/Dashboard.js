@@ -88,10 +88,7 @@ const Dashboard = () => {
       newTaskArray.push(finishedDatas.filter((res) => res.start !== ""));
     }
 
-    console.log(
-      "completCardsTimeArray",
-      newTaskArray[0].map((resu) => resu.cardId)
-    );
+    console.log("completCardsTimeArray", newTaskArray[0]);
   }, [
     tjm,
     setEurTjm,
@@ -139,8 +136,7 @@ const Dashboard = () => {
       stopArray.push(stopTaskResult);
     }
 
-    console.log("stopTaskForArray", stopArray);
-    console.log("startTaskForArray", startArrayTimes);
+    // console.log("startTaskForArray", startArrayTimes);
 
     if (
       projectDone &&
@@ -165,35 +161,46 @@ const Dashboard = () => {
     localStorage.setItem("connexionNumber", totalSum.length);
     setConnexionNumber(localStorage.getItem("connexionNumber"));
 
+    const counts = newTaskArray[0]
+      .map((resu) => resu.cardTitle)
+      .reduce(
+        (acc, value) => ({
+          ...acc,
+          [value]: (acc[value] || 0) + 1,
+        }),
+        {}
+      );
+    localStorage.setItem("counts", JSON.stringify(counts));
+
     // console.log(
     //   "totalSum:",
     //   totalSum.map((res, i) => res)
     // );
     // console.log("total:", totalSum.length);
-    check();
+    // check();
     // console.log("ObjIdToFind", unifySameCard);
-    console.log("cardIdTime", cardIdTime);
-
+    // console.log("count", counts[0]);
+    console.log("totalSum", totalSum);
     // console.log("test", countInArray(finishedDatas, comparId)); // returns 2
-    console.log("newTaskArray", newTaskArray);
+    // console.log("newTaskArray", newTaskArray);
     // console.log("finishedDatas", finishedDatas);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [finishedDatas, setTotalTimeToSeconds, totalTimeToSeconds, projectDone]);
 
-  function check() {
-    let count = 0;
-    var arr = newTaskArray[0].map((resu) => resu.cardId);
-    for (let i = 0; i < arr.length; i++) {
-      for (let x = 0; x < arr.length; x++) {
-        if (arr[i] === arr[x] && i !== x && arr[i].start !== "") {
-          count++;
-          console.log("SAME ones in ARRAY: " + arr[i]);
-          console.log("count", count);
-        } else console.log("no same ones");
-      }
-    }
-    return count;
-  }
+  // function check() {
+  //   let count = 0;
+  //   var arr = newTaskArray[0].map((resu) => resu.cardId);
+  //   for (let i = 0; i < arr.length; i++) {
+  //     for (let x = 0; x < arr.length; x++) {
+  //       if (arr[i] === arr[x] && i !== x && arr[i].start !== "") {
+  //         count++;
+  //         console.log("SAME ones in ARRAY: " + arr[i]);
+  //         console.log("count", count);
+  //       } else console.log("no same ones");
+  //     }
+  //   }
+  //   return count;
+  // }
 
   let Note1Content = localStorage.getItem("valueNote1");
   let Note2Content = localStorage.getItem("valueNote2") ?? null;
@@ -585,8 +592,8 @@ const Dashboard = () => {
             </span>
             <div className="list-dash">
               {finishedDatas !== [] ? (
+                totalTimeSeconds &&
                 totalTimeSeconds
-
                   .filter((totMax) => totMax.total > 3600)
                   .map((res, i) => (
                     <ul key={uuidv4()}>
@@ -635,6 +642,7 @@ const Dashboard = () => {
             </span>
             <div className="list-dash less1hour">
               {finishedDatas !== [] ? (
+                totalTimeSeconds &&
                 totalTimeSeconds
                   .filter((totMax) => totMax.total > 0)
                   .filter((totMax) => totMax.total < 3600)
