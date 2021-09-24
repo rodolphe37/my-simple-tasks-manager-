@@ -31,6 +31,7 @@ import useCustomAlertHook from "../../hooks/useCustomAlertHook";
 import useCutDecimals from "../../hooks/useCutDecimals";
 import useHmsToSeconds from "../../hooks/useHmsToSeconds";
 import useAddSumStartStop from "../../hooks/useAddSumStartStop";
+import useReverseArray from "../../hooks/useReverseArray";
 
 const Dashboard = () => {
   const [totalTimeToSeconds, setTotalTimeToSeconds] = useRecoilState(
@@ -46,6 +47,7 @@ const Dashboard = () => {
     JSON.parse(localStorage.getItem("finishedData"))
   );
   const [totalTimeSeconds, setTotalTimeSeconds] = useState([]);
+  const { mapRevers } = useReverseArray();
 
   let totalSum = [];
   const [connexionNumber, setConnexionNumber] = useState(0);
@@ -688,14 +690,15 @@ const Dashboard = () => {
                 width="44"
               />
               <span className="dashTask-title">Time Elapsed For each Task</span>
+              <sub>from the most recent session to the oldest</sub>
             </span>
             <div className="list-dash bottom">
-              {completCardsTimeArray
+              {mapRevers(completCardsTimeArray)
                 .filter((resFiltered) => resFiltered.start !== "")
                 .map((res) => (
                   <div key={uuidv4()}>
                     <strong>{res.cardTitle}</strong>
-                    <hr />
+                    <br />
                     <span>
                       <img src={StartIcon} alt="start" width="34" />
                       <p style={{ fontWeight: "bold", color: "#57a957" }}>
