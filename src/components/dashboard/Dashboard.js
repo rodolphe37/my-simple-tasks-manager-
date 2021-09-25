@@ -383,7 +383,7 @@ const Dashboard = () => {
           </div>
           <div className="inProgress-dash">
             <div className="list-dash graphDash">
-              <SecondChart />
+              <SecondChart cumuledTimeCards={cumuledTimeCards} />
             </div>
           </div>
           <div className="done-dash">

@@ -15,9 +15,10 @@ const LineChart = ({ cumuledTimeCards }) => {
     if (cumuledTotal) {
       setIsLoading(false);
     }
-    console.log("cumuledTimeCards", cumuledTimeCards);
-    console.log("cumuledTitle", cumuledTitle[0]);
-    console.log("cumuledTotal", cumuledTotal[0]);
+    // console.log("cumuledTimeCards", cumuledTimeCards);
+    // console.log("cumuledTitle", cumuledTitle[0]);
+    // console.log("cumuledTotal", cumuledTotal[0]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cumuledTimeCards, isLoading, setCumuledTitle, setCumuledTotal]);
 
   const data = {
