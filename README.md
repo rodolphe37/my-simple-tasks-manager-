@@ -10,7 +10,7 @@
 [![Website](https://i.imgur.com/xSu6S5v.png)](https://rodolphe-augusto.fr)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/21d74bb3-0c7d-44b4-ab8e-7a04a0f93946/deploy-status)](https://app.netlify.com/sites/my-simple-tasks-manager/deploys)
 
-# Tutorial Intro
+# User Guide
 
 ---
 
@@ -26,10 +26,10 @@ is a drag-and-drop task manager as well as a time tracker (not for a team, but f
 
 
 
-## :computer: Online Demo sites
+## :computer: Online sites
 
 
-**You can try My Simple Task Manager** **[here](https://my-simple-tasks-manager.netlify.app/)**,
+**You can use My Simple Task Manager** **[here](https://my-simple-tasks-manager.netlify.app/)**,
 
 ![alt text](demo/pwa-check-all.png "My Simple Tasks Manager")
 
@@ -289,45 +289,6 @@ Can I use Compatibility:
 
 ![alt text](demo/new-version/canIuse.png "My Simple Tasks Manager")
 
-## :microscope: Getting Started!
-
-you just have to **clone this repository**.
-
----
-
-## :satellite: Install dependencies
-
-On the root folder:
-
-```shell
-yarn
-```
-or
-```shell
-npm i
-```
----
-
-## :rainbow: Start the App
-
-```shell
-yarn start
-```
-or
-```shell
-npm start
-```
-
-
-Your site starts at `http://localhost:3000`.
-
----
-
-
-* **Enjoy!**
-
-
----
 
 ## :bust_in_silhouette: Author
 
