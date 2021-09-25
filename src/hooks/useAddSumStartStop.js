@@ -10,6 +10,8 @@ const useAddSumStartStop = () => {
         title: title[index],
       });
     });
+
+    localStorage.setItem("totalCounts", JSON.stringify(arrayToPush));
   };
   return {
     addSumStartStop,

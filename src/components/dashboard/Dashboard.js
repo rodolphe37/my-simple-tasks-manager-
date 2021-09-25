@@ -49,6 +49,10 @@ const Dashboard = () => {
   const [totalTimeSeconds, setTotalTimeSeconds] = useState([]);
   const { mapRevers } = useReverseArray();
 
+  const [cumuledCardsTimeArray] = useState(
+    JSON.parse(localStorage.getItem("totalCounts"))
+  );
+
   let totalSum = [];
   const [connexionNumber, setConnexionNumber] = useState(0);
   const [finishedDatas] = useRecoilState(finishedDatasAtom);
@@ -103,12 +107,15 @@ const Dashboard = () => {
 
   let cardIdTime = finishedDatas.map((res) => res.cardId);
   let cardTitleTime = finishedDatas.map((res) => res.cardTitle);
+  let cumuledTimeCards = cumuledCardsTimeArray.filter(
+    (resultFiltered) => resultFiltered.total !== null
+  );
 
   useEffect(() => {
     if (totalSum !== []) {
       setTotalTimeSeconds(...totalTimeSeconds, totalSum);
     }
-    console.log("totalTimeSeconds", totalTimeSeconds);
+    // console.log("cumuledCardsTimeArray", cumuledTimeCards);
 
     let startedTime = finishedDatas.map((res) => res.start);
     let finishedTime = finishedDatas.map((res) => res.stop);
@@ -371,7 +378,7 @@ const Dashboard = () => {
         <div className="tasks-dash graphs">
           <div className="todo-dash">
             <div className="list-dash graphDash">
-              <FirstChart />
+              <FirstChart cumuledTimeCards={cumuledTimeCards} />
             </div>
           </div>
           <div className="inProgress-dash">
