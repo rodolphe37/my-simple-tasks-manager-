@@ -794,9 +794,7 @@ const Dashboard = () => {
   const [totalTimeSeconds, setTotalTimeSeconds] = useState([]);
   const { mapRevers } = useReverseArray();
 
-  const [cumuledCardsTimeArray] = useState(
-    JSON.parse(localStorage.getItem("totalCounts"))
-  );
+  const [cumuledCardsTimeArray, setCumuledCardsTimeArray] = useState([]);
 
   let totalSum = [];
   const [connexionNumber, setConnexionNumber] = useState(0);
@@ -815,10 +813,13 @@ const Dashboard = () => {
   let totalEuro = eurTjm * changeEurDoll;
   // let newTaskArray = [];
   useEffect(() => {
+    if (finishedDatas) {
+      setCumuledCardsTimeArray(JSON.parse(localStorage.getItem("totalCounts")));
+    }
     if (!tjm) {
       setEurTjm(0);
     }
-  }, [tjm]);
+  }, [tjm, finishedDatas]);
 
   const handleChangeDevise = () => {
     setChangeDevise((changeDevise) => !changeDevise);
@@ -851,8 +852,8 @@ const Dashboard = () => {
   const numberKeeped = 8;
 
   let cardIdTime = finishedDatas.map((res) => res.cardId);
-  let cardTitleTime = finishedDatas.map((res) => res.cardTitle);
-  let cumuledTimeCards = cumuledCardsTimeArray.filter(
+  let cardTitleTime = finishedDatas?.map((res) => res.cardTitle);
+  let cumuledTimeCards = cumuledCardsTimeArray?.filter(
     (resultFiltered) => resultFiltered.total !== null
   );
 
