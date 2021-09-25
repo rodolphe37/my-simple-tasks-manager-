@@ -29,7 +29,7 @@ is a drag-and-drop task manager as well as a time tracker (not for a team, but f
 ## :computer: Online sites
 
 
-**You can use My Simple Task Manager** **[here](https://my-simple-tasks-manager.netlify.app/)**,
+**You can use My Simple Task Manager for FREE** **[here](https://my-simple-tasks-manager.netlify.app/)**,
 
 ![alt text](demo/pwa-check-all.png "My Simple Tasks Manager")
 
