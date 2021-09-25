@@ -90,19 +90,7 @@ const Dashboard = () => {
     // }
 
     // console.log("completCardsTimeArray", newTaskArray[0]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    tjm,
-    setEurTjm,
-    eurTjm,
-    projectDone,
-    handlePrice,
-    stockItemsByStatus,
-    changeDevise,
-    startArrayTimes,
-    setTotalTimeSeconds,
-    totalTimeSeconds,
-  ]);
+  }, [tjm, eurTjm, projectDone, handlePrice]);
 
   const { addSumStartStop } = useAddSumStartStop();
 
@@ -117,6 +105,11 @@ const Dashboard = () => {
   let cardTitleTime = finishedDatas.map((res) => res.cardTitle);
 
   useEffect(() => {
+    if (totalSum !== []) {
+      setTotalTimeSeconds(...totalTimeSeconds, totalSum);
+    }
+    console.log("totalTimeSeconds", totalTimeSeconds);
+
     let startedTime = finishedDatas.map((res) => res.start);
     let finishedTime = finishedDatas.map((res) => res.stop);
 
@@ -154,12 +147,11 @@ const Dashboard = () => {
         startArrayTimes,
         totalSum,
         cardIdTime,
-        cardTitleTime
+        cardTitleTime,
+        totalTimeSeconds
       );
     }
-    if (totalSum !== []) {
-      setTotalTimeSeconds(...totalTimeSeconds, totalSum);
-    }
+
     localStorage.setItem("connexionNumber", totalSum.length);
     setConnexionNumber(localStorage.getItem("connexionNumber"));
 
@@ -185,7 +177,7 @@ const Dashboard = () => {
     // check();
     // console.log("ObjIdToFind", unifySameCard);
     // console.log("count", counts[0]);
-    // console.log("totalSum", totalSum);
+
     // console.log("test", countInArray(finishedDatas, comparId)); // returns 2
     // console.log("newTaskArray", newTaskArray);
     // console.log("finishedDatas", finishedDatas);
@@ -549,7 +541,7 @@ const Dashboard = () => {
               {finishedDatas !== [] ? (
                 totalTimeSeconds &&
                 totalTimeSeconds
-                  .filter((totMax) => totMax.total < -1)
+                  .filter((totMax) => totMax.total >= 7200)
                   .map((res, i) => (
                     <ul key={uuidv4()}>
                       {isNaN(res.total) === false ? (
@@ -599,7 +591,9 @@ const Dashboard = () => {
               {finishedDatas !== [] ? (
                 totalTimeSeconds &&
                 totalTimeSeconds
-                  .filter((totMax) => totMax.total > 3600)
+                  .filter(
+                    (totMax) => totMax.total >= 3600 && totMax.total < 7200
+                  )
                   .map((res, i) => (
                     <ul key={uuidv4()}>
                       {isNaN(res.total) === false ? (
