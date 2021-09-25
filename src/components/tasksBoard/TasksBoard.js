@@ -22,6 +22,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import projectDoneAtom from "../../statesManager/atoms/projectDoneAtom";
 import useCustomAlertHook from "../../hooks/useCustomAlertHook";
+import finishedDatasAtom from "../../statesManager/atoms/finishedDatasAtom";
 
 const generateId = () => Date.now().toString();
 
@@ -47,6 +48,8 @@ const defaultItems = {
 };
 
 function Taskboard() {
+  let newTaskArray = [];
+  const [finishedDatas] = useRecoilState(finishedDatasAtom);
   const { finishedProjectAlert } = useCustomAlertHook();
   const MySwal = withReactContent(Swal);
   // eslint-disable-next-line no-unused-vars
@@ -82,6 +85,23 @@ function Taskboard() {
 
     if (!projectDone) {
       localStorage.removeItem("DoneAlert");
+    }
+    if (finishedDatas) {
+      newTaskArray.push(finishedDatas.filter((res) => res.start !== ""));
+    }
+
+    if (projectDone && newTaskArray) {
+      const counts = newTaskArray[0]
+        .map((resu) => resu.cardTitle)
+        .reduce(
+          (acc, value) => ({
+            ...acc,
+            [value]: (acc[value] || 0) + 1,
+          }),
+          {}
+        );
+      localStorage.setItem("counts", JSON.stringify(counts));
+      console.log("total:", counts);
     }
     // console.log("Done", DoneAlert);
     // eslint-disable-next-line react-hooks/exhaustive-deps

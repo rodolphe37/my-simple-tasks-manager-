@@ -1,5 +1,8 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
+import { useRecoilState } from "recoil";
+import projectDoneAtom from "../../statesManager/atoms/projectDoneAtom";
+import Loader from "../loader/Loader";
 
 const options = {
   indexAxis: "y",
@@ -23,14 +26,44 @@ const options = {
 };
 
 const HorizontalBarChart = () => {
-  const [dataTasks] = useState([JSON.parse(localStorage.getItem("counts"))]);
+  const [dataTasks, setDataTasks] = useState(
+    JSON.parse(localStorage.getItem("counts")) || []
+  );
+  const [isLoading, setIsLoading] = useState(false);
+  const [projectDone] = useRecoilState(projectDoneAtom);
+
+  function getDatas() {
+    try {
+      if (!dataTasks || localStorage.getItem("counts") === null) {
+        setDataTasks(localStorage.getItem("counts"));
+        setIsLoading(true);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 1000);
+      }
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    if (!isLoading && projectDone) {
+      getDatas();
+    }
+    console.log("isLoading", isLoading);
+    console.log("dataTasks", dataTasks);
+    // console.log("data keys", Object.keys(dataTasks));
+    // console.log("data values", Object.values(dataTasks));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoading, projectDone, dataTasks]);
 
   const data = {
-    labels: dataTasks ? Object.keys(dataTasks[0]) : null,
+    labels: Object.keys(dataTasks),
     datasets: [
       {
         label: "Number of work sessions per task",
-        data: dataTasks ? Object.values(dataTasks[0]) : null,
+        data: Object.values(dataTasks),
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
@@ -52,23 +85,17 @@ const HorizontalBarChart = () => {
     ],
   };
 
-  useEffect(() => {
-    // console.log("data keys", Object.keys(dataTasks[0]));
-    // console.log("data values", Object.values(dataTasks[0]));
-  }, [dataTasks]);
   return (
     <>
-      {dataTasks ? (
-        <Fragment>
-          <div className="header">
-            <h1 className="title">Number of work sessions per task </h1>
-            <sub style={{ fontWeight: "bold" }}>
-              (Task name on the left and number of work sessions on the bottom)
-            </sub>
-          </div>
-          <Bar data={data} options={options} />
-        </Fragment>
-      ) : null}
+      <Fragment>
+        <div className="header">
+          <h1 className="title">Number of work sessions per task </h1>
+          <sub style={{ fontWeight: "bold" }}>
+            (Task name on the left and number of work sessions on the bottom)
+          </sub>
+        </div>
+        {isLoading ? <Loader /> : <Bar data={data} options={options} />}
+      </Fragment>
     </>
   );
 };

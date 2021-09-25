@@ -64,7 +64,7 @@ const Dashboard = () => {
   const { cutDecimals } = useCutDecimals();
   const changeEurDoll = 0.85;
   let totalEuro = eurTjm * changeEurDoll;
-  let newTaskArray = [];
+  // let newTaskArray = [];
   useEffect(() => {
     if (!tjm) {
       setEurTjm(0);
@@ -85,9 +85,9 @@ const Dashboard = () => {
     if (projectDone && tjm === 0) {
       return handlePrice();
     }
-    if (projectDone) {
-      newTaskArray.push(finishedDatas.filter((res) => res.start !== ""));
-    }
+    // if (finishedDatas) {
+    //   newTaskArray.push(finishedDatas.filter((res) => res.start !== ""));
+    // }
 
     // console.log("completCardsTimeArray", newTaskArray[0]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -163,19 +163,19 @@ const Dashboard = () => {
     localStorage.setItem("connexionNumber", totalSum.length);
     setConnexionNumber(localStorage.getItem("connexionNumber"));
 
-    if (newTaskArray) {
-      const counts = newTaskArray[0]
-        .map((resu) => resu.cardTitle)
-        .reduce(
-          (acc, value) => ({
-            ...acc,
-            [value]: (acc[value] || 0) + 1,
-          }),
-          {}
-        );
-      localStorage.setItem("counts", JSON.stringify(counts));
-      console.log("total:", counts);
-    }
+    // if (projectDone && newTaskArray) {
+    //   const counts = newTaskArray[0]
+    //     .map((resu) => resu.cardTitle)
+    //     .reduce(
+    //       (acc, value) => ({
+    //         ...acc,
+    //         [value]: (acc[value] || 0) + 1,
+    //       }),
+    //       {}
+    //     );
+    //   localStorage.setItem("counts", JSON.stringify(counts));
+    //   console.log("total:", counts);
+    // }
 
     // console.log(
     //   "totalSum:",

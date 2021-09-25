@@ -217,6 +217,7 @@ function TaskboardItemCard({
                 Edit
               </Menu.Item>
               <DeleteMenuItem
+                key={uuidv4()}
                 icon={<DeleteOutlined />}
                 onClick={() =>
                   Modal.confirm({
