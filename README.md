@@ -51,9 +51,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 ---
 ## UPDATE
 
----
-
-### New Version (18 sept 2021 - ^V_1.6.0)
+### Version (18 sept 2021 - ^V_1.6.0)
 
 **:heavy_exclamation_mark: When you put the card on "In Progress" column**
 
@@ -93,7 +91,8 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 ---
 
-### New Version (19 sept 2021 - ^V_1.7)
+
+### Version (19 sept 2021 - ^V_1.7)
 
 **:heavy_exclamation_mark: Time Tracker : Manual or automatic mode ?**
 
@@ -154,6 +153,91 @@ You can easily install this application on a Windows, Mac or Linux computer.
 >If you drag more than one card into the "In Progress" column an alert informs you that it is not allowed and your card goes back to the box it came from automatically.
 
 ![alt text](demo/update-09-21/onlyOneTask.gif "My Simple Tasks Manager")
+
+---
+
+
+### New Version (25 sept 2021 - ^V_2.0.0)
+
+**:heavy_exclamation_mark: Auto-detect end project : When all tasks are done !**
+
+>when you have finished all your tasks, the timeTracker disappears, a message appears to inform you that the dashboard is now accessible (you will notice the icon that swings on the left of the window).
+
+![alt text](demo/version2/endProject.gif "My Simple Tasks Manager")
+
+---
+
+**:heavy_exclamation_mark: When you open your dashboard for the first time**
+
+>When you click on the icon, it stops oscillating and the dashboad opens. When you open the dashboad for the first time, a modal window appears asking you for your daily rate in order to calculate the statistics based on it.
+
+![alt text](demo/version2/firstDashboard.gif "My Simple Tasks Manager")
+
+---
+
+**:heavy_exclamation_mark: Here is your dashbord with some statistics on the work done!**
+
+>The first three "modules" you see (from left to right) are:
+>> - The total duration in hours and the average wage per hour.
+>> - The number of days that the work represents. And the calculation of the total cost of the project based on the daily rate entered beforehand.
+>> - The number of tasks and the average hour per task.
+
+![alt text](demo/version2/firstViewDash.png "My Simple Tasks Manager")
+
+***For the graphics, let's see it in more detail...***
+
+---
+
+
+**:heavy_exclamation_mark: Time spent on each task!**
+
+>The first graph represents each task and the time spent on it.
+
+![alt text](demo/version2/timeSpent.png "My Simple Tasks Manager")
+
+---
+
+**:heavy_exclamation_mark: Budgetary impact for each task!**
+
+>The second graph represents  the percentage of budget impact for each task (Calculated from the daily rate, the overall time and the time spent on each task individually).
+
+![alt text](demo/version2/budgetImpact.png "My Simple Tasks Manager")
+
+---
+**:heavy_exclamation_mark: Number of work sessions per task!**
+
+>This last graph is based on the number of times a task has been put in "In Progress".
+
+![alt text](demo/version2/numberSessionTask.png "My Simple Tasks Manager")
+
+---
+
+**:heavy_exclamation_mark: Further down in the Dashboard page...**
+
+> - You have, first of all, the view on all notes written during the project.
+> - Then you have the number of connections to the application.
+> - Then come the tasks with their titles, their id, the text description of the task, and the date of creation.
+
+![alt text](demo/version2/secondViewDash.png "My Simple Tasks Manager")
+
+---
+
+**:heavy_exclamation_mark: Then there is the detailed "task/time session" section.**
+
+> - First of all, you have the tasks that required more than 2 hours.
+> - Then, the ones that required between 1 hour and 2 hours.
+> - Then come the ones that required less than 1 hour to do.
+
+![alt text](demo/version2/thirdViewDash.png "My Simple Tasks Manager")
+
+---
+
+**:heavy_exclamation_mark: Then there is the detailed "task/time session" section.**
+
+>Finally, you have the list of tasks with "day and time of start and end of work" on each of them.
+
+
+![alt text](demo/version2/lastViewDash.png "My Simple Tasks Manager")
 
 ---
 

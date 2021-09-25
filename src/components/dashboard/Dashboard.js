@@ -460,14 +460,22 @@ const Dashboard = () => {
                   stockItemsByStatus["Done"].map((res, i) => (
                     <ul key={uuidv4()}>
                       <li>
-                        <strong style={{ fontSize: 11 }}>
+                        <strong style={{ fontSize: 17 }}>
                           Name: {res.title}
                         </strong>
                         <p>id :{res.id}</p>
-                        <p style={{ fontSize: 12 }}>desc: {res.description}</p>
+                        <p
+                          style={{
+                            fontSize: 14,
+                            fontWeight: 500,
+                            fontStyle: "italic",
+                          }}
+                        >
+                          desc: {res.description}
+                        </p>
                         <span className="createdTaskDash">
                           <img src={CreatedIcon} alt="start" width="28" />
-                          <p style={{ fontSize: 12 }}>
+                          <p style={{ fontSize: 12, margin: 6, color: "blue" }}>
                             Created: {res.timestamp}
                           </p>
                         </span>
