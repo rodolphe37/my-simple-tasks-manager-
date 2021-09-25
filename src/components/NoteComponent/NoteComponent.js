@@ -65,16 +65,9 @@ const NoteComponent = () => {
     if (newNote1 && newNote2 && newNote3 && newNote4) {
       setCreateButtonState(false);
     }
-    // if (NoteNumberFromLocalStore === 1) {
-    //   setNoteNumberToDisplay(2);
-    // }
-    // if (newNote1 && newNote2 && newNote3 && newNote4) {
-    //   setNoteNumberToDisplay(4);
-    // }
+
     if (newNote1 && !newNote2 && !newNote3 && !newNote4) {
       setCreateButtonState(true);
-      // setNoteNumberToDisplay(1);
-      // localStorage.setItem("noteNumberToDisplay", 1);
     }
     if (valueNote1) {
       localStorage.setItem("valueNote1", valueNote1);
@@ -89,7 +82,6 @@ const NoteComponent = () => {
       localStorage.setItem("valueNote4", valueNote4);
     }
 
-    // console.log("noteNumberToDisplay", noteNumberToDisplay);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [valueNote1, valueNote2, valueNote3, valueNote4, noteNumberToDisplay]);
 
@@ -120,7 +112,6 @@ const NoteComponent = () => {
       <div
         style={{
           position: "relative",
-          // marginRight: "22px !important",
           maxWidth: 520,
           maxHeight: 250,
         }}
@@ -164,7 +155,6 @@ const NoteComponent = () => {
         <div
           style={{
             position: "relative",
-            // marginRight: "22px !important",
             maxWidth: 520,
             maxHeight: 250,
           }}
@@ -182,7 +172,6 @@ const NoteComponent = () => {
         <div
           style={{
             position: "relative",
-            // marginRight: "22px !important",
             maxWidth: 520,
             maxHeight: 250,
           }}

@@ -25,18 +25,6 @@ const options = {
   },
 };
 
-// const options = {
-//   scales: {
-//     yAxes: [
-//       {
-//         ticks: {
-//           beginAtZero: true,
-//         },
-//       },
-//     ],
-//   },
-// };
-
 const HorizontalBarChart = () => {
   const [dataTasks, setDataTasks] = useState(
     JSON.parse(localStorage.getItem("counts")) || []
@@ -59,9 +47,6 @@ const HorizontalBarChart = () => {
       getDatas();
     }
 
-    console.log("dataTasks", dataTasks);
-    // console.log("data keys", Object.keys(dataTasks));
-    // console.log("data values", Object.values(dataTasks));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projectDone]);
 

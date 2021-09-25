@@ -2,7 +2,7 @@ import { DragDropContext } from "react-beautiful-dnd";
 import { Fragment, useEffect, useMemo, useState } from "react";
 import produce from "immer";
 import styled from "styled-components";
-// eslint-disable-next-line no-unused-vars
+
 import { TaskboardItemStatus } from "./TaskboardTypes";
 import TaskboardItemModal from "./TasksBoardItemModal";
 import TaskboardCol from "./TaskboardCol";
@@ -52,10 +52,7 @@ function Taskboard() {
   const [finishedDatas] = useRecoilState(finishedDatasAtom);
   const { finishedProjectAlert } = useCustomAlertHook();
   const MySwal = withReactContent(Swal);
-  // eslint-disable-next-line no-unused-vars
-  const [autoTrackTime, setAutoTrackTime] = useRecoilState(
-    automaticTrackTimerAtom
-  );
+  const [autoTrackTime] = useRecoilState(automaticTrackTimerAtom);
   const [projectDone] = useRecoilState(projectDoneAtom);
   const [itemsByStatus, setItemsByStatus] = useSyncedState(
     "itemsByStatus",
@@ -101,9 +98,7 @@ function Taskboard() {
           {}
         );
       localStorage.setItem("counts", JSON.stringify(counts));
-      console.log("total:", counts);
     }
-    // console.log("Done", DoneAlert);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projectDone, MySwal, clickedOnDashButton, DoneAlert, itemsByStatus]);
 
@@ -179,13 +174,8 @@ function Taskboard() {
     const syncTrackTime = (values) => {
       setItemsByStatus((current) =>
         produce(current, (draft) => {
-          // console.log("current", current);
-
           // Editing existing item
           const draftItem = Object.values(draft);
-          // .flatMap((items) => items)
-          // .find((item) => item.id === itemToEdit.id);
-
           draftItem.startWork = n;
         })
       );
@@ -196,8 +186,6 @@ function Taskboard() {
       localStorage.removeItem("stopArrayTimes");
       localStorage.removeItem("startArrayTimes");
     }
-    // console.log("initialValues", initialValues);
-    // console.log("clickedAddButton taskboard", clickedAddButton);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialValues, statusOf, projectDone]);
 
