@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
+import Loader from "../loader/Loader";
 
 const VerticalBar = ({ cumuledTimeCards }) => {
-  const [isLoading, setIsLoading] = useState(false);
   const [cumuledTitle, setCumuledTitle] = useState([]);
   const [cumuledTotal, setCumuledTotal] = useState([]);
   const tjm = localStorage.getItem("tjm");
@@ -10,25 +10,24 @@ const VerticalBar = ({ cumuledTimeCards }) => {
   let totalSumPrice = (tjm * totalTimeLocalStore) / 28800;
 
   useEffect(() => {
-    setCumuledTitle([cumuledTimeCards.map((resTitle) => resTitle.title)]);
-    setCumuledTotal([
-      cumuledTimeCards.map(
-        (resTotal) => (totalSumPrice * (resTotal.total / 3600)) / 100
-      ),
-    ]);
-    setIsLoading(true);
-    if (cumuledTotal) {
-      setIsLoading(false);
+    if (cumuledTimeCards) {
+      setCumuledTitle([cumuledTimeCards.map((resTitle) => resTitle.title)]);
+      setCumuledTotal([
+        cumuledTimeCards.map(
+          (resTotal) => (totalSumPrice * (resTotal.total / 3600)) / 100
+        ),
+      ]);
     }
+
     console.log("cumuledTitle", cumuledTitle?.[0]);
     console.log("cumuledTjm", cumuledTotal?.[0]);
     console.log("totalSumPrice", totalSumPrice);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cumuledTimeCards, isLoading, setCumuledTitle, setCumuledTotal]);
+  }, [cumuledTimeCards, setCumuledTitle, setCumuledTotal]);
 
-  useEffect(() => {
-    console.log("data Stats", cumuledTimeCards);
-  }, [cumuledTimeCards]);
+  // useEffect(() => {
+  //   console.log("data Stats", cumuledTimeCards);
+  // }, [cumuledTimeCards]);
 
   const data = {
     labels: cumuledTitle?.[0],
@@ -70,13 +69,72 @@ const VerticalBar = ({ cumuledTimeCards }) => {
   };
   return (
     <>
-      <div className="header">
-        <h1 className="title">Budgetary impact for each task</h1>
-        <sub>Impact expressed in %.</sub>
-      </div>
-      <Bar data={data} options={options} />
+      {!cumuledTimeCards ? (
+        <Loader />
+      ) : (
+        <Fragment>
+          <div className="header">
+            <h1 className="title">Budgetary impact for each task</h1>
+            <sub>Impact expressed in %.</sub>
+          </div>
+          <Bar data={data} options={options} />
+        </Fragment>
+      )}
     </>
   );
 };
 
 export default VerticalBar;
+
+// import React from "react";
+// import { Bar } from "react-chartjs-2";
+
+// const data = {
+//   labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+//   datasets: [
+//     {
+//       label: "# of Votes",
+//       data: [12, 19, 3, 5, 2, 3],
+//       backgroundColor: [
+//         "rgba(255, 99, 132, 0.2)",
+//         "rgba(54, 162, 235, 0.2)",
+//         "rgba(255, 206, 86, 0.2)",
+//         "rgba(75, 192, 192, 0.2)",
+//         "rgba(153, 102, 255, 0.2)",
+//         "rgba(255, 159, 64, 0.2)",
+//       ],
+//       borderColor: [
+//         "rgba(255, 99, 132, 1)",
+//         "rgba(54, 162, 235, 1)",
+//         "rgba(255, 206, 86, 1)",
+//         "rgba(75, 192, 192, 1)",
+//         "rgba(153, 102, 255, 1)",
+//         "rgba(255, 159, 64, 1)",
+//       ],
+//       borderWidth: 1,
+//     },
+//   ],
+// };
+
+// const options = {
+//   scales: {
+//     yAxes: [
+//       {
+//         ticks: {
+//           beginAtZero: true,
+//         },
+//       },
+//     ],
+//   },
+// };
+
+// const VerticalBar = () => (
+//   <>
+//     <div className="header">
+//       <h1 className="title">Vertical Bar Chart</h1>
+//     </div>
+//     <Bar data={data} options={options} />
+//   </>
+// );
+
+// export default VerticalBar;

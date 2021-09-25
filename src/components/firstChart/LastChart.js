@@ -4,24 +4,36 @@ import { useRecoilState } from "recoil";
 import projectDoneAtom from "../../statesManager/atoms/projectDoneAtom";
 import Loader from "../loader/Loader";
 
+// const options = {
+//   indexAxis: "y",
+//   // Elements options apply to all of the options unless overridden in a dataset
+//   // In this case, we are setting the border of each horizontal bar to be 2px wide
+//   elements: {
+//     bar: {
+//       borderWidth: 2,
+//     },
+//   },
+//   responsive: true,
+//   plugins: {
+//     // legend: {
+//     //   position: "right",
+//     // },
+//     // title: {
+//     //   display: true,
+//     //   text: "Chart.js Horizontal Bar Chart",
+//     // },
+//   },
+// };
+
 const options = {
-  indexAxis: "y",
-  // Elements options apply to all of the options unless overridden in a dataset
-  // In this case, we are setting the border of each horizontal bar to be 2px wide
-  elements: {
-    bar: {
-      borderWidth: 2,
-    },
-  },
-  responsive: true,
-  plugins: {
-    // legend: {
-    //   position: "right",
-    // },
-    // title: {
-    //   display: true,
-    //   text: "Chart.js Horizontal Bar Chart",
-    // },
+  scales: {
+    yAxes: [
+      {
+        ticks: {
+          beginAtZero: true,
+        },
+      },
+    ],
   },
 };
 
@@ -29,34 +41,29 @@ const HorizontalBarChart = () => {
   const [dataTasks, setDataTasks] = useState(
     JSON.parse(localStorage.getItem("counts")) || []
   );
-  const [isLoading, setIsLoading] = useState(false);
+
   const [projectDone] = useRecoilState(projectDoneAtom);
 
   function getDatas() {
     try {
-      if (!dataTasks || localStorage.getItem("counts") === null) {
-        setDataTasks(localStorage.getItem("counts"));
-        setIsLoading(true);
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 1000);
+      if (!dataTasks || localStorage.getItem("counts") !== null) {
+        setDataTasks(JSON.parse(localStorage.getItem("counts")));
       }
     } catch (error) {
       console.log(error);
-      setIsLoading(false);
     }
   }
 
   useEffect(() => {
-    if (!isLoading && projectDone) {
+    if (projectDone) {
       getDatas();
     }
-    console.log("isLoading", isLoading);
+
     console.log("dataTasks", dataTasks);
     // console.log("data keys", Object.keys(dataTasks));
     // console.log("data values", Object.values(dataTasks));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoading, projectDone, dataTasks]);
+  }, [projectDone]);
 
   const data = {
     labels: Object.keys(dataTasks),
@@ -94,7 +101,7 @@ const HorizontalBarChart = () => {
             (Task name on the left and number of work sessions on the bottom)
           </sub>
         </div>
-        {isLoading ? <Loader /> : <Bar data={data} options={options} />}
+        {!dataTasks ? <Loader /> : <Bar data={data} options={options} />}
       </Fragment>
     </>
   );

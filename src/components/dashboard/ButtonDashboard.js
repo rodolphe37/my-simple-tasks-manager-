@@ -6,6 +6,9 @@ import dashIcon from "../assets/dashboards.svg";
 import "./dashboard.css";
 
 const ButtonDashboard = () => {
+  const nextURL = "/";
+  const nextTitle = "DashBoard";
+  const nextState = { additionalInformation: "statistics of the work done" };
   const [projectDone] = useRecoilState(projectDoneAtom);
   // eslint-disable-next-line no-unused-vars
   const [openDash, setOpenDash] = useRecoilState(openDashAtom);
@@ -17,6 +20,7 @@ const ButtonDashboard = () => {
     setOpenDash((openDash) => !openDash);
     setClickedOnDashButton(true);
     localStorage.setItem("clickedOnDashButton", true);
+    window.history.pushState(nextState, nextTitle, nextURL);
   };
 
   return (
