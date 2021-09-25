@@ -8,13 +8,13 @@
 
 
 [![Website](https://i.imgur.com/xSu6S5v.png)](https://rodolphe-augusto.fr)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/6823d126-b09c-4558-b1f9-717177b8a194/deploy-status)](https://app.netlify.com/sites/amazing-turing-37ab6a/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/21d74bb3-0c7d-44b4-ab8e-7a04a0f93946/deploy-status)](https://app.netlify.com/sites/my-simple-tasks-manager/deploys)
 
 # Tutorial Intro
 
 ---
 
-## <img  style =" float: left; margin-top: 5px; margin-right: 22px " src="demo/backlog.svg" alt="drawing" height="30" width="25"/>My Simple Task Manager
+## <img  style =" float: left; margin-top: 5px; margin-right: 22px " src="demo/backlog.svg" alt="drawing" height="30" width="25"/>My Simple Task Manager_V2.0.0
 
 is a drag-and-drop task manager as well as a time tracker (not for a team, but for a single freelance developer for example)!
 
