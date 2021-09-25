@@ -9,7 +9,7 @@
 
 .offlineMessCOntainer {
   position: absolute;
-  top: 23em;
+  top: 7em;
   z-index: 99999;
   display: flex;
   align-items: center;
@@ -52,22 +52,30 @@
   color: #842029;
   background-color: #f8d7da;
   border-color: #f5c2c7;
+  width: 69%;
+  padding-left: 39px;
 }
 .primary {
   color: #084298;
   background-color: #cfe2ff;
   border-color: #b6d4fe;
+  width: 69%;
+  padding-left: 39px;
 }
 
 .success {
   color: #0f5132;
   background-color: #d1e7dd;
   border-color: #badbcc;
+  width: 69%;
+  padding-left: 39px;
 }
 .warning {
   color: #664d03;
   background-color: #fff3cd;
   border-color: #ffecb5;
+  width: 69%;
+  padding-left: 39px;
 }
 .info {
   color: #055160;
@@ -98,4 +106,28 @@
   position: fixed;
   background: rgba(0, 0, 0, 0.5);
   z-index: 99;
+}
+
+.content-infoMessage-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 17px;
+  transform: translate(-54px, -11px);
+  width: 82%;
+}
+
+.scale-in-center {
+  animation: scale-in-center 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+@keyframes scale-in-center {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }

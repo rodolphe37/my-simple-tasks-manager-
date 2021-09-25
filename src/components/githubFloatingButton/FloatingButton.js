@@ -53,7 +53,7 @@ const FloatingButton = () => {
           </svg>
         </a>
         <a
-          href="https://github.com/rodolphe37/"
+          href="https://my-github-pwa.netlify.app"
           target="new"
           className="buttons"
           title="My Github"

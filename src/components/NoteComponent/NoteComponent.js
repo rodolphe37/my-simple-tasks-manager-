@@ -1,55 +1,50 @@
 import { useEffect, useState } from "react";
 import "./noteComponent.css";
 import Erasericon from "../assets/eraser.svg";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
+import useCustomAlertHook from "../../hooks/useCustomAlertHook";
 
 const NoteComponent = () => {
-  // eslint-disable-next-line no-unused-vars
-  const [noteNumberToDisplay, setNoteNumberToDisplay] = useState(
-    localStorage.getItem("noteNumberToDisplay") ?? 1
-  );
+  const {
+    setNewNote2,
+    noteNumberToDisplay,
+    setNoteNumberToDisplay,
+    setNewNote3,
+    setNewNote4,
+    newNote2,
+    newNote3,
+    newNote4,
+    valueNote1,
+    valueNote2,
+    valueNote3,
+    valueNote4,
+    setValueNote1,
+    setValueNote2,
+    setValueNote3,
+    setValueNote4,
+    handleEraseNoteOne,
+    handleDeleteNote2,
+    handleDeleteNote3,
+    handleDeleteNote4,
+  } = useCustomAlertHook();
+
   // eslint-disable-next-line no-unused-vars
   const [newNote1, setNewNote1] = useState(true);
-  const [newNote2, setNewNote2] = useState(
-    JSON.parse(localStorage.getItem("newNote2")) === true ? true : false
-  );
-  const [newNote3, setNewNote3] = useState(
-    JSON.parse(localStorage.getItem("newNote3")) === true ? true : false
-  );
-  const [newNote4, setNewNote4] = useState(
-    JSON.parse(localStorage.getItem("newNote4")) === true ? true : false
-  );
   const [createButtonState, setCreateButtonState] = useState(true);
-  const [valueNote1, setValueNote1] = useState(
-    localStorage.getItem("valueNote1") ?? ""
-  );
-  const [valueNote2, setValueNote2] = useState(
-    localStorage.getItem("valueNote2") ?? ""
-  );
-  const [valueNote3, setValueNote3] = useState(
-    localStorage.getItem("valueNote3") ?? ""
-  );
-  const [valueNote4, setValueNote4] = useState(
-    localStorage.getItem("valueNote4") ?? ""
-  );
-
-  const MySwal = withReactContent(Swal);
 
   const handleCreateNote2 = () => {
     setNewNote2((newNote2) => !newNote2);
-    setNoteNumberToDisplay(2);
+    setNoteNumberToDisplay((prevState) => prevState + 1);
     localStorage.setItem("newNote2", true);
   };
   const handleCreateNote3 = () => {
     setNewNote3((newNote3) => !newNote3);
-    setNoteNumberToDisplay(3);
+    setNoteNumberToDisplay((prevState) => prevState + 1);
     localStorage.setItem("noteNumberToDisplay", noteNumberToDisplay);
     localStorage.setItem("newNote3", true);
   };
   const handleCreateNote4 = () => {
     setNewNote4((newNote4) => !newNote4);
-    setNoteNumberToDisplay(4);
+    setNoteNumberToDisplay((prevState) => prevState + 1);
     localStorage.setItem("noteNumberToDisplay", noteNumberToDisplay);
     localStorage.setItem("newNote4", true);
   };
@@ -66,89 +61,6 @@ const NoteComponent = () => {
     }
   };
 
-  const handleDeleteNote2 = () => {
-    MySwal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        setNewNote2(false);
-        setNoteNumberToDisplay(noteNumberToDisplay - 1);
-        localStorage.setItem("noteNumberToDisplay", noteNumberToDisplay);
-        setValueNote2("");
-        localStorage.removeItem("valueNote2");
-        localStorage.setItem("newNote2", false);
-        MySwal.fire("Deleted!", "Your note has been deleted.", "success");
-      }
-    });
-  };
-  const handleDeleteNote3 = () => {
-    MySwal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        setNewNote3(false);
-        setNoteNumberToDisplay(noteNumberToDisplay - 1);
-        localStorage.setItem("noteNumberToDisplay", noteNumberToDisplay);
-        setValueNote3("");
-        localStorage.removeItem("valueNote3");
-        localStorage.setItem("newNote3", false);
-        MySwal.fire("Deleted!", "Your note has been deleted.", "success");
-      }
-    });
-  };
-  const handleDeleteNote4 = () => {
-    MySwal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        setNewNote4(false);
-        setNoteNumberToDisplay(noteNumberToDisplay - 1);
-        localStorage.setItem("noteNumberToDisplay", noteNumberToDisplay);
-        setValueNote4("");
-        localStorage.removeItem("valueNote4");
-        localStorage.setItem("newNote4", false);
-        MySwal.fire("Deleted!", "Your note has been deleted.", "success");
-      }
-    });
-  };
-  const handleEraseNoteOne = () => {
-    MySwal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        setValueNote1("");
-        localStorage.removeItem("valueNote1");
-        MySwal.fire("Erased!", "Your note has been erased.", "success");
-      }
-    });
-  };
-
-  // const NoteNumberFromLocalStore = localStorage.getItem("noteNumberToDisplay");
-
   useEffect(() => {
     if (newNote1 && newNote2 && newNote3 && newNote4) {
       setCreateButtonState(false);
@@ -156,13 +68,13 @@ const NoteComponent = () => {
     // if (NoteNumberFromLocalStore === 1) {
     //   setNoteNumberToDisplay(2);
     // }
-    if (newNote1 && newNote2 && newNote3 && newNote4) {
-      setNoteNumberToDisplay(4);
-    }
+    // if (newNote1 && newNote2 && newNote3 && newNote4) {
+    //   setNoteNumberToDisplay(4);
+    // }
     if (newNote1 && !newNote2 && !newNote3 && !newNote4) {
       setCreateButtonState(true);
-      setNoteNumberToDisplay(1);
-      localStorage.setItem("noteNumberToDisplay", 1);
+      // setNoteNumberToDisplay(1);
+      // localStorage.setItem("noteNumberToDisplay", 1);
     }
     if (valueNote1) {
       localStorage.setItem("valueNote1", valueNote1);
@@ -182,7 +94,7 @@ const NoteComponent = () => {
   }, [valueNote1, valueNote2, valueNote3, valueNote4, noteNumberToDisplay]);
 
   return (
-    <div style={{ display: "flex", marginTop: 7 }}>
+    <div className="scale-in-ver-top" style={{ display: "flex", marginTop: 7 }}>
       <button
         style={{ position: "relative", zIndex: 5 }}
         disabled={createButtonState ? false : true}

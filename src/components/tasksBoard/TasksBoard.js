@@ -17,6 +17,12 @@ import clickedAddToDoAtom from "../../statesManager/atoms/clickedAddToDoAtom";
 import chevron from "../assets/chevron.svg";
 import pinIcon from "../assets/pin.svg";
 import pinGreen from "../assets/pin-green.svg";
+import ButtonDashboard from "../dashboard/ButtonDashboard";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import projectDoneAtom from "../../statesManager/atoms/projectDoneAtom";
+import useCustomAlertHook from "../../hooks/useCustomAlertHook";
+import finishedDatasAtom from "../../statesManager/atoms/finishedDatasAtom";
 
 const generateId = () => Date.now().toString();
 
@@ -42,20 +48,64 @@ const defaultItems = {
 };
 
 function Taskboard() {
+  let newTaskArray = [];
+  const [finishedDatas] = useRecoilState(finishedDatasAtom);
+  const { finishedProjectAlert } = useCustomAlertHook();
+  const MySwal = withReactContent(Swal);
   // eslint-disable-next-line no-unused-vars
   const [autoTrackTime, setAutoTrackTime] = useRecoilState(
     automaticTrackTimerAtom
   );
+  const [projectDone] = useRecoilState(projectDoneAtom);
   const [itemsByStatus, setItemsByStatus] = useSyncedState(
     "itemsByStatus",
     defaultItems
   );
   const [closed] = useRecoilState(closedStateAtom);
+  const [clickedOnDashButton] = useState(
+    localStorage.getItem("clickedOnDashButton") ?? false
+  );
+
+  const [DoneAlert] = useState(
+    localStorage.getItem("DoneAlert") !== null ? true : false
+  );
+
   const { JSalert } = CustomConfirm();
 
   useEffect(() => {
-    // console.log("in progress", itemsByStatus["In Progress"].length);
-  }, [itemsByStatus]);
+    if (
+      projectDone &&
+      itemsByStatus["In Progress"].length === 0 &&
+      itemsByStatus["To Do"].length === 0 &&
+      localStorage.getItem("DoneAlert") === null
+    ) {
+      finishedProjectAlert();
+      localStorage.setItem("DoneAlert", true);
+    }
+
+    if (!projectDone) {
+      localStorage.removeItem("DoneAlert");
+    }
+    if (finishedDatas) {
+      newTaskArray.push(finishedDatas.filter((res) => res.start !== ""));
+    }
+
+    if (projectDone && newTaskArray) {
+      const counts = newTaskArray[0]
+        .map((resu) => resu.cardTitle)
+        .reduce(
+          (acc, value) => ({
+            ...acc,
+            [value]: (acc[value] || 0) + 1,
+          }),
+          {}
+        );
+      localStorage.setItem("counts", JSON.stringify(counts));
+      console.log("total:", counts);
+    }
+    // console.log("Done", DoneAlert);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [projectDone, MySwal, clickedOnDashButton, DoneAlert, itemsByStatus]);
 
   const handleDragEnd = ({ source, destination }) => {
     // console.log("destination", destination);
@@ -141,10 +191,15 @@ function Taskboard() {
       );
     };
     syncTrackTime();
+
+    if (!projectDone) {
+      localStorage.removeItem("stopArrayTimes");
+      localStorage.removeItem("startArrayTimes");
+    }
     // console.log("initialValues", initialValues);
     // console.log("clickedAddButton taskboard", clickedAddButton);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [initialValues, statusOf]);
+  }, [initialValues, statusOf, projectDone]);
 
   const handleViewBottomToolbar = () => {
     if (viewBottomToolbar) {
@@ -164,12 +219,18 @@ function Taskboard() {
           <div className={closed ? "none" : "overlay"}></div>
           <InfoMessage
             type="warning"
-            content="You want to delete individual cards working time history?"
+            content="Do you want to delete the complete history of the time spent on the cards? "
+            subContent="You won't be able to revert this!"
           />
         </Fragment>
       ) : null}
       <DragDropContext onDragEnd={handleDragEnd}>
         <TaskboardRoot>
+          {itemsByStatus["In Progress"].length === 0 &&
+          itemsByStatus["To Do"].length === 0 &&
+          itemsByStatus["Done"].length !== 0 ? (
+            <ButtonDashboard />
+          ) : null}
           <TaskboardContent
             style={autoTrackTime ? { paddingBottom: "7em" } : {}}
           >

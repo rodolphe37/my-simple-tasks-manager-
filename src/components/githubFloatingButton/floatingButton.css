@@ -31,7 +31,16 @@ a.buttons {
   display: block;
   margin: 20px auto 0;
   position: relative;
-  transition: all 0.1s ease-out;
+  filter: opacity(0.6);
+  transition: all 0.6s ease-out;
+}
+a.buttons:hover {
+  filter: opacity(1);
+}
+a.buttons:hover > svg,
+a.buttons:hover > img {
+  box-shadow: 0 0 3px gray;
+  border-radius: 50%;
 }
 .buttons > svg {
   transform: translate(0px, -1px);
@@ -70,6 +79,7 @@ nav.float-action-button:hover a.buttons:not(:last-child) {
   -ms-transform: none;
   transform: none;
   margin: 20px auto 0;
+  transition: all 0.6s ease-in-out;
 }
 
 a.buttons:nth-last-child(1) {

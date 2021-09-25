@@ -7,7 +7,7 @@ import { useRecoilState } from "recoil";
 import automaticTrackTimerAtom from "../../statesManager/atoms/automaticTrackTimerAtom";
 import { useEffect } from "react";
 
-const ModalConfigComponent = ({ status }) => {
+const ModalConfigComponent = ({ status, STATUS }) => {
   const [clickedConfig, setClickedConfig] = useRecoilState(clickedConfigAtom);
   const [autoTrackTime, setAutoTrackTime] = useRecoilState(
     automaticTrackTimerAtom
@@ -22,6 +22,10 @@ const ModalConfigComponent = ({ status }) => {
     }
   };
 
+  const nextURL = "/";
+  const nextTitle = "My Simple Tasks Manager";
+  const nextState = { additionalInformation: "Updated the URL with JS" };
+
   const handleAutoTrackTime = () => {
     if (!autoTrackTime) {
       setAutoTrackTime(true);
@@ -31,7 +35,7 @@ const ModalConfigComponent = ({ status }) => {
     }
     setClickedConfig(false);
     setTimeout(() => {
-      window.location.replace("/");
+      window.history.pushState(nextState, nextTitle, nextURL); // window.location("/");
     }, 400);
   };
 

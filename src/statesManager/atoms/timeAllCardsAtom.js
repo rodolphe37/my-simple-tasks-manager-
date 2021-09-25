@@ -3,8 +3,8 @@ import { atom } from "recoil";
 const timeAllCardsAtom = atom({
   key: "timeAllCardsState",
   default:
-    localStorage.getItem("completCardsTimeArray") !== null
-      ? JSON.parse(localStorage.getItem("completCardsTimeArray"))
+    localStorage.getItem("timeAllCards") !== null
+      ? JSON.parse(localStorage.getItem("timeAllCards"))
       : [],
 });
 

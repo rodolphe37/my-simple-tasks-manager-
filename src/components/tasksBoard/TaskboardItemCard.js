@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { Fragment, useEffect, useState } from "react";
 import { Button, Card, Modal, Typography, Dropdown, Menu, Form } from "antd";
 import { DeleteOutlined, EditOutlined, MoreOutlined } from "@ant-design/icons";
@@ -9,11 +8,13 @@ import Checklist from "../assets/arrows.svg";
 import List from "../assets/lists.svg";
 import Clipboard from "../assets/clipboard.svg";
 import { useRecoilState } from "recoil";
-import timeAllCardsAtom from "../../statesManager/atoms/timeAllCardsAtom";
 import TimerEndIcon from "../assets/timer.svg";
 import StartIcon from "../assets/start.svg";
-import cumulTimeCardsTaskAtom from "../../statesManager/atoms/cumulTimeCardsTaskAtom";
 import { v4 as uuidv4 } from "uuid";
+import completCardsTimeArrayAtom from "../../statesManager/atoms/completCardsTimeArrayAtom";
+import projectDoneAtom from "../../statesManager/atoms/projectDoneAtom";
+import finishedDatasAtom from "../../statesManager/atoms/finishedDatasAtom";
+import useDateTime from "../../hooks/useDateTime";
 
 const StyledCard = styled(Card)`
   margin: 0.5rem;
@@ -36,21 +37,14 @@ function TaskboardItemCard({
   isDragging,
   onEdit,
   onDelete,
-  items,
   itemsByStatus,
-  setItemsByStatus,
 }) {
-  let d = new Date();
-  let n = d.toLocaleString();
-  const [timeForCard, setTimeForCard] = useState("");
-  const [totalTimeToSeconds, setTotalTimeToSeconds] = useState(
-    JSON.parse(localStorage.getItem("totalTimeInSeconds")) ?? []
+  const { n } = useDateTime();
+
+  const [completCardsTimeArray, setCompletCardsTimeArray] = useRecoilState(
+    completCardsTimeArrayAtom
   );
-  const [cumuledTimeCards, setCumuledTimeCards] = useRecoilState(
-    cumulTimeCardsTaskAtom
-  );
-  const [completCardsTimeArray, setCompletCardsTimeArray] =
-    useRecoilState(timeAllCardsAtom);
+  const [finishedDatas, setFinishedDatas] = useRecoilState(finishedDatasAtom);
   const [timeAllCards, setTimeAllCards] = useState([]);
 
   const [startWorkState, setStartWorkState] = useState(
@@ -60,28 +54,53 @@ function TaskboardItemCard({
     localStorage.getItem("stopTimeWork") ?? ""
   );
   const [cardId, setCardId] = useState(0);
-  const [UniqueUuid, setUniqueUuid] = useState();
 
   let cardIdFromTimeAll = timeAllCards.map((res) =>
     JSON.parse(`${res.cardId}`)
   );
 
-  // USE UUIDV4 FOR GENERATE unique id
-  useEffect(() => {
-    setUniqueUuid(uuidv4());
+  const [projectDone, setProjectDone] = useRecoilState(projectDoneAtom);
 
-    return () => {
-      setUniqueUuid("");
-    };
-  }, [status]);
+  const TotalTimeStart = completCardsTimeArray
+    .filter((res) => res.start)
+    .map((result) => result.start !== "");
+
+  const TotalTimeStop = completCardsTimeArray
+    .filter((res) => res.stop)
+    .map((result) => result.stop !== "");
+
+  let tasksCount =
+    itemsByStatus["In Progress"].length === 0 &&
+    itemsByStatus["To Do"].length === 0 &&
+    itemsByStatus["Done"].length !== 0;
 
   useEffect(() => {
-    // console.log("timestamp", item.timestamp);
-    if (item.timestamp === undefined) {
-      setTimeForCard(n);
+    if (tasksCount) {
+      setTimeout(() => {
+        setProjectDone(true);
+        localStorage.setItem("ProjectDone", true);
+      }, 1000);
+      localStorage.setItem(
+        "finishedData",
+        JSON.stringify(completCardsTimeArray)
+      );
+    } else {
+      setProjectDone(false);
+      localStorage.setItem("ProjectDone", false);
+      localStorage.removeItem("finishedData");
     }
-    localStorage.setItem("timeStamp", timeForCard);
-    // console.log("itms status", itemsByStatus["Done"].length);
+    if (localStorage.getItem("finishedData") !== null && !projectDone)
+      setFinishedDatas(JSON.parse(localStorage.getItem("finishedData")));
+  }, [
+    setProjectDone,
+    itemsByStatus,
+    projectDone,
+    completCardsTimeArray,
+    tasksCount,
+    setFinishedDatas,
+  ]);
+
+  useEffect(() => {
     if (status === "In Progress") {
       setStartWorkState(n);
       setTimeAllCards([
@@ -90,80 +109,57 @@ function TaskboardItemCard({
       localStorage.setItem("startTimeWork", startWorkState);
       localStorage.setItem("timeAllCards", JSON.stringify(timeAllCards));
     }
-    if (status === "Done") {
-      const re = timeAllCards.map((res) => res.start);
-      setCardId(cardIdFromTimeAll);
-      setStopWorkState(n);
-      setStartWorkState(localStorage.getItem("startTimeWork"));
 
-      setTimeAllCards([
-        {
-          cardId: item.id,
-          cardTitle: item.title,
-          start: startWorkState,
-          stop: `${n}`,
-          uuid: UniqueUuid,
-        },
-      ]);
+    if (!projectDone && finishedDatas !== []) {
+      if (status === "Done") {
+        setCardId(cardIdFromTimeAll);
+        setStopWorkState(n);
+        setStartWorkState(localStorage.getItem("startTimeWork"));
 
-      if (completCardsTimeArray.length === 0) {
-        setCompletCardsTimeArray(timeAllCards);
-      }
+        setTimeAllCards([
+          {
+            cardId: item.id,
+            cardTitle: item.title,
+            start: startWorkState,
+            stop: `${n}`,
+            uuid: uuidv4(),
+          },
+        ]);
 
-      if (Number(item.id) !== cardId[0]) {
-        setCompletCardsTimeArray((completCardsTimeArray) =>
-          completCardsTimeArray.concat(timeAllCards)
+        if (
+          Number(item.id) !== cardId[0] &&
+          TotalTimeStart !== "" &&
+          TotalTimeStop !== ""
+        ) {
+          setCompletCardsTimeArray((completCardsTimeArray) =>
+            completCardsTimeArray.concat(timeAllCards)
+          );
+        }
+
+        localStorage.setItem(
+          "completCardsTimeArray",
+          JSON.stringify(completCardsTimeArray)
         );
+
+        if (!stopWorkState) {
+          localStorage.setItem("stopTimeWork", stopWorkState);
+        }
       }
-      // console.log(re[0]);
-      // if (totalTimeToSeconds !== null && cumuledTimeCards === null) {
-      //   setCumuledTimeCards([totalTimeToSeconds]);
-      //   localStorage.removeItem("totalTimeInSeconds");
-      // }
-      // if (cumuledTimeCards.length >= 1) {
-      //   setCumuledTimeCards((cumuledTimeCards) =>
-      //     cumuledTimeCards.concat(totalTimeToSeconds)
-      //   );
-      //   localStorage.removeItem("totalTimeInSeconds");
-      // }
-
-      // console.log(
-      //   "cumuledTimeCards",
-      //   cumuledTimeCards.map((res) => res.cardId)
-      // );
-      // console.log("item id", Number(item.id));
-      // console.log("totalCardsTime id", cardId[0]);
-      // console.log(
-      //   "timeAllCards[0].id",
-      //   timeAllCards.map((res) => res.id)
-      // );
-      localStorage.setItem(
-        "completCardsTimeArray",
-        JSON.stringify(completCardsTimeArray)
-      );
-      // localStorage.setItem(
-      //   "cumulTimeCardsTask",
-      //   JSON.stringify(cumuledTimeCards)
-      // );
-
-      if (!stopWorkState) {
-        localStorage.setItem("stopTimeWork", stopWorkState);
-      }
-      localStorage.setItem("timeAllCards", JSON.stringify(timeAllCards));
-
-      return () => {
-        // localStorage.removeItem("totalTimeInSeconds");
-      };
     }
 
     if (itemsByStatus["In Progress"].length === 0) {
-      localStorage.removeItem("startTimeWork");
+      setTimeout(() => {
+        localStorage.removeItem("startTimeWork");
+      }, 1000);
       localStorage.removeItem("timeAllCards");
+    }
+    if (itemsByStatus["In Progress"].length !== 0) {
+      localStorage.removeItem("clickedOnDashButton");
     }
 
     if (itemsByStatus["Done"].length === 0) {
-      // localStorage.removeItem("totalTimeInSeconds");
       localStorage.removeItem("stopTimeWork");
+      localStorage.removeItem("clickedOnDashButton");
     }
 
     if (JSON.parse(localStorage.getItem("timeAllCards")) !== null) {
@@ -174,76 +170,17 @@ function TaskboardItemCard({
       // localStorage.removeItem("startTimeWork");
       localStorage.removeItem("stopTimeWork");
       localStorage.removeItem("allCarsTime");
+      localStorage.removeItem("timeAllCards");
     };
-
-    // console.log("itemsByStatus", itemsByStatus);
-    // console.log("item", item);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [status, startWorkState, stopWorkState, completCardsTimeArray]);
-
-  useEffect(() => {
-    // console.log("compar id", item.id === timeAllCards.id);
-
-    // if (totalTimeToSeconds !== null && status === "Done") {
-    //   localStorage.setItem(
-    //     "totalTimeInSeconds",
-    //     JSON.stringify(totalTimeToSeconds)
-    //   );
-    // }
-
-    if (startWorkState && stopWorkState) {
-      totalTimeAddition();
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [completCardsTimeArray, timeAllCards]);
-
-  const totalTimeAddition = () => {
-    const numberKeeped = 8;
-
-    const startTask = startWorkState;
-    const hoursToMinStartTask = startTask.substring(
-      startTask.length - numberKeeped
-    );
-    const stopTask = stopWorkState;
-    const hoursToMinStopTask = stopTask.substring(
-      stopTask.length - numberKeeped
-    );
-    // console.log("startTask", hoursToMinStartTask);
-    // console.log("stopTask", hoursToMinStopTask);
-
-    function hmsToSecondsOnly(str) {
-      let p = str.split(":"),
-        s = 0,
-        m = 1;
-      while (p.length > 0) {
-        s += m * parseInt(p.pop(), 10);
-        m *= 60;
-      }
-      return s;
-    }
-    const startTaskResult = hmsToSecondsOnly(hoursToMinStartTask);
-    const stopTaskResult = hmsToSecondsOnly(hoursToMinStopTask);
-    // console.log("result :", startTaskResult);
-    // console.log("result :", stopTaskResult);
-
-    // setTotalTimeToSeconds((totalTimeToSeconds) =>
-    //   totalTimeToSeconds.concat({
-    //     cardId: item.id,
-    //     totalTime: stopTaskResult - startTaskResult,
-    //   })
-    // );
-
-    setTotalTimeToSeconds({
-      cardId: item.id,
-      totalTime: stopTaskResult - startTaskResult,
-      uuid: UniqueUuid,
-    });
-  };
-
-  // useEffect(() => {
-
-  // }, [cumuledTimeCards, totalTimeToSeconds]);
+  }, [
+    status,
+    startWorkState,
+    stopWorkState,
+    completCardsTimeArray,
+    item.id,
+    projectDone,
+  ]);
 
   return (
     <StyledCard
@@ -251,10 +188,6 @@ function TaskboardItemCard({
       size="small"
       title={
         <BaseTooltip overlay={item.title}>
-          {/* styled(Typography.Title) throws an error in console about
-          forwarding ref in function components.
-          Because Typography.Title doesn't accept a ref.
-          So, we just placed a span tag here. */}
           <span
             style={{
               display: "flex",
@@ -262,7 +195,11 @@ function TaskboardItemCard({
               justifyContent: "center",
             }}
           >
-            <TaskboardItemCardTitle level={5} ellipsis={{ rows: 2 }}>
+            <TaskboardItemCardTitle
+              key={uuidv4()}
+              level={5}
+              ellipsis={{ rows: 2 }}
+            >
               {item.title}
             </TaskboardItemCardTitle>
           </span>
@@ -272,10 +209,15 @@ function TaskboardItemCard({
         <Dropdown
           overlay={
             <Menu>
-              <Menu.Item icon={<EditOutlined />} onClick={() => onEdit(item)}>
+              <Menu.Item
+                key={uuidv4()}
+                icon={<EditOutlined />}
+                onClick={() => onEdit(item)}
+              >
                 Edit
               </Menu.Item>
               <DeleteMenuItem
+                key={uuidv4()}
                 icon={<DeleteOutlined />}
                 onClick={() =>
                   Modal.confirm({
@@ -307,7 +249,11 @@ function TaskboardItemCard({
             justifyContent: "space-between",
           }}
         >
-          <Typography.Paragraph type="secondary" ellipsis={{ rows: 2 }}>
+          <Typography.Paragraph
+            key={uuidv4()}
+            type="secondary"
+            ellipsis={{ rows: 2 }}
+          >
             {item.timestamp ?? "edit to set the Date/time"}
           </Typography.Paragraph>
           <div className="">
@@ -324,7 +270,11 @@ function TaskboardItemCard({
         </div>
       </BaseTooltip>
       <BaseTooltip overlay={item.description}>
-        <Typography.Paragraph type="secondary" ellipsis={{ rows: 2 }}>
+        <Typography.Paragraph
+          key={uuidv4()}
+          type="secondary"
+          ellipsis={{ rows: 2 }}
+        >
           {item.description}
         </Typography.Paragraph>
       </BaseTooltip>
@@ -346,7 +296,7 @@ function TaskboardItemCard({
                 >
                   {() => {
                     return (
-                      <Form.Item>
+                      <Form.Item key={uuidv4()}>
                         <img
                           style={{ width: 21, marginRight: 20 }}
                           src={StartIcon}
@@ -363,29 +313,29 @@ function TaskboardItemCard({
         </BaseTooltip>
       ) : null}
       <div
-        // key={item.id}
         style={
           status === "Done"
             ? { border: "1px dotted gray", padding: 8 }
             : { display: "none" }
         }
       >
-        {status === "Done" ? (
-          <BaseTooltip overlay={item.stopWork}>
-            {completCardsTimeArray.map((res) => (
-              <Form key={res.uuid} className="myForm">
-                {item.id === res.cardId ? (
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "flex-start",
-                      justifyContent: "space-around",
-                      height: "20px",
-                    }}
-                  >
-                    {res.start && res.stop && (
+        {status === "Done" && !projectDone ? (
+          <BaseTooltip key={uuidv4()} overlay={item.stopWork}>
+            {completCardsTimeArray
+              .filter((resu) => resu.start !== "")
+              .map((res) => (
+                <Form key={uuidv4()} className="myForm">
+                  {item.id === res.cardId ? (
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "flex-start",
+                        justifyContent: "space-around",
+                        height: "20px",
+                      }}
+                    >
                       <Fragment>
-                        <Form.Item key={res.cardId}>
+                        <Form.Item key={uuidv4()}>
                           <p style={{ fontSize: 10 }}>{res.start}</p>
                         </Form.Item>
                         <Typography.Paragraph
@@ -400,7 +350,7 @@ function TaskboardItemCard({
                           >
                             {() => {
                               return (
-                                <Form.Item>
+                                <Form.Item key={uuidv4()}>
                                   <p style={{ fontSize: 10 }}>{res.stop}</p>
                                 </Form.Item>
                               );
@@ -408,11 +358,64 @@ function TaskboardItemCard({
                           </Form.Item>
                         </Typography.Paragraph>
                       </Fragment>
-                    )}
-                  </div>
-                ) : null}
-              </Form>
-            ))}
+                    </div>
+                  ) : null}
+                </Form>
+              ))}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "flex-start",
+                justifyContent: "space-around",
+              }}
+            >
+              <img style={{ width: 28 }} src={StartIcon} alt="" />
+              <img style={{ width: 28 }} src={TimerEndIcon} alt="" />
+            </div>
+          </BaseTooltip>
+        ) : projectDone ? (
+          <BaseTooltip key={uuidv4()} overlay={item.stopWork}>
+            {finishedDatas
+              .filter((resu) => resu.start !== "")
+              .map((res) => (
+                <Form key={uuidv4()} className="myForm">
+                  {item.id === res.cardId ? (
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "flex-start",
+                        justifyContent: "space-around",
+                        height: "20px",
+                      }}
+                    >
+                      <Fragment>
+                        <Form.Item key={uuidv4()}>
+                          <p style={{ fontSize: 10 }}>{res.start}</p>
+                        </Form.Item>
+                        <Typography.Paragraph
+                          type="secondary"
+                          ellipsis={{ rows: 2 }}
+                        >
+                          <Form.Item
+                            shouldUpdate={(prevValuesStop, curValuesStop) =>
+                              prevValuesStop.additional !==
+                              curValuesStop.additional
+                            }
+                          >
+                            {() => {
+                              return (
+                                <Form.Item key={uuidv4()}>
+                                  <p style={{ fontSize: 10 }}>{res.stop}</p>
+                                </Form.Item>
+                              );
+                            }}
+                          </Form.Item>
+                        </Typography.Paragraph>
+                      </Fragment>
+                    </div>
+                  ) : null}
+                </Form>
+              ))}
             <div
               style={{
                 display: "flex",
