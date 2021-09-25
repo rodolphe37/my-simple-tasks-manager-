@@ -232,7 +232,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 ---
 
-**:heavy_exclamation_mark: Then there is the detailed "task/time session" section.**
+**:heavy_exclamation_mark: All sessions on each task!**
 
 >Finally, you have the list of tasks with "day and time of start and end of work" on each of them.
 
