@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { confirmAlert } from "react-confirm-alert"; // Import
 import "react-confirm-alert/src/react-confirm-alert.css";
 import "./alert.css";
-import "../checkboxAlert/checkbox-alert.css";
 import BacklogImg from "../../assets/backlog.svg";
 
 import useCustomAlertHook from "../../../hooks/useCustomAlertHook";
@@ -17,7 +16,6 @@ const Alert = ({
   buttonYes,
   buttonNo,
 }) => {
-  // eslint-disable-next-line no-unused-vars
   const { deteleAll, setClickedAlert } = useCustomAlertHook();
   const nextURL = "/";
   const nextTitle = "My Simple Tasks Manager";
