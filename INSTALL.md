@@ -1,6 +1,6 @@
 ## :microscope: Getting Started!
 
-you just have to **clone this repository**.
+you just have to **fork this repository**.
 
 ---
 
