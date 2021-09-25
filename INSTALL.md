@@ -49,7 +49,7 @@ Enjoy the World :smirk:
 
 **:memo: To Do for the next version:**
 
->:bar_chart: Add a dashboard of statistics (number of tasks created for each day & total project tasks, time spent - with chronology (date - time - time spent for each work day), total number of hours on the project).
+>:bar_chart: Add pdf & csv export.
 
 ---
 
