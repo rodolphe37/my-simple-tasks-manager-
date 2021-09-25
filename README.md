@@ -174,8 +174,41 @@ You can easily install this application on a Windows, Mac or Linux computer.
 ![alt text](demo/version2/firstDashboard.gif "My Simple Tasks Manager")
 
 ---
+---
 
-**:heavy_exclamation_mark: Here is your dashbord with some statistics on the work done!**
+**:heavy_exclamation_mark: Just under the header you have the daily rate management!**
+
+>This is where the amount you entered is managed
+
+![alt text](demo/version2/tjmTool.png "My Simple Tasks Manager")
+
+---
+
+**:heavy_exclamation_mark: You can change devise to euros!**
+
+>(but the default value for the app is $)
+
+![alt text](demo/version2/changeDevise.png "My Simple Tasks Manager")
+
+---
+
+**:heavy_exclamation_mark: Erase current daily rate!**
+
+>On the left is a cross to delete the current amount.
+
+![alt text](demo/version2/eraseTjm.png "My Simple Tasks Manager")
+
+---
+
+**:heavy_exclamation_mark: New daily rate!**
+
+>And on the right you have the button that allows you to enter a new amount.
+
+![alt text](demo/version2/newDailyRate.png "My Simple Tasks Manager")
+
+---
+
+**:heavy_exclamation_mark: let see the dashbord with some statistics on the work done!**
 
 >The first three "modules" you see (from left to right) are:
 >> - The total duration in hours and the average wage per hour.
@@ -241,7 +274,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 ---
 
-## END OF UPDATE New Version
+## END OF UPDATE Version
 ---
 
 **:heavy_exclamation_mark: When you want to delete the Project name!**
