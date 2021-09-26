@@ -296,11 +296,13 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 > - The second one is the export in png (copy of the complete dashboard this time).
 
->***If you choose this export option, there is one important thing to know...***
+>***If you choose this export option there is one important thing to know...***
+>
+> because the png file is generated automatically with the scale of your window, if you use this option in full screen in very large screen, your image will be all crushed.
 
 ![alt text](demo/version2/png-classic.gif "My Simple Tasks Manager")
 
->You can resize your window like the animated gif below (with the graphs in large size if you want (by reducing the width of your window before clicking on the png button)) because the png file is generated automatically with the scale of your window (if you use this option in full screen in very large screen, your image will be all crushed.
+>You can resize your window like the animated gif below (with the graphs in large size if you want (by reducing the width of your window before clicking on the png button))
 
 
 ![alt text](demo/version2/png.gif "My Simple Tasks Manager")
