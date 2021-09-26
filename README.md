@@ -14,7 +14,7 @@
 
 ---
 
-## <img  style =" float: left; margin-top: 5px; margin-right: 22px " src="demo/backlog.svg" alt="drawing" height="30" width="25"/>My Simple Task Manager_V2.0.0
+## <img  style =" float: left; margin-top: 5px; margin-right: 22px " src="demo/backlog.svg" alt="drawing" height="30" width="25"/>My Simple Task Manager_V2.1.0
 
 is a drag-and-drop task manager as well as a time tracker (not for a team, but for a single freelance developer for example)!
 
@@ -271,6 +271,11 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 
 ![alt text](demo/version2/lastViewDash.png "My Simple Tasks Manager")
+
+---
+
+
+### New Version (26 sept 2021 - ^V_2.1.0)
 
 ---
 
