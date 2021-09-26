@@ -279,6 +279,9 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 >You have two options for exporting dashboard data:
  >- Neither solution is perfect for my taste, but they do work. I'm working on an improved version of the export functionality right now... as soon as I get a great solution I'll update the application.
+
+ ***You must have entered a project name in the application to export the data.***
+> - The files are named at the stolen with this value
 ---
 
 **:heavy_exclamation_mark: You can download the pdf rapport!**
@@ -300,14 +303,27 @@ You can easily install this application on a Windows, Mac or Linux computer.
 >
 > because the png file is generated automatically with the scale of your window, if you use this option in full screen in very large screen, your image will be all crushed.
 
-![alt text](demo/version2/png-classic.gif "My Simple Tasks Manager")
+![alt text](demo/version2/png.gif "My Simple Tasks Manager")
+
+---
+
+>And this is a result:
+
+<img  style =" margin-top: 5px; margin-right: 22px " src="demo/version2/report.png" alt="drawing" height="1750" width="600"/>
+---
 
 >You can resize your window like the animated gif below (with the graphs in large size if you want (by reducing the width of your window before clicking on the png button))
 
 
-![alt text](demo/version2/png.gif "My Simple Tasks Manager")
+![alt text](demo/version2/png-reduced.gif "My Simple Tasks Manager")
 
 ---
+
+>And this is a result:
+
+<img  style =" margin-top: 5px; margin-right: 22px " src="demo/version2/reduced.png" alt="drawing" height="2250" width="400"/>
+---
+
 
 ## END OF UPDATE Version
 ---
