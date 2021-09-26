@@ -274,6 +274,15 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 ---
 
+**:heavy_exclamation_mark: You can download the pdf rapport!**
+
+>The report is available in pdf format so that you can keep track of your work, file it in your archives....
+
+
+![alt text](demo/version2/pdf.gif "My Simple Tasks Manager")
+
+---
+
 ## END OF UPDATE Version
 ---
 
@@ -335,7 +344,7 @@ Enjoy the World :smirk:
 
 **:memo: To Do for the next version:**
 
->:bar_chart: Add pdf & csv export.
+>:bar_chart: Add csv export.
 
 ---
 

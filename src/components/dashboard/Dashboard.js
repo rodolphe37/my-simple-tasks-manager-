@@ -32,6 +32,9 @@ import useCutDecimals from "../../hooks/useCutDecimals";
 import useHmsToSeconds from "../../hooks/useHmsToSeconds";
 import useAddSumStartStop from "../../hooks/useAddSumStartStop";
 import useReverseArray from "../../hooks/useReverseArray";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import { PdfDocument } from "../exportPdf/ExportPdf";
+import DownPdf from "../assets/downPdf.svg";
 
 const Dashboard = () => {
   const [totalTimeToSeconds, setTotalTimeToSeconds] = useRecoilState(
@@ -57,6 +60,7 @@ const Dashboard = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   let startArrayTimes = [];
   let stopArray = [];
+  const projectName = localStorage.getItem("projectName");
   const [projectDone] = useRecoilState(projectDoneAtom);
   // eslint-disable-next-line no-unused-vars
   const [openDash, setOpenDash] = useRecoilState(openDashAtom);
@@ -169,7 +173,50 @@ const Dashboard = () => {
           <img src={ProductivityIcon} alt="dash" style={{ width: 55 }} />
           <h1>Dashboard</h1>
         </div>
-
+        <PDFDownloadLink
+          document={
+            <PdfDocument
+              totalTimeLocalStore={totalTimeLocalStore}
+              data={finishedDatas}
+              tjm={tjm}
+              changeEurDoll={changeEurDoll}
+              stockItemsByStatus={stockItemsByStatus}
+              taskPerHour={taskPerHour}
+              cumuledTimeCards={cumuledTimeCards}
+              Note1Content={Note1Content}
+              Note2Content={Note2Content}
+              Note3Content={Note3Content}
+              Note4Content={Note4Content}
+              connexionNumber={connexionNumber}
+              totalTimeSeconds={totalTimeSeconds}
+              completCardsTimeArray={completCardsTimeArray}
+            />
+          }
+          fileName={`${projectName}.pdf`}
+          style={{
+            textDecoration: "none",
+            padding: "10px",
+            color: "#4a4a4a",
+            backgroundColor: "transparent",
+            border: "none",
+          }}
+        >
+          {({ blob, url, loading, error }) =>
+            loading ? (
+              <img src={DownPdf} alt="" />
+            ) : (
+              <img
+                title="Download Rapport in Pdf format!"
+                data-toggle="tooltip"
+                data-placement="left"
+                className="PdfIcon bounce-top"
+                src={DownPdf}
+                alt="pdf"
+                width="34"
+              />
+            )
+          }
+        </PDFDownloadLink>
         <div className="closeButton-container">
           <button
             title="Close the Dashboard!"
