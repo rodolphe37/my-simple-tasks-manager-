@@ -277,14 +277,33 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 ### New Version (26 sept 2021 - ^V_2.1.0)
 
+>You have two options for exporting dashboard data:
+ >- Neither solution is perfect for my taste, but they do work. I'm working on an improved version of the export functionality right now... as soon as I get a great solution I'll update the application.
 ---
 
 **:heavy_exclamation_mark: You can download the pdf rapport!**
 
->The report is available in pdf format so that you can keep track of your work, file it in your archives....
+>**The first is exporting as a pdf (without the graphs and numbers that are part of it).**
+>
+> - By clicking on the pdf icon, the application will generate a file with the raw data.
 
 
 ![alt text](demo/version2/pdf.gif "My Simple Tasks Manager")
+
+---
+
+**:heavy_exclamation_mark: You can download the png screenshot!**
+
+> - The second one is the export in png (copy of the complete dashboard this time).
+
+>***If you choose this export option, there is one important thing to know...***
+
+![alt text](demo/version2/png-classic.gif "My Simple Tasks Manager")
+
+>You can resize your window like the animated gif below (with the graphs in large size if you want (by reducing the width of your window before clicking on the png button)) because the png file is generated automatically with the scale of your window (if you use this option in full screen in very large screen, your image will be all crushed.
+
+
+![alt text](demo/version2/png.gif "My Simple Tasks Manager")
 
 ---
 

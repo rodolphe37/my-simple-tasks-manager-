@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useState, createRef } from "react";
 import { useRecoilState } from "recoil";
 import supp from "../assets/supp.svg";
 import openDashAtom from "../../statesManager/atoms/openDashAtom";
@@ -34,7 +34,9 @@ import useAddSumStartStop from "../../hooks/useAddSumStartStop";
 import useReverseArray from "../../hooks/useReverseArray";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { PdfDocument } from "../exportPdf/ExportPdf";
+import DownloadPNG from "../assets/download.svg";
 import DownPdf from "../assets/downPdf.svg";
+import { useScreenshot, createFileName } from "use-react-screenshot";
 
 const Dashboard = () => {
   const [totalTimeToSeconds, setTotalTimeToSeconds] = useRecoilState(
@@ -70,6 +72,26 @@ const Dashboard = () => {
   const { cutDecimals } = useCutDecimals();
   const changeEurDoll = 0.85;
   let totalEuro = eurTjm * changeEurDoll;
+  const ref = createRef(null);
+  // eslint-disable-next-line no-unused-vars
+  const [image, takeScreenShot] = useScreenshot({
+    type: "image/png",
+    quality: 1.5,
+    width: 600,
+    height: 1800,
+  });
+
+  const download = (
+    image,
+    { name = `${projectName}`, extension = "png" } = {}
+  ) => {
+    const a = document.createElement("a");
+    a.href = image;
+    a.download = createFileName(extension, name);
+    a.click();
+  };
+
+  const downloadScreenshot = () => takeScreenShot(ref.current).then(download);
 
   useEffect(() => {
     if (finishedDatas) {
@@ -173,50 +195,66 @@ const Dashboard = () => {
           <img src={ProductivityIcon} alt="dash" style={{ width: 55 }} />
           <h1>Dashboard</h1>
         </div>
-        <PDFDownloadLink
-          document={
-            <PdfDocument
-              totalTimeLocalStore={totalTimeLocalStore}
-              data={finishedDatas}
-              tjm={tjm}
-              changeEurDoll={changeEurDoll}
-              stockItemsByStatus={stockItemsByStatus}
-              taskPerHour={taskPerHour}
-              cumuledTimeCards={cumuledTimeCards}
-              Note1Content={Note1Content}
-              Note2Content={Note2Content}
-              Note3Content={Note3Content}
-              Note4Content={Note4Content}
-              connexionNumber={connexionNumber}
-              totalTimeSeconds={totalTimeSeconds}
-              completCardsTimeArray={completCardsTimeArray}
-            />
-          }
-          fileName={`${projectName}.pdf`}
-          style={{
-            textDecoration: "none",
-            padding: "10px",
-            color: "#4a4a4a",
-            backgroundColor: "transparent",
-            border: "none",
-          }}
-        >
-          {({ blob, url, loading, error }) =>
-            loading ? (
-              <img src={DownPdf} alt="" />
-            ) : (
-              <img
-                title="Download Rapport in Pdf format!"
-                data-toggle="tooltip"
-                data-placement="left"
-                className="PdfIcon bounce-top"
-                src={DownPdf}
-                alt="pdf"
-                width="34"
+        <div style={{ width: 150, justifyContent: "center", display: "flex" }}>
+          <PDFDownloadLink
+            document={
+              <PdfDocument
+                totalTimeLocalStore={totalTimeLocalStore}
+                data={finishedDatas}
+                tjm={tjm}
+                changeEurDoll={changeEurDoll}
+                stockItemsByStatus={stockItemsByStatus}
+                taskPerHour={taskPerHour}
+                cumuledTimeCards={cumuledTimeCards}
+                Note1Content={Note1Content}
+                Note2Content={Note2Content}
+                Note3Content={Note3Content}
+                Note4Content={Note4Content}
+                connexionNumber={connexionNumber}
+                totalTimeSeconds={totalTimeSeconds}
+                completCardsTimeArray={completCardsTimeArray}
               />
-            )
-          }
-        </PDFDownloadLink>
+            }
+            fileName={`${projectName}.pdf`}
+            style={{
+              textDecoration: "none",
+              padding: "10px",
+              color: "#4a4a4a",
+              backgroundColor: "transparent",
+              border: "none",
+            }}
+          >
+            {({ blob, url, loading, error }) =>
+              loading ? (
+                <img src={DownPdf} alt="" />
+              ) : (
+                <img
+                  title="Download Rapport in pdf format!"
+                  data-toggle="tooltip"
+                  data-placement="left"
+                  className="PdfIcon bounce-top"
+                  src={DownPdf}
+                  alt="pdf"
+                  width="44"
+                />
+              )
+            }
+          </PDFDownloadLink>
+          <button
+            style={{ background: "transparent", border: "none" }}
+            onClick={downloadScreenshot}
+          >
+            <img
+              title="Download Rapport in png format!"
+              data-toggle="tooltip"
+              data-placement="left"
+              className="PdfIcon bounce-top"
+              src={DownloadPNG}
+              alt="pdf"
+              width="44"
+            />
+          </button>
+        </div>
         <div className="closeButton-container">
           <button
             title="Close the Dashboard!"
@@ -229,7 +267,11 @@ const Dashboard = () => {
           </button>
         </div>
       </div>
-      <div style={{ position: "relative" }} className="dashContent-container">
+      <div
+        ref={ref}
+        style={{ position: "relative" }}
+        className="dashContent-container"
+      >
         <div onClick={handlePrice} className="tjm-button">
           <button
             className="tjmButtonActif"

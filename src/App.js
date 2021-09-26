@@ -19,7 +19,7 @@ import FloatingButton from "./components/githubFloatingButton/FloatingButton";
 import openDashAtom from "./statesManager/atoms/openDashAtom";
 import Dashboard from "./components/dashboard/Dashboard";
 import useDateTime from "./hooks/useDateTime";
-// import ReactGA from 'react-ga'
+// import ReactGA from "react-ga";
 
 // const TRACKING_ID = "process.env.REACT_APP_TRACKING_GA";
 // ReactGA.initialize(TRACKING_ID);
