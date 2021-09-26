@@ -19,11 +19,11 @@ import FloatingButton from "./components/githubFloatingButton/FloatingButton";
 import openDashAtom from "./statesManager/atoms/openDashAtom";
 import Dashboard from "./components/dashboard/Dashboard";
 import useDateTime from "./hooks/useDateTime";
-// import ReactGA from 'react-ga'
+import ReactGA from "react-ga";
 
-// const TRACKING_ID = "process.env.REACT_APP_TRACKING_GA";
-// ReactGA.initialize(TRACKING_ID);
-// ReactGA.pageview(window.location.pathname);
+const TRACKING_ID = "G-KHCDHJCLMG";
+ReactGA.initialize(TRACKING_ID);
+ReactGA.pageview(window.location.pathname);
 
 const StyledLayout = styled(Layout)`
   /* We can't use "height: 100vh; width: 100vw;" here.

@@ -229,7 +229,7 @@ const Dashboard = () => {
                 <img src={DownPdf} alt="" />
               ) : (
                 <img
-                  title="Download Rapport in Png format!"
+                  title="Download Rapport in pdf format!"
                   data-toggle="tooltip"
                   data-placement="left"
                   className="PdfIcon bounce-top"
@@ -245,7 +245,7 @@ const Dashboard = () => {
             onClick={downloadScreenshot}
           >
             <img
-              title="Download Rapport in Pdf format!"
+              title="Download Rapport in png format!"
               data-toggle="tooltip"
               data-placement="left"
               className="PdfIcon bounce-top"
