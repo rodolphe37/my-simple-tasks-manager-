@@ -21,7 +21,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import useDateTime from "./hooks/useDateTime";
 import ReactGA from "react-ga";
 
-const TRACKING_ID = "G-KHCDHJCLMG";
+const TRACKING_ID = "process.env.REACT_APP_TRACKING_GA";
 ReactGA.initialize(TRACKING_ID);
 ReactGA.pageview(window.location.pathname);
 
