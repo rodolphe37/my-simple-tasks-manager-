@@ -306,171 +306,50 @@ export function PdfDocument(props) {
                     </View>
                   </View>
                 )}
-                {totalTimeSeconds.filter((totMax) => totMax.total >= 7200) ? (
-                  <View style={{ marginTop: 40 }}>
-                    <Text style={styles.largeTitle}>
-                      Working session that required more than 2 hours
-                    </Text>
-                    <View style={styles.flexStart}>
-                      {data !== [] ? (
-                        totalTimeSeconds &&
-                        totalTimeSeconds
-                          .filter((totMax) => totMax.total >= 7200)
-                          .map((res, i) => (
-                            <View style={styles.stickyNotes} key={i}>
-                              {isNaN(res.total) === false ? (
-                                <View
-                                  style={{ fontSize: 14, marginBottom: 22 }}
-                                >
-                                  <Text style={{ marginBottom: 8 }}>
-                                    {res.title}
-                                  </Text>
-
-                                  <Text style={{ fontSize: 10 }}>{res.id}</Text>
-
-                                  <View>
-                                    <Text
-                                      style={{
-                                        fontWeight: "bold",
-                                        color: "#57a957",
-                                        marginBottom: 11,
-                                      }}
-                                    >
-                                      {NewDateCreated(res.total)}{" "}
-                                      <Text
-                                        style={{
-                                          fontSize: 10,
-                                          fontStyle: "italic",
-                                          color: "#000",
-                                        }}
-                                      >
-                                        hour(s)
-                                      </Text>
-                                    </Text>
-                                  </View>
-                                </View>
-                              ) : null}
-                            </View>
-                          ))
-                      ) : (
-                        <Text>No Working session in this section</Text>
-                      )}
-                    </View>
-                  </View>
-                ) : (
-                  ""
-                )}
-                {totalTimeSeconds.filter(
-                  (totMax) => totMax.total >= 3600 && totMax.total < 7200
-                ) ? (
-                  <View style={{ marginTop: 40 }}>
-                    <Text style={styles.largeTitle}>
-                      Working session that required between 1 and 2 hour(s)
-                    </Text>
-                    <View style={styles.flexStart}>
-                      {data !== [] ? (
-                        totalTimeSeconds &&
-                        totalTimeSeconds
-                          .filter(
-                            (totMax) =>
-                              totMax.total >= 3600 && totMax.total < 7200
-                          )
-                          .map((res, i) => (
-                            <View style={styles.stickyNotes} key={i}>
-                              {isNaN(res.total) === false ? (
-                                <View
-                                  style={{ fontSize: 14, marginBottom: 22 }}
-                                >
-                                  <Text style={{ marginBottom: 8 }}>
-                                    {res.title}
-                                  </Text>
-
-                                  <Text style={{ fontSize: 10 }}>{res.id}</Text>
-
-                                  <View>
-                                    <Text
-                                      style={{
-                                        fontWeight: "bold",
-                                        color: "#57a957",
-                                        marginBottom: 11,
-                                      }}
-                                    >
-                                      {NewDateCreated(res.total)}
-                                      <Text
-                                        style={{
-                                          fontSize: 10,
-                                          fontStyle: "italic",
-                                          color: "#000",
-                                        }}
-                                      >
-                                        hour(s)
-                                      </Text>
-                                    </Text>
-                                  </View>
-                                </View>
-                              ) : null}
-                            </View>
-                          ))
-                      ) : (
-                        <Text>No Working session in this section</Text>
-                      )}
-                    </View>
-                  </View>
-                ) : (
-                  ""
-                )}
-                <View style={{ marginTop: 40, marginBottom: 40 }}>
+                <View style={{ marginTop: 20, marginBottom: 20 }}>
                   <Text style={styles.largeTitle}>
-                    Working session that required less than 1 hour
+                    Work session on tasks with each time spent on them.
                   </Text>
                   <View style={styles.flexStart}>
-                    {data !== [] ? (
-                      totalTimeSeconds &&
-                      totalTimeSeconds
-                        .filter((totMax) => totMax.total > 0)
-                        .filter((totMax) => totMax.total < 3600)
-                        .map((res, i) => (
-                          <View style={styles.stickyNotes} key={i}>
-                            {isNaN(res.total) === false ? (
-                              <View style={{ fontSize: 14, marginBottom: 22 }}>
-                                <Text style={{ marginBottom: 8 }}>
-                                  {res.title}
+                    {totalTimeSeconds.map((res, i) => (
+                      <View style={styles.stickyNotes} key={i}>
+                        {isNaN(res.total) === false ? (
+                          <View style={{ fontSize: 14, marginBottom: 22 }}>
+                            <Text style={{ marginBottom: 8 }}>{res.title}</Text>
+
+                            <Text style={{ fontSize: 10 }}>{res.id}</Text>
+
+                            <View>
+                              <Text
+                                style={{
+                                  fontWeight: "bold",
+                                  color: "#57a957",
+                                  marginBottom: 11,
+                                }}
+                              >
+                                {NewDateCreated(res.total)}{" "}
+                                <Text
+                                  style={{
+                                    fontSize: 10,
+                                    fontStyle: "italic",
+                                    color: "#000",
+                                  }}
+                                >
+                                  hour(s)
                                 </Text>
-
-                                <Text style={{ fontSize: 10 }}>{res.id}</Text>
-
-                                <View>
-                                  <Text
-                                    style={{
-                                      fontWeight: "bold",
-                                      color: "#57a957",
-                                      marginBottom: 11,
-                                    }}
-                                  >
-                                    {NewDateCreated(res.total)}{" "}
-                                    <Text
-                                      style={{
-                                        fontSize: 10,
-                                        fontStyle: "italic",
-                                        color: "#000",
-                                      }}
-                                    >
-                                      hour(s)
-                                    </Text>
-                                  </Text>
-                                </View>
-                              </View>
-                            ) : null}
+                              </Text>
+                            </View>
                           </View>
-                        ))
-                    ) : (
-                      <Text>No Working session in this section</Text>
-                    )}
+                        ) : null}
+                      </View>
+                    ))}
                   </View>
                 </View>
                 <View>
                   <View>
-                    <Text style={styles.title}>Time Elapsed For each Task</Text>
+                    <Text style={styles.largeTitle}>
+                      Work session on tasks with each time spent on them.
+                    </Text>
                     <Text
                       style={{
                         fontSize: 12,

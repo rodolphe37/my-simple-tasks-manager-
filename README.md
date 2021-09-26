@@ -279,7 +279,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 ---
 
-**:heavy_exclamation_mark: You can download the pdf rapport!**
+**:heavy_exclamation_mark: You can download the pdf report!**
 
 >The report is available in pdf format so that you can keep track of your work, file it in your archives....
 
