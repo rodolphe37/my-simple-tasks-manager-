@@ -281,7 +281,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
  >- Neither solution is perfect for my taste, but they do work. I'm working on an improved version of the export functionality right now... as soon as I get a great solution I'll update the application.
 
  ***You must have entered a project name in the application to export the data.***
-> - The files are named at the stolen with this value
+> - The files are named "on the fly" with this value
 ---
 
 **:heavy_exclamation_mark: You can download the pdf rapport!**
@@ -309,7 +309,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 >And this is a result:
 
-<img  style =" margin-top: 5px; margin-right: 22px " src="demo/version2/report.png" alt="drawing" height="1650" width="600"/>
+<img  style =" margin-top: 5px; margin-right: 22px " src="demo/version2/report.png" alt="drawing" height="1600" width="500"/>
 ---
 
 >You can resize your window like the animated gif below (with the graphs in large size if you want (by reducing the width of your window before clicking on the png button))
