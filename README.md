@@ -309,7 +309,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 >And this is a result:
 
-<img  style =" margin-top: 5px; margin-right: 22px " src="demo/version2/report.png" alt="drawing" height="1600" width="500"/>
+<img  style =" margin-top: 5px; margin-right: 22px " src="demo/version2/report.png" alt="drawing" height="1600" width="600"/>
 ---
 
 >You can resize your window like the animated gif below (with the graphs in large size if you want (by reducing the width of your window before clicking on the png button))
