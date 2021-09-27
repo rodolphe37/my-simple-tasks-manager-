@@ -293,7 +293,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 > - By clicking on the pdf icon, the application will generate a file with the raw data.
 
 
-![alt text](demo/version2/pdf.gif "My Simple Tasks Manager")
+![alt text](demo/version2/pdf-export.gif "My Simple Tasks Manager")
 
 ---
 
