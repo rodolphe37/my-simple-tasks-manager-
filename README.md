@@ -281,7 +281,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 > - The files are named "on the fly" with this value, so you won't have a file name if you haven't entered this value first!
 ---
 
->You have two options for exporting dashboard data:
+**You have two options for exporting dashboard data:**
  >- pdf export is not perfect for my taste (the layout of generated pdf more exactly), but they do work. I'm working on an improved version of the pdf export functionality right now... as soon as I get a great solution I'll update the application.
 
 ---
