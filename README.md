@@ -286,7 +286,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 ---
 
-**:heavy_exclamation_mark: You can download the pdf rapport!**
+**:heavy_exclamation_mark: You can download the pdf report!**
 
 >**The first is exporting as a pdf (without the graphs and numbers that are part of it).**
 >
@@ -297,7 +297,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 ---
 
-**:heavy_exclamation_mark: You can download the png screenshot!**
+**:heavy_exclamation_mark: You can download the png report screenshot!**
 
 > - The second one is the export in png (copy of the complete dashboard this time).
 
