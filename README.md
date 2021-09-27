@@ -278,7 +278,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 ### New Version (26 sept 2021 - ^V_2.1.0)
 
 >You have two options for exporting dashboard data:
- >- Neither solution is perfect for my taste, but they do work. I'm working on an improved version of the export functionality right now... as soon as I get a great solution I'll update the application.
+ >- pdf export is not perfect for my taste (the layout of generated pdf more exactly), but they do work. I'm working on an improved version of the pdf export functionality right now... as soon as I get a great solution I'll update the application.
 
  ***You must have entered a project name in the application to export the data.***
 > - The files are named "on the fly" with this value
