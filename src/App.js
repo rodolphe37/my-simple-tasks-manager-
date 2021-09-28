@@ -20,6 +20,8 @@ import openDashAtom from "./statesManager/atoms/openDashAtom";
 import Dashboard from "./components/dashboard/Dashboard";
 import useDateTime from "./hooks/useDateTime";
 import ReactGA from "react-ga";
+import useMobile from "./hooks/useMobile";
+import NoMobile from "./components/assets/smartphone.svg";
 
 const TRACKING_ID = "process.env.REACT_APP_TRACKING_GA";
 ReactGA.initialize(TRACKING_ID);
@@ -49,6 +51,7 @@ const StyledContent = styled(Content)`
 function App() {
   const [openDash] = useRecoilState(openDashAtom);
   const { dateStartSession } = useDateTime();
+  const { isMobile } = useMobile();
 
   // eslint-disable-next-line no-unused-vars
   const [clickedConfig, setClickedConfig] = useRecoilState(clickedConfigAtom);
@@ -92,126 +95,163 @@ function App() {
 
   return (
     <StyledLayout>
-      {openNote ? <NoteComponent /> : null}
-      <StyledHeader>
-        <div className="projectName-container">
-          {clickedConfig ? <ModalConfigComponent /> : null}
-          {erasedDemand ? (
-            <Alert
-              setValidateProjectName={setValidateProjectName}
-              setProjectName={setProjectName}
-              title={`Delete or reset?`}
-              subTitle={`You can delete the project name only, or reset the whole app...`}
-              buttonYes={`Project name`}
-              buttonNo={`Reset all`}
-            />
-          ) : null}
-          <div
-            style={{ position: "relative", width: "42%" }}
-            className="projectName-content"
-          >
-            {projectName && (
-              <Fragment>
-                {!validateprojectName && (
-                  <button
-                    onClick={handleValidateprojectName}
-                    className={
-                      validateprojectName
-                        ? "valid-projectName-button simple "
-                        : "valid-projectName-button simple"
-                    }
-                  >
-                    <span className="infoEraser">
-                      <img
-                        style={{ opacity: 1 }}
-                        className="projectName-icons"
-                        src={ok}
-                        alt="ok"
-                      />
-                      <span
-                        style={{ marginTop: -22 }}
-                        className="tooltip tooltipProjectName"
+      {!isMobile ? (
+        <Fragment>
+          {openNote ? <NoteComponent /> : null}
+          <StyledHeader>
+            <div className="projectName-container">
+              {clickedConfig ? <ModalConfigComponent /> : null}
+              {erasedDemand ? (
+                <Alert
+                  setValidateProjectName={setValidateProjectName}
+                  setProjectName={setProjectName}
+                  title={`Delete or reset?`}
+                  subTitle={`You can delete the project name only, or reset the whole app...`}
+                  buttonYes={`Project name`}
+                  buttonNo={`Reset all`}
+                />
+              ) : null}
+              <div
+                style={{ position: "relative", width: "42%" }}
+                className="projectName-content"
+              >
+                {projectName && (
+                  <Fragment>
+                    {!validateprojectName && (
+                      <button
+                        onClick={handleValidateprojectName}
+                        className={
+                          validateprojectName
+                            ? "valid-projectName-button simple "
+                            : "valid-projectName-button simple"
+                        }
                       >
-                        Click for validate project name!
-                      </span>
-                    </span>
-                  </button>
-                )}
-                {validateprojectName && (
-                  <button
-                    onClick={handleEraseprojectName}
-                    className="erase-urername-button simple opacityfull"
-                  >
-                    <span className="infoEraser">
-                      <img
-                        className="projectName-icons"
-                        src={supp}
-                        alt="supp"
-                      />
-                      <span
-                        style={{ marginTop: -22, fontSize: 15 }}
-                        className="tooltip tooltipProjectName"
+                        <span className="infoEraser">
+                          <img
+                            style={{ opacity: 1 }}
+                            className="projectName-icons"
+                            src={ok}
+                            alt="ok"
+                          />
+                          <span
+                            style={{ marginTop: -22 }}
+                            className="tooltip tooltipProjectName"
+                          >
+                            Click for validate project name!
+                          </span>
+                        </span>
+                      </button>
+                    )}
+                    {validateprojectName && (
+                      <button
+                        onClick={handleEraseprojectName}
+                        className="erase-urername-button simple opacityfull"
                       >
-                        Delete project name or reset all
-                      </span>
-                    </span>
-                  </button>
+                        <span className="infoEraser">
+                          <img
+                            className="projectName-icons"
+                            src={supp}
+                            alt="supp"
+                          />
+                          <span
+                            style={{ marginTop: -22, fontSize: 15 }}
+                            className="tooltip tooltipProjectName"
+                          >
+                            Delete project name or reset all
+                          </span>
+                        </span>
+                      </button>
+                    )}
+                  </Fragment>
                 )}
-              </Fragment>
-            )}
-            <input
-              style={{ width: "100%", height: "100%" }}
-              readOnly={validateprojectName ? true : false}
-              type="text"
-              autoComplete="off"
-              maxLength="30"
-              id="chat-name-input"
-              value={projectName}
-              onChange={(e) => setProjectName(e.target.value)}
-              placeholder="Project Name"
-              className={
-                !validateprojectName
-                  ? "new-message-input-field light-background opacityFilter"
-                  : "new-message-input-field light-background"
-              }
-            />
-            <div
-              className="noteButton"
-              style={{
-                // position: "absolute",
-                cursor: "pointer",
-                border: "1px solid purple",
-                padding: "8px",
-                height: 63,
-                width: 73,
-              }}
-            >
-              <img
-                onClick={handleOpenNote}
-                style={{ width: 44, position: "absolute" }}
-                src={ProjectIcon}
-                alt="note"
-              />
-            </div>
-          </div>
-          <div className="logoApp">
-            <img className="logo" src={BacklogImg} alt="" />
-            <strong>My Simple Tasks manager</strong>
-          </div>
+                <input
+                  style={{ width: "100%", height: "100%" }}
+                  readOnly={validateprojectName ? true : false}
+                  type="text"
+                  autoComplete="off"
+                  maxLength="30"
+                  id="chat-name-input"
+                  value={projectName}
+                  onChange={(e) => setProjectName(e.target.value)}
+                  placeholder="Project Name"
+                  className={
+                    !validateprojectName
+                      ? "new-message-input-field light-background opacityFilter"
+                      : "new-message-input-field light-background"
+                  }
+                />
+                <div
+                  className="noteButton"
+                  style={{
+                    // position: "absolute",
+                    cursor: "pointer",
+                    border: "1px solid purple",
+                    padding: "8px",
+                    height: 63,
+                    width: 73,
+                  }}
+                >
+                  <img
+                    onClick={handleOpenNote}
+                    style={{ width: 44, position: "absolute" }}
+                    src={ProjectIcon}
+                    alt="note"
+                  />
+                </div>
+              </div>
+              <div className="logoApp">
+                <img className="logo" src={BacklogImg} alt="" />
+                <strong>My Simple Tasks manager</strong>
+              </div>
 
-          <div className="ribbon ribbon-top-right">
-            <span>
-              <img className="picture-ribbon" src={PwaLogo} alt="ribbon" />
-            </span>
-          </div>
+              <div className="ribbon ribbon-top-right">
+                <span>
+                  <img className="picture-ribbon" src={PwaLogo} alt="ribbon" />
+                </span>
+              </div>
+            </div>
+          </StyledHeader>
+          {!autoTrackTime ? <TimeTracker /> : null}
+          <StyledContent>
+            {openDash ? <Dashboard /> : null}
+            {!openDash ? <Taskboard /> : null}
+            <FloatingButton />
+          </StyledContent>
+        </Fragment>
+      ) : (
+        <div
+          style={{
+            background: "rgb(85 4 135)",
+            width: "100%",
+            height: "100vh",
+            color: "#fff",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column",
+          }}
+        >
+          <img
+            className="rotate-in-center"
+            style={{ marginTop: -40, marginBottom: 45 }}
+            src={NoMobile}
+            alt="noMobile"
+            width="125"
+          />
+          <strong
+            className="tracking-in-expand"
+            style={{ fontSize: 22, marginBottom: 12 }}
+          >
+            This app is not for mobile devices
+          </strong>
+          <p
+            className="tracking-in-contract-bck-bottom"
+            style={{ fontStyle: "italic" }}
+          >
+            To see the app correctly, open it to desktop computer...
+          </p>
         </div>
-      </StyledHeader>
-      {!autoTrackTime ? <TimeTracker /> : null}
-      <StyledContent>
-        {openDash ? <Dashboard /> : null}
-        {!openDash ? <Taskboard /> : null}
-        <FloatingButton />
-      </StyledContent>
+      )}
     </StyledLayout>
   );
 }
