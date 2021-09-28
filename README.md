@@ -356,6 +356,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 **:x:** this application is  not responsive on mobile :mobile_phone_off: (as it is an application for people working in front of a computer - developer like me for example - I did not find useful to do media queries for that).
 
+![alt text](demo/version2/mobileView.png "My Simple Tasks Manager")
 
 ***(The demo is fully functional, all infos are stocked in localStorage)***
 
