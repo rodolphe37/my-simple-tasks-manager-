@@ -23,7 +23,7 @@ import ReactGA from "react-ga";
 import useMobile from "./hooks/useMobile";
 import NoMobile from "./components/assets/smartphone.svg";
 
-const TRACKING_ID = "process.env.REACT_APP_TRACKING_GA";
+const TRACKING_ID = `${process.env.REACT_APP_TRACKING_GA}`;
 ReactGA.initialize(TRACKING_ID);
 ReactGA.pageview(window.location.pathname);
 

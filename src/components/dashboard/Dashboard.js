@@ -37,6 +37,7 @@ import { PdfDocument } from "../exportPdf/ExportPdf";
 import DownloadPNG from "../assets/download.svg";
 import DownPdf from "../assets/downPdf.svg";
 import { useScreenshot, createFileName } from "use-react-screenshot";
+import axios from "axios";
 
 const Dashboard = () => {
   const [totalTimeToSeconds, setTotalTimeToSeconds] = useRecoilState(
@@ -70,7 +71,8 @@ const Dashboard = () => {
   const { tjm, setTjm, handlePrice } = useCustomAlertHook();
   const { hmsToSecondsOnly } = useHmsToSeconds();
   const { cutDecimals } = useCutDecimals();
-  const changeEurDoll = 0.85;
+  const [exchangeRate, setExchangeRate] = useState([]);
+  let changeEurDoll = exchangeRate.USD_EUR;
   let totalEuro = eurTjm * changeEurDoll;
   const ref = createRef(null);
   // eslint-disable-next-line no-unused-vars
@@ -80,6 +82,17 @@ const Dashboard = () => {
     width: 600,
     height: 1800,
   });
+
+  useEffect(() => {
+    axios
+      .get(
+        `https://free.currconv.com/api/v7/convert?q=USD_EUR,EUR_USD&compact=ultra&apiKey=${process.env.REACT_APP_EXCHANGERATE_API_KEY}`
+      )
+      .then((res) => {
+        const response = res.data;
+        setExchangeRate(response);
+      });
+  }, [changeEurDoll]);
 
   const download = (
     image,
@@ -100,7 +113,8 @@ const Dashboard = () => {
     if (!tjm) {
       setEurTjm(0);
     }
-  }, [tjm, finishedDatas]);
+    // console.log("exchangeRate", exchangeRate);
+  }, [tjm, finishedDatas, exchangeRate]);
 
   const handleChangeDevise = () => {
     setChangeDevise((changeDevise) => !changeDevise);
@@ -311,11 +325,15 @@ const Dashboard = () => {
           <span className="priceTextContainer">
             <p>
               {!changeDevise ? "€" : "$"}
-              {changeDevise ? tjm : totalEuro}
+              {changeDevise ? tjm : cutDecimals(totalEuro, 2)}
             </p>
             <p>
               {changeDevise ? "€" : "$"}
-              {changeDevise ? totalEuro : !changeDevise ? tjm : 0}
+              {changeDevise
+                ? cutDecimals(totalEuro, 2)
+                : !changeDevise
+                ? tjm
+                : 0}
             </p>
           </span>
           <button

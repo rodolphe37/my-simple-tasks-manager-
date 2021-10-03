@@ -127,7 +127,7 @@ export function PdfDocument(props) {
     changeEurDoll,
     stockItemsByStatus,
     taskPerHour,
-    cumuledTimeCards,
+    // cumuledTimeCards,
     Note1Content,
     Note2Content,
     Note3Content,
@@ -162,29 +162,29 @@ export function PdfDocument(props) {
     return NewDate;
   };
 
-  console.log(
-    "pdf props",
-    data.filter((res) => res.start !== "")
-  );
-  console.log("time props", totalTimeLocalStore);
-  console.log("tjm props", tjm);
-  console.log("changeEurDoll props", changeEurDoll);
-  console.log("stockItemsByStatus props", stockItemsByStatus);
-  console.log("tasksNumber props", taskPerHour);
-  console.log("cumuledTimeCards props", cumuledTimeCards);
-  console.log("Note1Content props", Note1Content);
-  console.log("Note2Content props", Note2Content);
-  console.log("Note3Content props", Note3Content);
-  console.log("Note4Content props", Note4Content);
-  console.log("connexionNumber props", connexionNumber);
-  console.log(
-    "totalTimeSeconds props",
-    totalTimeSeconds.filter((result) => !isNaN(result.total))
-  );
-  console.log(
-    "completCardsTimeArray props",
-    completCardsTimeArray.filter((resu) => resu.start !== "")
-  );
+  // console.log(
+  //   "pdf props",
+  //   data.filter((res) => res.start !== "")
+  // );
+  // console.log("time props", totalTimeLocalStore);
+  // console.log("tjm props", tjm);
+  // console.log("changeEurDoll props", changeEurDoll);
+  // console.log("stockItemsByStatus props", stockItemsByStatus);
+  // console.log("tasksNumber props", taskPerHour);
+  // console.log("cumuledTimeCards props", cumuledTimeCards);
+  // console.log("Note1Content props", Note1Content);
+  // console.log("Note2Content props", Note2Content);
+  // console.log("Note3Content props", Note3Content);
+  // console.log("Note4Content props", Note4Content);
+  // console.log("connexionNumber props", connexionNumber);
+  // console.log(
+  //   "totalTimeSeconds props",
+  //   totalTimeSeconds.filter((result) => !isNaN(result.total))
+  // );
+  // console.log(
+  //   "completCardsTimeArray props",
+  //   completCardsTimeArray.filter((resu) => resu.start !== "")
+  // );
 
   return (
     <Document>
