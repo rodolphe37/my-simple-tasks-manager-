@@ -7,7 +7,7 @@ const VerticalBar = ({ cumuledTimeCards }) => {
   const [cumuledTotal, setCumuledTotal] = useState([]);
   const tjm = localStorage.getItem("tjm");
   const [totalTimeLocalStore] = useState(localStorage.getItem("time"));
-  let totalSumPrice = (tjm * totalTimeLocalStore) / 28800;
+  let totalSumPrice = tjm * (totalTimeLocalStore / 28800);
 
   useEffect(() => {
     if (cumuledTimeCards) {
