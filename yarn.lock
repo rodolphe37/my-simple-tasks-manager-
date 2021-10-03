@@ -6137,13 +6137,6 @@ htmlparser2@^3.10.1:
     inherits "^2.0.1"
     readable-stream "^3.1.1"
 
-http-agent@*:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/http-agent/-/http-agent-0.1.2.tgz#aaacd633c87e5ab42ed4f90827a1a5f1e2bac4b8"
-  integrity sha1-qqzWM8h+WrQu1PkIJ6Gl8eK6xLg=
-  dependencies:
-    request "1.9.x"
-
 http-deceiver@^1.2.7:
   version "1.2.7"
   resolved "https://registry.yarnpkg.com/http-deceiver/-/http-deceiver-1.2.7.tgz#fa7168944ab9a519d337cb0bec7284dc3e723d87"
@@ -7947,11 +7940,6 @@ moment@^2.24.0, moment@^2.25.3:
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.1.tgz#b2be769fa31940be9eeea6469c075e35006fa3d3"
   integrity sha512-kHmoybcPV8Sqy59DwNDY3Jefr64lK/by/da0ViFcuA4DH0vQg5Q6Ze5VimxkfQNSC+Mls/Kx53s7TjP1RhFEDQ==
 
-money@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/money/-/money-0.2.0.tgz#7eada2df1009df935fa18d4fb1d620ddacce02c2"
-  integrity sha1-fq2i3xAJ35NfoY1PsdYg3azOAsI=
-
 move-concurrently@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/move-concurrently/-/move-concurrently-1.0.1.tgz#be2c005fda32e0b29af1f05d7c4b33214c701f92"
@@ -8333,13 +8321,6 @@ onetime@^5.1.0:
   integrity sha512-kbpaSSGJTWdAY5KPVeMOKXSrPtr8C8C7wodJbcsd51jRnmD+GZu8Y0VoU6Dm5Z4vWr0Ig/1NKuWRKf7j5aaYSg==
   dependencies:
     mimic-fn "^2.1.0"
-
-open-exchange-rates@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/open-exchange-rates/-/open-exchange-rates-0.3.0.tgz#00a0f22e8a06945f60615c25656cd765fd48316b"
-  integrity sha1-AKDyLooGlF9gYVwlZWzXZf1IMWs=
-  dependencies:
-    http-agent "*"
 
 open@^7.0.2:
   version "7.4.2"
@@ -10450,11 +10431,6 @@ request-promise-native@^1.0.8:
     request-promise-core "1.1.4"
     stealthy-require "^1.1.1"
     tough-cookie "^2.3.3"
-
-request@1.9.x:
-  version "1.9.9"
-  resolved "https://registry.yarnpkg.com/request/-/request-1.9.9.tgz#af231fe87e3725a5db46ff74833f3aa0ebfd9151"
-  integrity sha1-ryMf6H43JaXbRv90gz86oOv9kVE=
 
 request@^2.88.2:
   version "2.88.2"
