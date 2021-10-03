@@ -331,7 +331,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 ### New Version (03 oct 2021 - ^V_2.2.0)
 
-**:heavy_exclamation_mark: Dynamic real time Dollars/Euros exchange rate added! :dollar: / :euro: **
+**:heavy_exclamation_mark: Dynamic real time Dollars/Euros exchange rate added! :dollar: / :euro:**
 
 >The conversion of the Daily rate from Dollars to Euros is now done automatically according to the official exchange rate.
 
