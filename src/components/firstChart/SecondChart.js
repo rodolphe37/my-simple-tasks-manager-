@@ -14,7 +14,10 @@ const VerticalBar = ({ cumuledTimeCards }) => {
       setCumuledTitle([cumuledTimeCards.map((resTitle) => resTitle.title)]);
       setCumuledTotal([
         cumuledTimeCards.map(
-          (resTotal) => (totalSumPrice * (resTotal.total / 3600)) / 100
+          (resTotal) =>
+            ((totalSumPrice / (totalTimeLocalStore / 8)) *
+              (resTotal.total / 3600)) /
+            100
         ),
       ]);
     }
