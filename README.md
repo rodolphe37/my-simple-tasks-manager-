@@ -324,6 +324,18 @@ You can easily install this application on a Windows, Mac or Linux computer.
 >And this is a result:
 
 <img  style =" margin-top: 5px; margin-right: 22px " src="demo/version2/reduced.png" alt="drawing" height="2250" width="400"/>
+
+
+---
+
+
+### New Version (03 oct 2021 - ^V_2.2.0)
+
+**:heavy_exclamation_mark: Dynamic real time Dollars/Euros exchange rate added! :dollar: / :euro: **
+
+>The conversion of the Daily rate from Dollars to Euros is now done automatically according to the official exchange rate.
+
+
 ---
 
 

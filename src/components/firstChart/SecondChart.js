@@ -19,9 +19,9 @@ const VerticalBar = ({ cumuledTimeCards }) => {
       ]);
     }
 
-    console.log("cumuledTitle", cumuledTitle?.[0]);
-    console.log("cumuledTjm", cumuledTotal?.[0]);
-    console.log("totalSumPrice", totalSumPrice);
+    // console.log("cumuledTitle", cumuledTitle?.[0]);
+    // console.log("cumuledTjm", cumuledTotal?.[0]);
+    // console.log("totalSumPrice", totalSumPrice);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cumuledTimeCards, setCumuledTitle, setCumuledTotal]);
 
