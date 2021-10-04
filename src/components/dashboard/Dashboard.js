@@ -72,7 +72,8 @@ const Dashboard = () => {
   const { hmsToSecondsOnly } = useHmsToSeconds();
   const { cutDecimals } = useCutDecimals();
   const [exchangeRate, setExchangeRate] = useState([]);
-  let changeEurDoll = exchangeRate.USD_EUR;
+  let changeEurDoll =
+    exchangeRate.USD_EUR ?? localStorage.getItem("exchangeRate");
   let totalEuro = eurTjm * changeEurDoll;
   const ref = createRef(null);
   // eslint-disable-next-line no-unused-vars
@@ -84,15 +85,25 @@ const Dashboard = () => {
   });
 
   useEffect(() => {
-    axios
-      .get(
-        `https://free.currconv.com/api/v7/convert?q=USD_EUR,EUR_USD&compact=ultra&apiKey=${process.env.REACT_APP_EXCHANGERATE_API_KEY}`
-      )
-      .then((res) => {
-        const response = res.data;
-        setExchangeRate(response);
-      });
-  }, [changeEurDoll]);
+    if (exchangeRate === []) {
+      axios
+        .get(
+          `https://free.currconv.com/api/v7/convert?q=USD_EUR,EUR_USD&compact=ultra&apiKey=${process.env.REACT_APP_EXCHANGERATE_API_KEY}`
+        )
+        .then((res) => {
+          const response = res.data;
+          console.log("response", response);
+          if (response !== exchangeRate) {
+            setExchangeRate(response);
+            localStorage.setItem("exchangeRate", exchangeRate.USD_EUR);
+          }
+        });
+    } else {
+      localStorage.setItem("exchangeRate", 0.86);
+      setExchangeRate(localStorage.getItem("exchangeRate"));
+    }
+    console.log("exchangeRate", exchangeRate);
+  }, [changeEurDoll, exchangeRate]);
 
   const download = (
     image,
