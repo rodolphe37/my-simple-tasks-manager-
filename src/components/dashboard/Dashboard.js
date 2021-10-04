@@ -37,7 +37,7 @@ import { PdfDocument } from "../exportPdf/ExportPdf";
 import DownloadPNG from "../assets/download.svg";
 import DownPdf from "../assets/downPdf.svg";
 import { useScreenshot, createFileName } from "use-react-screenshot";
-import axios from "axios";
+// import axios from "axios";
 
 const Dashboard = () => {
   const [totalTimeToSeconds, setTotalTimeToSeconds] = useRecoilState(
@@ -72,9 +72,8 @@ const Dashboard = () => {
   const { hmsToSecondsOnly } = useHmsToSeconds();
   const { cutDecimals } = useCutDecimals();
   const [exchangeRate, setExchangeRate] = useState([]);
-  let changeEurDoll =
-    exchangeRate.USD_EUR ?? localStorage.getItem("exchangeRate");
-  let totalEuro = eurTjm * changeEurDoll;
+  let changeEurDoll = exchangeRate ?? localStorage.getItem("exchangeRate");
+  let totalEuro = eurTjm / changeEurDoll;
   const ref = createRef(null);
   // eslint-disable-next-line no-unused-vars
   const [image, takeScreenShot] = useScreenshot({
@@ -85,25 +84,16 @@ const Dashboard = () => {
   });
 
   useEffect(() => {
-    if (exchangeRate === []) {
-      axios
-        .get(
-          `https://free.currconv.com/api/v7/convert?q=USD_EUR,EUR_USD&compact=ultra&apiKey=${process.env.REACT_APP_EXCHANGERATE_API_KEY}`
-        )
-        .then((res) => {
-          const response = res.data;
-          console.log("response", response);
-          if (response !== exchangeRate) {
-            setExchangeRate(response);
-            localStorage.setItem("exchangeRate", exchangeRate.USD_EUR);
-          }
-        });
-    } else {
-      localStorage.setItem("exchangeRate", 0.86);
-      setExchangeRate(localStorage.getItem("exchangeRate"));
-    }
-    console.log("exchangeRate", exchangeRate);
-  }, [changeEurDoll, exchangeRate]);
+    fetch(
+      `http://api.exchangeratesapi.io/v1/latest?access_key=${process.env.REACT_APP_EXCHANGERATE_API_KEY}&symbols=USD,AUD,CAD,PLN,MXN&format=1`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        const firstCurrency = Object.values(data.rates)[0];
+        setExchangeRate(firstCurrency);
+        localStorage.setItem("exchangeRate", exchangeRate);
+      });
+  }, [exchangeRate, eurTjm]);
 
   const download = (
     image,
