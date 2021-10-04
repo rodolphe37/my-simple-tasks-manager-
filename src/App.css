@@ -367,3 +367,10 @@ button.erase-urername-button > .infoEraser,
     opacity: 1;
   }
 }
+.logoApp sub {
+  font-size: 16px;
+  margin-left: 13px;
+  color: crimson;
+  font-style: italic;
+  transform: translate(-9px, -3px);
+}
