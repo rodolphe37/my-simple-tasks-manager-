@@ -37,7 +37,9 @@ import { PdfDocument } from "../exportPdf/ExportPdf";
 import DownloadPNG from "../assets/download.svg";
 import DownPdf from "../assets/downPdf.svg";
 import { useScreenshot, createFileName } from "use-react-screenshot";
-// import axios from "axios";
+import CurrencyConverter from "../currencyConverter/CurrencyConverter";
+import CurrencyConvertIcon from "../assets/currencyExchange.svg";
+import Axios from "axios";
 
 const Dashboard = () => {
   const [totalTimeToSeconds, setTotalTimeToSeconds] = useRecoilState(
@@ -71,10 +73,16 @@ const Dashboard = () => {
   const { tjm, setTjm, handlePrice } = useCustomAlertHook();
   const { hmsToSecondsOnly } = useHmsToSeconds();
   const { cutDecimals } = useCutDecimals();
+  const [converter, setConverter] = useState(false);
   const [exchangeRate, setExchangeRate] = useState([]);
   let changeEurDoll = exchangeRate ?? localStorage.getItem("exchangeRate");
   let totalEuro = eurTjm / changeEurDoll;
   const ref = createRef(null);
+
+  const [info, setInfo] = useState([]);
+
+  const [from, setFrom] = useState("eur");
+
   // eslint-disable-next-line no-unused-vars
   const [image, takeScreenShot] = useScreenshot({
     type: "image/png",
@@ -83,21 +91,28 @@ const Dashboard = () => {
     height: 1800,
   });
 
+  // Calling the api whenever the dependency changes
   useEffect(() => {
-    if (tjm) {
-      fetch(
-        `http://api.exchangeratesapi.io/v1/latest?access_key=${process.env.REACT_APP_EXCHANGERATE_API_KEY}&symbols=USD,AUD,CAD,PLN,MXN&format=1`
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          const firstCurrency = Object.values(data.rates)[0];
-          setExchangeRate(firstCurrency);
-          localStorage.setItem("exchangeRate", exchangeRate);
-        });
-    }
+    Axios.get(
+      `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${from}.json`
+    ).then((res) => {
+      setInfo(res.data[from]);
+      setExchangeRate(info.usd);
+    });
+  }, [from, info]);
 
-    console.log("exchangeRate", exchangeRate);
-  }, [exchangeRate, tjm]);
+  const HandleOpenConverter = () => {
+    if (converter) {
+      setConverter(false);
+    }
+    if (!converter) {
+      setConverter(true);
+    }
+  };
+  useEffect(() => {
+    localStorage.setItem("exchangeRate", exchangeRate);
+    console.log("infos ", exchangeRate);
+  }, [exchangeRate]);
 
   const download = (
     image,
@@ -133,9 +148,10 @@ const Dashboard = () => {
       localStorage.removeItem("tjm");
     }
     if (projectDone && tjm === 0) {
-      return handlePrice();
+      handlePrice();
     }
-  }, [tjm, eurTjm, projectDone, handlePrice]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tjm, projectDone]);
 
   const { addSumStartStop } = useAddSumStartStop();
 
@@ -214,6 +230,17 @@ const Dashboard = () => {
           <img src={ProductivityIcon} alt="dash" style={{ width: 55 }} />
           <h1>Dashboard</h1>
         </div>
+        <button onClick={HandleOpenConverter} className="currencyButton">
+          <img
+            title="Open Currency Converter Widget"
+            data-toggle="tooltip"
+            data-placement="left"
+            className="CurrencyIcon"
+            src={CurrencyConvertIcon}
+            alt="currencyConverter"
+            width="90"
+          />
+        </button>
         <div style={{ width: 150, justifyContent: "center", display: "flex" }}>
           <PDFDownloadLink
             document={
@@ -291,6 +318,17 @@ const Dashboard = () => {
         style={{ position: "relative" }}
         className="dashContent-container"
       >
+        {converter ? (
+          <Fragment>
+            <div className="CurrencyOverlay"></div>
+            <CurrencyConverter
+              info={info}
+              from={from}
+              setFrom={setFrom}
+              HandleOpenConverter={HandleOpenConverter}
+            />
+          </Fragment>
+        ) : null}
         <div onClick={handlePrice} className="tjm-button">
           <button
             className="tjmButtonActif"
