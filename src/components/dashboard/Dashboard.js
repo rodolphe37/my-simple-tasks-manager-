@@ -84,16 +84,20 @@ const Dashboard = () => {
   });
 
   useEffect(() => {
-    fetch(
-      `http://api.exchangeratesapi.io/v1/latest?access_key=${process.env.REACT_APP_EXCHANGERATE_API_KEY}&symbols=USD,AUD,CAD,PLN,MXN&format=1`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        const firstCurrency = Object.values(data.rates)[0];
-        setExchangeRate(firstCurrency);
-        localStorage.setItem("exchangeRate", exchangeRate);
-      });
-  }, [exchangeRate, eurTjm]);
+    if (tjm) {
+      fetch(
+        `http://api.exchangeratesapi.io/v1/latest?access_key=${process.env.REACT_APP_EXCHANGERATE_API_KEY}&symbols=USD,AUD,CAD,PLN,MXN&format=1`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          const firstCurrency = Object.values(data.rates)[0];
+          setExchangeRate(firstCurrency);
+          localStorage.setItem("exchangeRate", exchangeRate);
+        });
+    }
+
+    console.log("exchangeRate", exchangeRate);
+  }, [exchangeRate, tjm]);
 
   const download = (
     image,
