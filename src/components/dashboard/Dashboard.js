@@ -40,6 +40,7 @@ import { useScreenshot, createFileName } from "use-react-screenshot";
 import CurrencyConverter from "../currencyConverter/CurrencyConverter";
 import CurrencyConvertIcon from "../assets/currencyExchange.svg";
 import Axios from "axios";
+import currencyConverterAtom from "../../statesManager/atoms/currencyConverterAtom";
 
 const Dashboard = () => {
   const [totalTimeToSeconds, setTotalTimeToSeconds] = useRecoilState(
@@ -73,7 +74,7 @@ const Dashboard = () => {
   const { tjm, setTjm, handlePrice } = useCustomAlertHook();
   const { hmsToSecondsOnly } = useHmsToSeconds();
   const { cutDecimals } = useCutDecimals();
-  const [converter, setConverter] = useState(false);
+  const [converter, setConverter] = useRecoilState(currencyConverterAtom);
   const [exchangeRate, setExchangeRate] = useState([]);
   let changeEurDoll = exchangeRate ?? localStorage.getItem("exchangeRate");
   let totalEuro = eurTjm / changeEurDoll;
@@ -112,7 +113,8 @@ const Dashboard = () => {
   useEffect(() => {
     localStorage.setItem("exchangeRate", exchangeRate);
     console.log("infos ", exchangeRate);
-  }, [exchangeRate]);
+    console.log("converter ", converter);
+  }, [exchangeRate, converter]);
 
   const download = (
     image,
@@ -320,7 +322,6 @@ const Dashboard = () => {
       >
         {converter ? (
           <Fragment>
-            <div className="CurrencyOverlay"></div>
             <CurrencyConverter
               info={info}
               from={from}

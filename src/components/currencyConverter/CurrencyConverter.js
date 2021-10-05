@@ -89,13 +89,13 @@ function CurrencyConverter({ info, from, setFrom, HandleOpenConverter }) {
         </div>
       </div>
       <div className="result">
-        <button
+        {/*<button
           onClick={() => {
             convert();
           }}
         >
           Convert
-        </button>
+        </button>*/}
         <h2>Converted Amount:</h2>
         <p>{input + " " + from + " = " + output.toFixed(2) + " " + to}</p>
       </div>
