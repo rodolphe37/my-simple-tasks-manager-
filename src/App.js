@@ -38,17 +38,6 @@ const StyledLayout = styled(Layout)`
   right: 0;
 `;
 
-const StyledLayoutFixed = styled(Layout)`
-  /* We can't use "height: 100vh; width: 100vw;" here.
-  Otherwise, when there is a horizontal scrollbar etc,
-  because that we set a constant height, there will be a vertical one too.  */
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-`;
-
 const StyledHeader = styled(Header)`
   display: flex;
   align-items: center;
