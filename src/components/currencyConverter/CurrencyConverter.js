@@ -6,7 +6,7 @@ import "./CurrencyConverter.css";
 import supp from "../assets/supp.svg";
 
 function CurrencyConverter({ info, from, setFrom, HandleOpenConverter }) {
-  // Initializing all the state variables
+  // Initializing all the state letiables
   const [input, setInput] = useState(0);
   const [to, setTo] = useState("usd");
   const [options, setOptions] = useState([]);
@@ -22,13 +22,13 @@ function CurrencyConverter({ info, from, setFrom, HandleOpenConverter }) {
 
   // Function to convert the currency
   function convert() {
-    var rate = info[to];
+    let rate = info[to];
     setOutput(input * rate);
   }
 
   // Function to switch between two currency
   function flip() {
-    var temp = from;
+    let temp = from;
     setFrom(to);
     setTo(temp);
   }
