@@ -416,7 +416,7 @@ const Dashboard = () => {
               {!changeDevise ? "€" : "$"}
               {changeDevise
                 ? cutDecimals(tjm / 8, 2)
-                : cutDecimals((tjm / 8) * changeEurDoll, 2)}{" "}
+                : cutDecimals(tjm / 8 / changeEurDoll, 2)}{" "}
               <sub style={{ fontSize: 11, fontStyle: "italic" }}>per hour</sub>
             </p>
           </div>
@@ -432,7 +432,7 @@ const Dashboard = () => {
               {changeDevise
                 ? cutDecimals((tjm * totalTimeLocalStore) / 28800, 2)
                 : cutDecimals(
-                    ((tjm * totalTimeLocalStore) / 28800) * changeEurDoll,
+                    (tjm * totalTimeLocalStore) / 28800 / changeEurDoll,
                     2
                   )}{" "}
               <sub style={{ fontSize: 11, fontStyle: "italic" }}>total</sub>
