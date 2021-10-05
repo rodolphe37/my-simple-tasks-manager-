@@ -353,56 +353,58 @@ const Dashboard = () => {
             />
           </button>
         </div>
-        <div className="priceContainer">
-          <img
-            onClick={() => setTjm(0)}
-            className={tjm !== 0 ? "eraseTjmButton" : "none"}
-            title="Erase your Daily rate here!"
-            data-toggle="tooltip"
-            data-placement="left"
-            src={supp}
-            alt="suppr"
-            style={{ width: 16 }}
-          />
-
-          <span className="priceTextContainer">
-            <p>
-              {!changeDevise ? "€" : "$"}
-              {changeDevise ? tjm : cutDecimals(totalEuro, 2)}
-            </p>
-            <p>
-              {changeDevise ? "€" : "$"}
-              {changeDevise
-                ? cutDecimals(totalEuro, 2)
-                : !changeDevise
-                ? tjm
-                : 0}
-            </p>
-          </span>
-          <button
-            onClick={handleChangeDevise}
-            style={{
-              width: 35,
-              marginLeft: 25,
-              background: "transparent",
-              border: "none",
-            }}
-          >
+        {!converter ? (
+          <div className="priceContainer">
             <img
-              className="bump"
-              title={
-                changeDevise
-                  ? "You are in Dollars, you can change the value to Euros"
-                  : "You are in Euros, you can change the value to Dollars"
-              }
+              onClick={() => setTjm(0)}
+              className={tjm !== 0 ? "eraseTjmButton" : "none"}
+              title="Erase your Daily rate here!"
               data-toggle="tooltip"
               data-placement="left"
-              src={changeDevise ? DollarIcon : EuroIcon}
-              alt=""
-              style={{ width: 35 }}
+              src={supp}
+              alt="suppr"
+              style={{ width: 16 }}
             />
-          </button>
-        </div>
+
+            <span className="priceTextContainer">
+              <p>
+                {!changeDevise ? "€" : "$"}
+                {changeDevise ? tjm : cutDecimals(totalEuro, 2)}
+              </p>
+              <p>
+                {changeDevise ? "€" : "$"}
+                {changeDevise
+                  ? cutDecimals(totalEuro, 2)
+                  : !changeDevise
+                  ? tjm
+                  : 0}
+              </p>
+            </span>
+            <button
+              onClick={handleChangeDevise}
+              style={{
+                width: 35,
+                marginLeft: 25,
+                background: "transparent",
+                border: "none",
+              }}
+            >
+              <img
+                className="bump"
+                title={
+                  changeDevise
+                    ? "You are in Dollars, you can change the value to Euros"
+                    : "You are in Euros, you can change the value to Dollars"
+                }
+                data-toggle="tooltip"
+                data-placement="left"
+                src={changeDevise ? DollarIcon : EuroIcon}
+                alt=""
+                style={{ width: 35 }}
+              />
+            </button>
+          </div>
+        ) : null}
 
         <div className="dashContainer-header">
           <div className="dashContainer-content-header">

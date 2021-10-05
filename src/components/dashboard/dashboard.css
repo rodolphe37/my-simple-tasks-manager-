@@ -451,7 +451,8 @@ button,
   display: flex;
 } */
 
-.PdfIcon:hover {
+.PdfIcon:hover,
+.CurrencyIcon:hover {
   animation: jello-vertical 0.9s both;
 }
 @keyframes jello-vertical {

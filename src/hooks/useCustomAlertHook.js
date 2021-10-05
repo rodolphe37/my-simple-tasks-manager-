@@ -214,7 +214,7 @@ const useCustomAlertHook = () => {
       },
       showCancelButton: true,
       confirmButtonText: "Look up",
-      showLoaderOnConfirm: true,
+      // showLoaderOnConfirm: true,
     }).then((result) => {
       if (result.isConfirmed) {
         // console.log(result);
