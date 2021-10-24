@@ -15,6 +15,8 @@
 
 ## <img  style =" float: left; margin-top: 5px; margin-right: 22px " src="demo/backlog.svg" alt="drawing" height="30" width="25"/>My Simple Task Manager_V2.2.0
 
+### :bookmark: This is the web (pwa) version, if you want to use the desktop version it's [here](https://github.com/rodolphe37/my-simple-tasks-manager-desktop-version)
+
 is a drag-and-drop task manager as well as a time tracker (not for a team, but for a single freelance developer for example)!
 
 ### :bookmark: This is a great little application when you are working alone on projects where you need to organize your tasks, as well as track the time you spend on a project to know the actual time you spent on it.
