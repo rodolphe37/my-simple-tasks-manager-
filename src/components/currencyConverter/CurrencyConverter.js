@@ -48,7 +48,7 @@ function CurrencyConverter({ info, from, setFrom, HandleOpenConverter }) {
       <div className="heading">
         <h1>Currency converter</h1>
       </div>
-      <div className="container">
+      <div className="container-converter">
         <div className="left">
           <h3>Amount</h3>
           <input

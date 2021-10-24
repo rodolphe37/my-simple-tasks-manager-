@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
 
 .CurrencyConverter {
-  height: 39vh;
+  min-height: 22vh;
   width: 56%;
   display: flex;
   align-items: center;
@@ -17,8 +17,8 @@
   font-family: "Pacifico", cursive;
   font-size: 35px;
 }
-.container {
-  height: 300px;
+.container-converter {
+  height: 130px;
   /* width: 800px; */
   display: flex;
   justify-content: space-around;
