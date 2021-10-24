@@ -442,6 +442,9 @@ MIT
 >### My Simple Cam
 >https://github.com/rodolphe37/my-simple-cam-dektop-app
 
+>### My SimpleTasks Manager (software version for Linux, Mac & Windows)
+>https://github.com/rodolphe37/my-simple-tasks-manager-desktop-version
+
 >### QRCode Tools
 >https://github.com/rodolphe37/qr-code-tools
 
