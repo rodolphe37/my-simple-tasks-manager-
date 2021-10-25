@@ -48,7 +48,11 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 >Install on Mac OSX :heavy_check_mark:
 >
->![alt text](demo/install-mac-osx.png "My Simple Tasks Manager")
+>![alt text](demo/mac.gif "My Simple Tasks Manager")
+
+>Installed app on Windows :heavy_check_mark:
+>
+>![alt text](demo/windows.png "My Simple Tasks Manager")
 
 ---
 ## UPDATE
