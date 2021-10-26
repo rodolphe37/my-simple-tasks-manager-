@@ -30,8 +30,7 @@ is a drag-and-drop task manager as well as a time tracker (not for a team, but f
 
 [Online sites](#computer-online-sites)
 
-
-- [Functionality](#Functionality)
+[Functionality](#Functionality)
 
   - [Task card](#task-card)
 
