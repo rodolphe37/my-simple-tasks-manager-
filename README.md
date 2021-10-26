@@ -44,27 +44,27 @@ is a drag-and-drop task manager as well as a time tracker (not for a team, but f
 
   - [Dashboard](#dashboard)
 
-  - [Daily rate](#daily-rate)
+    - [Daily rate](#daily-rate)
 
-  - [Statistics](#statistics)
+    - [Statistics](#statistics)
 
-  - [Export data](#export-data)
+    - [Export data](#export-data)
 
-    - [Pdf export](#pdf-export)
+      - [Pdf export](#pdf-export)
 
-    - [Png report screenshot](#png-report-screenshot)
+      - [Png report screenshot](#png-report-screenshot)
 
-  - [Exchange Dollars-Euros](#exchange-dollars-euros)
+    - [Exchange Dollars-Euros](#exchange-dollars-euros)
 
-  - [Currency converter](#currency-converter)
+    - [Currency converter](#currency-converter)
 
   - [Delete or reset](#delete-or-reset)
 
   - [Real time counter](#real-time-counter)
 
-  - [For mobile devices](#for-mobile-devices)
+[For mobile devices](#for-mobile-devices)
 
-  - [LocalStorage persistence](#localstorage-persistence)
+[LocalStorage persistence](#localstorage-persistence)
 
 [compatibility](#compatibility)
 
