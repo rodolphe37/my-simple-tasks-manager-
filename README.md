@@ -81,7 +81,7 @@ is a drag-and-drop task manager as well as a time tracker (not for a team, but f
 ---
 
 
-## :computer: Online sites
+# :computer: Online sites
 
 
 **You can use My Simple Task Manager for FREE** **[here](https://my-simple-tasks-manager.netlify.app/)**,
@@ -108,9 +108,9 @@ You can easily install this application on a Windows, Mac or Linux computer.
 >![alt text](demo/windows.png "My Simple Tasks Manager")
 
 ---
-## Functionality
+# Functionality
 
-### Task card
+## Task card
 
 **:heavy_exclamation_mark: When you put the card on "In Progress" column**
 
@@ -143,7 +143,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 ---
 
-### Sticky Notes
+## Sticky Notes
 
 >You can create 4 sticky notes max.
 
@@ -155,7 +155,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 ---
 
-#### Time Tracker
+## Time Tracker
 
 **:heavy_exclamation_mark: Time Tracker : Manual or automatic mode ?**
 
@@ -211,7 +211,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 ---
 
-### Limit on simultaneous tasks
+## Limit on simultaneous tasks
 
 >For better organisation, only one task can be in progress at a time.
 
@@ -224,7 +224,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 ---
 
 
-### Auto-detect end project
+## Auto-detect end project
 
 **:heavy_exclamation_mark: Auto-detect end project : When all tasks are done !**
 
@@ -371,7 +371,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 ---
 
-### Png report screenshot
+#### Png report screenshot
 
 **:heavy_exclamation_mark: You can download the png report screenshot!**
 
@@ -424,7 +424,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 ---
 
-### Delete or reset
+# Delete or reset
 
 **:heavy_exclamation_mark: When you want to delete the Project name!**
 
@@ -442,7 +442,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 ---
 
-### Real time counter
+# Real time counter
 
 **:heavy_exclamation_mark: When you Start the counter!**
 
@@ -452,7 +452,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 ---
 
-### For mobile devices
+# For mobile devices
 
 >All mobile devices with a screen width of less than 500px are not compatible with this application
 
@@ -462,7 +462,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 ---
 
-### LocalStorage persistence
+# LocalStorage persistence
 
 ***(The demo is fully functional, all infos are stocked in localStorage)***
 
@@ -479,20 +479,20 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 ---
 
-### compatibility
+# compatibility
 
 Can I use Compatibility:
 
 ![alt text](demo/new-version/canIuse.png "My Simple Tasks Manager")
 
 
-## :bust_in_silhouette: Author
+# :bust_in_silhouette: Author
 
 - Thought, designed and developed with :purple_heart: by Rodolphe Augusto
 
 ---
 
-## :large_blue_diamond: A few words from the author
+# :large_blue_diamond: A few words from the author
 
 Enjoy the World :smirk:
 
@@ -502,7 +502,7 @@ Enjoy the World :smirk:
 
 ---
 
-## :sparkling_heart: Support the project
+# :sparkling_heart: Support the project
 
 I put almost everything open-source I can, and try to accommodate anyone who needs help using these projects. Obviously,
 this takes time. You can use this service for free.
@@ -515,13 +515,13 @@ Thank you! :heart:
 
 ---
 
-## :scroll: License
+# :scroll: License
 
 MIT
 
 ---
 
-## My other projects:
+# My other projects:
 
 >### My Simple Tutorial Creator
 >https://github.com/rodolphe37/my-simple-tutorial-creator
