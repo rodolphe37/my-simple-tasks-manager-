@@ -14,7 +14,7 @@
 
 ---
 
-## <img  style =" float: left; margin-top: 5px; margin-right: 22px " src="demo/backlog.svg" alt="drawing" height="30" width="25"/>My Simple Task Manager_V3.2.0 beta
+## <img  style =" float: left; margin-top: 5px; margin-right: 22px " src="demo/backlog.svg" alt="drawing" height="30" width="25"/>My Simple Task Manager_V3.2.1 beta
 
 ### :bookmark: This is the web (pwa) version, if you want to use the desktop version it's [here](https://github.com/rodolphe37/my-simple-tasks-manager-desktop-version)
 
