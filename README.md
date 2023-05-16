@@ -14,15 +14,13 @@
 
 ---
 
-## <img  style =" float: left; margin-top: 5px; margin-right: 22px " src="demo/backlog.svg" alt="drawing" height="30" width="25"/>My Simple Task Manager_V2.2.0
+## <img  style =" float: left; margin-top: 5px; margin-right: 22px " src="demo/backlog.svg" alt="drawing" height="30" width="25"/>My Simple Task Manager_V3.2.0 beta
 
 ### :bookmark: This is the web (pwa) version, if you want to use the desktop version it's [here](https://github.com/rodolphe37/my-simple-tasks-manager-desktop-version)
 
 is a drag-and-drop task manager as well as a time tracker (not for a team, but for a single freelance developer for example)!
 
 ### :bookmark: This is a great little application when you are working alone on projects where you need to organize your tasks, as well as track the time you spend on a project to know the actual time you spent on it.
-
-
 
 ![alt text](demo/demo.gif "My Simple Tasks Manager")
 
@@ -32,35 +30,35 @@ is a drag-and-drop task manager as well as a time tracker (not for a team, but f
 
 [Functionality](#Functionality)
 
-  - [Task card](#task-card)
+- [Task card](#task-card)
 
-  - [Sticky Notes](#sticky-notes)
+- [Sticky Notes](#sticky-notes)
 
-  - [Time Tracker](#time-tracker)
+- [Time Tracker](#time-tracker)
 
-  - [Limit on simultaneous tasks](#limit-on-simultaneous-tasks)
+- [Limit on simultaneous tasks](#limit-on-simultaneous-tasks)
 
-  - [Auto-detect end project](#auto-detect-end-project)
+- [Auto-detect end project](#auto-detect-end-project)
 
-  - [Dashboard](#dashboard)
+- [Dashboard](#dashboard)
 
-    - [Daily rate](#daily-rate)
+  - [Daily rate](#daily-rate)
 
-    - [Statistics](#statistics)
+  - [Statistics](#statistics)
 
-    - [Export data](#export-data)
+  - [Export data](#export-data)
 
-      - [Pdf export](#pdf-export)
+    - [Pdf export](#pdf-export)
 
-      - [Png report screenshot](#png-report-screenshot)
+    - [Png report screenshot](#png-report-screenshot)
 
-    - [Exchange Dollars-Euros](#exchange-dollars-euros)
+  - [Exchange Dollars-Euros](#exchange-dollars-euros)
 
-    - [Currency converter](#currency-converter)
+  - [Currency converter](#currency-converter)
 
-  - [Delete or reset](#delete-or-reset)
+- [Delete or reset](#delete-or-reset)
 
-  - [Real time counter](#real-time-counter)
+- [Real time counter](#real-time-counter)
 
 [For mobile devices](#for-mobile-devices)
 
@@ -80,41 +78,39 @@ is a drag-and-drop task manager as well as a time tracker (not for a team, but f
 
 ---
 
-
 # :computer: Online sites
-
 
 **You can use My Simple Task Manager for FREE** **[here](https://my-simple-tasks-manager.netlify.app/)**,
 
 ![alt text](demo/pwa-check-all.png "My Simple Tasks Manager")
 
->**:heavy_check_mark: This is Progressive Web App (PWA)**
+> **:heavy_check_mark: This is Progressive Web App (PWA)**
 
 ![alt text](demo/pwa-test.png "My Simple Tasks Manager")
 
 You can easily install this application on a Windows, Mac or Linux computer.
 
->Install on Ubuntu :heavy_check_mark:
+> Install on Ubuntu :heavy_check_mark:
 >
->![alt text](demo/demoInstall.gif "My Simple Tasks Manager")
+> ![alt text](demo/demoInstall.gif "My Simple Tasks Manager")
 
-
->Install on Mac OSX :heavy_check_mark:
+> Install on Mac OSX :heavy_check_mark:
 >
->![alt text](demo/mac.gif "My Simple Tasks Manager")
+> ![alt text](demo/mac.gif "My Simple Tasks Manager")
 
->Installed app on Windows :heavy_check_mark:
+> Installed app on Windows :heavy_check_mark:
 >
->![alt text](demo/windows.png "My Simple Tasks Manager")
+> ![alt text](demo/windows.png "My Simple Tasks Manager")
 
 ---
+
 # Functionality
 
 ## Task card
 
 **:heavy_exclamation_mark: When you put the card on "In Progress" column**
 
->You have the day and the hour of the beginning of the treatment of the task to do.
+> You have the day and the hour of the beginning of the treatment of the task to do.
 
 ![alt text](demo/new-version/inProgress.png "My Simple Tasks Manager")
 
@@ -122,7 +118,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 **:heavy_exclamation_mark: When you put the card on "Done" column**
 
->In addition to the information of the beginning of the work on this card, the information of the end of the work is added.
+> In addition to the information of the beginning of the work on this card, the information of the end of the work is added.
 
 ![alt text](demo/new-version/done.png "My Simple Tasks Manager")
 
@@ -130,14 +126,15 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 **:heavy_exclamation_mark: If you work several times on the same card**
 
->The start/end information for each session is displayed.
+> The start/end information for each session is displayed.
 
 ![alt text](demo/new-version/done-resume.png "My Simple Tasks Manager")
 
 ---
+
 **:heavy_exclamation_mark: If you put all the cards back in the "To Do" column**
 
->You will be asked if you want to reset the history of the time spent working on the cards!
+> You will be asked if you want to reset the history of the time spent working on the cards!
 
 ![alt text](demo/new-version/reinitHistory.gif "My Simple Tasks Manager")
 
@@ -145,11 +142,11 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 ## Sticky Notes
 
->You can create 4 sticky notes max.
+> You can create 4 sticky notes max.
 
 **:heavy_exclamation_mark: I also added a "Sticky Notes or Post It" section**
 
->You can create up to 4 sticky notes in order to store all the information needed for the project and to access them at any time.!
+> You can create up to 4 sticky notes in order to store all the information needed for the project and to access them at any time.!
 
 ![alt text](demo/new-version/note-section.gif "My Simple Tasks Manager")
 
@@ -159,7 +156,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 **:heavy_exclamation_mark: Time Tracker : Manual or automatic mode ?**
 
->A configuration button has been added to allow you to choose between two modes for the Time Tracker.
+> A configuration button has been added to allow you to choose between two modes for the Time Tracker.
 
 ![alt text](demo/update-09-21/config.png "My Simple Tasks Manager")
 
@@ -167,7 +164,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 **:heavy_exclamation_mark: When you are in manual mode (default configuration)**
 
->The manual mode leaves the "Time Tracker" toolbar at the top of your page (header), This mode allows you to manage the time tracking independently from the task card dashboard..
+> The manual mode leaves the "Time Tracker" toolbar at the top of your page (header), This mode allows you to manage the time tracking independently from the task card dashboard..
 
 ![alt text](demo/update-09-21/manualTimer.png "My Simple Tasks Manager")
 
@@ -175,7 +172,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 **:heavy_exclamation_mark: When you click on the configuration button when you are in manual mode**
 
->A modal appears telling you which mode you are in and the possibility to change the default configuration to automatic mode.
+> A modal appears telling you which mode you are in and the possibility to change the default configuration to automatic mode.
 
 ![alt text](demo/update-09-21/config-modal.gif "My Simple Tasks Manager")
 
@@ -183,21 +180,23 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 **:heavy_exclamation_mark: When you are in automatic mode**
 
->The automatic mode moves the "Time Tracker" toolbar to the bottom of your page (footer). The management of the timer start/stop is done automatically depending on whether you are working on a task or not.
+> The automatic mode moves the "Time Tracker" toolbar to the bottom of your page (footer). The management of the timer start/stop is done automatically depending on whether you are working on a task or not.
 
 ![alt text](demo/update-09-21/autoTimer.png "My Simple Tasks Manager")
 
 ---
+
 **:heavy_exclamation_mark: When you drag a task card into the "In Progress" column**
 
->The timer starts automatically...
+> The timer starts automatically...
 
 ![alt text](demo/update-09-21/autoStart.gif "My Simple Tasks Manager")
 
 ---
+
 **:heavy_exclamation_mark: Then, when you drag the card to the "Done" column**
 
->The timer stops automatically.!
+> The timer stops automatically.!
 
 ![alt text](demo/update-09-21/autoStop.gif "My Simple Tasks Manager")
 
@@ -205,7 +204,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 **:heavy_exclamation_mark: When you click on the configuration button when you are in automatic mode**
 
->A modal appears showing you in which mode you are and the possibility to change the default configuration in manual mode.
+> A modal appears showing you in which mode you are and the possibility to change the default configuration in manual mode.
 
 ![alt text](demo/update-09-21/config-modal2.gif "My Simple Tasks Manager")
 
@@ -213,22 +212,21 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 ## Limit on simultaneous tasks
 
->For better organisation, only one task can be in progress at a time.
+> For better organisation, only one task can be in progress at a time.
 
 **:heavy_exclamation_mark: You can only do one task at a time**
 
->If you drag more than one card into the "In Progress" column an alert informs you that it is not allowed and your card goes back to the box it came from automatically.
+> If you drag more than one card into the "In Progress" column an alert informs you that it is not allowed and your card goes back to the box it came from automatically.
 
 ![alt text](demo/update-09-21/onlyOneTask.gif "My Simple Tasks Manager")
 
 ---
 
-
 ## Auto-detect end project
 
 **:heavy_exclamation_mark: Auto-detect end project : When all tasks are done !**
 
->when you have finished all your tasks, the timeTracker disappears, a message appears to inform you that the dashboard is now accessible (you will notice the icon that swings on the left of the window).
+> when you have finished all your tasks, the timeTracker disappears, a message appears to inform you that the dashboard is now accessible (you will notice the icon that swings on the left of the window).
 
 ![alt text](demo/version2/endProject.gif "My Simple Tasks Manager")
 
@@ -238,7 +236,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 **:heavy_exclamation_mark: When you open your dashboard for the first time**
 
->When you click on the icon, it stops oscillating and the dashboad opens. When you open the dashboad for the first time, a modal window appears asking you for your daily rate in order to calculate the statistics based on it.
+> When you click on the icon, it stops oscillating and the dashboad opens. When you open the dashboad for the first time, a modal window appears asking you for your daily rate in order to calculate the statistics based on it.
 
 ![alt text](demo/version2/firstDashboard.gif "My Simple Tasks Manager")
 
@@ -248,7 +246,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 **:heavy_exclamation_mark: Just under the header you have the daily rate management!**
 
->This is where the amount you entered is managed
+> This is where the amount you entered is managed
 
 ![alt text](demo/version2/tjmTool.png "My Simple Tasks Manager")
 
@@ -256,7 +254,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 **:heavy_exclamation_mark: You can change devise to euros!**
 
->(but the default value for the app is $)
+> (but the default value for the app is $)
 
 ![alt text](demo/version2/changeDevise.png "My Simple Tasks Manager")
 
@@ -264,7 +262,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 **:heavy_exclamation_mark: Erase current daily rate!**
 
->On the left is a cross to delete the current amount.
+> On the left is a cross to delete the current amount.
 
 ![alt text](demo/version2/eraseTjm.png "My Simple Tasks Manager")
 
@@ -272,7 +270,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 **:heavy_exclamation_mark: New daily rate!**
 
->And on the right you have the button that allows you to enter a new amount.
+> And on the right you have the button that allows you to enter a new amount.
 
 ![alt text](demo/version2/newDailyRate.png "My Simple Tasks Manager")
 
@@ -282,21 +280,21 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 **:heavy_exclamation_mark: let see the dashbord with some statistics on the work done!**
 
->The first three "modules" you see (from left to right) are:
->> - The total duration in hours and the average wage per hour.
->> - The number of days that the work represents. And the calculation of the total cost of the project based on the daily rate entered beforehand.
->> - The number of tasks and the average hour per task.
+> The first three "modules" you see (from left to right) are:
+>
+> > - The total duration in hours and the average wage per hour.
+> > - The number of days that the work represents. And the calculation of the total cost of the project based on the daily rate entered beforehand.
+> > - The number of tasks and the average hour per task.
 
 ![alt text](demo/version2/firstViewDash.png "My Simple Tasks Manager")
 
-***For the graphics, let's see it in more detail...***
+**_For the graphics, let's see it in more detail..._**
 
 ---
 
-
 **:heavy_exclamation_mark: Time spent on each task!**
 
->The first graph represents each task and the time spent on it.
+> The first graph represents each task and the time spent on it.
 
 ![alt text](demo/version2/timeSpent.png "My Simple Tasks Manager")
 
@@ -304,14 +302,15 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 **:heavy_exclamation_mark: Budgetary impact for each task!**
 
->The second graph represents  the percentage of budget impact for each task (Calculated from the daily rate, the overall time and the time spent on each task individually).
+> The second graph represents the percentage of budget impact for each task (Calculated from the daily rate, the overall time and the time spent on each task individually).
 
 ![alt text](demo/version2/budgetImpact.png "My Simple Tasks Manager")
 
 ---
+
 **:heavy_exclamation_mark: Number of work sessions per task!**
 
->This last graph is based on the number of times a task has been put in "In Progress".
+> This last graph is based on the number of times a task has been put in "In Progress".
 
 ![alt text](demo/version2/numberSessionTask.png "My Simple Tasks Manager")
 
@@ -339,22 +338,23 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 **:heavy_exclamation_mark: All sessions on each task!**
 
->Finally, you have the list of tasks with "day and time of start and end of work" on each of them.
-
+> Finally, you have the list of tasks with "day and time of start and end of work" on each of them.
 
 ![alt text](demo/version2/lastViewDash.png "My Simple Tasks Manager")
 
 ---
 
-
 ### Export data
 
- ***Warning - You must have entered a project name in the application to export the data.***
+**_Warning - You must have entered a project name in the application to export the data._**
+
 > - The files are named "on the fly" with this value, so you won't have a file name if you haven't entered this value first!
+
 ---
 
 **You have two options for exporting dashboard data:**
- >- pdf export is not perfect for my taste (the layout of generated pdf more exactly), but they do work. I'm working on an improved version of the pdf export functionality right now... as soon as I get a great solution I'll update the application.
+
+> - pdf export is not perfect for my taste (the layout of generated pdf more exactly), but they do work. I'm working on an improved version of the pdf export functionality right now... as soon as I get a great solution I'll update the application.
 
 ---
 
@@ -362,10 +362,9 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 **:heavy_exclamation_mark: You can download the pdf report!**
 
->**The first is exporting as a pdf (without the graphs and numbers that are part of it).**
+> **The first is exporting as a pdf (without the graphs and numbers that are part of it).**
 >
 > - By clicking on the pdf icon, the application will generate a file with the raw data.
-
 
 ![alt text](demo/version2/pdf-export.gif "My Simple Tasks Manager")
 
@@ -377,7 +376,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 > - The second one is the export in png (copy of the complete dashboard this time).
 
->***If you choose this export option there is one important thing to know...***
+> **_If you choose this export option there is one important thing to know..._**
 >
 > because the png file is generated automatically with the scale of your window, if you use this option in full screen in very large screen, your image will be all crushed.
 
@@ -385,32 +384,27 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 ---
 
->And this is a result:
+> And this is a result:
 
-<img  style =" margin-top: 5px; margin-right: 22px " src="demo/version2/report.png" alt="drawing" height="1600" width="600"/>
----
+## <img  style =" margin-top: 5px; margin-right: 22px " src="demo/version2/report.png" alt="drawing" height="1600" width="600"/>
 
->You can resize your window like the animated gif below (with the graphs in large size if you want (by reducing the width of your window before clicking on the png button))
-
+> You can resize your window like the animated gif below (with the graphs in large size if you want (by reducing the width of your window before clicking on the png button))
 
 ![alt text](demo/version2/png-reduced.gif "My Simple Tasks Manager")
 
 ---
 
->And this is a result:
+> And this is a result:
 
 <img  style =" margin-top: 5px; margin-right: 22px " src="demo/version2/reduced.png" alt="drawing" height="2250" width="400"/>
 
-
 ---
-
 
 ### Exchange Dollars-Euros
 
 **:heavy_exclamation_mark: Dynamic real time Dollars/Euros exchange rate added! :dollar: / :euro:**
 
->The conversion of the Daily rate from Dollars to Euros is now done automatically according to the official exchange rate.
-
+> The conversion of the Daily rate from Dollars to Euros is now done automatically according to the official exchange rate.
 
 ---
 
@@ -418,7 +412,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 **:heavy_exclamation_mark: A currency converter has just been added.**
 
->You can convert almost any currency, simply and quickly, with this widget.
+> You can convert almost any currency, simply and quickly, with this widget.
 
 ![alt text](demo/version2/currencyConverter.gif "My Simple Tasks Manager")
 
@@ -428,7 +422,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 **:heavy_exclamation_mark: When you want to delete the Project name!**
 
->You have two choices, delete only the project name or reset all (Project name, timer & all cards)
+> You have two choices, delete only the project name or reset all (Project name, timer & all cards)
 
 ![alt text](demo/delete.gif "My Simple Tasks Manager")
 
@@ -436,7 +430,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 **:heavy_exclamation_mark: When you want to delete an task card!**
 
->You have one alert for confirm your wish to delete this card (with name card)
+> You have one alert for confirm your wish to delete this card (with name card)
 
 ![alt text](demo/confirm-delete-card.gif "My Simple Tasks Manager")
 
@@ -446,7 +440,7 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 **:heavy_exclamation_mark: When you Start the counter!**
 
->The elapsed seconds are sent to the localstorage in real time, if you close the window inadvertently without stopping the counter, the elapsed time is automatically saved in the localStorage, adding to the time already present (seconds)!
+> The elapsed seconds are sent to the localstorage in real time, if you close the window inadvertently without stopping the counter, the elapsed time is automatically saved in the localStorage, adding to the time already present (seconds)!
 
 ![alt text](demo/real-time-seconds.gif "My Simple Tasks Manager")
 
@@ -454,9 +448,9 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 # For mobile devices
 
->All mobile devices with a screen width of less than 500px are not compatible with this application
+> All mobile devices with a screen width of less than 500px are not compatible with this application
 
-**:x:** this application is  not responsive on mobile :mobile_phone_off: (as it is an application for people working in front of a computer - developer like me for example - I did not find useful to do media queries for that).
+**:x:** this application is not responsive on mobile :mobile_phone_off: (as it is an application for people working in front of a computer - developer like me for example - I did not find useful to do media queries for that).
 
 ![alt text](demo/version2/mobileView.png "My Simple Tasks Manager")
 
@@ -464,11 +458,11 @@ You can easily install this application on a Windows, Mac or Linux computer.
 
 # LocalStorage persistence
 
-***(The demo is fully functional, all infos are stocked in localStorage)***
+**_(The demo is fully functional, all infos are stocked in localStorage)_**
 
 - Infos:
   - An input field, at the top right, is made to enter the name of the project you are working on!
-  - 1 day of work is equivalent to 8 hours (28800 seconds)! (the calculation of the days worked in proportion to the passed seconds  is made with this logic - each 28800 elapsed seconds increment one day more)
+  - 1 day of work is equivalent to 8 hours (28800 seconds)! (the calculation of the days worked in proportion to the passed seconds is made with this logic - each 28800 elapsed seconds increment one day more)
   - When you start the counter, the seconds passed are sent to the localstorage in real time, when you stop the counter, the seconds passed add to the total and when you restart the counter, the count continues from this beginning.
   - When you click on reset button, it's reset the time in the state app & remove time to localStorage ( at each project beginning you can put to 0 the counter)
   - All the cards and their contents are synchronized with the localstorage.
@@ -485,7 +479,6 @@ Can I use Compatibility:
 
 ![alt text](demo/new-version/canIuse.png "My Simple Tasks Manager")
 
-
 # :bust_in_silhouette: Author
 
 - Thought, designed and developed with :purple_heart: by Rodolphe Augusto
@@ -498,7 +491,7 @@ Enjoy the World :smirk:
 
 **:memo: To Do for the next version:**
 
->:bar_chart: Add csv export.
+> :bar_chart: Add csv export.
 
 ---
 
@@ -523,59 +516,76 @@ MIT
 
 # My other projects:
 
->### My Simple Tutorial Creator
->https://github.com/rodolphe37/my-simple-tutorial-creator
+> ### My Simple Tutorial Creator
+>
+> https://github.com/rodolphe37/my-simple-tutorial-creator
 
->### My Simple Cam
->https://github.com/rodolphe37/my-simple-cam-dektop-app
+> ### My Simple Cam
+>
+> https://github.com/rodolphe37/my-simple-cam-dektop-app
 
->### My SimpleTasks Manager (software version for Linux, Mac & Windows)
->https://github.com/rodolphe37/my-simple-tasks-manager-desktop-version
+> ### My SimpleTasks Manager (software version for Linux, Mac & Windows)
+>
+> https://github.com/rodolphe37/my-simple-tasks-manager-desktop-version
 
->### QRCode Tools
->https://github.com/rodolphe37/qr-code-tools
+> ### QRCode Tools
+>
+> https://github.com/rodolphe37/qr-code-tools
 
->### App for decrypt greenPass europe QRcode
->https://github.com/rodolphe37/qrcode-decoder
+> ### App for decrypt greenPass europe QRcode
+>
+> https://github.com/rodolphe37/qrcode-decoder
 
->### Css animation with Create React App base.
->https://github.com/rodolphe37/halloween2021-bat-tuto-youtube-video
+> ### Css animation with Create React App base.
+>
+> https://github.com/rodolphe37/halloween2021-bat-tuto-youtube-video
 
->### My GitHub "open Sources" project
->https://github.com/rodolphe37/pwa-react-project
+> ### My GitHub "open Sources" project
+>
+> https://github.com/rodolphe37/pwa-react-project
 
->### cra-template-github-my-profile
->https://github.com/rodolphe37/cra-template-github-my-profile
+> ### cra-template-github-my-profile
+>
+> https://github.com/rodolphe37/cra-template-github-my-profile
 
->### My Awesome Custom Alert
->https://github.com/rodolphe37/my-awesome-custom-alert
+> ### My Awesome Custom Alert
+>
+> https://github.com/rodolphe37/my-awesome-custom-alert
 
->### Geolocation starter app React-native
->https://github.com/rodolphe37/react-native_geolocation-tracker
+> ### Geolocation starter app React-native
+>
+> https://github.com/rodolphe37/react-native_geolocation-tracker
 
->### Classic React Ultimate Messenger version repository (for open sources contributors)
->https://github.com/rodolphe37/rum-open-sources
+> ### Classic React Ultimate Messenger version repository (for open sources contributors)
+>
+> https://github.com/rodolphe37/rum-open-sources
 
->### React Ultimate Messenger template for React (create-react-app tools)
->https://github.com/rodolphe37/cra-react-ultimate-messenger
+> ### React Ultimate Messenger template for React (create-react-app tools)
+>
+> https://github.com/rodolphe37/cra-react-ultimate-messenger
 
->### PWA React Ultimate Messenger template for React (create-react-app tools)
->https://github.com/rodolphe37/cra-pwa-react-ultimate-messenger
+> ### PWA React Ultimate Messenger template for React (create-react-app tools)
+>
+> https://github.com/rodolphe37/cra-pwa-react-ultimate-messenger
 
->### installation and initialization shell script for the PWA React Ultimate Messenger template
->https://github.com/rodolphe37/pwa-rum-install-pack
+> ### installation and initialization shell script for the PWA React Ultimate Messenger template
+>
+> https://github.com/rodolphe37/pwa-rum-install-pack
 
->### Upload-image-profil-component
->https://github.com/rodolphe37/Upload-image-profil-component
+> ### Upload-image-profil-component
+>
+> https://github.com/rodolphe37/Upload-image-profil-component
 
->### Jeux libres de droits "open Sources" - Memory Yoga Cards Game - Sort the Waste Game - Match 3 Yoga Game - Tetris Classic Game - Remake Earth Puzzle Game
->https://github.com/rodolphe37/install-games-repository
+> ### Jeux libres de droits "open Sources" - Memory Yoga Cards Game - Sort the Waste Game - Match 3 Yoga Game - Tetris Classic Game - Remake Earth Puzzle Game
+>
+> https://github.com/rodolphe37/install-games-repository
 
->### Administration template - React JS & react-admin
->https://github.com/rodolphe37/nfc-updates-front
+> ### Administration template - React JS & react-admin
+>
+> https://github.com/rodolphe37/nfc-updates-front
 
-
->### Administration template Backend - Node & Express
->https://github.com/rodolphe37/nfc-updates-back
+> ### Administration template Backend - Node & Express
+>
+> https://github.com/rodolphe37/nfc-updates-back
 
 ---
