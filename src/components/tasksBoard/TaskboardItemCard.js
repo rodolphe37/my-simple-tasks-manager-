@@ -84,13 +84,15 @@ function TaskboardItemCard({
         "finishedData",
         JSON.stringify(completCardsTimeArray)
       );
-    } else {
+    } else if (!tasksCount) {
       setProjectDone(false);
       localStorage.setItem("ProjectDone", false);
       localStorage.removeItem("finishedData");
     }
     if (localStorage.getItem("finishedData") !== null && !projectDone)
       setFinishedDatas(JSON.parse(localStorage.getItem("finishedData")));
+
+    return () => clearTimeout(setTimeout);
   }, [
     setProjectDone,
     itemsByStatus,
@@ -125,16 +127,6 @@ function TaskboardItemCard({
             uuid: uuidv4(),
           },
         ]);
-
-        if (
-          Number(item.id) !== cardId[0] &&
-          TotalTimeStart !== "" &&
-          TotalTimeStop !== ""
-        ) {
-          setCompletCardsTimeArray((completCardsTimeArray) =>
-            completCardsTimeArray.concat(timeAllCards)
-          );
-        }
 
         localStorage.setItem(
           "completCardsTimeArray",
@@ -173,14 +165,19 @@ function TaskboardItemCard({
       localStorage.removeItem("timeAllCards");
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    status,
-    startWorkState,
-    stopWorkState,
-    completCardsTimeArray,
-    item.id,
-    projectDone,
-  ]);
+  }, [status, startWorkState, stopWorkState, projectDone]);
+
+  useEffect(() => {
+    if (
+      item.id !== cardId[0] &&
+      TotalTimeStart !== "" &&
+      TotalTimeStop !== ""
+    ) {
+      setCompletCardsTimeArray((completCardsTimeArray) =>
+        completCardsTimeArray.concat(timeAllCards)
+      );
+    }
+  }, [cardId, item, setCompletCardsTimeArray, timeAllCards]);
 
   return (
     <StyledCard

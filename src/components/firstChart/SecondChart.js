@@ -57,14 +57,13 @@ const VerticalBar = ({ cumuledTimeCards }) => {
   };
 
   const options = {
+    type: "line",
     scales: {
-      yAxes: [
-        {
-          ticks: {
-            beginAtZero: true,
-          },
+      y: {
+        ticks: {
+          beginAtZero: true,
         },
-      ],
+      },
     },
   };
   return (

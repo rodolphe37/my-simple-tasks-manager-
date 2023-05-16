@@ -525,7 +525,7 @@ export function PdfDocument(props) {
             <View style={styles.detailsFooter}>
               <View style={styles.marginBottom}>
                 <Text style={{ textAlign: "center" }}>
-                  Copyright - 2021 © Created with React by{" "}
+                  {`Copyright - ${new Date().getFullYear()} © Created with React by`}{" "}
                   <Text style={{ color: "rgb(121 204 82)" }}>
                     rodolphe Augusto
                   </Text>

@@ -1,6 +1,6 @@
 import { DragDropContext } from "react-beautiful-dnd";
 import { Fragment, useEffect, useMemo, useState } from "react";
-import produce from "immer";
+import { produce } from "immer";
 import styled from "styled-components";
 
 import { TaskboardItemStatus } from "./TaskboardTypes";
@@ -276,7 +276,7 @@ function Taskboard() {
       ) : null}
 
       <TaskboardItemModal
-        visible={isModalVisible}
+        open={isModalVisible}
         onCancel={closeTaskItemModal}
         onOk={(values) => {
           setItemsByStatus((current) =>

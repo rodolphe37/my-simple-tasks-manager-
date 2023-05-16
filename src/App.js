@@ -202,7 +202,7 @@ function App() {
               <div className="logoApp">
                 <img className="logo" src={BacklogImg} alt="" />
                 <strong>My Simple Tasks manager</strong>
-                <sub>v2.2</sub>
+                <sub>v3.2 Beta</sub>
               </div>
 
               <div className="ribbon ribbon-top-right">

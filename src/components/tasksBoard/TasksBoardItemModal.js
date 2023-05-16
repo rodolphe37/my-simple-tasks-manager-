@@ -8,19 +8,19 @@ import clickedAddToDoAtom from "../../statesManager/atoms/clickedAddToDoAtom";
 // import { EditorState } from "draft-js";
 // import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
-function TaskboardItemModal({ visible, initialValues, onCancel, onOk }) {
+function TaskboardItemModal({ open, initialValues, onCancel, onOk }) {
   const [form] = Form.useForm();
   const inputRef = useRef(null);
   const [clickedAddButton, setClickedAddButton] =
     useRecoilState(clickedAddToDoAtom);
 
   useEffect(() => {
-    if (visible) {
+    if (open) {
       // Focus on the first input when the modal is opened
       inputRef.current?.focus();
       form.resetFields();
     }
-  }, [form, visible]);
+  }, [form, open]);
 
   // set date for each message
   let d = new Date();
@@ -104,7 +104,7 @@ function TaskboardItemModal({ visible, initialValues, onCancel, onOk }) {
   return (
     <Modal
       title="Add Item"
-      visible={visible}
+      open={open}
       destroyOnClose
       // To make dynamically changing initialValues work with Form
       forceRender

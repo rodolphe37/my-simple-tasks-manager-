@@ -841,7 +841,7 @@ const Dashboard = () => {
               width="34"
               style={{ marginRight: 10 }}
             />
-            Copyright - 2021 © Created with React by{" "}
+            {`Copyright - ${new Date().getFullYear()} © Created with React by`}{" "}
             <a
               className="linkName"
               title="Visit my WebSite if you want!"

@@ -1,7 +1,8 @@
-import { Droppable, Draggable } from "react-beautiful-dnd";
+import { Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
 import { Button, Card } from "antd";
 import TaskboardItemCard from "./TaskboardItemCard";
+import { StrictModeDroppable } from "../../helpers/StrictModeDroppable";
 
 const TaskboardColRoot = styled(Card)`
   user-select: none;
@@ -21,8 +22,8 @@ const TaskboardColRoot = styled(Card)`
 const DroppableRoot = styled.div`
   height: 100%;
   overflow-y: auto;
-  background-color: ${({ isDraggingOver }) =>
-    isDraggingOver ? "#e0e0e0" : "#f5f5f5"};
+  background-color: ${({ isdraggingover }) =>
+    isdraggingover ? "#e0e0e0" : "#f5f5f5"};
 `;
 
 function TaskboardCol({
@@ -45,12 +46,12 @@ function TaskboardCol({
         )
       }
     >
-      <Droppable droppableId={status}>
+      <StrictModeDroppable droppableId={status}>
         {(provided, snapshot) => (
           <DroppableRoot
             ref={provided.innerRef}
             {...provided.droppableProps}
-            isDraggingOver={snapshot.isDraggingOver}
+            isdraggingover={snapshot.isdraggingover}
           >
             {items.map((item, index) => {
               return (
@@ -80,7 +81,7 @@ function TaskboardCol({
             {provided.placeholder}
           </DroppableRoot>
         )}
-      </Droppable>
+      </StrictModeDroppable>
     </TaskboardColRoot>
   );
 }
